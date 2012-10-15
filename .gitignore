@@ -36,3 +36,21 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+#Ingore Specific Folder#
+######################
+/**/bin/**/*
+/./**/bin/**/*
+./**/bin/**/*
+**/bin/**/*
+*/bin/**/*
+bin/**/*
+/**/bin/*
+
+/**/obj/**/*
+/./**/obj/**/*
+./**/obj/**/*
+**/obj/**/*
+*/obj/**/*
+obj/**/*
+/**/obj/*

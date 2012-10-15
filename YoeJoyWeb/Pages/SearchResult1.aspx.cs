@@ -12,62 +12,17 @@ namespace YoeJoyWeb
     public partial class SearchResult1 : System.Web.UI.Page
     {
 
-        protected int C1CategorySysId
+        protected string KeyWords
         {
             get
             {
-                if (Request.QueryString["c1"] == null)
+                if (Request.QueryString["q"] == null)
                 {
-                    return 0;
+                    return String.Empty;
                 }
                 else
                 {
-                    return int.Parse(Request.QueryString["c1"].ToString().Trim());
-                }
-            }
-        }
-
-        protected int C2CategorySysId
-        {
-            get
-            {
-                if (Request.QueryString["c2"] == null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return int.Parse(Request.QueryString["c2"].ToString().Trim());
-                }
-            }
-        }
-
-        protected int C3CategorySysId
-        {
-            get
-            {
-                if (Request.QueryString["c3"] == null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return int.Parse(Request.QueryString["c3"].ToString().Trim());
-                }
-            }
-        }
-
-        protected string Attribution2Ids
-        {
-            get
-            {
-                if (Request.QueryString["attrIds"] == null || String.IsNullOrEmpty(Request.QueryString["attrIds"].ToString()))
-                {
-                    return null;
-                }
-                else
-                {
-                    return Request.QueryString["attrIds"].ToString();
+                    return Request.QueryString["q"].ToString().GetUrlDecodeStr();
                 }
             }
         }
@@ -79,8 +34,8 @@ namespace YoeJoyWeb
         {
             if (!IsPostBack)
             {
-                C3ProductListHeaderHTML = FrontProductsHelper.InitC3ProductListHeader(C3CategorySysId,Attribution2Ids);
-                C3ProductListFooterHTML = FrontProductsHelper.InitC3ProductListFooter(C3CategorySysId,Attribution2Ids);
+                C3ProductListHeaderHTML=SearchHelper.InitSearch1C3ProductListHeader(KeyWords);
+                C3ProductListFooterHTML = SearchHelper.InitSearch1C3ProductListFooter(KeyWords);
             }
         }
     }

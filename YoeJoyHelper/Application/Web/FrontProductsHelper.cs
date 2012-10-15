@@ -466,7 +466,7 @@ namespace YoeJoyHelper
                             <span>{6}</span></a></li>";
                 foreach (FrontDsiplayProduct product in products)
                 {
-                    strb.Append(String.Format(productListItemHTMLTemplate, c1SysNo, c2SysNo, c3SysNo, product.ProductSysNo, String.Concat(imageBaseURL + product.ImgPath), product.Price, product.ProductPromotionWord));
+                    strb.Append(String.Format(productListItemHTMLTemplate, c1SysNo, c2SysNo, c3SysNo, product.ProductSysNo, String.Concat(imageBaseURL, product.ImgPath), product.Price, product.ProductPromotionWord));
                 }
             }
             strb.Append("</ul>");

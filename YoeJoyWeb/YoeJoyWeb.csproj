@@ -100,6 +100,27 @@
     <Compile Include="Pages\Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SearchDetail.aspx.cs">
+      <DependentUpon>SearchDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SearchDetail.aspx.designer.cs">
+      <DependentUpon>SearchDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchResult1.aspx.cs">
+      <DependentUpon>SearchResult1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SearchResult1.aspx.designer.cs">
+      <DependentUpon>SearchResult1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchResult2.aspx.cs">
+      <DependentUpon>SearchResult2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SearchResult2.aspx.designer.cs">
+      <DependentUpon>SearchResult2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SubProductList1.aspx.cs">
       <DependentUpon>SubProductList1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -114,13 +135,6 @@
     <Compile Include="Pages\SubProductList2.aspx.designer.cs">
       <DependentUpon>SubProductList2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SearchResult1.aspx.cs">
-      <DependentUpon>SearchResult1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\SearchResult1.aspx.designer.cs">
-      <DependentUpon>SearchResult1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\GetProductListItem.aspx.cs">
       <DependentUpon>GetProductListItem.aspx</DependentUpon>
@@ -128,6 +142,20 @@
     </Compile>
     <Compile Include="Service\GetProductListItem.aspx.designer.cs">
       <DependentUpon>GetProductListItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\GetSearch1ProductListItem.aspx.cs">
+      <DependentUpon>GetSearch1ProductListItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\GetSearch1ProductListItem.aspx.designer.cs">
+      <DependentUpon>GetSearch1ProductListItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\GetSearch2ProductListItem.aspx.cs">
+      <DependentUpon>GetSearch2ProductListItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\GetSearch2ProductListItem.aspx.designer.cs">
+      <DependentUpon>GetSearch2ProductListItem.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -509,10 +537,14 @@
     <Content Include="Global.asax" />
     <Content Include="Pages\ProductList.aspx" />
     <Content Include="Pages\Search.aspx" />
+    <Content Include="Pages\SearchDetail.aspx" />
+    <Content Include="Pages\SearchResult1.aspx" />
+    <Content Include="Pages\SearchResult2.aspx" />
     <Content Include="Pages\SubProductList1.aspx" />
     <Content Include="Pages\SubProductList2.aspx" />
-    <Content Include="Pages\SearchResult1.aspx" />
     <Content Include="Service\GetProductListItem.aspx" />
+    <Content Include="Service\GetSearch1ProductListItem.aspx" />
+    <Content Include="Service\GetSearch2ProductListItem.aspx" />
     <Content Include="static\css\layout.css" />
     <Content Include="static\css\layout1020.css" />
     <Content Include="static\images\ad01.jpg" />

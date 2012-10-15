@@ -33,7 +33,7 @@ namespace YoeJoyWeb
         {
             if (!IsPostBack)
             {
-                Search1C3Filter = SerachHelper.InitSearch1C3ProductFilter(KeyWords);
+                Search1C3Filter = SearchHelper.InitSearch1C3ProductFilter(KeyWords);
             }
         }
     }

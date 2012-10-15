@@ -54,7 +54,7 @@
     <Compile Include="Application\Web\InComingProductHelper.cs" />
     <Compile Include="Application\Web\PromotionProductsHelper.cs" />
     <Compile Include="Application\Data\SqlDBHelper.cs" />
-    <Compile Include="Application\Web\SerachHelper.cs" />
+    <Compile Include="Application\Web\SearchHelper.cs" />
     <Compile Include="Application\Web\WebBulletinHelper.cs" />
     <Compile Include="Application\YoeJoyConfig.cs" />
     <Compile Include="Extension\MyExtension.cs" />

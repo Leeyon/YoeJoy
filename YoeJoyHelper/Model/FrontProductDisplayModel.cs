@@ -91,6 +91,20 @@ namespace YoeJoyHelper.Model
         public string C3Name { get; set; }
     }
 
+    /// <summary>
+    /// Serach1结果中展示的商品
+    /// </summary>
+    public class Search1DsiplayProduct
+    {
+        public string ProductSysNo { get; set; }
+        public int C1SysNo { get; set; }
+        public int C2SysNo { get; set; }
+        public int C3SysNo { get; set; }
+        public string Price { get; set; }
+        public string ImgPath { get; set; }
+        public string ProductPromotionWord { get; set; }
+    }
+
     #endregion
 
     #region 前台商品展示的模型服务
@@ -468,11 +482,11 @@ namespace YoeJoyHelper.Model
   where ca1.C3SysNo={0} and Attribute2Type=1 and ca1.Status=0 and ca2.Status=0
   order by ca1.OrderNum ";
 
-        private static readonly string getC3ProductAttributionOptionSqlCmdTemplate = @"  select ca2o.SysNo,ca2o.Attribute2OptionName from Category_Attribute2 ca2 
+        private static readonly string getC3ProductAttributionOptionSqlCmdTemplate = @"select ca2o.SysNo,ca2o.Attribute2OptionName from Category_Attribute2 ca2 
   left join Category_Attribute2_Option ca2o on ca2.SysNo=ca2o.Attribute2SysNo
   where ca2.SysNo={0}";
 
-        private static readonly string getProductListItemTotalCountSqlCmdTemplate = @"  select COUNT(distinct p.SysNo)as totalCount from Product p
+        private static readonly string getProductListItemTotalCountSqlCmdTemplate = @"select COUNT(distinct p.SysNo)as totalCount from Product p
   left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo
   where p.Status=1
   {0}
@@ -503,7 +517,7 @@ namespace YoeJoyHelper.Model
                     }
                 case YoeJoyEnum.ProductListSortedOrder.Price:
                     {
-                        orderByStr1=orderByStr1.Replace("price", "pp.CurrentPrice");
+                        orderByStr1 = orderByStr1.Replace("price", "pp.CurrentPrice");
                         break;
                     }
                 default:
@@ -555,7 +569,7 @@ namespace YoeJoyHelper.Model
             {
                 arrtibutionFilterSqlCmd = "and pa2.Attribute2OptionSysNo in ( " + attribution2IdStr + " )";
             }
-            string sqlCmd = String.Format(getProductListItemTotalCountSqlCmdTemplate,arrtibutionFilterSqlCmd,c3SysNo);
+            string sqlCmd = String.Format(getProductListItemTotalCountSqlCmdTemplate, arrtibutionFilterSqlCmd, c3SysNo);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -635,7 +649,7 @@ namespace YoeJoyHelper.Model
 
     }
 
-    public class C3ProductSearchService
+    public class Search1ProductService
     {
         private static readonly string getSearch1C3NamesSqlCmdTemplate = @"select distinct p.C1SysNo,p.C2SysNo,p.C3SysNo,c3.C3Name from Product p 
  left join Category3 c3 on p.C3SysNo=c3.SysNo
@@ -645,6 +659,23 @@ namespace YoeJoyHelper.Model
  (p.PromotionWord like ('%{0}%')
 {1})";
 
+        private static readonly string getSearch1C3ProductTotalCountSqlCmdTemplate = @"select COUNT(distinct p.SysNo)as totalCount from Product p
+ where p.Status=1
+ and 
+ (p.PromotionWord like ('%{0}%')
+ {1})";
+
+        private static readonly string getSearch1C3PagedProductsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo from Product p
+  left join Product_Price pp on p.SysNo=pp.ProductSysNo
+  left join Product_Images pimg on p.SysNo=pimg.product_sysNo 
+  left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo 
+  where p.Status=1  
+  and (pimg.orderNum=1 and pimg.status=1) 
+  and 
+ (p.PromotionWord like ('%{1}%')
+ {2})
+  and p.SysNo not in  (select top {3} p.SysNo from Product p where p.Status=1 {4}) 
+  {5}";
 
 
         /// <summary>
@@ -653,24 +684,24 @@ namespace YoeJoyHelper.Model
         /// <returns></returns>
         public static List<C3ProductSerach1Filter> GetSearch1C3Names(string keyWords)
         {
-            string childSearchSqlCmd=String.Empty;
-            string[] keyWordsArray=keyWords.Split(' ');
-            if(keyWordsArray.Length>1)
+            string childSearchSqlCmd = String.Empty;
+            string[] keyWordsArray = keyWords.Split(' ');
+            if (keyWordsArray.Length > 1)
             {
-                for(int i=1;i<keyWordsArray.Length;i++)
+                for (int i = 1; i < keyWordsArray.Length; i++)
                 {
-                    childSearchSqlCmd+=String.Format(" or p.PromotionWord like ('%{0}%')",keyWordsArray[i].Trim());
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
                 }
             }
-            string sqlCmd=String.Format(getSearch1C3NamesSqlCmdTemplate,keyWordsArray[0].Trim(),childSearchSqlCmd);
+            string sqlCmd = String.Format(getSearch1C3NamesSqlCmdTemplate, keyWordsArray[0].Trim(), childSearchSqlCmd);
             try
             {
-                DataTable data=new SqlDBHelper().ExecuteQuery(sqlCmd);
-                int rowCount=data.Rows.Count;
-                if(rowCount>0)
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
                 {
-                    List<C3ProductSerach1Filter> filters=new List<C3ProductSerach1Filter>();
-                    for(int j=0;j<rowCount;j++)
+                    List<C3ProductSerach1Filter> filters = new List<C3ProductSerach1Filter>();
+                    for (int j = 0; j < rowCount; j++)
                     {
                         filters.Add(new C3ProductSerach1Filter()
                         {
@@ -692,6 +723,261 @@ namespace YoeJoyHelper.Model
                 return null;
             }
         }
+
+        /// <summary>
+        /// 返回search1的结果总数
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <returns></returns>
+        public static int GetSearch1C3ProductTotalCount(string keyWords)
+        {
+            string childSearchSqlCmd = String.Empty;
+            string[] keyWordsArray = keyWords.Split(' ');
+            if (keyWordsArray.Length > 1)
+            {
+                for (int i = 1; i < keyWordsArray.Length; i++)
+                {
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                }
+            }
+            string sqlCmd = String.Format(getSearch1C3ProductTotalCountSqlCmdTemplate, keyWordsArray[0].Trim(), childSearchSqlCmd);
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    return int.Parse(data.Rows[0]["totalCount"].ToString().Trim());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 取得分页的搜索结果集合
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="pagedCount"></param>
+        /// <param name="c3SysNo"></param>
+        /// <param name="orderByOption"></param>
+        /// <param name="attribution2IdStr"></param>
+        /// <returns></returns>
+        public static List<Search1DsiplayProduct> GetPagedSearch1Products(int startIndex, int pagedCount, YoeJoyEnum.ProductListSortedOrder orderByOption, string keyWords)
+        {
+            string orderByStr = YoeJoySystemDic.ProductListSortedOrderDic[orderByOption];
+            string orderByStr1 = orderByStr;
+            switch (orderByOption)
+            {
+                case YoeJoyEnum.ProductListSortedOrder.Default:
+                    {
+                        break;
+                    }
+                case YoeJoyEnum.ProductListSortedOrder.Price:
+                    {
+                        orderByStr1 = orderByStr1.Replace("price", "pp.CurrentPrice");
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            string childSearchSqlCmd = String.Empty;
+            string[] keyWordsArray = keyWords.Split(' ');
+            if (keyWordsArray.Length > 1)
+            {
+                for (int i = 1; i < keyWordsArray.Length; i++)
+                {
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                }
+            }
+            string sqlCmd = String.Format(getSearch1C3PagedProductsSqlCmdTemplate, pagedCount, keyWords[0], childSearchSqlCmd, startIndex, orderByStr1, orderByStr);
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    List<Search1DsiplayProduct> products = new List<Search1DsiplayProduct>();
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        products.Add(new Search1DsiplayProduct()
+                        {
+                            C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                            C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                            C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                            ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
+                            Price = data.Rows[i]["price"].ToString().Trim(),
+                            ProductSysNo = data.Rows[i]["SysNo"].ToString().Trim(),
+                            ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        });
+                    }
+                    return products;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+    }
+
+    public class Search2ProductService
+    {
+        private static readonly string getSearch2ProductListItemTotalCountSqlCmdTemplate = @"select COUNT(distinct p.SysNo)as totalCount from Product p
+  left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo
+  where p.Status=1
+  {0}
+and (p.PromotionWord like ('%{1}%')
+ {2})
+  and p.C3SysNo={3}";
+
+        private static readonly string getSearch2C3PagedProductsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from Product p
+  left join Product_Price pp on p.SysNo=pp.ProductSysNo
+  left join Product_Images pimg on p.SysNo=pimg.product_sysNo 
+  left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo 
+  where p.Status=1
+  and (pimg.orderNum=1 and pimg.status=1)
+  and p.C3SysNo={1}
+  {2}
+  and (pimg.orderNum=1 and pimg.status=1) 
+  and 
+ (p.PromotionWord like ('%{3}%')
+ {4})
+  and p.SysNo not in  (select top {5} p.SysNo from Product p where p.Status=1 {6}) 
+  {7}";
+
+        /// <summary>
+        /// 获得满足search2条件的商品总数
+        /// </summary>
+        /// <param name="c3SysNo"></param>
+        /// <param name="attribution2IdStr"></param>
+        /// <param name="keyWords"></param>
+        /// <returns></returns>
+        public static int GetSearch2C3ProductTotalCount(int c3SysNo, string attribution2IdStr, string keyWords)
+        {
+            string arrtibutionFilterSqlCmd = String.Empty;
+            if (attribution2IdStr != null)
+            {
+                arrtibutionFilterSqlCmd = "and pa2.Attribute2OptionSysNo in ( " + attribution2IdStr + " )";
+            }
+            string childSearchSqlCmd = String.Empty;
+            string[] keyWordsArray = keyWords.Split(' ');
+            if (keyWordsArray.Length > 1)
+            {
+                for (int i = 1; i < keyWordsArray.Length; i++)
+                {
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                }
+            }
+            string sqlCmd = String.Format(getSearch2ProductListItemTotalCountSqlCmdTemplate, arrtibutionFilterSqlCmd, keyWords[0].ToString().Trim(), childSearchSqlCmd, c3SysNo);
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    return int.Parse(data.Rows[0]["totalCount"].ToString().Trim());
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 获得满足search2条件的分页的商品
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="pagedCount"></param>
+        /// <param name="c3SysNo"></param>
+        /// <param name="orderByOption"></param>
+        /// <param name="attribution2IdStr"></param>
+        /// <returns></returns>
+        public static List<FrontDsiplayProduct> GetPagedProductList(int startIndex, int pagedCount, int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr, string keyWords)
+        {
+            string orderByStr = YoeJoySystemDic.ProductListSortedOrderDic[orderByOption];
+            string orderByStr1 = orderByStr;
+            string arrtibutionFilterSqlCmd = String.Empty;
+            if (attribution2IdStr != null)
+            {
+                arrtibutionFilterSqlCmd = "and pa2.Attribute2OptionSysNo in ( " + attribution2IdStr + " )";
+            }
+            string childSearchSqlCmd = String.Empty;
+            string[] keyWordsArray = keyWords.Split(' ');
+            if (keyWordsArray.Length > 1)
+            {
+                for (int i = 1; i < keyWordsArray.Length; i++)
+                {
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                }
+            }
+            switch (orderByOption)
+            {
+                case YoeJoyEnum.ProductListSortedOrder.Default:
+                    {
+                        break;
+                    }
+                case YoeJoyEnum.ProductListSortedOrder.Price:
+                    {
+                        orderByStr1 = orderByStr1.Replace("price", "pp.CurrentPrice");
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            string sqlCmd = String.Format(getSearch2C3PagedProductsSqlCmdTemplate, pagedCount, c3SysNo, arrtibutionFilterSqlCmd,keyWordsArray[0].ToString().Trim(),childSearchSqlCmd, startIndex, orderByStr1, orderByStr);
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    List<FrontDsiplayProduct> products = new List<FrontDsiplayProduct>();
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        products.Add(new FrontDsiplayProduct()
+                        {
+                            C3SysNo = c3SysNo,
+                            ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
+                            Price = data.Rows[i]["price"].ToString().Trim(),
+                            ProductSysNo = data.Rows[i]["SysNo"].ToString().Trim(),
+                            ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        });
+                    }
+                    return products;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
 
     }
 

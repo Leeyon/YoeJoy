@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchResult1.aspx.cs" Inherits="YoeJoyWeb.SearchResult1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchResult2.aspx.cs" Inherits="YoeJoyWeb.Pages.SearchResult2" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -77,11 +77,15 @@
         }
 
         function getProductListItem(callbackHandler) {
-            var handerBaseURL = "../Service/GetSearch1ProductListItem.aspx";
-            var keyWords = getQueryString("q");
+            var handerBaseURL = "../Service/GetSearch2ProductListItem.aspx";
+            var c1 = getQueryString("c1");
+            var c2 = getQueryString("c2");
+            var c3 = getQueryString("c3");
             var currentPageIndex = parseInt($("#currentPageIndex").val());
             var orderOption = $("#listHeaderLeft .selected").children("input").val();
-            var handlerURL = handerBaseURL + "?startIndex=" + currentPageIndex + "&orderBy=" + orderOption + "&q=" +escape(keyWords)+ "&random=" + Math.random();
+            var attributionIds = getQueryString("attrIds");
+            var keyWords = getQueryString("q");
+            var handlerURL = handerBaseURL + "?c1=" + c1 + "&c2=" + c2 + "&c3=" + c3 + "&startIndex=" + currentPageIndex + "&orderBy=" + orderOption + "&attrIds=" + attributionIds +"&q="+escape(keyWords)+ "&random=" + Math.random();
             $.get(handlerURL, function (data) {
                 $("#productList").empty().append(data);
                 callbackHandler();

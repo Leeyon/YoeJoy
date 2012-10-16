@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assemblies\CKEditor.NET.dll" />
+    <Content Include="Controls\My97DatePicker\开发包\skin\default\bg.jpg" />
     <Content Include="Controls\SubCategoryNavigation.ascx" />
     <Content Include="Controls\CategoryNavigation.ascx" />
     <Content Include="Controls\CKEditor\adapters\jquery.js" />
@@ -525,7 +526,6 @@
     <Content Include="Controls\My97DatePicker\开发包\lang\en.js" />
     <Content Include="Controls\My97DatePicker\开发包\lang\zh-cn.js" />
     <Content Include="Controls\My97DatePicker\开发包\lang\zh-tw.js" />
-    <Content Include="Controls\My97DatePicker\开发包\readme.txt" />
     <Content Include="Controls\My97DatePicker\开发包\skin\datePicker.gif" />
     <Content Include="Controls\My97DatePicker\开发包\skin\default\datepicker.css" />
     <Content Include="Controls\My97DatePicker\开发包\skin\default\img.gif" />

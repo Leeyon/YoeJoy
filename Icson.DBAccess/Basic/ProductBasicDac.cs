@@ -399,7 +399,7 @@ namespace Icson.DBAccess.Basic
                             ProductColor=@ProductColor, ProductSize=@ProductSize,
                             ProducingArea=@ProducingArea, PackQuantity=@PackQuantity,
                             MinOrderQuantity=@MinOrderQuantity, IsStoreFrontSale=@IsStoreFrontSale,
-                            SaleUnit=@SaleUnit, StorageDay=@StorageDay
+                            SaleUnit=@SaleUnit, StorageDay=@StorageDay, IsCanPurchase=@IsCanPurchase
                             WHERE SysNo = @SysNo";
             SqlCommand cmd = new SqlCommand(sql);
 
@@ -457,6 +457,7 @@ namespace Icson.DBAccess.Basic
             SqlParameter paramIsStoreFrontSale = new SqlParameter("@IsStoreFrontSale", SqlDbType.Int, 4);
             SqlParameter paramSaleUnit = new SqlParameter("@SaleUnit", SqlDbType.NVarChar, 50);
             SqlParameter paramStorageDay = new SqlParameter("@StorageDay", SqlDbType.Int, 4);
+            SqlParameter paramIsCanPurchase = new SqlParameter("@IsCanPurchase", SqlDbType.Int, 4);
 
             if (oParam.SysNo != AppConst.IntNull)
                 paramSysNo.Value = oParam.SysNo;
@@ -661,6 +662,14 @@ namespace Icson.DBAccess.Basic
                 paramStorageDay.Value = oParam.StorageDay;
             else
                 paramStorageDay.Value = System.DBNull.Value;
+            if (oParam.IsCanPurchase !=AppConst.IntNull)
+            {
+                paramIsCanPurchase.Value=oParam.IsCanPurchase;
+            }
+            else
+            {
+                paramIsCanPurchase.Value = System.DBNull.Value;
+            }
 
             cmd.Parameters.Add(paramSysNo);
             cmd.Parameters.Add(paramProductID);
@@ -713,6 +722,8 @@ namespace Icson.DBAccess.Basic
             cmd.Parameters.Add(paramIsStoreFrontSale);
             cmd.Parameters.Add(paramSaleUnit);
             cmd.Parameters.Add(paramStorageDay);
+
+            cmd.Parameters.Add(paramIsCanPurchase);
 
             return SqlHelper.ExecuteNonQuery(cmd);
         }

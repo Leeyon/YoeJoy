@@ -86,7 +86,7 @@ namespace YoeJoyHelper
                 }
                 strb.Append("</ul></a>");
                 strb.Append("<div id='itsm' class='fllist list'>");
-                string productsItemHTMLTempate = @" <li><a href='products/product.html?c1={0}&c2={1}&c3={2}&pid={3}'>
+                string productsItemHTMLTempate = @" <li><a href='products/product.aspx?c1={0}&c2={1}&c3={2}&pid={3}'>
                         <p>
                             <img src='{4}' /><span class='price'>{5}元</span></p>
                         <span>{6}</span></a></li>";
@@ -142,7 +142,7 @@ namespace YoeJoyHelper
                     List<FrontDsiplayProduct> c2Products = C1DisplayProductService.GetC1DsiplayProducts(key);
                     if (c2Products != null)
                     {
-                        string productsItemHTMLTempate = @" <li><a href='products/product.html?c1={0}&c2={1}&c3={2}&pid={3}'>
+                        string productsItemHTMLTempate = @" <li><a href='pages/product.aspx?c1={0}&c2={1}&c3={2}&pid={3}'>
                         <p>
                             <img src='{4}' /><span class='price'>{5}元</span></p>
                         <span>{6}</span></a></li>";
@@ -181,7 +181,7 @@ namespace YoeJoyHelper
             if (products != null)
             {
 
-                string emptyInventoryItemHTML = @"<li><a href='products/product.html?c1={0}&c2={1}&c3={2}&pid={3}'>{4}</a>&nbsp;&nbsp;￥<span class='price'>{5}</span></li>";
+                string emptyInventoryItemHTML = @"<li><a href='Product.aspx?c1={0}&c2={1}&c3={2}&pid={3}'>{4}</a>&nbsp;&nbsp;￥<span class='price'>{5}</span></li>";
                 foreach (EmptyInventoryProduct product in products)
                 {
                     strb.Append(String.Format(emptyInventoryItemHTML, categoryOneId, product.C2SysNo, product.C3SysNo, product.ProductSysNo, product.ProductPromotionWord, product.Price));
@@ -263,12 +263,12 @@ namespace YoeJoyHelper
                         {0}
                     </td>
                     <td width='60'>
-                        <a href='products/product.html?c1={1}&c2={2}&c3={3}&pid={4}'>
+                        <a href='Product.aspx?c1={1}&c2={2}&c3={3}&pid={4}'>
                             <img src='{5}'/>
                         </a>
                     </td>
                     <td valign='top' width='102' align='right'>
-                        <a href='products/product.html?c1={6}&c2={7}&c3={8}&pid={9}'>
+                        <a href='Product.aspx?c1={6}&c2={7}&c3={8}&pid={9}'>
                             <p>
                                 {10}</p>
                         </a>￥<span class='price'>{11}</span>
@@ -460,7 +460,7 @@ namespace YoeJoyHelper
             if (products != null)
             {
                 string imageBaseURL = YoeJoyConfig.ImgVirtualPathBase;
-                string productListItemHTMLTemplate = @"<li><a href='product.html?c1={0}&c2={1}&c3={2}&pid={3}' target='_parent'>
+                string productListItemHTMLTemplate = @"<li><a href='Product.aspx?c1={0}&c2={1}&c3={2}&pid={3}' target='_parent'>
                             <p>
                                 <img src='{4}'><span class='price'>{5}元</span></p>
                             <span>{6}</span></a></li>";

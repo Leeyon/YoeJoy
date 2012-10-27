@@ -69,7 +69,7 @@ namespace Icson.Objects.Basic
         public int IsStoreFrontSale;
         public string SaleUnit;
         public int StorageDay;
-
+        public int IsCanPurchase;
         public int IsCanDoVat;
 
         //baby1one
@@ -134,6 +134,7 @@ namespace Icson.Objects.Basic
             StorageDay = AppConst.IntNull;
 
             IsCanDoVat = AppConst.IntNull;
+            IsCanPurchase = AppConst.IntNull;
             //baby1one
 		}
 		public static string GetSmallPic(string path, string productID)

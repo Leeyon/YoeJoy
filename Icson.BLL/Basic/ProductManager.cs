@@ -62,6 +62,7 @@ namespace Icson.BLL.Basic
                 oParam.C1SysNo = Util.TrimIntNull(tempdr["C1SysNo"]);
                 oParam.C2SysNo = Util.TrimIntNull(tempdr["C2SysNo"]);
                 oParam.C3SysNo = Util.TrimIntNull(tempdr["C3SysNo"]);
+                
                 oParam.ManufacturerSysNo = Util.TrimIntNull(tempdr["ManufacturerSysNo"]);
                 oParam.ProductLink = Util.TrimNull(tempdr["ProductLink"]);
                 //oParam.MultiPicNum = Util.TrimIntNull(tempdr["MultiPicNum"]);
@@ -96,6 +97,8 @@ namespace Icson.BLL.Basic
                 oParam.IsStoreFrontSale = Util.TrimIntNull(tempdr["IsStoreFrontSale"]);
                 oParam.SaleUnit = Util.TrimNull(tempdr["SaleUnit"]);
                 oParam.StorageDay = Util.TrimIntNull(tempdr["StorageDay"]);
+
+                oParam.IsCanPurchase = Util.TrimIntNull(tempdr["IsCanPurchase"]);
             }
         }
         private void mapPrice(ProductPriceInfo oParam, DataRow tempdr)
@@ -428,7 +431,7 @@ namespace Icson.BLL.Basic
                 sql += "))";
             }
 
-            sql += "and Product.SysNo=Product_Price.SysNo order by Product.sysno ";
+            sql += "and Product.SysNo=Product_Price.ProductSysNo order by Product.sysno ";
             return SqlHelper.ExecuteDataSet(sql);
         }
 

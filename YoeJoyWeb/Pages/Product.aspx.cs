@@ -78,7 +78,8 @@ namespace YoeJoyWeb
             if (!IsPostBack)
             {
                 SubCategoryNavigation1.C1CategoryId = C1CategorySysId;
-                ProductDetailImagesHTML = ProductDetailHelper.GetProductDetailImages(ProductSysNo);
+                ProductDetailHelper helper = new ProductDetailHelper(ProductSysNo);
+                ProductDetailImagesHTML = helper.GetProductDetailImages();
             }
         }
     }

@@ -8,18 +8,31 @@ namespace YoeJoyHelper
 {
     public class ProductDetailHelper
     {
-        private ProductDetailModel productDetailModle;
 
-        public static ProductDetailModel getProductDetailInstance(int productSysNo)
+        private ProductDetailModel productDetail;
+
+        private ProductDetailHelper()
         {
-            return new ProductDetailModel();
+            throw new NotImplementedException("禁止对ProductDetailHelper类声明无参的构造函数");
         }
 
-        public static string GetProductDetailImages(int productSysNo)
+        public ProductDetailHelper(int productSysNo)
+        {
+            //string key = String.Format(DynomicCacheObjSettings.ProductBaiscInfoCacheSettings.CacheKey, productSysNo);
+            //int duration = DynomicCacheObjSettings.ProductBaiscInfoCacheSettings.CacheDuration;
+            //productDetail = CacheObj<ProductDetailModel>.GetCachedObj(key, duration, ProductDetailBasicService.GetProductDetailBasicInfo(productSysNo));
+            productDetail = ProductDetailBasicService.GetProductDetailBasicInfo(productSysNo);
+        }
+
+        /// <summary>
+        /// 获取商品图片展示
+        /// </summary>
+        /// <returns></returns>
+        public string GetProductDetailImages()
         {
             string productImgHTML = String.Empty;
 
-            List<ProductDetailImg> imgs = ProductDetailBasicService.GetProductDetailImgs(productSysNo);
+            List<ProductDetailImg> imgs = productDetail.Images;
             if (imgs != null)
             {
                 string imgVirtualPathBase = YoeJoyConfig.ImgVirtualPathBase;

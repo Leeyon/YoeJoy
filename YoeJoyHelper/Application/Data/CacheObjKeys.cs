@@ -36,6 +36,7 @@ namespace YoeJoyHelper
         internal static readonly CacheObjSetting CategoryOneEmptyInventoryProductsCacheSettings = new CacheObjSetting() { CacheKey = "CategoryOneEmptyInventoryProducts/{0}", CacheDuration = 14400 };
         internal static readonly CacheObjSetting CategoryOneLastedDiscountProductsCacheSettings = new CacheObjSetting() { CacheKey = "CategoryOneLastedDiscountProducts/{0}", CacheDuration = 14400 };
         internal static readonly CacheObjSetting CategoryOneWeeklyBestSaledProductsCacheSettings = new CacheObjSetting() { CacheKey = "CategoryOneWeeklyBestSaledProducts/{0}", CacheDuration = 14400 };
+        internal static readonly CacheObjSetting ProductBaiscInfoCacheSettings = new CacheObjSetting() { CacheKey = "ProductDetailBasic/{0}", CacheDuration = 3600 };
     }
 
     /// <summary>
@@ -47,6 +48,7 @@ namespace YoeJoyHelper
         internal static readonly CacheObjSetting CategoryOneListCacheSettings = new CacheObjSetting() { CacheKey = "C1List", CacheDuration = 3600 };
         internal static readonly CacheObjSetting CategoryTwoListCacheSettings = new CacheObjSetting() { CacheKey = "C2List", CacheDuration = 3600 };
         internal static readonly CacheObjSetting CategoryThreeListCacheSettings = new CacheObjSetting() { CacheKey = "C3List", CacheDuration = 3600 };
+
         #region 备用代码
         //internal static readonly CacheObjSetting CategoryOneHashCacheSettings = new CacheObjSetting() { CacheKey = "C1Hash", CacheDuration = 3600 };
         //internal static readonly CacheObjSetting CategoryTwoHashCacheSettings = new CacheObjSetting() { CacheKey = "C2Hash", CacheDuration = 3600 };

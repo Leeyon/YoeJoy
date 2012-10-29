@@ -24,6 +24,8 @@ namespace YoeJoyHelper.Model
         public int LimitedQty { get; set; }
         //商品图片
         public List<ProductDetailImg> Images { get; set; }
+        //规格参数
+        public string ProductAttrSummery { get; set; }
     }
 
     /// <summary>
@@ -47,6 +49,14 @@ namespace YoeJoyHelper.Model
             pimg.orderNum,pimg.status from Product_Images pimg
             where pimg.product_sysNo={0} and pimg.status=1 order by pimg.orderNum";
 
+        private static readonly string getProductDetailInfoSqlCmdTemplate = @"select p.SysNo,p.BriefName,
+  CONVERT(float,pp.BasicPrice) as BasicPrice,CONVERT(float,pp.CurrentPrice) as CurrentPrice,
+  p.ProductDescLong,p.PackageList,pp.LimitedQty, pas.SummaryMain from Product p 
+  left join Product_Price pp on p.SysNo=pp.ProductSysNo
+  left join Inventory inve on p.SysNo=inve.ProductSysNo
+  left join Product_Attribute2_Summary pas on p.SysNo=pas.ProductSysNo
+  where p.SysNo={0}";
+
         /// <summary>
         /// 获得商品的全部展示图片
         /// </summary>
@@ -66,8 +76,8 @@ namespace YoeJoyHelper.Model
                     {
                         imgs.Add(new ProductDetailImg()
                         {
-                            ThumbnailImg=data.Rows[i]["product_simg"].ToString().Trim(),
-                            LargeImg=data.Rows[i]["product_limg"].ToString().Trim(),
+                            ThumbnailImg = data.Rows[i]["product_simg"].ToString().Trim(),
+                            LargeImg = data.Rows[i]["product_limg"].ToString().Trim(),
                         });
                     }
                     return imgs;
@@ -82,6 +92,46 @@ namespace YoeJoyHelper.Model
                 return null;
             }
         }
+
+        /// <summary>
+        /// 获得商品详细的基本信息
+        /// </summary>
+        /// <param name="productSysNo"></param>
+        /// <returns></returns>
+        public static ProductDetailModel GetProductDetailBasicInfo(int productSysNo)
+        {
+            string sqlCmd = String.Format(getProductDetailInfoSqlCmdTemplate, productSysNo);
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    ProductDetailModel productDetail = new ProductDetailModel()
+                    {
+                        SysNo = data.Rows[0]["SysNo"].ToString().Trim(),
+                        ProductBriefName = data.Rows[0]["BriefName"].ToString().Trim(),
+                        ProductBaiscPrice = data.Rows[0]["BasicPrice"].ToString().Trim(),
+                        ProductCurrentPrice = data.Rows[0]["CurrentPrice"].ToString().Trim(),
+                        ProductDescriptionLong = data.Rows[0]["ProductDescLong"].ToString().Trim(),
+                        PackageList = data.Rows[0]["PackageList"].ToString().Trim(),
+                        LimitedQty = int.Parse(data.Rows[0]["LimitedQty"].ToString().Trim()),
+                        Images = GetProductDetailImgs(productSysNo),
+                        ProductAttrSummery = data.Rows[0]["SummaryMain"].ToString().Trim(),
+                    };
+                    return productDetail;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 
     #endregion

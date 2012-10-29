@@ -66,6 +66,7 @@
     <Compile Include="Model\PanicBuyingProductModel.cs" />
     <Compile Include="Model\InComingProductModel.cs" />
     <Compile Include="Model\ProductDetailModel.cs" />
+    <Compile Include="Model\ProductMappingModel.cs" />
     <Compile Include="Model\PromotionProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\CommonUtility.cs" />

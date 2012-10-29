@@ -16,10 +16,14 @@ namespace YoeJoyHelper.Model
         public string ProductBriefName { get; set; }
         public string ProductBaiscPrice { get; set; }
         public string ProductCurrentPrice { get; set; }
-        //public string ProductDescriptionLong { get; set; }
-        //public string PackageList { get; set; }
+        //详细说明
+        public string ProductDescriptionLong { get; set; }
+        //包装清单
+        public string PackageList { get; set; }
         //一次限购数量
         public int LimitedQty { get; set; }
+        //商品图片
+        public List<ProductDetailImg> Images { get; set; }
     }
 
     /// <summary>

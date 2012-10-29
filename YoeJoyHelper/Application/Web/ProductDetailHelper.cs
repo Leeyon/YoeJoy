@@ -8,6 +8,13 @@ namespace YoeJoyHelper
 {
     public class ProductDetailHelper
     {
+        private ProductDetailModel productDetailModle;
+
+        public static ProductDetailModel getProductDetailInstance(int productSysNo)
+        {
+            return new ProductDetailModel();
+        }
+
         public static string GetProductDetailImages(int productSysNo)
         {
             string productImgHTML = String.Empty;

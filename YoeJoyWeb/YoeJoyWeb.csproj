@@ -164,6 +164,13 @@
     <Compile Include="Service\GetSearch2ProductListItem.aspx.designer.cs">
       <DependentUpon>GetSearch2ProductListItem.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -741,6 +748,7 @@
     <Content Include="static\js\prod\jquery-1.8.1.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="User\Register.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

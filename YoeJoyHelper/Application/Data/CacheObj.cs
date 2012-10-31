@@ -13,6 +13,7 @@ namespace YoeJoyHelper
     {
         /// <summary>
         /// 获取缓存对象
+        /// 不允许缓存null的对象
         /// </summary>
         /// <param name="key"></param>
         /// <param name="duration"></param>
@@ -26,8 +27,11 @@ namespace YoeJoyHelper
             }
             else
             {
-                CacheHelper helper = new CacheHelper(key, obj, duration);
-                helper.Add();
+                if (obj != null)
+                {
+                    CacheHelper helper = new CacheHelper(key, obj, duration);
+                    helper.Add();
+                }
                 return obj;
             }
         }

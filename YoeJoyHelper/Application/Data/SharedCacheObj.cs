@@ -14,6 +14,7 @@ namespace YoeJoyHelper
     {
         /// <summary>
         /// 获取一个共享的缓存对象
+        /// 不允许缓存null的对象
         /// </summary>
         /// <param name="settings">缓存设定</param>
         /// <param name="obj">需要缓存的对象</param>
@@ -27,8 +28,11 @@ namespace YoeJoyHelper
             }
             else
             {
-                CacheHelper helper = new CacheHelper(key, obj, settings.CacheDuration);
-                helper.Add();
+                if (obj != null)
+                {
+                    CacheHelper helper = new CacheHelper(key, obj, settings.CacheDuration);
+                    helper.Add();
+                }
                 return obj;
             }
         }

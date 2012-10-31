@@ -31,10 +31,9 @@ namespace YoeJoyHelper
         public string GetProductDetailImages()
         {
             string productImgHTML = String.Empty;
-
-            List<ProductDetailImg> imgs = productDetail.Images;
-            if (imgs != null)
+            if (productDetail != null)
             {
+                List<ProductDetailImg> imgs = productDetail.Images;
                 string imgVirtualPathBase = YoeJoyConfig.ImgVirtualPathBase;
 
                 StringBuilder strb = new StringBuilder("<ul>");

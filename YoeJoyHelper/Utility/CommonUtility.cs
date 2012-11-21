@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.IO;
 
+using Icson.Objects;
+using Icson.Objects.Online;
+
 namespace YoeJoyHelper
 {
     public class CommonUtility
@@ -94,5 +97,33 @@ namespace YoeJoyHelper
             }
             return statusDic;
         }
+
+        /// <summary>
+        /// 通用正则
+        /// </summary>
+        /// <param name="num">待验证信息</param>
+        /// <param name="match">正则表达式</param>
+        /// <returns>通过与否 true or false</returns>
+        public static bool IsValidNum(string num, string match)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(num, match);
+        }
+
+        /// <summary>
+        /// 获得用户的session
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static IcsonSessionInfo GetUserSession(HttpContext context)
+        {
+            IcsonSessionInfo oSession = (IcsonSessionInfo)context.Session["IcsonSessionInfo"];
+            if (oSession == null)
+            {
+                oSession = new IcsonSessionInfo();
+                context.Session["IcsonSessionInfo"] = oSession;
+            }
+            return oSession;
+        }
+
     }
 }

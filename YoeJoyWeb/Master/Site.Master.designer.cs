@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace YoeJoyWeb.Master {
+namespace YoeJoyWeb {
     
     
     public partial class Site {

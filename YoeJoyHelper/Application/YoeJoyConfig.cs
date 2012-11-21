@@ -23,11 +23,11 @@ namespace YoeJoyHelper
         /// </summary>
         public enum ProductListSortedOrder : int
         {
-            Default=1,
-            Price=2,
-            SaledAmount=3,
-            OnlieDate=4,
-            Comment=5,
+            Default = 1,
+            Price = 2,
+            SaledAmount = 3,
+            OnlieDate = 4,
+            Comment = 5,
         }
 
     }
@@ -58,6 +58,8 @@ namespace YoeJoyHelper
         public static readonly string HomeDisplayCategoryID2 = ConfigurationManager.AppSettings["HomeDisplayCategoryID2"].ToString().Trim();
         public static readonly string SiteBaseURL = ConfigurationManager.AppSettings["SiteBaseURL"].ToString().Trim();
         public static readonly string ProductListPagedCount = ConfigurationManager.AppSettings["ProductListPagedCount"].ToString().Trim();
+        public static readonly string DESCEncryptKey = ConfigurationManager.AppSettings["DESCEncryptKey"].ToString().Trim();
+        public static readonly string WishListPagedCount = ConfigurationManager.AppSettings["WishListPagedCount"].ToString().Trim();
         //public static readonly string XMLVirtualPathBase = ConfigurationManager.AppSettings["XMLVitrualPath"].ToString().Trim();
     }
 }

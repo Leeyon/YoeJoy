@@ -5,6 +5,8 @@ using System.Text;
 using System.Data;
 using System.Data.Sql;
 using Icson.Objects;
+using Icson.Utils;
+using System.Collections;
 
 namespace YoeJoyHelper.Model
 {
@@ -103,6 +105,23 @@ namespace YoeJoyHelper.Model
         public string Price { get; set; }
         public string ImgPath { get; set; }
         public string ProductPromotionWord { get; set; }
+    }
+
+    /// <summary>
+    /// 用户浏览记录中的商品
+    /// </summary>
+    public class CustomerBrowserHistoryProduct
+    {
+        public string ProductSysNo { get; set; }
+        public int C1SysNo { get; set; }
+        public int C2SysNo { get; set; }
+        public int C3SysNo { get; set; }
+        public string ProductBriefName { get; set; }
+        public string LargeImg { get; set; }
+        public string SmallImg { get; set; }
+        public string CurrentPrice { get; set; }
+        public string StandardPrice { get; set; }
+        public string PromotionWord { get; set; }
     }
 
     #endregion
@@ -945,7 +964,7 @@ and (p.PromotionWord like ('%{1}%')
                         break;
                     }
             }
-            string sqlCmd = String.Format(getSearch2C3PagedProductsSqlCmdTemplate, pagedCount, c3SysNo, arrtibutionFilterSqlCmd,keyWordsArray[0].ToString().Trim(),childSearchSqlCmd, startIndex, orderByStr1, orderByStr);
+            string sqlCmd = String.Format(getSearch2C3PagedProductsSqlCmdTemplate, pagedCount, c3SysNo, arrtibutionFilterSqlCmd, keyWordsArray[0].ToString().Trim(), childSearchSqlCmd, startIndex, orderByStr1, orderByStr);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -979,6 +998,74 @@ and (p.PromotionWord like ('%{1}%')
 
 
 
+    }
+
+    public class CustomerBrowserHistoryProductService
+    {
+        private static readonly string getCustomerBrowserHistoryProductAllSqlCmdTemplate = @"select p.SysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.BriefName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as currentprice,CONVERT(float,pp.BasicPrice) as basicprice,pimgs.product_limg,pimgs.product_simg from Product p
+  left join Product_Price pp on p.SysNo=pp.ProductSysNo
+  left join Product_Images pimgs on p.SysNo=pimgs.product_sysNo
+  where p.SysNo in ({0})
+  and p.Status=1
+  and pimgs.status=1
+  and pimgs.orderNum=1";
+
+        /// <summary>
+        /// 获得用户的浏览过的商品信息
+        /// </summary>
+        /// <param name="productSysNoList"></param>
+        /// <returns></returns>
+        public static ArrayList GetBrowseHistoryList(string sysNoList)
+        {
+            if (sysNoList == null || sysNoList == string.Empty)
+            {
+                return null;
+            }
+            try
+            {
+                string sqlCmd = String.Format(getCustomerBrowserHistoryProductAllSqlCmdTemplate, sysNoList);
+
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+
+                if (!Util.HasMoreRow(data))
+                    return null;
+
+                //将数据库获取的数据放入Hashtable
+                Hashtable ht = new Hashtable(10);
+                foreach (DataRow dr in data.Rows)
+                {
+                    CustomerBrowserHistoryProduct cbHisProduct = new CustomerBrowserHistoryProduct()
+                    {
+                        ProductSysNo = dr["SysNo"].ToString().Trim(),
+                        C1SysNo = int.Parse(dr["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(dr["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(dr["C3SysNo"].ToString().Trim()),
+                        ProductBriefName = dr["BriefName"].ToString().Trim(),
+                        PromotionWord = dr["PromotionWord"].ToString().Trim(),
+                        LargeImg = dr["product_limg"].ToString().Trim(),
+                        SmallImg = dr["product_simg"].ToString().Trim(),
+                        CurrentPrice = dr["currentprice"].ToString().Trim(),
+                        StandardPrice = dr["basicprice"].ToString().Trim(),
+                    };
+                    ht.Add(cbHisProduct.ProductSysNo.ToString(), cbHisProduct);
+                }
+
+                //根据次序进行排序
+                ArrayList al = new ArrayList(10);
+                string[] sysArr = sysNoList.Split(',');
+                for (int i = 0; i < sysArr.Length; i++)
+                {
+                    if (ht.Contains(sysArr[i])) //有可能商品Status变化,所以ht会比cookie中的少
+                        al.Add(ht[sysArr[i]]);
+                }
+
+                return al;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 
     #endregion

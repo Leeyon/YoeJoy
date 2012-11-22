@@ -7,6 +7,7 @@ using System.Web.SessionState;
 using YoeJoyHelper.Security;
 using System.Collections;
 using YoeJoyHelper.Model;
+using System.Globalization;
 
 
 using Icson.Utils;
@@ -252,17 +253,17 @@ namespace YoeJoyHelper
             strb.Append(String.Format(profileRowHTMLTemplate, "会员等级：", AppEnum.GetCustomerRank(cInfo.CustomerRank)));
             strb.Append(String.Format(profileRowHTMLTemplate, "积分：", cInfo.ValidScore > 0 ? cInfo.ValidScore : 0));
 
-            string emailStatus=String.Empty;
-            if(cInfo.EmailStatus==(int)AppEnum.EmailStatus.Origin)
+            string emailStatus = String.Empty;
+            if (cInfo.EmailStatus == (int)AppEnum.EmailStatus.Origin)
             {
-                emailStatus="未验证";
+                emailStatus = "未验证";
             }
             else
             {
-                emailStatus="已验证";
+                emailStatus = "已验证";
             }
 
-            strb.Append(String.Format(profileRowHTMLTemplate, "邮箱验证：",emailStatus));
+            strb.Append(String.Format(profileRowHTMLTemplate, "邮箱验证：", emailStatus));
 
             strb.Append("</tbody>");
             customInfoHTML = strb.ToString();
@@ -275,14 +276,14 @@ namespace YoeJoyHelper
         /// <param name="customerSysNo"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public static string GetCustomerWishListProducts(int customerSysNo,int startIndex)
+        public static string GetCustomerWishListProducts(int customerSysNo, int startIndex)
         {
             string wishListHTML = String.Empty;
 
             int pageCount = int.Parse(YoeJoyConfig.WishListPagedCount);
             List<WishListModule> wishList = WishListService.GetCustomerWishList(customerSysNo, startIndex, pageCount);
 
-            if (wishList!= null)
+            if (wishList != null)
             {
                 StringBuilder strb = new StringBuilder();
 
@@ -294,5 +295,101 @@ namespace YoeJoyHelper
             return wishListHTML;
         }
 
+        /// <summary>
+        /// 设置用户的浏览记录
+        /// </summary>
+        /// <param name="productSysNo"></param>
+        public static void SetCustomerBrowserHistory(int productSysNo)
+        {
+            // 如果product已经存在于cookie中，就不用更新了
+            // 更新Cookie
+            // 更新Session
+
+            string cookie = CookieUtil.GetDESEncryptedCookieValue(CookieUtil.Cookie_BrowseHistory);
+
+            string newCookie = productSysNo.ToString();
+
+            if (cookie != null)
+            {
+                string[] productArray = cookie.Split(',');
+
+                int index = 0; // 新的字符串的个数
+                for (int i = 0; i < productArray.Length; i++)
+                {
+                    if (productArray[i] != productSysNo.ToString())
+                    {
+                        newCookie += ",";
+                        try
+                        {
+                            Convert.ToInt32(productArray[i]);
+                        }
+                        catch
+                        {
+                            //出错重置为当前product
+                            newCookie = productSysNo.ToString();
+                            break;
+                        }
+                        newCookie += productArray[i];
+                        index++;
+                    }
+
+                    if (index == 9)
+                        break;
+                }
+            }
+            CookieUtil.SetDESEncryptedCookie(CookieUtil.Cookie_BrowseHistory, newCookie, DateTime.MaxValue);
+        }
+
+        /// <summary>
+        /// 获取在商品详细页用户的浏览历史
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCustomerBrowserHistoryByPosition(string positionTag)
+        {
+            ///TODO: add UI code
+            string frontPageBrowserHisHTML = String.Empty;
+
+            string cookie = CookieUtil.GetDESEncryptedCookieValue(CookieUtil.Cookie_BrowseHistory);
+            ArrayList al = CustomerBrowserHistoryProductService.GetBrowseHistoryList(cookie);
+
+            if (al != null)
+            {
+                switch (positionTag.ToLower(CultureInfo.InvariantCulture))
+                {
+                    //商品详细页的用户浏览记录
+                    case "productdetail":
+                        {
+                            if (al.Count > 5)
+                            {
+                                var hisList = al.ToArray().Take(5);
+                            }
+                            else
+                            {
+                                var hisList = al.ToArray(typeof(string));
+                            }
+                            break;
+                        }
+                    //用户中心首页
+                    case "accountcenter":
+                        {
+                            if (al.Count < 7)
+                            {
+                                var histList = al.ToArray().Take(7);
+                            }
+                            else
+                            {
+
+                            }
+                            break;
+                        }
+                    //我的全部浏览记录
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }
+            return frontPageBrowserHisHTML;
+        }
     }
 }

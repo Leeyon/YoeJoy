@@ -55,6 +55,14 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Area.cs" />
+    <Compile Include="Controls\CustomerDetailInfo.ascx.cs">
+      <DependentUpon>CustomerDetailInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerDetailInfo.ascx.designer.cs">
+      <DependentUpon>CustomerDetailInfo.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SubCategoryNavigation.ascx.cs">
       <DependentUpon>SubCategoryNavigation.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,6 +200,20 @@
     <Compile Include="User\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\MyAddress.aspx.cs">
+      <DependentUpon>MyAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MyAddress.aspx.designer.cs">
+      <DependentUpon>MyAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\MyPassword.aspx.cs">
+      <DependentUpon>MyPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MyPassword.aspx.designer.cs">
+      <DependentUpon>MyPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\MyProfile.aspx.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -207,6 +229,7 @@
   <ItemGroup>
     <Content Include="Assemblies\CKEditor.NET.dll" />
     <Content Include="Controls\My97DatePicker\开发包\skin\default\bg.jpg" />
+    <Content Include="Controls\CustomerDetailInfo.ascx" />
     <Content Include="Controls\SubCategoryNavigation.ascx" />
     <Content Include="Controls\CategoryNavigation.ascx" />
     <Content Include="Controls\CKEditor\adapters\jquery.js" />
@@ -780,6 +803,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="User\Login.aspx" />
+    <Content Include="User\MyAddress.aspx" />
+    <Content Include="User\MyPassword.aspx" />
     <Content Include="User\MyProfile.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

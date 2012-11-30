@@ -77,6 +77,8 @@ namespace Icson.BLL.Basic
             oParam.TotalFreeShipFee = Util.TrimDecimalNull(tempdr["TotalFreeShipFee"]);
             oParam.ValidFreeShipFee = Util.TrimDecimalNull(tempdr["ValidFreeShipFee"]);
             oParam.RefCustomerSysNo = Util.TrimIntNull(tempdr["RefCustomerSysNo"]);
+            oParam.NickName = Util.TrimNull(tempdr["Nickname"]);
+            oParam.BirthDay = Util.TrimNull(tempdr["Birthday"]);
         }
 
         public CustomerInfo LoadByVip(string card)

@@ -3,15 +3,15 @@ using Icson.Utils;
 
 namespace Icson.Objects.Basic
 {
-	/// <summary>
-	/// Summary description for CustomerInfo.
-	/// </summary>
-	public class CustomerInfo
-	{		
-		public CustomerInfo()
-		{
-			Init();
-		}
+    /// <summary>
+    /// Summary description for CustomerInfo.
+    /// </summary>
+    public class CustomerInfo
+    {
+        public CustomerInfo()
+        {
+            Init();
+        }
 
         public int SysNo;
         public string CustomerID;
@@ -50,6 +50,8 @@ namespace Icson.Objects.Basic
         public int RefCustomerSysNo;
         public int VIPRank;
         public int DiscountPercent;
+        public string BirthDay;
+        public string NickName;
 
         public void Init()
         {

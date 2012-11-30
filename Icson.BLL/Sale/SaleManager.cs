@@ -2199,7 +2199,9 @@ namespace Icson.BLL.Sale
                 {
                     bool HasService = false;
                     int HasExpectQty = (int)AppEnum.YNStatus.No;
-                    soInfo.Status = (int)AppEnum.SOStatus.Origin;
+                    //修改逻辑，当用户提交订单后需要支付，而不是审核。
+                    //soInfo.Status = (int)AppEnum.SOStatus.Origin;
+                    soInfo.Status = (int)AppEnum.SOStatus.WaitingPay;
                     soInfo.IsPrintPackageCover = (int)AppEnum.YNStatus.No;
                     soInfo.OrderDate = DateTime.Now;
                     

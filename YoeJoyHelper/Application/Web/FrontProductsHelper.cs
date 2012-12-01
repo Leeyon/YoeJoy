@@ -68,42 +68,42 @@ namespace YoeJoyHelper
             Dictionary<int, string> c2IdDic = HomeCategoryOneProductService.GetCategoryTwoIDs(categoryOneId);
             if (c2IdDic != null)
             {
-                StringBuilder strb = new StringBuilder("<div class='intlist'>");
+                StringBuilder strb = new StringBuilder("<div class='sort'>");
 
-                strb.Append(@"<a href='#'><ul class='flmenu'>");
-                int tagCount = 0;
+                strb.Append(@"<ul class='sortHeader'>");
                 foreach (int key in c2IdDic.Keys)
                 {
-                    if (tagCount == 0)
-                    {
-                        strb.Append(String.Concat("<li class='selected'>", c2IdDic[key].ToString().Trim(), "</li>"));
-                        tagCount++;
-                    }
-                    else
-                    {
-                        strb.Append(String.Concat("<li>", c2IdDic[key].ToString().Trim(), "</li>"));
-                    }
+                    strb.Append(String.Concat("<li><a  href='#'>", c2IdDic[key].ToString().Trim(), "</a></li>"));
                 }
-                strb.Append("</ul></a>");
-                strb.Append("<div id='itsm' class='fllist list'>");
-                string productsItemHTMLTempate = @" <li><a href='products/product.aspx?c1={0}&c2={1}&c3={2}&pid={3}'>
-                        <p>
-                            <img src='{4}' /><span class='price'>{5}元</span></p>
-                        <span>{6}</span></a></li>";
+                strb.Append("</ul>");
+                strb.Append(@"<div class='main'>");
+                string baseURL = YoeJoyConfig.SiteBaseURL;
+                string deeplinkTemplate = "{0}Pages/Product.aspx?c1={1}&c2={2}&c3={3}&pid={4}";
+                string productsItemHTMLTempate = @"<li>
+                                    <div>
+                                        <h3>
+                                            <a href='{0}'>
+                                                <img alt='产品图片' src='{1}' width='140' height='140'/></a></h3>
+                                        <p>
+                                            <a href='{2}'>{3}</a></p>
+                                        <b>￥{4}</b>
+                                    </div>
+                                </li>";
                 string imageBasePath = YoeJoyConfig.ImgVirtualPathBase;
                 foreach (int key in c2IdDic.Keys)
                 {
                     List<FrontDsiplayProduct> products = HomeCategoryOneProductService.GetHomeCategoryOneDisplayProducts(key);
-                    strb.Append("<ul>");
+                    strb.Append(" <div class='sort1Con'><ul class='product sortContent'>");
                     if (products != null)
                     {
                         for (int i = 0; i < products.Count; i++)
                         {
                             FrontDsiplayProduct product = products[i];
                             string imagePath = imageBasePath + product.ImgPath;
-                            strb.Append(String.Format(productsItemHTMLTempate, categoryOneId.Trim(), key, product.C3SysNo, product.ProductSysNo, imagePath, product.Price, product.ProductPromotionWord));
+                            string deeplink = String.Format(deeplinkTemplate, baseURL, product.C1SysNo, product.C2SysNo, product.C3SysNo, product.ProductSysNo);
+                            strb.Append(String.Format(productsItemHTMLTempate, deeplink, imagePath, deeplink, product.ProductPromotionWord, product.Price));
                         }
-                        strb.Append("</ul>");
+                        strb.Append("</ul></div>");
                     }
                 }
                 strb.Append("</div>");
@@ -318,7 +318,7 @@ namespace YoeJoyHelper
             else
             {
                 int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount<=pagedCount)?1:productTotalCount / pagedCount;
+                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
 
                 string enableArrowHTML = @"<a class='enableArrow' id='nextArrow'></a>";
                 string disableArrowHTML = @"<a class='disableArrow' id='prevArrow'></a>";
@@ -326,11 +326,11 @@ namespace YoeJoyHelper
                 string topNavHTMLTemplate = @"共<span>{0}<input type='hidden' value='{1}' id='totalCount'/></span>个商品<img src='../static/images/pxtjfg.gif' width='2' height='20'><span id='currentPageNum'>1</span>/{2}<input type='hidden' value='1' id='currentPageIndex'/><input type='hidden' value='1' id='pagedSeed'/><input type='hidden' value='{3}' id='totalPagedCount'/><input type='hidden' value='{4}' id='seed'/>{5}{6}";
                 if (totalPageCount == 1)
                 {
-                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount,pagedCount,disableArrowHTML, disableArrowHTML);
+                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount, pagedCount, disableArrowHTML, disableArrowHTML);
                 }
                 else
                 {
-                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount,pagedCount, disableArrowHTML, enableArrowHTML);
+                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount, pagedCount, disableArrowHTML, enableArrowHTML);
                 }
                 strb.Append(topNavHTML);
             }
@@ -348,33 +348,33 @@ namespace YoeJoyHelper
         /// <param name="c3SysNo"></param>
         /// <param name="attribution2Ids"></param>
         /// <returns></returns>
-        public static string InitC3ProductListFooter(int c3SysNo,string attribution2Ids)
+        public static string InitC3ProductListFooter(int c3SysNo, string attribution2Ids)
         {
             string productListFooterHTML = String.Empty;
 
             int productTotalCount = C3ProductListSerivice.GetPagedProductListItemTotalCount(c3SysNo, attribution2Ids);
             StringBuilder strb = new StringBuilder("<div id='listFooter' class='fyitem1' align='right'>");
-            if (productTotalCount>0)
+            if (productTotalCount > 0)
             {
                 int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount<=pagedCount)?1:productTotalCount / pagedCount;
+                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
 
-                string disablePrevButtonHTML=@"<span id='prevBtn' class='prev prev0'>上一页</span>";
-                string enableNextArrowHTML =@"<span id='nextBtn' class='prev next1'>下一页</span>";
+                string disablePrevButtonHTML = @"<span id='prevBtn' class='prev prev0'>上一页</span>";
+                string enableNextArrowHTML = @"<span id='nextBtn' class='prev next1'>下一页</span>";
                 string bottomNavHTML = String.Empty;
-                string bottomNavItemHTMLTemplate=@"<span class='pagenum'>{0}</span>";
+                string bottomNavItemHTMLTemplate = @"<span class='pagenum'>{0}</span>";
                 string bottomNavHTMLTemplate = @"{0}{1}{2}<span>共{3}页</span><span>到第</span>
         <input id='txtPageNum' maxlength='2' width='2' type='text' />
         <span>页</span>
         <input id='btnPageNum' value='确定' type='button' />";
-                if(totalPageCount>1)
+                if (totalPageCount > 1)
                 {
-                    string bottomNavItenHTML=String.Empty;
-                    for(int i=1;i<=totalPageCount;i++)
+                    string bottomNavItenHTML = String.Empty;
+                    for (int i = 1; i <= totalPageCount; i++)
                     {
-                        bottomNavItenHTML+=String.Format(bottomNavItemHTMLTemplate,i);
+                        bottomNavItenHTML += String.Format(bottomNavItemHTMLTemplate, i);
                     }
-                    bottomNavHTML = String.Format(bottomNavHTMLTemplate,disablePrevButtonHTML,bottomNavItenHTML,enableNextArrowHTML,totalPageCount);
+                    bottomNavHTML = String.Format(bottomNavHTMLTemplate, disablePrevButtonHTML, bottomNavItenHTML, enableNextArrowHTML, totalPageCount);
                 }
                 strb.Append(bottomNavHTML);
             }
@@ -448,7 +448,7 @@ namespace YoeJoyHelper
         /// <param name="c1SysNo"></param>
         /// <param name="c2SysNo"></param>
         /// <returns></returns>
-        public static string GetC3PageProductListHTML(YoeJoyEnum.ProductListSortedOrder orderOption, int startIndex,int c3SysNo, int c1SysNo, int c2SysNo, string attribution2Ids)
+        public static string GetC3PageProductListHTML(YoeJoyEnum.ProductListSortedOrder orderOption, int startIndex, int c3SysNo, int c1SysNo, int c2SysNo, string attribution2Ids)
         {
             string productListHTML = String.Empty;
             StringBuilder strb = new StringBuilder("<ul>");

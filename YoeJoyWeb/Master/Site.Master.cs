@@ -30,8 +30,21 @@ namespace YoeJoyWeb
             }
         }
 
+        //判断是否是主页
+        public bool IsHomePage { get; set; }
+
+        protected string LeftTopDivTag { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsHomePage)
+            {
+                LeftTopDivTag = "<div class='left'>";
+            }
+            else
+            {
+                LeftTopDivTag = "<div class='left ItemSort1' id='ItemSortCon'>";
+            }
             if (UserSession.sCustomer == null)
             {
                 ///TODO: add logic here for user scenarios

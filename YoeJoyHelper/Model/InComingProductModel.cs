@@ -16,11 +16,14 @@ namespace YoeJoyHelper.Model
         public int Price { get; set; }
         public string PromotionWord { get; set; }
         public string ImgCover { get; set; }
+        public int C1SysNo { get; set; }
+        public int C2SysNo { get; set; }
+        public int C3SysNo { get; set; }
     }
 
     public class InComingProductService
     {
-        private static readonly string GetHomeInComingProductSqlCmdTemplate = @"  select top 4 olp.ProductSysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
+        private static readonly string GetHomeInComingProductSqlCmdTemplate = @" select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
   left join Product p on olp.ProductSysNo=p.SysNo 
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
   left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
@@ -43,6 +46,9 @@ namespace YoeJoyHelper.Model
                     PromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                     Price = int.Parse(data.Rows[i]["price"].ToString().Trim()),
                     ImgCover = data.Rows[i]["product_limg"].ToString().Trim(),
+                    C1SysNo=int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                    C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                    C3SysNo=int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
                 });
             }
             return products;

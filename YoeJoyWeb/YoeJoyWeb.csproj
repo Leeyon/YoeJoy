@@ -63,6 +63,13 @@
     <Compile Include="Controls\CustomerDetailInfo.ascx.designer.cs">
       <DependentUpon>CustomerDetailInfo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OnlineStaticAD.ascx.cs">
+      <DependentUpon>OnlineStaticAD.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineStaticAD.ascx.designer.cs">
+      <DependentUpon>OnlineStaticAD.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SubCategoryNavigation.ascx.cs">
       <DependentUpon>SubCategoryNavigation.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -83,6 +90,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default_old.aspx.cs">
+      <DependentUpon>Default_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default_old.aspx.designer.cs">
+      <DependentUpon>Default_old.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,6 +235,13 @@
     <Compile Include="User\MyProfile.aspx.designer.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -230,6 +251,7 @@
     <Content Include="Assemblies\CKEditor.NET.dll" />
     <Content Include="Controls\My97DatePicker\开发包\skin\default\bg.jpg" />
     <Content Include="Controls\CustomerDetailInfo.ascx" />
+    <Content Include="Controls\OnlineStaticAD.ascx" />
     <Content Include="Controls\SubCategoryNavigation.ascx" />
     <Content Include="Controls\CategoryNavigation.ascx" />
     <Content Include="Controls\CKEditor\adapters\jquery.js" />
@@ -599,6 +621,7 @@
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="Default.aspx" />
+    <Content Include="Default_old.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Product.aspx" />
     <Content Include="Pages\ProductList.aspx" />
@@ -614,33 +637,67 @@
     <Content Include="Service\GetSearch2ProductListItem.aspx" />
     <Content Include="Service\UserLogin.aspx" />
     <Content Include="Service\UserRegister.aspx" />
+    <Content Include="static\css\base.css" />
+    <Content Include="static\css\class.css" />
+    <Content Include="static\css\grounp.css" />
+    <Content Include="static\css\head.css" />
+    <Content Include="static\css\help.css" />
     <Content Include="static\css\layout.css" />
-    <Content Include="static\css\layout1020.css" />
+    <Content Include="static\css\login.css" />
+    <Content Include="static\css\process1.css" />
+    <Content Include="static\css\product.css" />
+    <Content Include="static\css\productSort.css" />
+    <Content Include="static\css\UserCenter.css" />
+    <Content Include="static\images\aaa.jpg" />
+    <Content Include="static\images\about.png" />
+    <Content Include="static\images\aboutTG.jpg" />
     <Content Include="static\images\ad01.jpg" />
     <Content Include="static\images\ad02.jpg" />
     <Content Include="static\images\ad03.jpg" />
     <Content Include="static\images\ad04.jpg" />
+    <Content Include="static\images\ad3.jpg" />
     <Content Include="static\images\add.png" />
+    <Content Include="static\images\adda.jpg" />
     <Content Include="static\images\address.png" />
-    <Content Include="static\images\allclass.png" />
-    <Content Include="static\images\allclass1.png" />
+    <Content Include="static\images\alert.png" />
+    <Content Include="static\images\allbg0.png" />
+    <Content Include="static\images\allbt.png" />
+    <Content Include="static\images\allclassbg0.png" />
+    <Content Include="static\images\allclassbg1.gif" />
+    <Content Include="static\images\allclassbg2.png" />
     <Content Include="static\images\arrow1.png" />
     <Content Include="static\images\arrow2.png" />
+    <Content Include="static\images\arrow3.png" />
+    <Content Include="static\images\band.gif" />
     <Content Include="static\images\bd1.png" />
     <Content Include="static\images\bd2.png" />
     <Content Include="static\images\bd3.png" />
     <Content Include="static\images\bottom.png" />
+    <Content Include="static\images\brand.gif" />
     <Content Include="static\images\btbg.png" />
+    <Content Include="static\images\btbg0.png" />
     <Content Include="static\images\btbg1.png" />
     <Content Include="static\images\btbg2.png" />
+    <Content Include="static\images\btbg3.png" />
+    <Content Include="static\images\buycar.gif" />
     <Content Include="static\images\bzxlph.png" />
+    <Content Include="static\images\cancel.jpg" />
     <Content Include="static\images\cantuan.png" />
+    <Content Include="static\images\cart.jpg" />
     <Content Include="static\images\chakan.png" />
-    <Content Include="static\images\class.png" />
+    <Content Include="static\images\char.jpg" />
     <Content Include="static\images\classBG.gif" />
     <Content Include="static\images\classfoot.png" />
     <Content Include="static\images\classfoot2.png" />
+    <Content Include="static\images\clock.jpg" />
     <Content Include="static\images\close.png" />
+    <Content Include="static\images\code.jpg" />
+    <Content Include="static\images\comfirm.jpg" />
+    <Content Include="static\images\comfirm1.jpg" />
+    <Content Include="static\images\comment.jpg" />
+    <Content Include="static\images\commentBg.jpg" />
+    <Content Include="static\images\computer.jpg" />
+    <Content Include="static\images\correct.jpg" />
     <Content Include="static\images\cprp.png" />
     <Content Include="static\images\cuxiao.png" />
     <Content Include="static\images\dd1.jpg" />
@@ -649,61 +706,139 @@
     <Content Include="static\images\dd4.jpg" />
     <Content Include="static\images\dd5.jpg" />
     <Content Include="static\images\ddys.jpg" />
-    <Content Include="static\images\ddzt.png" />
     <Content Include="static\images\ddzt1.png" />
+    <Content Include="static\images\del.jpg" />
+    <Content Include="static\images\dishes.jpg" />
     <Content Include="static\images\dot0.png" />
     <Content Include="static\images\dot1.png" />
+    <Content Include="static\images\down.gif" />
+    <Content Include="static\images\downstri.jpg" />
+    <Content Include="static\images\DownUp.jpg" />
+    <Content Include="static\images\dt.jpg" />
+    <Content Include="static\images\dt_span.jpg" />
+    <Content Include="static\images\ear.jpg" />
+    <Content Include="static\images\edit.jpg" />
     <Content Include="static\images\f01.jpg" />
     <Content Include="static\images\f02.jpg" />
     <Content Include="static\images\f03.jpg" />
     <Content Include="static\images\f04.jpg" />
     <Content Include="static\images\f05.jpg" />
+    <Content Include="static\images\f4.jpg" />
     <Content Include="static\images\fangdajing.png" />
+    <Content Include="static\images\fire.jpg" />
     <Content Include="static\images\flbtbg.png" />
     <Content Include="static\images\flhd.png" />
+    <Content Include="static\images\floatWbg.png" />
+    <Content Include="static\images\floatWline.png" />
     <Content Include="static\images\flpp.gif" />
     <Content Include="static\images\flpp1.gif" />
     <Content Include="static\images\footbg.jpg" />
+    <Content Include="static\images\footico1.png" />
+    <Content Include="static\images\footico2.png" />
+    <Content Include="static\images\footico3.png" />
+    <Content Include="static\images\footico4.png" />
+    <Content Include="static\images\footico5.png" />
     <Content Include="static\images\gg1.gif" />
+    <Content Include="static\images\gg1.jpg" />
     <Content Include="static\images\gg2.jpg" />
     <Content Include="static\images\gg3.gif" />
+    <Content Include="static\images\gg3.jpg" />
     <Content Include="static\images\gg4.jpg" />
+    <Content Include="static\images\gg5.jpg" />
     <Content Include="static\images\gmbt.png" />
     <Content Include="static\images\gou.png" />
+    <Content Include="static\images\gou1.png" />
+    <Content Include="static\images\gpBg.png" />
+    <Content Include="static\images\grounp.jpg" />
+    <Content Include="static\images\guanzhu.jpg" />
+    <Content Include="static\images\guide.jpg" />
     <Content Include="static\images\gwcbg.png" />
     <Content Include="static\images\gwcbottom.png" />
     <Content Include="static\images\gwcbt.png" />
+    <Content Include="static\images\gwcbt0.png" />
+    <Content Include="static\images\gwcbt1.png" />
+    <Content Include="static\images\gwcico.png" />
     <Content Include="static\images\gwctop.png" />
-    <Content Include="static\images\gwcxl.png" />
+    <Content Include="static\images\gwlc.png" />
+    <Content Include="static\images\hair.gif" />
+    <Content Include="static\images\headBg.png" />
+    <Content Include="static\images\headBg2.png" />
     <Content Include="static\images\headerBG.png" />
+    <Content Include="static\images\heart.jpg" />
+    <Content Include="static\images\help1.jpg" />
     <Content Include="static\images\helpbt.png" />
+    <Content Include="static\images\helpline.gif" />
+    <Content Include="static\images\helpline.png" />
     <Content Include="static\images\hfbt.jpg" />
+    <Content Include="static\images\hg1bg.gif" />
+    <Content Include="static\images\hg1bj0.png" />
+    <Content Include="static\images\hg1bj1.png" />
+    <Content Include="static\images\hg1next0.png" />
+    <Content Include="static\images\hg1next1.png" />
+    <Content Include="static\images\hg1prev0.png" />
+    <Content Include="static\images\hg1prev1.png" />
+    <Content Include="static\images\hg2bg.png" />
+    <Content Include="static\images\hg2next.png" />
+    <Content Include="static\images\hg2prev.png" />
+    <Content Include="static\images\hg2sp0.png" />
+    <Content Include="static\images\history.jpg" />
     <Content Include="static\images\home.png" />
     <Content Include="static\images\homeclass.png" />
+    <Content Include="static\images\hot.jpg" />
+    <Content Include="static\images\hov.png" />
+    <Content Include="static\images\hov2.png" />
+    <Content Include="static\images\hov3.png" />
     <Content Include="static\images\hssg.png" />
     <Content Include="static\images\hy2.gif" />
+    <Content Include="static\images\indexbg - 副本 %282%29.png" />
+    <Content Include="static\images\indexbg - 副本 %283%29.png" />
+    <Content Include="static\images\indexbg - 鍓湰 %282%29.png" />
+    <Content Include="static\images\indexbg - 鍓湰 %283%29.png" />
+    <Content Include="static\images\indexbg.png" />
+    <Content Include="static\images\indexbgs.png" />
+    <Content Include="static\images\indexline.gif" />
+    <Content Include="static\images\invoice.jpg" />
     <Content Include="static\images\it.png" />
+    <Content Include="static\images\jing.png" />
+    <Content Include="static\images\jointIco.png" />
+    <Content Include="static\images\jp1a.png" />
+    <Content Include="static\images\jp1b.png" />
+    <Content Include="static\images\jsbt.png" />
     <Content Include="static\images\jxgw.jpg" />
     <Content Include="static\images\jxgwbt.jpg" />
     <Content Include="static\images\kuaibao.png" />
+    <Content Include="static\images\liststyle.png" />
     <Content Include="static\images\loginbg.gif" />
     <Content Include="static\images\loginbt.png" />
     <Content Include="static\images\logintext.png" />
     <Content Include="static\images\logo.gif" />
     <Content Include="static\images\logob.jpg" />
     <Content Include="static\images\logoe.png" />
+    <Content Include="static\images\markes1.jpg" />
+    <Content Include="static\images\markesTri.jpg" />
     <Content Include="static\images\men.png" />
+    <Content Include="static\images\minbg.jpg" />
+    <Content Include="static\images\minus.jpg" />
     <Content Include="static\images\myyoe.png" />
-    <Content Include="static\images\navBG.png" />
-    <Content Include="static\images\navBG2.png" />
+    <Content Include="static\images\myyoe1.png" />
+    <Content Include="static\images\myyoyi.jpg" />
+    <Content Include="static\images\navbg0.png" />
+    <Content Include="static\images\navbg1.png" />
+    <Content Include="static\images\newNum.png" />
     <Content Include="static\images\next0.gif" />
     <Content Include="static\images\next1.gif" />
     <Content Include="static\images\nextwx.png" />
     <Content Include="static\images\nextxz.png" />
     <Content Include="static\images\note.png" />
     <Content Include="static\images\note2.png" />
+    <Content Include="static\images\num.gif" />
+    <Content Include="static\images\panic.png" />
     <Content Include="static\images\pay.png" />
+    <Content Include="static\images\pf0.png" />
+    <Content Include="static\images\pf1.png" />
+    <Content Include="static\images\pixe.png" />
     <Content Include="static\images\plbg.gif" />
+    <Content Include="static\images\plbg.png" />
     <Content Include="static\images\plbg1.gif" />
     <Content Include="static\images\plbgx.gif" />
     <Content Include="static\images\pljt.png" />
@@ -718,10 +853,14 @@
     <Content Include="static\images\prevwx.png" />
     <Content Include="static\images\prevxz.png" />
     <Content Include="static\images\priceBG.gif" />
+    <Content Include="static\images\process1.jpg" />
+    <Content Include="static\images\product.jpg" />
+    <Content Include="static\images\product2.jpg" />
     <Content Include="static\images\pxbg.png" />
     <Content Include="static\images\pxtjfg.gif" />
     <Content Include="static\images\qjsbt.jpg" />
     <Content Include="static\images\qkcp.png" />
+    <Content Include="static\images\qq.jpg" />
     <Content Include="static\images\qrjz.jpg" />
     <Content Include="static\images\qy1.gif" />
     <Content Include="static\images\reddot.gif" />
@@ -734,17 +873,32 @@
     <Content Include="static\images\safe1.png" />
     <Content Include="static\images\safe2.png" />
     <Content Include="static\images\safe3.png" />
+    <Content Include="static\images\save.jpg" />
     <Content Include="static\images\searchbg.png" />
+    <Content Include="static\images\searchbg0.png" />
     <Content Include="static\images\searchbt.png" />
+    <Content Include="static\images\shenqing.jpg" />
+    <Content Include="static\images\shops.jpg" />
+    <Content Include="static\images\shops2.jpg" />
+    <Content Include="static\images\shouting.jpg" />
+    <Content Include="static\images\showbg.png" />
+    <Content Include="static\images\showline.gif" />
+    <Content Include="static\images\sina-ico.gif" />
+    <Content Include="static\images\sina-ico.jpg" />
+    <Content Include="static\images\sina.jpg" />
     <Content Include="static\images\sortbg.gif" />
+    <Content Include="static\images\sp %281%29.jpg" />
     <Content Include="static\images\sp.jpg" />
     <Content Include="static\images\sp02.jpg" />
+    <Content Include="static\images\sp03.jpg" />
+    <Content Include="static\images\sp50.jpg" />
     <Content Include="static\images\spb1.jpg" />
     <Content Include="static\images\spb2.jpg" />
     <Content Include="static\images\spb3.jpg" />
     <Content Include="static\images\spb4.jpg" />
     <Content Include="static\images\spb5.jpg" />
     <Content Include="static\images\spb6.jpg" />
+    <Content Include="static\images\specilStri.jpg" />
     <Content Include="static\images\sps1.jpg" />
     <Content Include="static\images\spsbg.png" />
     <Content Include="static\images\spxxwx.png" />
@@ -755,11 +909,30 @@
     <Content Include="static\images\step4.png" />
     <Content Include="static\images\sub.png" />
     <Content Include="static\images\submit.png" />
+    <Content Include="static\images\szj.png" />
+    <Content Include="static\images\td.jpg" />
+    <Content Include="static\images\td.png" />
+    <Content Include="static\images\td1.jpg" />
+    <Content Include="static\images\telphone.jpg" />
+    <Content Include="static\images\tencent.jpg" />
     <Content Include="static\images\tgbg.gif" />
+    <Content Include="static\images\tgbg1.png" />
+    <Content Include="static\images\tgproduct.jpg" />
+    <Content Include="static\images\time.png" />
+    <Content Include="static\images\timebg.png" />
+    <Content Include="static\images\top.jpg" />
+    <Content Include="static\images\top.png" />
+    <Content Include="static\images\topp.png" />
+    <Content Include="static\images\toushu.jpg" />
+    <Content Include="static\images\tri.jpg" />
+    <Content Include="static\images\tri1.jpg" />
+    <Content Include="static\images\tri2.jpg" />
     <Content Include="static\images\tsj.jpg" />
     <Content Include="static\images\tuan.png" />
     <Content Include="static\images\tuan1.jpg" />
+    <Content Include="static\images\tuan1.png" />
     <Content Include="static\images\tuan2.jpg" />
+    <Content Include="static\images\tuan2.png" />
     <Content Include="static\images\tuanBG.png" />
     <Content Include="static\images\tuanBG1.png" />
     <Content Include="static\images\tuanbt.png" />
@@ -767,20 +940,38 @@
     <Content Include="static\images\tuansp01.jpg" />
     <Content Include="static\images\tx01.jpg" />
     <Content Include="static\images\tx02.jpg" />
+    <Content Include="static\images\uninvoice.jpg" />
+    <Content Include="static\images\use.jpg" />
     <Content Include="static\images\userbg.gif" />
+    <Content Include="static\images\userBg.png" />
+    <Content Include="static\images\uses.jpg" />
     <Content Include="static\images\women.png" />
+    <Content Include="static\images\wqr.png" />
+    <Content Include="static\images\xgmm1.jpg" />
+    <Content Include="static\images\xgmm2.jpg" />
+    <Content Include="static\images\xgmm3.jpg" />
     <Content Include="static\images\xingping.png" />
     <Content Include="static\images\xl1.png" />
     <Content Include="static\images\xl2.png" />
     <Content Include="static\images\xl3.png" />
     <Content Include="static\images\xsqg.png" />
+    <Content Include="static\images\xx1bg0.png" />
+    <Content Include="static\images\xx1bg1.png" />
+    <Content Include="static\images\xx2bg0.png" />
+    <Content Include="static\images\xx2bg1.png" />
+    <Content Include="static\images\xxyjd.png" />
     <Content Include="static\images\yj02.png" />
     <Content Include="static\images\yjd.gif" />
+    <Content Include="static\images\yjd.png" />
     <Content Include="static\images\yjd01.gif" />
+    <Content Include="static\images\yjd01.png" />
     <Content Include="static\images\yjd02.png" />
     <Content Include="static\images\yjd03.png" />
     <Content Include="static\images\yjd04.png" />
     <Content Include="static\images\yjd05.png" />
+    <Content Include="static\images\yojo.jpg" />
+    <Content Include="static\images\yojotri.jpg" />
+    <Content Include="static\images\youhui.jpg" />
     <Content Include="static\images\zf01.png" />
     <Content Include="static\images\zf02.png" />
     <Content Include="static\images\zf03.png" />
@@ -795,11 +986,14 @@
     <Content Include="static\images\zpprev1.png" />
     <Content Include="static\images\zxjj.png" />
     <Content Include="static\js\dev\jquery-1.8.1.js" />
+    <Content Include="static\js\dev\jquery.js" />
+    <Content Include="static\js\dev\jquery.scrollLoading-min.js" />
     <Content Include="static\js\dev\usercustom.js" />
     <Content Include="static\js\dev\YoeJoy.Object.js" />
     <Content Include="static\js\dev\YoeJoy.Namespace.js" />
     <Content Include="static\js\dev\Yoejoy.Site.js" />
     <Content Include="static\js\prod\jquery-1.8.1.min.js" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="User\Login.aspx" />

@@ -17,6 +17,8 @@ namespace YoeJoyHelper.Model
     public class FrontDsiplayProduct
     {
         public string ProductSysNo { get; set; }
+        public int C1SysNo { get; set; }
+        public int C2SysNo { get; set; }
         public int C3SysNo { get; set; }
         public string Price { get; set; }
         public string ImgPath { get; set; }
@@ -134,7 +136,7 @@ namespace YoeJoyHelper.Model
   where c2.C1SysNo={0} 
   order by c1c2.OrderNum";
 
-        private static readonly string GetCategoryTwoProductsSqlCmdTemplate = @"  select op.ProductSysNo,op.ProductBriefName,op.OrderNum,CONVERT(float,pp.CurrentPrice)as Price,pimg.product_limg,p.C3SysNo from OnlineC1_Product as op 
+        private static readonly string GetCategoryTwoProductsSqlCmdTemplate = @"select op.ProductSysNo,op.ProductBriefName,op.OrderNum,CONVERT(float,pp.CurrentPrice)as Price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.PromotionWord from OnlineC1_Product as op 
   left join Product as p on op.ProductSysNo=p.SysNo
   left join Product_Images pimg on op.ProductSysNo=pimg.product_sysNo
   left join Product_Price pp on op.ProductSysNo=pp.ProductSysNo
@@ -198,11 +200,13 @@ namespace YoeJoyHelper.Model
                     {
                         C2Products.Add(new FrontDsiplayProduct()
                         {
+                            C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                            C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
                             C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
                             ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
                             Price = data.Rows[i]["Price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
-                            ProductPromotionWord = data.Rows[i]["ProductBriefName"].ToString().Trim(),
+                            ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                         });
                     }
                     return C2Products;

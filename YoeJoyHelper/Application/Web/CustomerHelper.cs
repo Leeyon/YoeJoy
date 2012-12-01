@@ -22,7 +22,6 @@ using Icson.BLL.Online;
 using Icson.BLL.Basic;
 
 using System.Threading;
-using YoeJoyHelper.Model;
 
 namespace YoeJoyHelper
 {

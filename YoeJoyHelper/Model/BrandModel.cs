@@ -85,11 +85,11 @@ namespace YoeJoyHelper.Model
       ,[C3SysNo]
   FROM [mmbuy].[dbo].[Brand] WHERE [BrandSysNo]={0}";
 
-        private static readonly string GetHomeCenterBradsSqlCmdTemplate = @"  select top {0} BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 order by OrderNum ASC";
+        private static readonly string GetHomeCenterBradsSqlCmdTemplate = @"select top {0} BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 order by OrderNum ASC";
 
-        private static readonly string GetHomeCategoryOneBrandsSqlCmdTemplate = @"  select top 8 BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 and C1SysNo={0} order by OrderNum ASC";
+        private static readonly string GetHomeCategoryOneBrandsSqlCmdTemplate = @"select top 8 BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 and C1SysNo={0} order by OrderNum ASC";
 
-        private static readonly string GetHomeCategoryListBrandsSqlCmdTemplate = @"  select BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 and C1SysNo={0} order by OrderNum ASC";
+        private static readonly string GetHomeCategoryListBrandsSqlCmdTemplate = @"select BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 and C1SysNo={0} order by OrderNum ASC";
 
         /// <summary>
         /// 添加一个新的品牌

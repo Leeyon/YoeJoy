@@ -9,6 +9,8 @@ using Icson.DBAccess;
 using Icson.Objects;
 using Icson.Objects.Basic;
 using Icson.Utils;
+using YoeJoyHelper.Model;
+
 
 namespace YoeJoyHelper
 {
@@ -39,16 +41,6 @@ namespace YoeJoyHelper
         private SortedList c1List = SharedCacheObj<SortedList>.GetSharedCacheObj(SharedCacheObjSettings.CategoryOneListCacheSettings, CategoryManager.GetInstance().GetC1List());
         private SortedList c2List = SharedCacheObj<SortedList>.GetSharedCacheObj(SharedCacheObjSettings.CategoryTwoListCacheSettings, CategoryManager.GetInstance().GetC2List());
         private SortedList c3List = SharedCacheObj<SortedList>.GetSharedCacheObj(SharedCacheObjSettings.CategoryThreeListCacheSettings, CategoryManager.GetInstance().GetC3List());
-
-        #region 备用代码
-        /// <summary>
-        /// 定义共享的内存对象的GategoryList对象
-        /// 主要用于快速检索Hashtable的相关信息
-        /// </summary>
-        //internal static Hashtable c1Hash = SharedCacheObj<Hashtable>.GetSharedCacheObj(SharedCacheObjSettings.CategoryOneHashCacheSettings, CategoryManager.GetInstance().GetC1Hash());
-        //internal static Hashtable c2Hash = SharedCacheObj<Hashtable>.GetSharedCacheObj(SharedCacheObjSettings.CategoryTwoHashCacheSettings, CategoryManager.GetInstance().GetC2Hash());
-        //internal static Hashtable c3Hash = SharedCacheObj<Hashtable>.GetSharedCacheObj(SharedCacheObjSettings.CategoryThreeHashCacheSettings, CategoryManager.GetInstance().GetC3Hash());
-        #endregion
 
         /// <summary>
         /// 生成主页面的Top Category Navigation的包装方法
@@ -83,7 +75,8 @@ namespace YoeJoyHelper
         {
             string categoryNavHTML = String.Empty;
 
-            StringBuilder strb = new StringBuilder();
+            StringBuilder strb = new StringBuilder(@"<span class='header'></span>
+    <div class='lbg'><ul id='MeunList'>");
 
             string baseURL = YoeJoyConfig.SiteBaseURL;
 
@@ -92,18 +85,16 @@ namespace YoeJoyHelper
                 int c1SysNo = c1Info.SysNo;
 
                 Dictionary<string, C2C3Dic> c2c3Dic = new Dictionary<string, C2C3Dic>();
-                strb.Append(String.Concat(@"<tr><td class='item'><h3><a href='", baseURL,@"Pages/SubProductList1.aspx?c1=", c1SysNo, "' title='大分类'>"));
-                strb.Append(c1Info.C1Name);
-                strb.Append("</a></h3>");
-                strb.Append("<ul class='item1 item0'>");
+                strb.Append(String.Format(@"<li class='hover'><div style='padding-top: 2px; border-top-color: currentColor; border-top-width: medium;
+                        border-top-style: none;' class='liHover'>
+                        <div class='ListMain'>
+                            <h2><span>•</span>{0}<i>&gt;</i></h2><p>", c1Info.C1Name));
 
                 foreach (Category2Info c2Info in c2List.Keys)
                 {
                     int c2SysNo = c2Info.SysNo;
-
                     if (c2Info.C1SysNo == c1SysNo && c2List != null)
                     {
-                        strb.Append(String.Concat(@"<li><a href='", baseURL,@"Pages/SubProductList2.aspx?c1=", c1SysNo, "&c2=", c2SysNo, "' title='二级分类'>", c2Info.C2Name, "</a></li>"));
                         List<C3MiniInfo> c3InfoList = new List<C3MiniInfo>();
                         foreach (Category3Info c3Info in c3List.Keys)
                         {
@@ -113,35 +104,43 @@ namespace YoeJoyHelper
                             }
                         }
                         c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList });
+                        strb.Append(String.Format("<a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a> ", baseURL, c1Info.C1ID, c2Info.C2Name));
                     }
                 }
+                strb.Append("</p></div></div>");
 
-                strb.Append("</ul>");
-                strb.Append(@"<div class='fdmenu'><div class='l_global'><table border='0' cellpadding='0' cellspacing='0'>");
-
+                strb.Append(@"<dl class='Listcontent'><dt> <ul class='menuTwo'>");
                 foreach (string c2Name in c2c3Dic.Keys)
                 {
-                    strb.Append(String.Concat(@"<tr><td width='50' valign='top'><span class='fltitle'>", c2Name, "</span></td><td><ul>"));
-
+                    strb.Append(String.Concat(@"<li><h3>" + c2Name + "</h3><ul>"));
                     foreach (C3MiniInfo c3Info in c2c3Dic[c2Name].C3MiniList)
                     {
-                        strb.Append(String.Concat("<li>", c3Info.C3Name, "</li>"));
+                        strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList2.aspx?c1={1}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name));
                     }
-
-                    strb.Append("</ul></td></tr>");
+                    strb.Append("</ul><li>");
                 }
+                strb.Append("</ul><div class='mem'></div></dt>");
 
-                strb.Append(@"</table></div><div class='r_global'><p>推荐品牌</p>");
+                //推荐品牌
+                strb.Append(@"<dd><div class='recomment'><h2>推荐品牌</h2><p>");
 
-                strb.Append("</div></div>");
-                strb.Append(@"</td></tr>");
+                List<BrandForHome> brands = BrandService.GetCategoryOneBrands(c1Info.SysNo.ToString().Trim());
+                if (brands != null && brands.Count > 0)
+                {
+                    foreach (BrandForHome brand in brands)
+                    {
+                                strb.Append(@"<a href='#'>" + brand.BrandName + "</a>");
+                    }
+                }
+                strb.Append("</p></div></dd></dl></li>");
             }
 
+            strb.Append("</ul>");
+            strb.Append(@"</div><div class='rbg'></div>");
             categoryNavHTML = strb.ToString();
             return categoryNavHTML;
         }
 
-       
         /// <summary>
         /// 生成子页面的Sub Category Navigation
         /// </summary>
@@ -176,8 +175,8 @@ namespace YoeJoyHelper
                                 if (c3Info.C2SysNo == c2SysNo && c3List != null)
                                 {
                                     int c3SysNo = c3Info.SysNo;
-                                    
-                                    strb.Append(string.Concat("<li><a href='",baseURL,"Pages/SubProductList2.aspx?c1=", c1SysNo, "&c2=", c2SysNo, "&c3=", c3SysNo, "'>"));
+
+                                    strb.Append(string.Concat("<li><a href='", baseURL, "Pages/SubProductList2.aspx?c1=", c1SysNo, "&c2=", c2SysNo, "&c3=", c3SysNo, "'>"));
                                     strb.Append(c3Info.C3Name.Trim());
                                     strb.Append("</a>");
                                     strb.Append(String.Concat(@"<input type='hidden' value='", c3SysNo, "'/>"));
@@ -196,82 +195,5 @@ namespace YoeJoyHelper
             categoryNavHTML = strb.ToString();
             return categoryNavHTML;
         }
-
-        #region 备用代码
-        ///// <summary>
-        ///// 通过category1的sysNo获得分类信息
-        ///// </summary>
-        ///// <returns></returns>
-        //public static Category1Info GetC1InfoBySysNo(int c1SysNo)
-        //{
-        //    if (c1Hash.ContainsKey(c1SysNo))
-        //    {
-        //        Category1Info c1Info = null;
-        //        foreach (DictionaryEntry c1InfoDic in c1Hash)
-        //        {
-        //            if (((int)c1InfoDic.Key) == c1SysNo)
-        //            {
-        //                c1Info = c1InfoDic.Value as Category1Info;
-        //            }
-        //        }
-        //        return c1Info;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 通过category2的sysNo获得分类信息
-        ///// </summary>
-        ///// <param name="c2SysNo"></param>
-        ///// <returns></returns>
-        //public static Category2Info GetC2InfoBySysNo(int c2SysNo)
-        //{
-        //    if (c2Hash.ContainsKey(c2SysNo))
-        //    {
-        //        Category2Info c2Info = null;
-        //        foreach (DictionaryEntry c2InfoDic in c2Hash)
-        //        {
-        //            if (((int)c2InfoDic.Key) == c2SysNo)
-        //            {
-        //                c2Info = c2InfoDic.Value as Category2Info;
-        //            }
-        //        }
-        //        return c2Info;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 通过category3的sysNo获得分类信息
-        ///// </summary>
-        ///// <param name="c3SysNo"></param>
-        ///// <returns></returns>
-        //public static Category3Info GetC3InfoBySysNo(int c3SysNo)
-        //{
-        //    if (c3Hash.ContainsKey(c3SysNo))
-        //    {
-        //        Category3Info c3Info = null;
-        //        foreach (DictionaryEntry c3InfoDic in c3Hash)
-        //        {
-        //            if (((int)c3InfoDic.Key) == c3SysNo)
-        //            {
-        //                c3Info = c3InfoDic.Value as Category3Info;
-        //            }
-        //        }
-        //        return c3Info;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
-        #endregion
-
     }
 }

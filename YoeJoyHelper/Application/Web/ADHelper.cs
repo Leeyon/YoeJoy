@@ -14,17 +14,17 @@ namespace YoeJoyHelper
     public class ADHelper
     {
 
-        public static string GetSiteAdWrapper(int positionId)
+        public static string GetSiteStaticAdWrapper(int positionId, string cssClass, string width, string height)
         {
             CacheObjSetting cacheSetting = DynomicCacheObjSettings.SiteADCacheSetting;
             string key = String.Format(cacheSetting.CacheKey, positionId);
             int duration = cacheSetting.CacheDuration;
-            string siteAdHTML = CacheObj<string>.GetCachedObj(key, duration, GetSiteAd(positionId));
+            string siteAdHTML = CacheObj<string>.GetCachedObj(key, duration, GetSiteStaticAd(positionId, cssClass, width, height));
             return siteAdHTML;
         }
 
 
-        public static string GetSiteAd(int positionId)
+        public static string GetSiteStaticAd(int positionId, string cssClass, string width, string height)
         {
             string siteAdHTML = String.Empty;
             string imageVitualPath = ConfigurationManager.AppSettings["ImageVitrualPath"].ToString();
@@ -32,7 +32,14 @@ namespace YoeJoyHelper
             if (ad != null)
             {
                 string adImg = String.Concat(imageVitualPath, ad.ADImg);
-                siteAdHTML = String.Format("<a href='{0}' target='_blank'><img src='{1}' alt='{2}' /></a>", ad.ADLink, adImg, ad.ADName);
+                if (String.IsNullOrEmpty(width) || String.IsNullOrEmpty(height))
+                {
+                    siteAdHTML = String.Format("<a class='{0}' href='{1}' target='_blank' ><img src='{2}' alt='{3}' /></a>", cssClass, ad.ADLink, adImg, ad.ADName);
+                }
+                else
+                {
+                    siteAdHTML = String.Format("<a class='{0}' href='{1}' target='_blank' ><img width='{2}' height='{3}' src='{4}' alt='{5}' /></a>", cssClass, ad.ADLink, width, height, adImg, ad.ADName);
+                }
             }
             return siteAdHTML;
         }

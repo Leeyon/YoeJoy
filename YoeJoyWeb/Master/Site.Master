@@ -4,274 +4,115 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link type="text/css" rel="Stylesheet" href="../static/css/layout.css" />
-    <link type="text/css" rel="Stylesheet" href="../static/css/layout1020.css" />
+    <link type="text/css" rel="Stylesheet" href="../static/css/base.css" />
     <script type="text/javascript" src="../static/js/dev/jquery-1.8.1.js"></script>
     <script type="text/javascript" src="../static/js/dev/usercustom.js"></script>
+    <script type="text/javascript" src="../static/js/dev/jquery.js"></script>
     <script type="text/javascript" src="../static/js/dev/YoeJoy.Namespace.js"></script>
-    <script type="text/javascript" src="../static/js/dev/YoeJoy.Site.js"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
     <script type="text/javascript" src="../static/js/dev/YoeJoy.Object.js"></script>
     <script type="text/javascript" src="../static/js/dev/Yoejoy.Site.js"></script>
+    <script type="text/javascript" src="../static/js/dev/jquery.scrollLoading-min.js"></script>
 </head>
-<body>
+<body id="bg">
     <form runat="server">
-    <div class="page">
-        <!--页头-->
-        <div class="header">
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td>
-                        <span id="username">您好</span>，欢迎来逛攸怡商城！
-                    </td>
-                    <td>
-                        [<a href="#">登录</a>]
-                    </td>
-                    <td>
-                        [<a href="#">免费注册</a>]
-                    </td>
-                    <td>
-                        <ul class="headermenu">
-                            <li><a href="#">我的攸怡</a></li>
-                            <li><a href="#">今日特价</a></li>
-                            <li><a href="#">查看购物车</a></li>
-                            <li><a href="#">客户服务</a></li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
+    <dl id="logo">
+        <dt><a href="#">
+            <img alt="logo" src="static/images/logo.gif" width="180" height="56"></a></dt>
+        <dd>
+            <h6>
+                [<a href="login.html">登录</a>]&nbsp;&nbsp;&nbsp; [<a href="login.html?act=register">注册新用户</a>]
+            </h6>
+            <p>
+                <a href="UserCenterMyJoyo.html">我的攸怡</a> <a href="UserCenterMyHistory.html">我看过</a>
+                <a href="help-index.html">帮助中心</a>
+            </p>
+        </dd>
+    </dl>
+    <div class="ThreeRow top">
+        <%=LeftTopDivTag%>
+            <asp:ContentPlaceHolder ID="LeftTopModule" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-        <!--LOGO与搜索区域-->
-        <div class="title">
-            <table>
-                <tr>
-                    <td width="510" height="64">
-                    </td>
-                    <td width="180" valign="middle">
-                        <img src="../static/images/logo.gif" alt="logo" />
-                    </td>
-                    <td width="510" valign="bottom" align="right">
-                        <div id="search" align="left">
-                            <input id="txtSearch" type="text" maxlength="72" />
-                            <a id="btnSearch">
-                                <img src="../static/images/searchbt.png" align="middle" /></a></div>
-                    </td>
-                </tr>
-            </table>
+        <div class="right">
+            <asp:ContentPlaceHolder ID="RightTopModule" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-        <script type="text/javascript">
-            $(function () {
-
-                $("#btnSearch").click(function () {
-                    var q = $("#txtSearch").val();
-                    if (q == '') {
-                        return;
-                    }
-                    else {
-                        window.location.href = "Pages/Search.aspx?q=" +escape (q);
-                    }
-                });
-            });
-        </script>
-        <!--导航条-->
-        <table id="nav" border="0" cellspacing="0" cellpadding="0" width="1000" height="43">
-            <tbody>
-                <tr>
-                    <td valign="top">
-                        <!--导航菜单-->
-                        <div class="menu">
-                            <ul>
-                                <li><a href="../index.html">首页</a></li>
-                                <li><a href="#">团购</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                    <td>
-                        <!--搜索关键字-->
-                        <div id="key">
-                            关键字:<a href="#"><span>鼠标</span></a><a href="#"><span>雷柏</span></a><a href="#"><span>鼠标</span></a><a
-                                href="#"><span>雷柏</span></a></div>
-                    </td>
-                    <td width="210">
-                        <!--导航栏购物车-->
-                        <div id="gwc" class="xl">
-                            <table border="0" cellspacing="0" cellpadding="0">
-                                <tbody>
-                                    <tr>
-                                        <td width="120">
-                                            <p>
-                                                购物车:<span>2</span>件</p>
-                                        </td>
-                                        <td valign="top" width="45">
-                                            <a class="blank" href="#">&nbsp;</a>
-                                        </td>
-                                        <td width="68" align="center">
-                                            <a href="#">去结算</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!--浮动购物清单-->
-                            <div style="display: none;" id="gwqd">
-                                <p>
-                                    共<span>2</span>件商品&nbsp;金额总计(预估):<span>80.80</span>元</p>
-                                <div class="item">
-                                    <ul>
-                                        <li>
-                                            <table border="0" cellspacing="0" cellpadding="0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td height="42" width="42">
-                                                            <img src="images/sp02.jpg" width="40" height="40">
-                                                        </td>
-                                                        <td valign="top" width="220">
-                                                            &nbsp;&nbsp;<a href="#">金章 超高温灭菌全脂牛奶 1L/盒</a>
-                                                        </td>
-                                                        <td valign="top" width="108" align="right">
-                                                            <p>
-                                                                ¥15.80x1</p>
-                                                            <a href="#">删除</a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
-                                        <li>
-                                            <table border="0" cellspacing="0" cellpadding="0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td height="42" width="42">
-                                                            <img src="images/sp02.jpg" width="40" height="40">
-                                                        </td>
-                                                        <td valign="top" width="220">
-                                                            &nbsp;&nbsp;<a href="#">金章 超高温灭菌全脂牛奶 1L/盒</a>
-                                                        </td>
-                                                        <td valign="top" width="108" align="right">
-                                                            <p>
-                                                                ¥15.80x1</p>
-                                                            <a href="#">删除</a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <img src="images/gwcbottom.png"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!--首页上半区-->
-        <div class="mix">
-            <!--上半区左边区域-->
-            <div class="l_module">
-                <asp:ContentPlaceHolder ID="NavigationModuleContent" runat="server">
-                </asp:ContentPlaceHolder>
-                <asp:ContentPlaceHolder ID="PanicBuyingMdouleContent" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-            <!--上半中间区域-->
-            <div class="m_module">
-                <asp:ContentPlaceHolder ID="TopLeftModuleContent" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-            <!--上半右边区域-->
-            <div class="r_module">
-                <asp:ContentPlaceHolder ID="TopRightMdouleContent" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-        </div>
-        <asp:ContentPlaceHolder ID="BodyContent" runat="server">
+        <div class="middle">
+        <asp:ContentPlaceHolder ID="MiddleTopModule" runat="server">
         </asp:ContentPlaceHolder>
-        <div class="footer">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                    <td width="948">
-                        <ul class="footmenu">
-                            <li>
-                                <img src="../static/images/f01.jpg" /><span>购物指南</span></li>
-                            <li>
-                                <img src="../static/images/f02.jpg" /><span>配送方式</span></li>
-                            <li>
-                                <img src="../static/images/f03.jpg" /><span>支付方式</span></li>
-                            <li>
-                                <img src="../static/images/f04.jpg" /><span>售后服务</span></li>
-                            <li>
-                                <img src="../static/images/f05.jpg" /><span>特色服务</span></li>
-                        </ul>
-                        <div class="boxitem">
-                            <div class="footbox">
-                                <ul>
-                                    <li><a href="#">购物流程</a></li>
-                                    <li><a href="#">会员介绍</a></li>
-                                    <li><a href="#">常见问题</a></li>
-                                </ul>
-                            </div>
-                            <div class="footbox">
-                                <ul>
-                                    <li><a href="#">快递运输</a></li>
-                                    <li><a href="#">特快专递（EMS）</a></li>
-                                </ul>
-                            </div>
-                            <div class="footbox">
-                                <ul>
-                                    <li><a href="#">货到付款</a></li>
-                                    <li><a href="#">在线支付</a></li>
-                                    <li><a href="#">银行转账</a></li>
-                                    <li><a href="#">分期付款</a></li>
-                                </ul>
-                            </div>
-                            <div class="footbox">
-                                <ul>
-                                    <li><a href="#">退货原则</a></li>
-                                    <li><a href="#">退换货流程</a></li>
-                                    <li><a href="#">价格保护</a></li>
-                                    <li><a href="#">退款说明</a></li>
-                                </ul>
-                            </div>
-                            <div class="footbox">
-                                <ul>
-                                    <li><a href="#">商品拍卖</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                    <td width="250" bgcolor="#F1F2F2">
-                        <img src="../static/images/footbg.jpg" />
-                    </td>
-                </tr>
-            </table>
         </div>
-        <div class="footbq">
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td>
-                        <img src="../static/images/logob.jpg" />
-                    </td>
-                    <td>
-                        <ul class="footlink">
-                            <li><a href="#">联系我们</a></li>
-                            <li><a href="#">广告服务</a></li>
-                            <li><a href="#">批发方案</a></li>
-                            <li><a href="#">配送方式</a></li>
-                        </ul>
-                        <p>
-                            <b>联系热线: +86-21-64681500 E-Mail: contact@joyoplan.com</b></p>
-                        <p>
-                            Copyright 2012 Yoejoy. ALL RIGHT RESERVED.</p>
-                    </td>
-                </tr>
-            </table>
+        <asp:ContentPlaceHolder ID="SiteNavModule" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="LeftBigModule" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="RightBigModule" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="BackupContent1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <asp:ContentPlaceHolder ID="HomeMiddleContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="BackupContent2" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <div id="footer">
+        <ul id="Guide">
+            <a id="topp" href="#">
+                <img src="static/images/topp.png"></a>
+            <li><a class="guidePic" href="#">
+                <img src="static/images/guide.jpg"></a> </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="static/images/footico1.png">关于攸怡</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="static/images/footico2.png">新手指南</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="static/images/footico3.png">我的帐户</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="static/images/footico4.png">客户服务中心</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <div id="footMsg">
+            <span class="minLogo">
+                <img src="static/images/logob.jpg"></span> <span class="menu"><a href="#">商城首页</a> <a href="#">
+                    商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a>
+                    <br>
+                    <em>联系热线: +86-21-64681500 E-Mail: contact@joyoplan.com<br>
+                        沪ICP备09017990号</em> </span>
         </div>
-        <asp:ContentPlaceHolder ID="ExtenalContent" runat="server">
-        </asp:ContentPlaceHolder>
-        <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
-        </asp:ContentPlaceHolder>
-        <asp:ContentPlaceHolder ID="PopupContent" runat="server">
-        </asp:ContentPlaceHolder>
     </div>
     </form>
 </body>

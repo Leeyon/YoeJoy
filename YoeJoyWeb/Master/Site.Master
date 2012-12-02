@@ -19,7 +19,7 @@
     <form runat="server">
     <dl id="logo">
         <dt><a href="#">
-            <img alt="logo" src="static/images/logo.gif" width="180" height="56"></a></dt>
+            <img alt="logo" src="../static/images/logo.gif" width="180" height="56"></a></dt>
         <dd>
             <h6>
                 [<a href="login.html">登录</a>]&nbsp;&nbsp;&nbsp; [<a href="login.html?act=register">注册新用户</a>]
@@ -32,42 +32,111 @@
     </dl>
     <div class="ThreeRow top">
         <%=LeftTopDivTag%>
-            <asp:ContentPlaceHolder ID="LeftTopModule" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-        <div class="right">
-            <asp:ContentPlaceHolder ID="RightTopModule" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-        <div class="middle">
-        <asp:ContentPlaceHolder ID="MiddleTopModule" runat="server">
-        </asp:ContentPlaceHolder>
-        </div>
-        <asp:ContentPlaceHolder ID="SiteNavModule" runat="server">
-        </asp:ContentPlaceHolder>
-        <asp:ContentPlaceHolder ID="LeftBigModule" runat="server">
-        </asp:ContentPlaceHolder>
-        <asp:ContentPlaceHolder ID="RightBigModule" runat="server">
-        </asp:ContentPlaceHolder>
-        <asp:ContentPlaceHolder ID="BackupContent1" runat="server">
+        <asp:ContentPlaceHolder ID="LeftTopModule" runat="server">
         </asp:ContentPlaceHolder>
     </div>
+    <div class="right">
+        <div id="count">
+            <div id="chart">
+                <span>购物车:<b>12</b>件 </span>
+                <img alt="购物车" src="../static/images/gwcbt0.png" width="39" height="32">
+                <a href="process1.html">结算</a>
+            </div>
+            <div id="chartContent">
+                <img alt="背景" src="../static/images/gwctop.png" width="374" height="18">
+                <div class="shopping">
+                    <p class="l">
+                        <a href="product.html">
+                            <img alt="产品" src="../static/images/char.jpg" width="30" height="30"></a><a class="goodsName"
+                                href="product.html">全脂牛奶全脂牛奶全脂牛奶全脂牛奶</a><b>￥15000.00</b>
+                    </p>
+                    <div class="r">
+                        <a class="sub" href="javascript:void(0)">-</a>
+                        <input class="num" maxlength="3" value="1" type="text">
+                        <a class="add" href="javascript:void(0)">+</a>
+                        <p>
+                            删除</p>
+                    </div>
+                </div>
+                <div class="payNow">
+                    <div class="l">
+                        共<b>12</b>件商品
+                    </div>
+                    <div class="r">
+                        <p>
+                            合计：<b>￥1900.9</b></p>
+                        <a href="process1.html">
+                            <img alt="结算" src="../static/images/jsbt.png" width="61" height="25"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ServiceLine">
+            <span>021-64681500&nbsp;(9:30~18:30)</span> <font>9914838&nbsp;(9:30~22:00)</font>
+        </div>
+        <asp:ContentPlaceHolder ID="RightTopModule" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div class="middle">
+        <dl id="Search">
+            <dt><a href="index.html">首页</a> <a href="grounp.html">团购</a> </dt>
+            <dd>
+                <p id="HotWord">
+                    <span>热门搜索:</span> <a href="search.html">ＩＴ数码</a> <a href="search.html">巧克力</a>
+                    <a href="search.html">进口糖果</a>
+                </p>
+                <div id="SearchBox">
+                    <p>
+                        <input id="txtSearch" value="数码产品" type="text" />
+                        <button type="button" id="btnSearch">
+                        </button>
+                        <input type="hidden" id="siteSearchURL" value="<%=SiteBaseURLSerach %>" />
+                    </p>
+                </div>
+            </dd>
+        </dl>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSearch").click(function (event) {
+                    var keyWords = $("#txtSearch").val();
+                    if (keyWords.length > 0) {
+                        var searchURL = $("#siteSearchURL").val();
+                        window.location.href = searchURL + "?q=" + escape(keyWords);
+                    }
+                    else {
+                        return;
+                    }
+                });
+            });
+        </script>
+        <asp:ContentPlaceHolder ID="MiddleTopModule" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <asp:ContentPlaceHolder ID="SiteNavModule" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="LeftBigModule" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="RightBigModule" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="BackupContent1" runat="server">
+    </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="HomeMiddleContent" runat="server">
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="BackupContent2" runat="server">
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
     </asp:ContentPlaceHolder>
+    </div>
     <div id="footer">
         <ul id="Guide">
             <a id="topp" href="#">
-                <img src="static/images/topp.png"></a>
+                <img src="../static/images/topp.png" /></a>
             <li><a class="guidePic" href="#">
-                <img src="static/images/guide.jpg"></a> </li>
+                <img src="../static/images/guide.jpg" /></a> </li>
             <li>
                 <div class="guideDesc">
                     <h2>
-                        <img src="static/images/footico1.png">关于攸怡</h2>
+                        <img src="../static/images/footico1.png" />关于攸怡</h2>
                     <p>
                         <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
                         <a href="help.html">攸怡(新浪)</a>
@@ -77,7 +146,7 @@
             <li>
                 <div class="guideDesc">
                     <h2>
-                        <img src="static/images/footico2.png">新手指南</h2>
+                        <img src="../static/images/footico2.png" />新手指南</h2>
                     <p>
                         <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
                         <a href="help.html">攸怡(新浪)</a>
@@ -87,7 +156,7 @@
             <li>
                 <div class="guideDesc">
                     <h2>
-                        <img src="static/images/footico3.png">我的帐户</h2>
+                        <img src="../static/images/footico3.png" />我的帐户</h2>
                     <p>
                         <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
                         <a href="help.html">攸怡(新浪)</a>
@@ -97,7 +166,7 @@
             <li>
                 <div class="guideDesc">
                     <h2>
-                        <img src="static/images/footico4.png">客户服务中心</h2>
+                        <img src="../static/images/footico4.png" />客户服务中心</h2>
                     <p>
                         <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
                         <a href="help.html">攸怡(新浪)</a>
@@ -107,8 +176,8 @@
         </ul>
         <div id="footMsg">
             <span class="minLogo">
-                <img src="static/images/logob.jpg"></span> <span class="menu"><a href="#">商城首页</a> <a href="#">
-                    商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a>
+                <img src="../static/images/logob.jpg" /></span> <span class="menu"><a href="#">商城首页</a>
+                    <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a>
                     <br>
                     <em>联系热线: +86-21-64681500 E-Mail: contact@joyoplan.com<br>
                         沪ICP备09017990号</em> </span>

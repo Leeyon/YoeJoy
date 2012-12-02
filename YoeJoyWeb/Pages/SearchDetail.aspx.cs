@@ -63,7 +63,7 @@ namespace YoeJoyWeb.Pages
         {
             if (!IsPostBack)
             {
-                SubCategoryNavigation1.C1CategoryId = C1CategorySysId;
+                SubCategoryNavigation1.C1SysNo = C1CategorySysId;
                 C3ProductFilterHTML = FrontProductsHelper.InitC3ProductFilter(C3CategorySysId);
             }
         }

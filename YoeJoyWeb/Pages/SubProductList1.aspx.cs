@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using YoeJoyHelper;
-using YoeJoyWeb.Controls;
 
 namespace YoeJoyWeb
 {
-    public partial class C1ProductList : System.Web.UI.Page
+    public partial class SubProductList1 : System.Web.UI.Page
     {
-        protected int C1CategorySysId
+
+        protected int C1SysNo
         {
             get
             {
@@ -26,20 +26,28 @@ namespace YoeJoyWeb
             }
         }
 
+        /// <summary>
+        /// 大类商品
+        /// </summary>
         protected string C1ProductsDisplayHTML { get; set; }
+        /// <summary>
+        /// 清库产品
+        /// </summary>
         protected string C1EmptyInventoryProductsHTML { get; set; }
-        protected string C1LastedDiscountProductsHTML { get; set; }
+        /// <summary>
+        /// 本周销量排行
+        /// </summary>
         protected string C1WeeklyBestSaledProductsHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ((Site)this.Master).IsHomePage = false;
             if (!IsPostBack)
             {
-                SubCategoryNavigation1.C1CategoryId = C1CategorySysId;
-                C1ProductsDisplayHTML = FrontProductsHelper.GetC1ProductsDisplayHTMLWrapper(C1CategorySysId);
-                C1EmptyInventoryProductsHTML = FrontProductsHelper.GetC1EmptyInventoryProductsHTMLWrapper(C1CategorySysId);
-                C1LastedDiscountProductsHTML = FrontProductsHelper.GetC1LastedDisCountProductsHTMLWrapper(C1CategorySysId);
-                C1WeeklyBestSaledProductsHTML = FrontProductsHelper.GetC1WeeklyBestSaledProductsHTMLWrapper(C1CategorySysId);
+                SubCategoryNavigation1.C1SysNo = C1SysNo;
+                C1WeeklyBestSaledProductsHTML = FrontProductsHelper.GetC1WeeklyBestSaledProductsHTMLWrapper(C1SysNo);
+                C1EmptyInventoryProductsHTML = FrontProductsHelper.GetC1EmptyInventoryProductsHTML(C1SysNo);
+                C1ProductsDisplayHTML = FrontProductsHelper.GetC1ProductsDisplayHTMLWrapper(C1SysNo);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace YoeJoyWeb
 {
     public partial class SubProductList2 : System.Web.UI.Page
     {
-        protected int C1CategorySysId
+        protected int C1SysNo
         {
             get
             {
@@ -25,7 +25,7 @@ namespace YoeJoyWeb
             }
         }
 
-        protected int C2CategorySysId
+        protected int C2SysNo
         {
             get
             {
@@ -40,7 +40,7 @@ namespace YoeJoyWeb
             }
         }
 
-        protected int C3CategorySysId
+        protected int C3SysNo
         {
             get
             {
@@ -57,12 +57,14 @@ namespace YoeJoyWeb
 
         protected string C3ProductFilterHTML { get; set; }
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            ((Site)this.Master).IsHomePage = false;
             if (!IsPostBack)
             {
-                SubCategoryNavigation1.C1CategoryId = C1CategorySysId;
-                C3ProductFilterHTML = FrontProductsHelper.InitC3ProductFilter(C3CategorySysId);
+                SubCategoryNavigation1.C1SysNo = C1SysNo;
+                C3ProductFilterHTML = FrontProductsHelper.InitC3ProductFilterWrapper(C3SysNo);
             }
         }
     }

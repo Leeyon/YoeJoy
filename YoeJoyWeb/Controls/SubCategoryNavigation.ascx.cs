@@ -11,7 +11,7 @@ namespace YoeJoyWeb.Controls
     public partial class SubCategoryNavigation : System.Web.UI.UserControl
     {
 
-        public int C1CategoryId { get; set; }
+        public int C1SysNo { get; set; }
 
         protected string SubNavigationHTML { get; set; }
 
@@ -19,7 +19,7 @@ namespace YoeJoyWeb.Controls
         {
             if (!IsPostBack)
             {
-                SubNavigationHTML = new CategoryHelper().InitSubCategoryNavigationWrapper(C1CategoryId);
+                SubNavigationHTML = new CategoryHelper().InitSubCategoryNavigationWrapper(C1SysNo);
             }
         }
     }

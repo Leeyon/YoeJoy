@@ -72,15 +72,13 @@ namespace YoeJoyWeb
             }
         }
 
-        protected string C3ProductListHeaderHTML { get; set; }
         protected string C3ProductListFooterHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                C3ProductListHeaderHTML = FrontProductsHelper.InitC3ProductListHeader(C3CategorySysId,Attribution2Ids);
-                C3ProductListFooterHTML = FrontProductsHelper.InitC3ProductListFooter(C3CategorySysId,Attribution2Ids);
+                C3ProductListFooterHTML = FrontProductsHelper.GetC3PageProductListHTML(YoeJoyEnum.ProductListSortedOrder.Default, 1, C3CategorySysId, C1CategorySysId, C2CategorySysId, Attribution2Ids);
             }
         }
     }

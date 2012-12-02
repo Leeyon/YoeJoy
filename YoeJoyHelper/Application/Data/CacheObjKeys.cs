@@ -39,6 +39,7 @@ namespace YoeJoyHelper
         internal static readonly CacheObjSetting CategoryOneLastedDiscountProductsCacheSettings = new CacheObjSetting() { CacheKey = "CategoryOneLastedDiscountProducts/{0}", CacheDuration = 14400 };
         internal static readonly CacheObjSetting CategoryOneWeeklyBestSaledProductsCacheSettings = new CacheObjSetting() { CacheKey = "CategoryOneWeeklyBestSaledProducts/{0}", CacheDuration = 14400 };
         internal static readonly CacheObjSetting ProductBaiscInfoCacheSettings = new CacheObjSetting() { CacheKey = "ProductDetailBasic/{0}", CacheDuration = 3600 };
+        internal static readonly CacheObjSetting C3ProductFilterCacheSettings = new CacheObjSetting() { CacheKey = "C3ProductFilter/{0}", CacheDuration = 3600 };
     }
 
     /// <summary>

@@ -422,22 +422,22 @@ function chart() {
 
     char.hover(function () {
         charContent.css('display', 'block');
-        car.attr({ 'src': 'static/images/gwcbt1.png' });
+        car.attr({ 'src': '../static/images/gwcbt1.png' });
     }, function () {
     });
 
     charf.hover(function () {
     }, function () {
         charContent.css('display', 'none');
-        car.attr({ 'src': 'static/images/gwcbt0.png' });
+        car.attr({ 'src': '../static/images/gwcbt0.png' });
     });
 
     charContent.hover(function () {
         charContent.show();
-        car.attr({ 'src': 'static/images/gwcbt1.png' });
+        car.attr({ 'src': '../static/images/gwcbt1.png' });
     }, function () {
         charContent.hide();
-        car.attr({ 'src': 'static/images/gwcbt0.png' });
+        car.attr({ 'src': '../static/images/gwcbt0.png' });
     });
 
 }

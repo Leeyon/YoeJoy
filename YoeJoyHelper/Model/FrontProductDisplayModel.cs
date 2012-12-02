@@ -23,6 +23,8 @@ namespace YoeJoyHelper.Model
         public string Price { get; set; }
         public string ImgPath { get; set; }
         public string ProductPromotionWord { get; set; }
+        public bool IsCanPurchase { get; set; }
+        public int LimitQty { get; set; }
     }
 
     /// <summary>
@@ -233,7 +235,7 @@ namespace YoeJoyHelper.Model
   left join Category2 c2 on p.C2SysNo=c2.SysNo
   where olp.CategorySysNo=232 and c2.C1SysNo={0}";
 
-        private static readonly string GetC2DisplayProductsSqlCmdTemplate = @"select top 8 olp.ProductSysNo as sysno,p.ProductName,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C3SysNo from OnlineListProduct olp
+        private static readonly string GetC2DisplayProductsSqlCmdTemplate = @"select top 8 olp.ProductSysNo as sysno,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C3SysNo from OnlineListProduct olp
   left join Product p on olp.ProductSysNo=p.SysNo
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
   left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
@@ -304,7 +306,7 @@ namespace YoeJoyHelper.Model
                             ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
                             Price = data.Rows[i]["price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["sysno"].ToString().Trim(),
-                            ProductPromotionWord = data.Rows[i]["ProductName"].ToString().Trim(),
+                            ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                         });
                     }
                     return C2Products;
@@ -324,22 +326,26 @@ namespace YoeJoyHelper.Model
 
     public class C1EmptyInventoryProductService
     {
-        private static readonly string GetC1EmptyInventoryProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,CONVERT(float,pp.CurrentPrice)as price,p.PromotionWord,p.C3SysNo,p.C2SysNo from OnlineListProduct olp 
+        private static readonly string GetC1EmptyInventoryProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
+  p.C2SysNo,p.C3SysNo,pimg.product_simg
+  from OnlineListProduct olp
   left join Product p on olp.ProductSysNo=p.SysNo
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
- where olp.CategorySysNo={0}
- and pp.ClearanceSale=1 
- and p.Status=1 
- and OnlineAreaType={1}
- and OnlineRecommendType={2}
- order by olp.ListOrder";
+  left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
+  where olp.CategorySysNo={0}
+  and p.Status=1
+  and olp.OnlineAreaType={1}
+  and olp.OnlineRecommendType={2}
+  and pimg.status=1
+  and pimg.orderNum=1
+  order by olp.ListOrder";
 
         /// <summary>
         /// 获得清库商品模块的4商品
         /// </summary>
         /// <param name="c1SysNo"></param>
         /// <returns></returns>
-        public static List<EmptyInventoryProduct> GetGetC1EmptyInventoryProducts(int c1SysNo)
+        public static List<C1WeeklyBestSaledProduct> GetGetC1EmptyInventoryProducts(int c1SysNo)
         {
             try
             {
@@ -350,16 +356,17 @@ namespace YoeJoyHelper.Model
                 int rowCount = data.Rows.Count;
                 if (rowCount > 0)
                 {
-                    List<EmptyInventoryProduct> products = new List<EmptyInventoryProduct>();
+                    List<C1WeeklyBestSaledProduct> products = new List<C1WeeklyBestSaledProduct>();
                     for (int i = 0; i < rowCount; i++)
                     {
-                        products.Add(new EmptyInventoryProduct()
+                        products.Add(new C1WeeklyBestSaledProduct()
                         {
                             C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
                             C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
                             Price = data.Rows[i]["price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ImgPath = data.Rows[i]["product_simg"].ToString().Trim(),
                         });
                     }
                     return products;
@@ -487,7 +494,7 @@ namespace YoeJoyHelper.Model
 
     public class C3ProductListSerivice
     {
-        private static readonly string getPagedProductListItemsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg
+        private static readonly string getPagedProductListItemsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,pp.LimitedQty,p.IsCanPurchase
   from Product p
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Product_Images pimg on p.SysNo=pimg.product_sysNo
@@ -565,6 +572,8 @@ namespace YoeJoyHelper.Model
                             Price = data.Rows[i]["price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["SysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            IsCanPurchase = (int.Parse(data.Rows[i]["IsCanPurchase"].ToString().Trim()) == 1) ? true : false,
+                            LimitQty = int.Parse(data.Rows[i]["LimitedQty"].ToString().Trim()),
                         });
                     }
                     return products;
@@ -1074,7 +1083,7 @@ and (p.PromotionWord like ('%{1}%')
 
     public class HomePromotionProductService
     {
-        private static readonly string getHomePromotionProductsSqlCmdTemplate =@"select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
+        private static readonly string getHomePromotionProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
   left join Product p on olp.ProductSysNo=p.SysNo 
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
   left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
@@ -1099,7 +1108,7 @@ and (p.PromotionWord like ('%{1}%')
                 {
                     products.Add(new FrontDsiplayProduct()
                     {
-                        ProductSysNo=data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                        ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
                         ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                         Price = data.Rows[i]["price"].ToString().Trim(),
                         ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),

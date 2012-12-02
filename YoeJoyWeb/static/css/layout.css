@@ -85,19 +85,17 @@ textarea{border:solid 1px #ccc; vertical-align:top;}
 #breadNav p a{font-size:14px; font-weight:bold; margin-right:5px}
 #breadNav p a:hover{color:#c00}
 /*内页导航通用样式*/
-.classNav .border_b{height:10px; background:url(../images/showbg.png) 0px -140px no-repeat; font-size:0}
-.classNav .title div{width:30px; height:27px}
-.classNav .title h3{width:148px; height:23px; background-color:#F9AA3D; border-top:solid 2px #EF4100; color:#000; padding-top:2px}
-.classNav .title .mem0{background:url(../images/showbg.png) 0px 0px no-repeat}
-.classNav .title .mem1{background:url(../images/showbg.png) -40px 0px no-repeat}
-.classNav .group{border-left:solid 2px #EF4100; border-right:solid 2px #EF4100; background-color:#FFFFF5}
-/*三类页导航栏productslist.html*/
-#threeClass .group{width:184px; padding:0 10px}
-#threeClass .group dl{overflow:hidden; zoom:1; border-top:dotted 1px #ccc; padding:7px 10px 5px 10px; margin-top:-1px}
-#threeClass .group dt{color:#BB1F23; font-size:15px; font-weight:bold}
-#threeClass .group dd{float:left; margin-top:5px; border-right:solid 1px #EF4100; white-space:nowrap}
-#threeClass .group dd a{padding:0 10px}
-#threeClass dl.selected{background-color:#F5F5F5}
+#foodImport{width:208px}
+#foodImport h2{background:#F90; font-size:14px; font-weight:bold; color:#000; overflow:hidden;zoom:1;}
+#foodImport h2 i,#foodImport h2 b,#foodImport h2 strong{float:left;}
+#foodImport h2 i{background: url(../images/showbg.png) 0px 0px no-repeat;width: 30px;height: 27px;}
+#foodImport h2 b{width: 148px;height: 25px;background-color: #F9AA3D;border-top: solid 2px #EF4100;color: black; line-height:1.8}
+#foodImport h2 strong{background: url(../images/showbg.png) -40px 0px no-repeat;width: 30px;height: 27px;}
+.listOut{border:#F00 solid 2px; border-top:none; border-radius:0 0 6px 6px; padding:0 10px; margin-top:-1px} 
+.listOut li{height:70px; border-top:dotted 1px #ccc}
+#foodImport h3{ color:#BB1F23; font-weight:bold; font-size:14px; padding-top:7px; margin-left:10px}
+#foodImport p{overflow:hidden;zoom:1; margin:0 7px; padding-bottom:5px;}
+#foodImport p a{display:block; width:45%;float:left; text-align:center; border-right:#F63 solid 1px; margin-top:5px}
 /*弹出窗口样式*/
 .popbox{width:476px; display:none; position:absolute; margin:0 362px; display:none; z-index:200}
 .popbox .tBorder{height:4px; background:url(../images/floatWbg.png) no-repeat; font-size:0}

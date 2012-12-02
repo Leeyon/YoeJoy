@@ -5,67 +5,55 @@
 <head>
     <title></title>
     <link type="text/css" rel="Stylesheet" href="../static/css/layout.css" />
-    <link type="text/css" rel="Stylesheet" href="../static/css/layout1020.css" />
-    <style type="text/css">
-        body
-        {
-            background: none;
-        }
-        
-        .enableArrow
-        {
-            display: inline-block;
-            cursor: pointer;
-            background-image: url('../static/images/hy2.gif');
-            background-repeat: no-repeat;
-            width: 18px;
-            height: 18px;
-            margin: 0px 3px;
-        }
-        .disableArrow
-        {
-            display: inline-block;
-            background-image: url('../static/images/qy1.gif');
-            background-repeat: no-repeat;
-            width: 18px;
-            height: 18px;
-            margin: 0px 3px;
-        }
-        .pagenum
-        {
-            cursor: pointer;
-        }
-        #listHeaderLeft li
-        {
-            cursor: pointer;
-        }
-        .next1
-        {
-            cursor: pointer;
-        }
-    </style>
+    <link type="text/css" rel="Stylesheet" href="../static/css/class.css" />
     <script type="text/javascript" src="../static/js/dev/jquery-1.8.1.js"></script>
+    <script type="text/javascript" src="../static/js/dev/jquery.js"></script>
+    <script type="text/javascript" src="../static/js/dev/usercustom.js"></script>
 </head>
 <body>
-    <div class="splb">
-        <!--排序条件-->
-        <div class="pxtjitem">
-            <ul id="listHeaderLeft">
-                <li class="selected">默认排序<input type="hidden" value="1" /></li>
-                <li>价格<input type="hidden" value="2" /></li>
-                <li>销量<input type="hidden" value="3" /></li>
-                <li>上架时间<input type="hidden" value="4" /></li>
-                <li>评价<input type="hidden" value="5" /></li>
-            </ul>
-            <div id="listHeaderRight">
-                <%=C3ProductListHeaderHTML%>
+    <div id="showList">
+        <!--排序条件Begin-->
+        <div class="sort">
+            <div class="item0">
+                <div>
+                    <span>排序：</span>
+                    <select id="orderSelect">
+                        <option value="1">价格从低到高</option>
+                        <option value="2">价格从高到低</option>
+                        <option value="3">销量从高到低</option>
+                        <option value="4">评论从高到低</option>
+                        <option selected="selected" value="0">默认排序</option>
+                    </select>
+                </div>
+                <ul id="orderBy">
+                    <li><a href="javascript:void(0)">销量</a><input type="hidden" value="3" /></li>
+                    <li ><a href="javascript:void(0)">价格</a><input type="hidden" value="2" /></li>
+                    <li><a href="javascript:void(0)">评论</a><input type="hidden" value="5" /></li>
+                    <li><a href="javascript:void(0)">上架时间</a><input type="hidden" value="4" /></li>
+                </ul>
+            </div>
+            <div class="item1">
             </div>
         </div>
-        <div id="productList" class="list">
+        <!--排序条件End-->
+        <!--显示商品列表Begin-->
+        <div class="list">
+            <%=C3ProductListFooterHTML %>
         </div>
     </div>
-    <%=C3ProductListFooterHTML%>
-    <script type="text/javascript">
+    <div id="turnPage">
+    <a class="prev10" href="javascript:void(0)"></a><a class="prev" href="javascript:void(0)">
+                </a><em class="pageNum"><a class="current" href="javascript:void(0)">1</a> <a href="javascript:void(0)">
+                    2</a> <a href="javascript:void(0)">3</a> <a href="javascript:void(0)">4</a> <a href="javascript:void(0)">
+                        5</a> <a href="javascript:void(0)">6</a> <a href="javascript:void(0)">7</a>
+                    <a href="javascript:void(0)">8</a> <a href="javascript:void(0)">9</a> <a href="javascript:void(0)">
+                        10</a> </em><a class="next" href="javascript:void(0)"></a><a class="next10" href="javascript:void(0)">
+                        </a><span>共40页&nbsp;&nbsp;到第</span>
+                <input class="in" type="text">
+                <span>页</span>
+                <input class="butt" value="确定" type="button">
+    </div>
+    <%--<script type="text/javascript">
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -277,6 +265,6 @@
 
         });
 
-    </script>
+    </script>--%>
 </body>
 </html>

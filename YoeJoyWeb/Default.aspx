@@ -19,44 +19,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="RightTopModule" runat="server">
-    <div id="count">
-        <div id="chart">
-            <span>购物车:<b>12</b>件 </span>
-            <img alt="购物车" src="static/images/gwcbt0.png" width="39" height="32">
-            <a href="process1.html">结算</a>
-        </div>
-        <div id="chartContent">
-            <img alt="背景" src="static/images/gwctop.png" width="374" height="18">
-            <div class="shopping">
-                <p class="l">
-                    <a href="product.html">
-                        <img alt="产品" src="static/images/char.jpg" width="30" height="30"></a><a class="goodsName"
-                            href="product.html">全脂牛奶全脂牛奶全脂牛奶全脂牛奶</a><b>￥15000.00</b>
-                </p>
-                <div class="r">
-                    <a class="sub" href="javascript:void(0)">-</a>
-                    <input class="num" maxlength="3" value="1" type="text">
-                    <a class="add" href="javascript:void(0)">+</a>
-                    <p>
-                        删除</p>
-                </div>
-            </div>
-            <div class="payNow">
-                <div class="l">
-                    共<b>12</b>件商品
-                </div>
-                <div class="r">
-                    <p>
-                        合计：<b>￥1900.9</b></p>
-                    <a href="process1.html">
-                        <img alt="结算" src="static/images/jsbt.png" width="61" height="25"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="ServiceLine">
-        <span>021-64681500&nbsp;(9:30~18:30)</span> <font>9914838&nbsp;(9:30~22:00)</font>
-    </div>
     <dl id="notes">
         <dt><a class="adone sel" href="#"><span>公告</span> </a><a class="adtwo" href="#"><span>
             动态</span> </a></dt>
@@ -104,22 +66,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MiddleTopModule" runat="server">
-    <dl id="Search">
-        <dt><a href="index.html">首页</a> <a href="grounp.html">团购</a> </dt>
-        <dd>
-            <p id="HotWord">
-                <span>热门搜索:</span> <a href="search.html">ＩＴ数码</a> <a href="search.html">巧克力</a>
-                <a href="search.html">进口糖果</a>
-            </p>
-            <div id="SearchBox">
-                <p>
-                    <input value="数码产品" type="text">
-                    <button>
-                    </button>
-                </p>
-            </div>
-        </dd>
-    </dl>
     <dl id="focus">
         <dt><a style="display: none;" href="#">
             <img src="static/images/gg1.jpg"></a> <a style="display: none;" href="#">

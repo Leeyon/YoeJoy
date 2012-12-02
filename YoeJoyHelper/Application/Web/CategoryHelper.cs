@@ -104,8 +104,8 @@ namespace YoeJoyHelper
                                 c3InfoList.Add(new C3MiniInfo { C3SysNo = c3Info.SysNo, C3Name = c3Info.C3Name });
                             }
                         }
-                        c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList,C2SysNo=c2Info.SysNo });
-                        strb.Append(String.Format("<a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a> ", baseURL, c1Info.C1ID, c2Info.C2Name));
+                        c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList, C2SysNo = c2Info.SysNo });
+                        strb.Append(String.Format("<a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a> ", baseURL, c1Info.SysNo, c2Info.C2Name));
                     }
                 }
                 strb.Append("</p></div></div>");
@@ -130,7 +130,7 @@ namespace YoeJoyHelper
                 {
                     foreach (BrandForHome brand in brands)
                     {
-                                strb.Append(@"<a href='#'>" + brand.BrandName + "</a>");
+                        strb.Append(@"<a href='#'>" + brand.BrandName + "</a>");
                     }
                 }
                 strb.Append("</p></div></dd></dl></li>");
@@ -151,15 +151,15 @@ namespace YoeJoyHelper
             string categoryNavHTML = String.Empty;
 
             string baseURL = YoeJoyConfig.SiteBaseURL;
-            StringBuilder strb = new StringBuilder(@"<div class='flbt'>");
+            StringBuilder strb = new StringBuilder(@"<div id='foodImport'>");
 
             foreach (Category1Info c1Info in c1List.Keys)
             {
                 if (c1Info.SysNo == c1SysNo)
                 {
                     string c1Name = c1Info.C1Name.Trim();
-                    strb.Append(String.Concat(c1Name, "</div>"));
-                    strb.Append(@"<table border='0' cellspacing='0' cellpadding='0' width='100%' id='subCategoryMenu'><tbody>");
+                    strb.Append(String.Concat("<h2><i></i><b id='c1Name'>", c1Name, "</b><strong></strong></h2>"));
+                    strb.Append(@"<ul class='listOut'>");
 
                     foreach (Category2Info c2Info in c2List.Keys)
                     {
@@ -167,32 +167,30 @@ namespace YoeJoyHelper
                         if (c2Info.C1SysNo == c1SysNo && c2List != null)
                         {
                             int c2SysNo = c2Info.SysNo;
-                            strb.Append(@"<tr><td><h3>");
+                            strb.Append(@"<li><h3>");
                             strb.Append(c2Info.C2Name.Trim());
-                            strb.Append("</h3><ul>");
+                            strb.Append("</h3><p>");
 
                             foreach (Category3Info c3Info in c3List.Keys)
                             {
                                 if (c3Info.C2SysNo == c2SysNo && c3List != null)
                                 {
                                     int c3SysNo = c3Info.SysNo;
-
-                                    strb.Append(string.Concat("<li><a href='", baseURL, "Pages/SubProductList2.aspx?c1=", c1SysNo, "&c2=", c2SysNo, "&c3=", c3SysNo, "'>"));
+                                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/SubProductList2.aspx?c1=" + c1SysNo + "&c2=" + c2SysNo + "&c3=" + c3SysNo;
+                                    strb.Append(string.Concat("<a href='", deeplink, "'>"));
                                     strb.Append(c3Info.C3Name.Trim());
-                                    strb.Append("</a>");
                                     strb.Append(String.Concat(@"<input type='hidden' value='", c3SysNo, "'/>"));
                                     strb.Append(String.Concat(@"<input type='hidden' value='", c3Info.C3Name.Trim(), "'/>"));
-                                    strb.Append("</li>");
+                                    strb.Append("</a>");
                                 }
                             }
-                            strb.Append("</ul>");
+                            strb.Append("</p></li>");
                         }
                     }
-
                 }
             }
 
-            strb.Append("</tboby></table>");
+            strb.Append("</ul></div>");
             categoryNavHTML = strb.ToString();
             return categoryNavHTML;
         }

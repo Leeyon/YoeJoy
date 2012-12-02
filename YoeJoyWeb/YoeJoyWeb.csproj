@@ -784,8 +784,6 @@
     <Content Include="static\images\hy2.gif" />
     <Content Include="static\images\indexbg - 副本 %282%29.png" />
     <Content Include="static\images\indexbg - 副本 %283%29.png" />
-    <Content Include="static\images\indexbg - 鍓湰 %282%29.png" />
-    <Content Include="static\images\indexbg - 鍓湰 %283%29.png" />
     <Content Include="static\images\indexbg.png" />
     <Content Include="static\images\indexbgs.png" />
     <Content Include="static\images\indexline.gif" />

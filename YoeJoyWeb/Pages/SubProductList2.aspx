@@ -6,232 +6,225 @@
 <%@ Register Src="../Controls/SubCategoryNavigation.ascx" TagName="SubCategoryNavigation"
     TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-<style type="text/css">
-.sxtj
-{
-    width:998px;
-}
-</style>
+    <link type="text/css" rel="Stylesheet" href="../static/css/layout.css" />
+    <link type="text/css" rel="Stylesheet" href="../static/css/class.css" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="NavigationModuleContent" runat="server">
-    <uc1:CategoryNavigation ID="CategoryNavigation1" runat="server" />
-    <uc2:SubCategoryNavigation ID="SubCategoryNavigation1" runat="server" />
+<asp:Content ID="Content2" ContentPlaceHolderID="LeftTopModule" runat="server">
+    <uc1:CategoryNavigation ID="CategoryNavigation1" runat="server" IsHomePage="false" />
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="PanicBuyingMdouleContent" runat="server">
-    <div id="cprp" class="l_class">
-        <img src="../static/images/cprp.png">
-        <div class="item">
-            <table border="0" cellspacing="0" cellpadding="0" width="180">
-                <tbody>
-                    <tr>
-                        <td width="62">
-                            <img src="../static/images/plsp.jpg">
-                        </td>
-                        <td valign="top" width="118" align="right">
-                            <p align="left">
-                                <a href="#">商品名称</a></p>
-                            <a href="#"><span class="plnum">321</span></a>条
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="pltext" align="left">
-                评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            会员:<span class="plname">l***o</span>
-        </div>
-        <div class="item">
-            <table border="0" cellspacing="0" cellpadding="0" width="180">
-                <tbody>
-                    <tr>
-                        <td width="62">
-                            <img src="../static/images/plsp.jpg">
-                        </td>
-                        <td valign="top" width="118" align="right">
-                            <p align="left">
-                                <a href="#">商品名称</a></p>
-                            <a href="#"><span class="plnum">321</span></a>条
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="pltext" align="left">
-                评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            会员:<span class="plname">l***o</span>
-        </div>
-        <div class="item">
-            <table border="0" cellspacing="0" cellpadding="0" width="180">
-                <tbody>
-                    <tr>
-                        <td width="62">
-                            <img src="../static/images/plsp.jpg">
-                        </td>
-                        <td valign="top" width="118" align="right">
-                            <p align="left">
-                                <a href="#">商品名称</a></p>
-                            <a href="#"><span class="plnum">321</span></a>条
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="pltext" align="left">
-                评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            会员:<span class="plname">l***o</span>
-        </div>
-        <div class="item">
-            <table border="0" cellspacing="0" cellpadding="0" width="180">
-                <tbody>
-                    <tr>
-                        <td width="62">
-                            <img src="../static/images/plsp.jpg">
-                        </td>
-                        <td valign="top" width="118" align="right">
-                            <p align="left">
-                                <a href="#">商品名称</a></p>
-                            <a href="#"><span class="plnum">321</span></a>条
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="pltext" align="left">
-                评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            会员:<span class="plname">l***o</span>
-        </div>
-        <div class="item">
-            <table border="0" cellspacing="0" cellpadding="0" width="180">
-                <tbody>
-                    <tr>
-                        <td width="62">
-                            <img src="../static/images/plsp.jpg">
-                        </td>
-                        <td valign="top" width="118" align="right">
-                            <p align="left">
-                                <a href="#">商品名称</a></p>
-                            <a href="#"><span class="plnum">321</span></a>条
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="pltext" align="left">
-                评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            会员:<span class="plname">l***o</span>
-        </div>
-        <img src="../static/images/yj02.png">
+<asp:Content ID="Content3" ContentPlaceHolderID="RightTopModule" runat="server">
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="MiddleTopModule" runat="server">
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="SiteNavModule" runat="server">
+    <div id="position">
+        <span>您在:</span> <b>首页</b> <span>&gt;</span> <span id="c1"><b></b></span><span>&gt;</span>
+        <span id="c3"></span>
     </div>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="TopLeftModuleContent" runat="server">
+<asp:Content ID="Content6" ContentPlaceHolderID="LeftBigModule" runat="server">
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="TopRightMdouleContent" runat="server">
-    <!--洋葱导航条-->
-    <div class="ycdh">
-        <a href="../Default.aspx"><b>首页</b></a>&gt;<a><span></span></a>&gt;<span></span></div>
-    <!--热卖推荐-->
-    <table class="rmtj" border="0" cellspacing="0" cellpadding="0" width="1000">
-        <tbody>
-            <tr>
-                <td valign="top" width="38">
-                    <img src="../static/images/rmtj.png">
-                </td>
-                <td class="list">
-                    <ul>
-                        <li><a href="#">
-                            <p>
-                                <img src="../static/images/sp02.jpg"><span class="price">1000元</span></p>
-                            <span>商品名称</span></a></li>
-                        <li><a href="#">
-                            <p>
-                                <img src="../static/images/sp02.jpg"><span class="price">1000元</span></p>
-                            <span>商品名称</span></a></li>
-                        <li><a href="#">
-                            <p>
-                                <img src="../static/images/sp02.jpg"><span class="price">1000元</span></p>
-                            <span>商品名称</span></a></li>
-                        <li><a href="#">
-                            <p>
-                                <img src="../static/images/sp02.jpg"><span class="price">1000元</span></p>
-                            <span>商品名称</span></a></li>
+<asp:Content ID="Content7" ContentPlaceHolderID="RightBigModule" runat="server">
+</asp:Content>
+<asp:Content ID="Content8" ContentPlaceHolderID="BackupContent1" runat="server">
+</asp:Content>
+<asp:Content ID="Content9" ContentPlaceHolderID="HomeMiddleContent" runat="server">
+    <div class="mix">
+        <div class="l_module">
+            <uc2:SubCategoryNavigation ID="SubCategoryNavigation1" runat="server" />
+            <div id="hotComments" class="l_class area">
+                <div class="title">
+                    <div class="mem0">
+                    </div>
+                    <h3>
+                        产品热评</h3>
+                    <div class="mem1">
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="item">
+                        <a class="photo" href="product.html">
+                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <h2 class="goodsName">
+                            <a href="product.html">商品名称商品名称商品名称商品名称商品名称</a></h2>
+                        <p class="mast" align="right">
+                            ¥1500</p>
+                        <p class="slave" align="right">
+                            会员:l***o</p>
+                        <p class="pltext" align="left">
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                    </div>
+                    <div class="item">
+                        <a class="photo" href="product.html">
+                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <h2 class="goodsName">
+                            <a href="product.html">商品名称商品名称商品名称商品名称商品名称</a></h2>
+                        <p class="mast" align="right">
+                            ¥1500</p>
+                        <p class="slave" align="right">
+                            会员:l***o</p>
+                        <p class="pltext" align="left">
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                    </div>
+                    <div class="item">
+                        <a class="photo" href="product.html">
+                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <h2 class="goodsName">
+                            <a href="product.html">商品名称商品名称商品名称商品名称商品名称</a></h2>
+                        <p class="mast" align="right">
+                            ¥1500</p>
+                        <p class="slave" align="right">
+                            会员:l***o</p>
+                        <p class="pltext" align="left">
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                    </div>
+                    <div class="item">
+                        <a class="photo" href="product.html">
+                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <h2 class="goodsName">
+                            <a href="product.html">商品名称商品名称商品名称商品名称商品名称</a></h2>
+                        <p class="mast" align="right">
+                            ¥1500</p>
+                        <p class="slave" align="right">
+                            会员:l***o</p>
+                        <p class="pltext" align="left">
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                    </div>
+                    <div class="item">
+                        <a class="photo" href="product.html">
+                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <h2 class="goodsName">
+                            <a href="product.html">商品名称商品名称商品名称商品名称商品名称</a></h2>
+                        <p class="mast" align="right">
+                            ¥1500</p>
+                        <p class="slave" align="right">
+                            会员:l***o</p>
+                        <p class="pltext" align="left">
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                    </div>
+                    <div class="item">
+                        <a class="photo" href="product.html">
+                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <h2 class="goodsName">
+                            <a href="product.html">商品名称商品名称商品名称商品名称商品名称</a></h2>
+                        <p class="mast" align="right">
+                            ¥1500</p>
+                        <p class="slave" align="right">
+                            会员:l***o</p>
+                        <p class="pltext" align="left">
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="r_mix">
+            <!--热卖推荐Begin-->
+            <div id="recommend">
+                <div class="group">
+                    <ul class="item">
+                        <li>
+                            <img alt="商品名称商品名称商品名称商品名称" src="../static/images/sp.jpg" width="90" height="90">
+                            <p class="goodsName">
+                                <a href="product.html">商品名称商品名称商品名称商品名称</a></p>
+                            <p class="slave">
+                                攸怡价:<span class="mast">¥1500.00</span></p>
+                            <a class="bt1" href="javascript:void(0)">立即购买</a> </li>
+                        <li>
+                            <img alt="商品名称商品名称商品名称商品名称" src="../static/images/sp.jpg" width="90" height="90">
+                            <p class="goodsName">
+                                <a href="product.html">商品名称商品名称商品名称商品名称</a></p>
+                            <p class="slave">
+                                攸怡价:<span class="mast">¥1500.00</span></p>
+                            <a class="bt1" href="javascript:void(0)">立即购买</a> </li>
+                        <li>
+                            <img alt="商品名称商品名称商品名称商品名称" src="../static/images/sp.jpg" width="90" height="90">
+                            <p class="goodsName">
+                                <a href="product.html">商品名称商品名称商品名称商品名称</a></p>
+                            <p class="slave">
+                                攸怡价:<span class="mast">¥1500.00</span></p>
+                            <a class="bt1" href="javascript:void(0)">立即购买</a> </li>
                     </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!--筛选条件-->
-    <div class="sxtj">
-        <table border="0" cellspacing="0" cellpadding="0" width="792">
-            <%=C3ProductFilterHTML%>
-        </table>
+                    <ul class="title">
+                        <li>热</li>
+                        <li>卖</li>
+                        <li>推</li>
+                        <li>荐</li>
+                    </ul>
+                </div>
+            </div>
+            <!--热卖推荐End-->
+            <!--筛选条件Begin-->
+            <div id="screening">
+                <div class="title">
+                </div>
+                <%=C3ProductFilterHTML%>
+                <div class="more">
+                    <div class="item0">
+                    </div>
+                    <div class="item1">
+                        <a href="javascript:void(0)">更多筛选</a></div>
+                </div>
+            </div>
+            <iframe id="ProductIframe" frameborder="0" scrolling="no" width="1001px" height="750px">
+            </iframe>
+        </div>
     </div>
-    <!--商品列-->
-    <iframe id="ProductIframe" frameborder="0" scrolling="no" width="1001px" height="1200px">
-    </iframe>
 </asp:Content>
-<asp:Content ID="Content6" ContentPlaceHolderID="BodyContent" runat="server">
+<asp:Content ID="Content10" ContentPlaceHolderID="BackupContent2" runat="server">
 </asp:Content>
-<asp:Content ID="Content7" ContentPlaceHolderID="ExtenalContent" runat="server">
-</asp:Content>
-<asp:Content ID="Content8" ContentPlaceHolderID="ScriptContent" runat="server">
+<asp:Content ID="Content11" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
 
-        function getQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) {
-                return unescape(r[2]);
-            }
-            return null;
-        }
-
-        function replaceEmptyItem(arr) {
-            for (var i = 0, len = arr.length; i < len; i++) {
-                if (!arr[i] || arr[i] == '') {
-                    arr.splice(i, 1);
-                    len--;
-                    i--;
-                }
-            }
-            return arr;
-        }
-
         function getAttributionIds() {
-            var productFilterCount = $("#filterTable").children("tr").length;
+            var productFilterCount = $("#screening").children("div[class='attr']").length;
             var selectedAIds = new Array();
             for (var i = 0; i < productFilterCount; i++) {
-                var attrId = $("#filterTable tr").eq(i).children("td").eq(1).children("ul").children("input").val();
+                var attrId = $("#screening").children("div[class='attr']").eq(i).children("input[class='selectedValue']").eq(0).val();
                 if (attrId != "0") {
                     selectedAIds[i] = attrId;
                 }
             }
-            return replaceEmptyItem(selectedAIds);
+            return YoeJoy.Site.Utility.ReplaceEmptyItem(selectedAIds);
         }
 
         $(function () {
 
-            $("body").removeAttr("id").attr({ "id": "class" });
-            var c1 = getQueryString("c1");
-            var c2 = getQueryString("c2");
-            var c3 = getQueryString("c3");
-            var c1Page = "SubProductList1.aspx?c1=";
-            var $c1Name = $(".flbt").html();
-            var c3Name = $("#subCategoryMenu li input[value=" + c3 + "]").siblings("input").val();
-            $(".ycdh a").eq(1).attr({ "href": c1Page + c1 }).children("span").html($c1Name);
-            $(".ycdh span").eq(1).html(c3Name);
-            var productListBaseURL = "ProductList.aspx?c1=" + c1 + "&c2=" + c2 + "&c3=" + c3 + "&attrIds=";
+            var c1 = YoeJoy.Site.Utility.GetQueryString("c1");
+            var c2 = YoeJoy.Site.Utility.GetQueryString("c2");
+            var c3 = YoeJoy.Site.Utility.GetQueryString("c3");
 
+            var $c1Name = $("#foodImport").children("h2").eq(0).children("b").eq(0).html();
+            $("#position").children("span[id='c1']").children("b").html($c1Name);
+            var $c3Name = $(".listOut li p a input[value=" + c3 + "]").siblings("input").val();
+            $("#position").children("span[id='c3']").html($c3Name);
+            $("#screening").children(".title").eq(0).html($c3Name + "－商品筛选");
+
+            var productListBaseURL = "ProductList.aspx?c1=" + c1 + "&c2=" + c2 + "&c3=" + c3 + "&attrIds=";
             $("#ProductIframe").attr({ "src": productListBaseURL });
 
-            $("#filterTable tr").each(function (index) {
-                $(this).children("td").eq(1).children("ul").children("li").each(function (index1) {
-                    $(this).click(function () {
-                        var a2id = $(this).children("input").val();
-                        $(this).siblings("input").val(a2id);
-                        var a2Ids = getAttributionIds();
-                        var productListURL = productListBaseURL + a2Ids;
-                        $("#ProductIframe").attr({ "src": productListURL });
+            $("#screening").children("div[class='attr']").each(function (index) {
+
+                var $attrItem = $(this);
+                $attrItem.children(".all").click(function (event) {
+                    $attrItem.children("input[class='selectedValue']").val("0");
+                    var aIds = getAttributionIds();
+                    var url = productListBaseURL + aIds;
+                    $("#ProductIframe").attr({ "src": url });
+                });
+
+                $attrItem.children("strong").eq(0).children("span").each(function (index1) {
+                    var $attrItemSpan = $(this);
+                    $attrItemSpan.click(function (event) {
+                        var selectedAId = $attrItemSpan.children("input").val();
+                        $attrItem.children("input[class='selectedValue']").val(selectedAId);
+                        var aIds = getAttributionIds();
+                        var url = productListBaseURL + aIds;
+                        $("#ProductIframe").attr({ "src": url });
                     });
                 });
+
             });
 
         });
     </script>
-</asp:Content>
-<asp:Content ID="Content9" ContentPlaceHolderID="PopupContent" runat="server">
 </asp:Content>

@@ -26,7 +26,7 @@ namespace YoeJoyWeb.Controls
                 }
                 else
                 {
-                    CategoryNavHTML = String.Format("<div style='display: none;' id='Menu' class='classMenu'>{0}</div>", categoryMiddleContent);
+                    CategoryNavHTML = String.Format("<div id='ItemSort'> <span>全部商品分类<b>+</b></span> </div><div id='Menu' class='classMenu'>{0}</div>", categoryMiddleContent);
                 }
             }
         }

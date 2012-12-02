@@ -23,6 +23,7 @@ namespace YoeJoyHelper
         #region 辅助结构体
         internal struct C2C3Dic
         {
+            internal int C2SysNo;
             internal string C2Name;
             internal List<C3MiniInfo> C3MiniList;
         }
@@ -103,7 +104,7 @@ namespace YoeJoyHelper
                                 c3InfoList.Add(new C3MiniInfo { C3SysNo = c3Info.SysNo, C3Name = c3Info.C3Name });
                             }
                         }
-                        c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList });
+                        c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList,C2SysNo=c2Info.SysNo });
                         strb.Append(String.Format("<a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a> ", baseURL, c1Info.C1ID, c2Info.C2Name));
                     }
                 }
@@ -115,7 +116,7 @@ namespace YoeJoyHelper
                     strb.Append(String.Concat(@"<li><h3>" + c2Name + "</h3><ul>"));
                     foreach (C3MiniInfo c3Info in c2c3Dic[c2Name].C3MiniList)
                     {
-                        strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList2.aspx?c1={1}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name));
+                        strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={4}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name, c2c3Dic[c2Name].C2SysNo));
                     }
                     strb.Append("</ul><li>");
                 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="YoeJoyWeb.Default1" %>
+    CodeBehind="Default.aspx.cs" Inherits="YoeJoyWeb.Default" %>
 
 <%@ Register Src="Controls/CategoryNavigation.ascx" TagName="CategoryNavigation"
     TagPrefix="uc1" %>
@@ -15,25 +15,7 @@
         <h3>
             <em></em><strong><b>限时抢购</b><span>Panic-Bu ying</span></strong> <i></i>
         </h3>
-        <div class="panicContentt">
-            <h2>
-                <span>剩余 </span>&nbsp;<img alt="钟" src="static/images/time.png" width="15" height="18">
-                <b>23</b> <em>小时</em> <b>55</b> <em>分</em> <b>33</b> <em>秒</em>
-            </h2>
-            <a class="phone" href="#">
-                <img alt="商品图片" src="static/images/sp.jpg" width="100" height="100"></a> <a class="word"
-                    href="#">商品名称商品名称商品名称商品名称商品名称商品名称商品名称 </a><b class="price">¥1500</b>
-            <p class="hr">
-            </p>
-            <h2>
-                <span>剩余</span>
-                <img alt="钟" src="static/images/time.png" width="15" height="18">
-                <b>23</b> <em>小时</em> <b>55</b> <em>分</em> <b>33</b> <em>秒</em>
-            </h2>
-            <a class="phone" href="#">
-                <img alt="商品图片" src="static/images/sp.jpg" width="100" height="100"></a> <a class="word"
-                    href="#">商品名称商品名称商品名称商品名称商品名称商品名称商品名称 </a><b class="price">¥1500</b>
-        </div>
+        <%=PanicBuyingHTML%>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="RightTopModule" runat="server">
@@ -153,46 +135,17 @@
     </dl>
     <dl class="Promotions">
         <dt><a class="prom" href="#">
-            <img alt="图标" src="static/images/szj.png" width="8" height="8">
+            <img alt="图标" src="static/images/szj.png" width="8" height="8" />
             <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#">更多&gt;&gt; </a>
         </dt>
         <dd>
-            <ul class="product products">
-                <li>
-                    <h3>
-                        <a href="#">
-                            <img alt="产品图片" src="static/images/product.jpg" width="140" height="140"></a></h3>
-                    <p>
-                        <a href="product.html">商品名称商品名称商品名称商品名称商品名称商品商品名称</a></p>
-                    <b>￥1500</b> </li>
-                <li>
-                    <h3>
-                        <a href="#">
-                            <img alt="产品图片" src="static/images/product.jpg" width="140" height="140"></a></h3>
-                    <p>
-                        <a href="product.html">商品名称商品名称商品名称商品名称商品名称商品商品名称</a></p>
-                    <b>￥1500</b> </li>
-                <li>
-                    <h3>
-                        <a href="#">
-                            <img alt="产品图片" src="static/images/product.jpg" width="140" height="140"></a></h3>
-                    <p>
-                        <a href="product.html">商品名称商品名称商品名称商品名称商品名称商品商品名称</a></p>
-                    <b>￥1500</b> </li>
-                <li>
-                    <h3>
-                        <a href="#">
-                            <img alt="产品图片" src="static/images/product.jpg" width="140" height="140"></a></h3>
-                    <p>
-                        <a href="product.html">商品名称商品名称商品名称商品名称商品名称商品商品名称</a></p>
-                    <b>￥1500</b> </li>
-            </ul>
+            <%=PromoHTML %>
         </dd>
     </dl>
     <dl class="Promotions">
         <!--新品上市-->
         <dt><a class="prom" href="#">
-            <img alt="图标" src="static/images/szj.png" width="8" height="8">
+            <img alt="图标" src="static/images/szj.png" width="8" height="8" />
             <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#">更多&gt;&gt; </a>
         </dt>
         <dd>
@@ -375,14 +328,16 @@
         <div id="centerAdWrapper">
             <uc2:OnlineStaticAD ID="OnlineStaticAD1" ADPositionID="4" ADCSSClass="ad1" runat="server" />
             <uc2:OnlineStaticAD ID="OnlineStaticAD2" ADPositionID="5" ADCSSClass="ad1" runat="server" />
-            <div style="clear: left;" />
+            <div style="clear: left;">
+            </div>
         </div>
         <div class="ThreeRow">
             <div class="bigLeft">
                 <div class="It">
                     <a class="Header" href="#">
                         <img src="static/images/it.png" /></a>
-                    <uc2:OnlineStaticAD ID="C1LeftAD1" ADPositionID="6" Width="208" Height="278" ADCSSClass="Header" runat="server" />
+                    <uc2:OnlineStaticAD ID="C1LeftAD1" ADPositionID="6" Width="208" Height="278" ADCSSClass="Header"
+                        runat="server" />
                     <p>
                         <a href="#">IT相关导购文</a></p>
                     <p>
@@ -467,8 +422,9 @@
             <div class="bigLeft">
                 <div class="It">
                     <a class="Header" href="#">
-                        <img src="static/images/home.png"></a> 
-                        <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208" Height="278" runat="server" />
+                        <img src="static/images/home.png"></a>
+                    <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208"
+                        Height="278" runat="server" />
                     <p>
                         <a href="#">IT相关导购文</a></p>
                     <p>
@@ -557,6 +513,30 @@
 <asp:Content ID="Content11" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
         $(function () {
+
+            $("#panicContentt").children("div[class='panicContent']").each(function (index) {
+                var $this = $(this);
+                var startTime = new Date();
+                var $endTime = Date.parse($this.children(".time").children("input").val());
+                var remainSecond = (($endTime - startTime.getTime()) / 1000);
+                var $timeDiv = $this.children("h2[class='time']");
+                var InterValObj = window.setInterval(function () {
+                    if (remainSecond > 0) {
+                        remainSecond = remainSecond - 1;
+                        var second = Math.floor(remainSecond % 60);
+                        var minite = Math.floor((remainSecond / 60) % 60);
+                        var hour = Math.floor((remainSecond / 3600) % 24);
+                        var day = Math.floor((remainSecond / 3600) / 24);
+                        $timeDiv.html("<span>剩余 </span>&nbsp;<img alt='钟' src='static/images/time.png' width='15' height='18'/><b>"
+                         + day + "</b><em>天</em><b>" + hour + "</b><em>小时</em><b>" + minite + "</b><em>分</em>" +
+                                        "<b>" + second + "</b><em>秒</em>");
+                    }
+                    else {
+                        window.clearInterval(InterValObj);
+                        $timeDiv.html("<b>抢购结束</b>")
+                    }
+                }, 1000);
+            });
 
         });
     </script>

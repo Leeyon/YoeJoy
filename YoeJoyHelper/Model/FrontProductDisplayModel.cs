@@ -432,7 +432,7 @@ namespace YoeJoyHelper.Model
 
     public class C1WeeklyBestSaledProductService
     {
-        private static readonly string GetC1WeeklyBestSaledProductsSqlCmdTemplate = @"  select olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
+        private static readonly string GetC1WeeklyBestSaledProductsSqlCmdTemplate = @"select olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
   p.C2SysNo,p.C3SysNo,pimg.product_simg
   from OnlineListProduct olp
   left join Product p on olp.ProductSysNo=p.SysNo
@@ -1070,6 +1070,52 @@ and (p.PromotionWord like ('%{1}%')
                 return null;
             }
         }
+    }
+
+    public class HomePromotionProductService
+    {
+        private static readonly string getHomePromotionProductsSqlCmdTemplate =@"select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
+  left join Product p on olp.ProductSysNo=p.SysNo 
+  left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
+  left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
+  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1}
+  order by olp.ListOrder ASC";
+
+        /// <summary>
+        /// 获得首页的促销商品
+        /// </summary>
+        /// <returns></returns>
+        public static List<FrontDsiplayProduct> GetHomePromotionProducts()
+        {
+            int onlineAreaType = (int)AppEnum.OnlineAreaType.HomePage;
+            int onlineRecommendType = (int)AppEnum.OnlineRecommendType.Discount;
+            string sqlCmd = String.Format(getHomePromotionProductsSqlCmdTemplate, onlineAreaType, onlineRecommendType);
+            DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+            int count = data.Rows.Count;
+            if (count > 0)
+            {
+                List<FrontDsiplayProduct> products = new List<FrontDsiplayProduct>();
+                for (int i = 0; i < count; i++)
+                {
+                    products.Add(new FrontDsiplayProduct()
+                    {
+                        ProductSysNo=data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                        ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        Price = data.Rows[i]["price"].ToString().Trim(),
+                        ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                    });
+                }
+                return products;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 
     #endregion

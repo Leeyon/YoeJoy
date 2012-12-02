@@ -37,21 +37,28 @@ namespace YoeJoyHelper.Model
             string sqlCmd = String.Format(GetHomeInComingProductSqlCmdTemplate, onlineAreaType, onlineRecommendType);
             DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
             int count = data.Rows.Count;
-            List<InComingProductForHome> products = new List<InComingProductForHome>();
-            for (int i = 0; i < count; i++)
+            if (count > 0)
             {
-                products.Add(new InComingProductForHome()
+                List<InComingProductForHome> products = new List<InComingProductForHome>();
+                for (int i = 0; i < count; i++)
                 {
-                    SysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
-                    PromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
-                    Price = int.Parse(data.Rows[i]["price"].ToString().Trim()),
-                    ImgCover = data.Rows[i]["product_limg"].ToString().Trim(),
-                    C1SysNo=int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
-                    C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
-                    C3SysNo=int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
-                });
+                    products.Add(new InComingProductForHome()
+                    {
+                        SysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                        PromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        Price = int.Parse(data.Rows[i]["price"].ToString().Trim()),
+                        ImgCover = data.Rows[i]["product_limg"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                    });
+                }
+                return products;
             }
-            return products;
+            else
+            {
+                return null;
+            }
         }
     }
 

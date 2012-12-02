@@ -55,7 +55,6 @@
     <Compile Include="Application\Web\PanicBuyingHelper.cs" />
     <Compile Include="Application\Web\InComingProductHelper.cs" />
     <Compile Include="Application\Web\ProductDetailHelper.cs" />
-    <Compile Include="Application\Web\PromotionProductsHelper.cs" />
     <Compile Include="Application\Data\SqlDBHelper.cs" />
     <Compile Include="Application\Web\SearchHelper.cs" />
     <Compile Include="Application\Web\CustomerHelper.cs" />

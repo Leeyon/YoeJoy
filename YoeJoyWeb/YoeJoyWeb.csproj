@@ -91,13 +91,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default_old.aspx.cs">
-      <DependentUpon>Default_old.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default_old.aspx.designer.cs">
-      <DependentUpon>Default_old.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -621,7 +614,6 @@
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="Default.aspx" />
-    <Content Include="Default_old.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Product.aspx" />
     <Content Include="Pages\ProductList.aspx" />

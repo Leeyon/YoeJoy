@@ -15,11 +15,14 @@ namespace YoeJoyHelper.Model
         public int ProductPrice { get; set; }
         public DateTime EndTime { get; set; }
         public string CoverImg { get; set; }
+        public int C1SysNo { get; set; }
+        public int C2SysNo { get; set; }
+        public int C3SysNo { get; set; }
     }
 
     public class PanicBuyingProductService
     {
-        private static readonly string GetHomeLastedPanicProductSqlCmdTemplate = @"select top 2 sc.ProductSysNo,p.ProductName,p.PromotionWord,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pis.product_limg,sc.EndTime from Sale_CountDown sc left join 
+        private static readonly string GetHomeLastedPanicProductSqlCmdTemplate = @"select top 2 sc.ProductSysNo,p.ProductName,p.PromotionWord,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,pis.product_limg,sc.EndTime,p.C1SysNo,p.C2SysNo,p.C3SysNo from Sale_CountDown sc left join 
   Product p on sc.ProductSysNo=p.SysNo left join
   Product_Price pp on sc.ProductSysNo=pp.ProductSysNo left join 
   Product_Images pis on sc.ProductSysNo=pis.product_sysNo
@@ -38,6 +41,9 @@ namespace YoeJoyHelper.Model
                     {
                         ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
                         PromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
                         ProductPrice = int.Parse(data.Rows[i]["price"].ToString().Trim()),
                         EndTime = DateTime.Parse(data.Rows[i]["EndTime"].ToString().Trim()),
                         CoverImg = data.Rows[i]["product_limg"].ToString().Trim(),

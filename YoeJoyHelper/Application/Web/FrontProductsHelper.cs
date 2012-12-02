@@ -57,6 +57,15 @@ namespace YoeJoyHelper
             return c1WeeklyBestSaledProductsHTML;
         }
 
+        public static string GetHomePromotionProductsHTMWrapper()
+        {
+            CacheObjSetting cacheSetting = StaticCacheObjSettings.SiteHomePromoProductListCacheSetting;
+            string key = cacheSetting.CacheKey;
+            int duration = cacheSetting.CacheDuration;
+            string homePromotion = CacheObj<string>.GetCachedObj(key, duration, GetHomePromotionProductsHTML());
+            return homePromotion;
+        }
+
         /// <summary>
         /// 首页大类商品展示的HTML代码
         /// </summary>
@@ -474,6 +483,37 @@ namespace YoeJoyHelper
             productListHTML = strb.ToString();
 
             return productListHTML;
+        }
+
+        /// <summary>
+        /// 获得首页促销商品的HTML
+        /// </summary>
+        /// <returns></returns>
+        public static string GetHomePromotionProductsHTML()
+        {
+            string HomeInComingProductHTML = String.Empty;
+            List<FrontDsiplayProduct> products = HomePromotionProductService.GetHomePromotionProducts();
+            if (products != null)
+            {
+                string imageVitualPath = YoeJoyConfig.ImgVirtualPathBase;
+                StringBuilder strb = new StringBuilder("<ul class='product products'>");
+                foreach (FrontDsiplayProduct product in products)
+                {
+                    string productLink = String.Format("/Pages/Product.aspx?c1={0}&c2={1}&c3={2}&pid={3}", product.C1SysNo, product.C2SysNo, product.C3SysNo, product.ProductSysNo);
+                    string innerHTML = @"<li>
+                    <h3>
+                        <a href='{0}'>
+                            <img alt='产品图片' src='{1}' width='140' height='140'/></a></h3>
+                    <p>
+                        <a href='{2}'>{3}</a></p>
+                    <b>￥{4}</b> </li>";
+                    string imgURL = String.Concat(imageVitualPath, product.ImgPath);
+                    strb.Append(String.Format(innerHTML, productLink, imgURL, productLink, product.ProductPromotionWord, product.Price));
+                }
+                strb.Append("</ul>");
+                HomeInComingProductHTML = strb.ToString();
+            }
+            return HomeInComingProductHTML;
         }
     }
 }

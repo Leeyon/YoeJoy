@@ -8,7 +8,7 @@ using YoeJoyHelper;
 
 namespace YoeJoyWeb
 {
-    public partial class Default1 : System.Web.UI.Page
+    public partial class Default : System.Web.UI.Page
     {
         /// <summary>
         /// 商品促销
@@ -84,6 +84,8 @@ namespace YoeJoyWeb
                 CategoryProductsTwoHTML = FrontProductsHelper.GetHomeCategoryOneProductsDisplayHTMLWrapper(YoeJoyConfig.HomeDisplayCategoryID2);
                 CategoryProductsBrandsOneHTML = BrandsHelper.GetBrandsForCategoryOneProductsWrapper(YoeJoyConfig.HomeDisplayCategoryID1);
                 CategoryProductsBrandsTwoHTML = BrandsHelper.GetBrandsForCategoryOneProductsWrapper(YoeJoyConfig.HomeDisplayCategoryID2);
+                PromoHTML = FrontProductsHelper.GetHomePromotionProductsHTML();
+                PanicBuyingHTML = PanicBuyingHelper.GetPanicProductsForHomeWrapper();
             }
         }
     }

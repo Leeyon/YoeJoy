@@ -71,7 +71,8 @@
 .mytitles strong span{color:#FF9966;}
 .mytitles i{background:url(../images/showbg.png) no-repeat -40px -37px;}
 
-.panicContentt{border:#CCC solid 1px; border-top:none; padding-bottom:9px}
+.panicContentt{border:#CCC solid 1px; border-top:none;border-bottom:none; padding-bottom:9px}
+.panicContent{border-bottom:1px solid #ccc;}
 .panicContentt h2{text-align:center; padding-top:5px; padding-bottom:4px; overflow:hidden;zoom:1; height:26px}
 .panicContentt h2 span,.panicContentt h2 em,.panicContentt h2 b{padding:3px 0px;}
 .panicContentt h2 span{margin-right:0px; color:#000;}

@@ -16,7 +16,7 @@ namespace YoeJoyHelper
 
         public static string GetBrandsForHomeWrapper(int topNum)
         {
-            CacheObjSetting cacheSetting = StaticCacheObjSettings.SiteHomeInComingProductsCacheSetting;
+            CacheObjSetting cacheSetting = StaticCacheObjSettings.SiteHomeBrandsCacheSetting;
             string key = cacheSetting.CacheKey;
             int duration = cacheSetting.CacheDuration;
             string homeBrandsHTML = CacheObj<string>.GetCachedObj(key, duration, GetBrandsForHome(topNum));

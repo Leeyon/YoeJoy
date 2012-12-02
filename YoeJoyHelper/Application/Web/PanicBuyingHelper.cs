@@ -21,31 +21,44 @@ namespace YoeJoyHelper
     /// </summary>
     public class PanicBuyingHelper
     {
+        public static string GetPanicProductsForHomeWrapper()
+        {
+            CacheObjSetting cacheSetting = StaticCacheObjSettings.SiteHomePanicProductListCacheSetting;
+            string key = cacheSetting.CacheKey;
+            int duration = cacheSetting.CacheDuration;
+            string HomeInComingProductHTML = CacheObj<string>.GetCachedObj(key, duration, GetPanicProductsForHome());
+            return HomeInComingProductHTML;
+        }
+
+        /// <summary>
+        /// 主页限时抢购模块
+        /// </summary>
+        /// <returns></returns>
         public static string GetPanicProductsForHome()
         {
             string HomePanicHTML = String.Empty;
             List<PanicBuyingProductModelForHome> panicProducts = PanicBuyingProductService.GetHomePanicProduct();
             if (panicProducts != null)
             {
-                string imageVitualPath = ConfigurationManager.AppSettings["ImageVitrualPath"].ToString();
-                StringBuilder strb = new StringBuilder("<ul id='container'>");
+                string imageVitualPath = YoeJoyConfig.ImgVirtualPathBase;
+                StringBuilder strb = new StringBuilder("<div id='panicContentt' class='panicContentt'>");
                 foreach (PanicBuyingProductModelForHome panic in panicProducts)
                 {
-                    string liTemplate = @"<li style='text-align:center;'>
-                            <p align='center'>
-                                <div class='time'>
-                                <span class='qgtime'>100</span>天<span class='qgtime'>23</span>小时<span class='qgtime'>59</span>分<span
-                                    class='qgtime'>59</span>秒</div>
-                                <a href='products/product.html?pid={0}'>
-                                    <img src='{1}' alt='商品' width='100' height='100' /></a><br />
-                                <a href='products/product.html?pid={2}'>{3}</a><br />
-                                抢购价:<span class='price01'> ￥{4}</span></p> 
-                                <input type='hidden' class='buttonEndTime' value='{5}'/>
-                        </li>";
+                    string liTemplate = @"<div class='panicContent'>
+                <h2 class='time'>
+                    <span>剩余 </span>&nbsp;<img alt='钟' src='static/images/time.png' width='15' height='18'/>
+                    <b>23</b> <em>小时</em> <b>55</b> <em>分</em> <b>33</b> <em>秒</em>
+                     <input type='hidden' class='buttonEndTime' value='{0}'/>
+                </h2>
+                <a class='phone' href='{1}'>
+                    <img alt='商品图片' src='{2}' width='100' height='100'/></a> <a class='word'
+                        href='{3}'>{4}</a><b class='price'>¥{5}</b>
+            </div>";
                     string imgURL = String.Concat(imageVitualPath, panic.CoverImg);
-                    strb.Append(String.Format(liTemplate, panic.ProductSysNo, (imageVitualPath + panic.CoverImg), panic.ProductSysNo, panic.PromotionWord, panic.ProductPrice, panic.EndTime.ToString("MM-dd-yyyy HH:mm:ss")));
+                    string deeplink=YoeJoyConfig.SiteBaseURL+"Pages/Product.aspx?c1="+panic.C1SysNo+"&c2="+panic.C2SysNo+"&c3="+panic.C3SysNo+"&pid="+panic.ProductSysNo;
+                    strb.Append(String.Format(liTemplate, panic.EndTime.ToString("MM-dd-yyyy HH:mm:ss"), deeplink, imgURL, deeplink, panic.PromotionWord, panic.ProductPrice));
                 }
-                strb.Append("</ul>");
+                strb.Append("</div>");
                 HomePanicHTML = strb.ToString();
             }
             return HomePanicHTML;

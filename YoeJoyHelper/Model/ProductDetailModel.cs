@@ -16,6 +16,7 @@ namespace YoeJoyHelper.Model
         public string ProductBriefName { get; set; }
         public string ProductBaiscPrice { get; set; }
         public string ProductCurrentPrice { get; set; }
+        public string PromotionWord { get; set; }
         //详细说明
         public string ProductDescriptionLong { get; set; }
         //包装清单
@@ -26,6 +27,8 @@ namespace YoeJoyHelper.Model
         public List<ProductDetailImg> Images { get; set; }
         //规格参数
         public string ProductAttrSummery { get; set; }
+        //积分
+        public int Point { get; set; }
     }
 
     /// <summary>
@@ -47,11 +50,11 @@ namespace YoeJoyHelper.Model
 
         private static readonly string getProductImgsSqlCmdTemplate = @"select pimg.product_limg,pimg.product_simg,
             pimg.orderNum,pimg.status from Product_Images pimg
-            where pimg.product_sysNo={0} and pimg.status=1 order by pimg.orderNum";
+            where pimg.product_sysNo={0} and pimg.status=1 and pimg.orderNum<>1 order by pimg.orderNum";
 
-        private static readonly string getProductDetailInfoSqlCmdTemplate = @"select p.SysNo,p.BriefName,
+        private static readonly string getProductDetailInfoSqlCmdTemplate = @"select p.SysNo,p.BriefName,p.PromotionWord,
   CONVERT(float,pp.BasicPrice) as BasicPrice,CONVERT(float,pp.CurrentPrice) as CurrentPrice,
-  p.ProductDescLong,p.PackageList,pp.LimitedQty, pas.SummaryMain from Product p 
+  p.ProductDescLong,p.PackageList,pp.LimitedQty, pas.SummaryMain,pp.Point from Product p 
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Inventory inve on p.SysNo=inve.ProductSysNo
   left join Product_Attribute2_Summary pas on p.SysNo=pas.ProductSysNo
@@ -116,8 +119,10 @@ namespace YoeJoyHelper.Model
                         ProductDescriptionLong = data.Rows[0]["ProductDescLong"].ToString().Trim(),
                         PackageList = data.Rows[0]["PackageList"].ToString().Trim(),
                         LimitedQty = int.Parse(data.Rows[0]["LimitedQty"].ToString().Trim()),
+                        PromotionWord = data.Rows[0]["PromotionWord"].ToString().Trim(),
                         Images = GetProductDetailImgs(productSysNo),
                         ProductAttrSummery = data.Rows[0]["SummaryMain"].ToString().Trim(),
+                        Point = int.Parse(data.Rows[0]["Point"].ToString().Trim()),
                     };
                     return productDetail;
                 }

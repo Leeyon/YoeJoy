@@ -6,12 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using YoeJoyHelper;
 
-namespace YoeJoyWeb
+namespace YoeJoyWeb.Pages
 {
     public partial class Product : System.Web.UI.Page
     {
 
-        protected int C1CategorySysId
+        protected int C1SysNo
         {
             get
             {
@@ -26,7 +26,7 @@ namespace YoeJoyWeb
             }
         }
 
-        protected int C2CategorySysId
+        protected int C2SysNo
         {
             get
             {
@@ -41,7 +41,7 @@ namespace YoeJoyWeb
             }
         }
 
-        protected int C3CategorySysId
+        protected int C3SysNo
         {
             get
             {
@@ -71,15 +71,32 @@ namespace YoeJoyWeb
             }
         }
 
+        protected string ProductNameInfoHTML { get; set; }
         protected string ProductDetailImagesHTML { get; set; }
+        protected string ProductBaiscInfoHTML { get; set; }
+        protected string ProductLongDescriptionHTML { get; set; }
+        protected string ProductPackageListHTML { get; set; }
+        protected string ProductAttrSummeryHTML { get; set; }
+        protected string ProductRelatedGuessYouLikeHTML { get; set; }
+        protected string ProductAlsoSeenHTML { get; set; }
+        protected string ProductAlsoBuyHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ((Site)this.Master).IsHomePage = false;
             if (!IsPostBack)
             {
-                SubCategoryNavigation1.C1SysNo = C1CategorySysId;
+                SubCategoryNavigation1.C1SysNo = C1SysNo;
                 ProductDetailHelper helper = new ProductDetailHelper(ProductSysNo);
                 ProductDetailImagesHTML = helper.GetProductDetailImages();
+                ProductNameInfoHTML = helper.GetProductNameInfo();
+                ProductBaiscInfoHTML = helper.GetProductBaiscInfo();
+                ProductLongDescriptionHTML = helper.GetProductLongDescription();
+                ProductPackageListHTML=helper.GetProductPackageList();
+                ProductAttrSummeryHTML = helper.GetProductAttrSummery();
+                ProductRelatedGuessYouLikeHTML = FrontProductsHelper.GetProductGuessYouLikeHTML(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
+                ProductAlsoSeenHTML=FrontProductsHelper.GetProductAlsoSeenHTML(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
+                ProductAlsoBuyHTML = FrontProductsHelper.GetProductAlsoBuyInCartCheck(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
             }
         }
     }

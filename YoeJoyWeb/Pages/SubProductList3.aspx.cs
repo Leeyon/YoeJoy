@@ -8,7 +8,7 @@ using YoeJoyHelper;
 
 namespace YoeJoyWeb
 {
-    public partial class SubProductList2 : System.Web.UI.Page
+    public partial class SubProductList3 : System.Web.UI.Page
     {
         protected int C1SysNo
         {

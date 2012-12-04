@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace YoeJoyWeb {
+namespace YoeJoyWeb.Pages {
     
     
     public partial class Product {

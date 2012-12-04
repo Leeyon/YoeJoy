@@ -116,7 +116,7 @@ namespace YoeJoyHelper
                     strb.Append(String.Concat(@"<li><h3>" + c2Name + "</h3><ul>"));
                     foreach (C3MiniInfo c3Info in c2c3Dic[c2Name].C3MiniList)
                     {
-                        strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={4}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name, c2c3Dic[c2Name].C2SysNo));
+                        strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList3.aspx?c1={1}&c2={4}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name, c2c3Dic[c2Name].C2SysNo));
                     }
                     strb.Append("</ul><li>");
                 }
@@ -176,7 +176,7 @@ namespace YoeJoyHelper
                                 if (c3Info.C2SysNo == c2SysNo && c3List != null)
                                 {
                                     int c3SysNo = c3Info.SysNo;
-                                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/SubProductList2.aspx?c1=" + c1SysNo + "&c2=" + c2SysNo + "&c3=" + c3SysNo;
+                                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/SubProductList3.aspx?c1=" + c1SysNo + "&c2=" + c2SysNo + "&c3=" + c3SysNo;
                                     strb.Append(string.Concat("<a href='", deeplink, "'>"));
                                     strb.Append(c3Info.C3Name.Trim());
                                     strb.Append(String.Concat(@"<input type='hidden' value='", c3SysNo, "'/>"));

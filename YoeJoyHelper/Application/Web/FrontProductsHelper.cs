@@ -474,14 +474,14 @@ namespace YoeJoyHelper
                                 评论:1000条</p>
                         </div>
                         <div class='botton'>
-                            <a class='ck' href='{5}'>查看详情</a></div>
+                            <a class='ck' href='{5}' target='_parent'>查看详情</a></div>
                     </div>
                 </li>";
 
                 string productListItemHTMLTemplate2 = @"<li class='show2'>
                     <div class='group'>
                         <div class='photo'>
-                            <a href='{0}'>
+                            <a href='{0}' target='_parent'>
                                 <img class='photo' alt='商品' src='{1}'
                                     width='190' height='190'></a></div>
                         <div class='goodsName'>
@@ -551,5 +551,113 @@ namespace YoeJoyHelper
             }
             return HomeInComingProductHTML;
         }
+
+        /// <summary>
+        /// 
+        /// 获得浏览过该商品的用户还看过的商品
+        /// </summary>
+        /// <returns></returns>
+        public static string GetProductAlsoSeenHTML(int c1SysNo,int c2SysNo,int c3SysNo,int productSysno)
+        {
+            string alsoSeenProductHTML = String.Empty;
+
+            List<FrontDsiplayProduct> products = ProductMappingService.GetRelatedProductFromC3(c3SysNo, productSysno);
+            if (products != null)
+            {
+                StringBuilder strb = new StringBuilder("<ul class='list'>");
+
+                string liHTML = @"<li><a href='{0}'>
+                        <img class='photo' alt='{1}' src='{2}'
+                            width='140' height='140'></a>
+                        <div class='goodsName'>
+                            <a href='{3}'>{4}</a></div>
+                        <span class='price'>¥{5}</span></li>";
+
+                foreach (FrontDsiplayProduct product in products)
+                {
+                    string imgPath = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "pages/product.aspx?c1=" + c1SysNo + "&c2=" + c2SysNo + "&c3=" + c3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductPromotionWord, imgPath, deeplink, product.ProductPromotionWord, product.Price));
+                }
+                strb.Append("</ul>");
+                alsoSeenProductHTML = strb.ToString();
+            }
+            return alsoSeenProductHTML;
+        }
+
+        /// <summary>
+        ///获得猜你喜欢的商品
+        /// </summary>
+        /// <param name="c1SysNo"></param>
+        /// <param name="c2SysNo"></param>
+        /// <param name="c3SysNo"></param>
+        /// <param name="productSysno"></param>
+        /// <returns></returns>
+        public static string GetProductGuessYouLikeHTML(int c1SysNo, int c2SysNo, int c3SysNo, int productSysno)
+        {
+            string guessYouLikeProductHTML = String.Empty;
+
+            List<FrontDsiplayProduct> products = ProductMappingService.GetRelatedProductFromC2(c2SysNo, c3SysNo);
+            if (products != null)
+            {
+                StringBuilder strb = new StringBuilder("<ul class='group'>");
+
+                string liHTML = @" <li><a class='photo' href='{0}'>
+                        <img alt='{1}' src='{2}' width='60'
+                            height='60'></a>
+                        <p class='goodsName'>
+                            <a href='{3}'>{4}</a></p>
+                        <p align='right'>
+                            ¥<span class='price'>{5}</span></p>
+                    </li>";
+
+                foreach (FrontDsiplayProduct product in products)
+                {
+                    string imgPath = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "pages/product.aspx?c1=" + c1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductPromotionWord, imgPath, deeplink, product.ProductPromotionWord, product.Price));
+                }
+                strb.Append("</ul>");
+                guessYouLikeProductHTML = strb.ToString();
+            }
+            return guessYouLikeProductHTML;
+        }
+
+        /// <summary>
+        /// 获得购物车中
+        /// 购买了此商品的用户还购买了的商品
+        /// </summary>
+        /// <param name="c1SysNo"></param>
+        /// <param name="c2SysNo"></param>
+        /// <param name="c3SysNo"></param>
+        /// <param name="productSysno"></param>
+        /// <returns></returns>
+        public static string GetProductAlsoBuyInCartCheck(int c1SysNo, int c2SysNo, int c3SysNo, int productSysno)
+        {
+            string alsoBuyProductHTML = String.Empty;
+
+            List<FrontDsiplayProduct> products = ProductMappingService.GetRelatedProductFromC3(c3SysNo, productSysno, 6);
+            if (products != null)
+            {
+                StringBuilder strb = new StringBuilder("<ul>");
+
+                string liHTML = @"<li><a href='{0}'>
+                                <img alt='{1}' src='{2}' width='118' height='118'/>
+                                <p>
+                                    {3}</p>
+                            </a><span>¥{4}</span></li>";
+
+                foreach (FrontDsiplayProduct product in products)
+                {
+                    string imgPath = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "pages/product.aspx?c1=" + c1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductPromotionWord, imgPath, product.ProductPromotionWord, product.Price));
+                }
+                strb.Append("</ul>");
+                alsoBuyProductHTML = strb.ToString();
+            }
+            return alsoBuyProductHTML;
+        }
+
     }
 }

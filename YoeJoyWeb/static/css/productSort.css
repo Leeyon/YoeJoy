@@ -29,10 +29,10 @@
 #foodImport h2 b{width: 148px;height: 25px;background-color: #F9AA3D;border-top: solid 2px #EF4100;color: black; line-height:1.8}
 #foodImport h2 strong{background: url(../images/showbg.png) -40px 0px no-repeat;width: 30px;height: 27px;}
 .listOut{border:#F00 solid 2px; border-top:none; border-radius:0 0 6px 6px; padding:0 10px; margin-top:-1px} 
-.listOut li{height:70px; border-top:dotted 1px #ccc}
-#foodImport h3{ color:#BB1F23; font-weight:bold; font-size:14px; padding-top:7px; margin-left:10px}
-#foodImport p{overflow:hidden;zoom:1; margin:0 7px; padding-bottom:5px;}
-#foodImport p a{display:block; width:45%;float:left; text-align:center; border-right:#F63 solid 1px; margin-top:5px}
+.listOut li{border-top:dotted 1px #ccc}
+#foodImport h3{ color:#BB1F23; font-weight:bold; font-size:14px; padding-top:7px; padding-bottom:5px; margin-left:10px; cursor:pointer}
+#foodImport p{overflow:hidden;zoom:1; margin:0 7px; padding-bottom:5px}
+#foodImport p a{display:block; padding:0 5px; float:left; border-right:#F63 solid 1px; margin-bottom:5px}
 
 #Discount{float:right;width:192px; height:276px; overflow:hidden; padding-bottom:-1px; border-bottom:solid 1px #ccc}
 #Discount dt{ font-size:14px; font-weight:bold; color:#333;background:#EBEBEB; overflow:hidden;zoom:1}

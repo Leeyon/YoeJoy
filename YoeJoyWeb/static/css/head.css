@@ -8,14 +8,14 @@
 #notes dt a.sel{background:url(../images/xx1bg0.png) no-repeat center center;}
 #notes dt a.sell{background:url(../images/xx2bg0.png) no-repeat center center;}
 
-#notes dd{ border:solid #F63 2px; border-top:none; border-bottom:none; height:125px; width:188px; margin-top:-1px;}
-#notes dd p{display:none;}
-#notes dd a{padding-top:9px; padding-left:8px;}
+#notes dd{ border:solid #F63 2px; border-top:none; border-bottom:none; height:125px; width:188px; margin-top:-1px}
+#notes dd p{display:none}
+#notes dd a{padding-top:9px; padding-left:8px; width:94%; height:14px; overflow:hidden}
 #notes dd a img{ margin-right:5px;}
 
 .ad{margin-top:10px; font-size:0}
 .ad img{vertical-align:middle}
-.ad1{margin-bottom:10px;float:left;}
+.ad1{margin-bottom:10px}
 .prom{float:left;}
 .prom b{ color:#F93; font-weight:bold; font-size:16px;}
 .prom span{color:#999;}
@@ -71,8 +71,7 @@
 .mytitles strong span{color:#FF9966;}
 .mytitles i{background:url(../images/showbg.png) no-repeat -40px -37px;}
 
-.panicContentt{border:#CCC solid 1px; border-top:none;border-bottom:none; padding-bottom:9px}
-.panicContent{border-bottom:1px solid #ccc;}
+.panicContentt{border:#CCC solid 1px; border-top:none; padding-bottom:9px}
 .panicContentt h2{text-align:center; padding-top:5px; padding-bottom:4px; overflow:hidden;zoom:1; height:26px}
 .panicContentt h2 span,.panicContentt h2 em,.panicContentt h2 b{padding:3px 0px;}
 .panicContentt h2 span{margin-right:0px; color:#000;}
@@ -120,10 +119,11 @@
 .sortContent li div.lasts{ border-right:none; border-bottom:#ccc solid 1px;}
 .sortContent li h3 a{ margin-top:12px;}
 
+
 .brand a{display:block;}
 .brand .h{display:block;}
 .brand .h img{vertical-align:middle}
-.brand ul{overflow:hidden; zoom:1; border-left:1px solid #ccc;}
+.brand ul{overflow:hidden; zoom:1;}
 .brand li{float:left; width:50%; text-align:center;}
 .brand li a{ border-bottom:#ccc solid 1px; border-right:#ccc solid 1px;}
 .brand li a.first{border-left:#ccc solid 1px;}

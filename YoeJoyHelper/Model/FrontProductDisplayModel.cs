@@ -145,6 +145,7 @@ namespace YoeJoyHelper.Model
   left join Inventory inv on op.ProductSysNo=inv.ProductSysNo
   where
   (inv.AvailableQty+inv.VirtualQty>0) and
+  pimg.orderNum=1 and 
   p.Status=1 and
   (pp.ClearanceSale=1 or pp.currentprice>=IsNull(pp.unitcost,0)) and
   p.C2SysNo={0}
@@ -229,7 +230,7 @@ namespace YoeJoyHelper.Model
     public class C1DisplayProductService
     {
 
-        private static readonly string GetC2IDSqlCmdTemplate = @"  select distinct p.C2SysNo,c2.C2Name from OnlineListProduct olp
+        private static readonly string GetC2IDSqlCmdTemplate = @" select distinct p.C2SysNo,c2.C2Name from OnlineListProduct olp
   left join Product p on olp.CategorySysNo=p.C1SysNo
   left join Category1 c1 on olp.CategorySysNo=c1.SysNo
   left join Category2 c2 on p.C2SysNo=c2.SysNo

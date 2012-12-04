@@ -10,7 +10,7 @@
 namespace YoeJoyWeb {
     
     
-    public partial class SubProductList2 {
+    public partial class SubProductList3 {
         
         /// <summary>
         /// CategoryNavigation1 控件。

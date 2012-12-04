@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true"
-    CodeBehind="SubProductList2.aspx.cs" Inherits="YoeJoyWeb.SubProductList2" %>
+    CodeBehind="SubProductList3.aspx.cs" Inherits="YoeJoyWeb.SubProductList3" %>
 
 <%@ Register Src="../Controls/CategoryNavigation.ascx" TagName="CategoryNavigation"
     TagPrefix="uc1" %>

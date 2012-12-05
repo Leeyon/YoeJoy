@@ -101,11 +101,26 @@ namespace YoeJoyWeb
             }
         }
 
+        protected string Order
+        {
+            get
+            {
+                if (Request.QueryString["order"] == null)
+                {
+                    return "DESC";
+                }
+                else
+                {
+                    return Request.QueryString["order"].ToString().Trim();
+                }
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                Response.Write(FrontProductsHelper.GetC3PageProductListHTML(OrderTag, StartIndex,C3CategorySysId, C1CategorySysId, C2CategorySysId,Attribution2Ids));
+                Response.Write(FrontProductsHelper.GetC3PageProductListHTML(OrderTag,StartIndex,C3CategorySysId, C1CategorySysId, C2CategorySysId,Attribution2Ids,Order));
             }
         }
     }

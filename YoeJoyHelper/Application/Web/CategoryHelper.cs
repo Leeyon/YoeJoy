@@ -86,8 +86,7 @@ namespace YoeJoyHelper
                 int c1SysNo = c1Info.SysNo;
 
                 Dictionary<string, C2C3Dic> c2c3Dic = new Dictionary<string, C2C3Dic>();
-                strb.Append(String.Format(@"<li class='hover'><div style='padding-top: 2px; border-top-color: currentColor; border-top-width: medium;
-                        border-top-style: none;' class='liHover'>
+                strb.Append(String.Format(@"<li class='hover'><div class='liHover'>
                         <div class='ListMain'>
                             <h2><span>•</span>{0}<i>&gt;</i></h2><p>", c1Info.C1Name));
 

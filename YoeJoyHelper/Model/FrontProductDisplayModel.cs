@@ -505,8 +505,8 @@ namespace YoeJoyHelper.Model
   and p.C3SysNo={1}
   {3}
   and p.SysNo not in 
-  (select top {2} p.SysNo from Product p where p.Status=1 {4})
-  {5}";
+  (select top {2} p.SysNo from Product p where p.Status=1 and p.C3SysNo={4} {5} {6})
+  {7} {8}";
 
         private static readonly string getC3ProductAttributionNameSqlCmdTemplate = @"select ca1.SysNo as A1SysNo,ca2.SysNo as A2SysNo,ca2.Attribute2Name as A2Name from Category_Attribute2 ca2
   left join Category_Attribute1 ca1 on ca2.A1SysNo=ca1.SysNo
@@ -531,7 +531,7 @@ namespace YoeJoyHelper.Model
         /// <param name="c3SysNo"></param>
         /// <param name="orderByOption"></param>
         /// <returns></returns>
-        public static List<FrontDsiplayProduct> GetPagedProductList(int startIndex, int pagedCount, int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr)
+        public static List<FrontDsiplayProduct> GetPagedProductList(int startIndex, int pagedCount, int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr,string order)
         {
             string orderByStr = YoeJoySystemDic.ProductListSortedOrderDic[orderByOption];
             string orderByStr1 = orderByStr;
@@ -556,7 +556,7 @@ namespace YoeJoyHelper.Model
                         break;
                     }
             }
-            string sqlCmd = String.Format(getPagedProductListItemsSqlCmdTemplate, pagedCount, c3SysNo, startIndex, arrtibutionFilterSqlCmd, orderByStr1, orderByStr);
+            string sqlCmd = String.Format(getPagedProductListItemsSqlCmdTemplate, pagedCount, c3SysNo, startIndex, arrtibutionFilterSqlCmd,c3SysNo,orderByStr1,order,orderByStr,order);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);

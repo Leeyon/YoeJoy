@@ -78,7 +78,7 @@ namespace YoeJoyWeb
         {
             if (!IsPostBack)
             {
-                C3ProductListFooterHTML = FrontProductsHelper.GetC3PageProductListHTML(YoeJoyEnum.ProductListSortedOrder.Default, 1, C3CategorySysId, C1CategorySysId, C2CategorySysId, Attribution2Ids);
+                C3ProductListFooterHTML = FrontProductsHelper.InitC3ProductListFooter(C3CategorySysId, Attribution2Ids);
             }
         }
     }

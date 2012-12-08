@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>攸怡网 - 综合类互联网商城 100%正品行货 折扣 实惠</title>
     <meta property="qc:admins" content="2422330137617527163757" />
     <link type="text/css" rel="Stylesheet" href="../static/css/base.css" />
     <script type="text/javascript" src="../static/js/dev/jquery-1.8.1.js"></script>
@@ -20,10 +20,11 @@
     <form runat="server">
     <dl id="logo">
         <dt><a href="#">
-            <img alt="logo" src="../static/images/logo.gif" width="180" height="56"></a></dt>
+            <img alt="logo" src="../static/images/logo.gif" /></a></dt>
         <dd>
             <h6>
-                [&nbsp;<a href="login.html"> 登录 </a>&nbsp;]&nbsp;&nbsp;&nbsp; [&nbsp;<a href="login.html?act=register"> 注册新用户 </a>&nbsp;]
+                [&nbsp;<a href="login.html"> 登录 </a>&nbsp;]&nbsp;&nbsp;&nbsp; [&nbsp;<a href="login.html?act=register">
+                    注册新用户 </a>&nbsp;]
             </h6>
             <p>
                 <a href="UserCenterMyJoyo.html">我的攸怡</a> <a href="UserCenterMyHistory.html">我看过</a>
@@ -39,7 +40,7 @@
     <div class="right">
         <div id="count">
             <div id="chart">
-                <span>购物车:<b>12</b>件 </span>
+                <span>购物车:<b>&nbsp;12</b> 件 </span>
                 <img alt="购物车" src="../static/images/gwcbt0.png" width="39" height="32">
                 <a href="process1.html">结算</a>
             </div>
@@ -73,14 +74,15 @@
             </div>
         </div>
         <div id="ServiceLine">
-            <span>021-64681500&nbsp;(9:30~18:30)</span> <font>9914838&nbsp;(9:30~22:00)</font>
+            <span>400-808-9196&nbsp;(9:30~18:30)</span> <font>9914838&nbsp;(9:30~22:00)</font>
         </div>
         <asp:ContentPlaceHolder ID="RightTopModule" runat="server">
         </asp:ContentPlaceHolder>
     </div>
     <div class="middle">
         <dl id="Search">
-            <dt><a href="index.html">首页</a><a href="grounp.html">团购</a> </dt>
+            <dt id="topNav"><a href="<%=SiteBaseURL %>Default.aspx">首页</a><a href="grounp.html">团购</a>
+            </dt>
             <dd>
                 <p id="HotWord">
                     <span>热门搜索:</span> <a href="search.html">ＩＴ数码</a> <a href="search.html">巧克力</a>
@@ -91,6 +93,7 @@
                         <input id="txtSearch" value="数码产品" type="text" />
                         <button type="button" id="btnSearch">
                         </button>
+                        <input type="hidden" id="siteBaseURL" value="<%=SiteBaseURL %>" />
                         <input type="hidden" id="siteSearchURL" value="<%=SiteBaseURLSerach %>" />
                     </p>
                 </div>
@@ -121,13 +124,13 @@
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="BackupContent1" runat="server">
     </asp:ContentPlaceHolder>
+    </div>
     <asp:ContentPlaceHolder ID="HomeMiddleContent" runat="server">
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="BackupContent2" runat="server">
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
     </asp:ContentPlaceHolder>
-    </div>
     <div id="footer">
         <ul id="Guide">
             <a id="topp" href="#">

@@ -53,7 +53,7 @@ namespace YoeJoyHelper.Model
         private static readonly string getRelatedProductSysnoFromC3SqlCmdTemplate = @"select p.SysNo from Product p 
   where p.SysNo<>{0} and p.Status=1 and p.C3SysNo={1}";
 
-        private static readonly string getRelatedProductSqlCmdTemplate = @"select top {0} p.SysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C2SysNo,p.C3SysNo from Product p
+        private static readonly string getRelatedProductSqlCmdTemplate = @"select top {0} p.SysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C2SysNo,p.C3SysNo,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice from Product p
   left join Product_Price pp on p.SysNo=pp.ProductSysNo 
   left join Product_Images pimg on p.SysNo=pimg.product_sysNo
   where p.Status=1 and p.SysNo in ({1}) and pimg.orderNum=1 and pimg.status=1";
@@ -192,6 +192,8 @@ namespace YoeJoyHelper.Model
                                 Price = data.Rows[j]["price"].ToString().Trim(),
                                 ProductSysNo = data.Rows[j]["Sysno"].ToString().Trim(),
                                 ProductPromotionWord = data.Rows[j]["PromotionWord"].ToString().Trim(),
+                                BaiscPrice = data.Rows[j]["baiscPrice"].ToString().Trim(),
+                                ProductBriefName = data.Rows[j]["BriefName"].ToString().Trim(),
                             });
                         }
                         return products;
@@ -258,6 +260,8 @@ namespace YoeJoyHelper.Model
                                 ProductPromotionWord = data.Rows[j]["PromotionWord"].ToString().Trim(),
                                 C2SysNo = int.Parse(data.Rows[j]["C2SysNo"].ToString().Trim()),
                                 C3SysNo = int.Parse(data.Rows[j]["C3SysNo"].ToString().Trim()),
+                                BaiscPrice = data.Rows[j]["baiscPrice"].ToString().Trim(),
+                                ProductBriefName = data.Rows[j]["BriefName"].ToString().Trim(),
                             });
                         }
                         return products;

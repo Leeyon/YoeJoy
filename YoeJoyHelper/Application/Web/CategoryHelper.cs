@@ -88,7 +88,7 @@ namespace YoeJoyHelper
                 Dictionary<string, C2C3Dic> c2c3Dic = new Dictionary<string, C2C3Dic>();
                 strb.Append(String.Format(@"<li class='hover'><div class='liHover'>
                         <div class='ListMain'>
-                            <h2><span>•</span>{0}<i>&gt;</i></h2><p>", c1Info.C1Name));
+                            <h2><span>•</span><a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a><i>&gt;</i></h2><p>",baseURL,c1SysNo,c1Info.C1Name));
 
                 foreach (Category2Info c2Info in c2List.Keys)
                 {
@@ -112,14 +112,14 @@ namespace YoeJoyHelper
                 strb.Append(@"<dl class='Listcontent'><dt> <ul class='menuTwo'>");
                 foreach (string c2Name in c2c3Dic.Keys)
                 {
-                    strb.Append(String.Concat(@"<li><h3>" + c2Name + "</h3><ul>"));
+                    strb.Append(String.Format(@"<li><h3><a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a></h3><ul>",baseURL,c1SysNo,c2Name));
                     foreach (C3MiniInfo c3Info in c2c3Dic[c2Name].C3MiniList)
                     {
                         strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList3.aspx?c1={1}&c2={4}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name, c2c3Dic[c2Name].C2SysNo));
                     }
                     strb.Append("</ul><li>");
                 }
-                strb.Append("</ul><div class='mem'></div></dt>");
+                strb.Append("</ul><div class='mem'><span></span></div></dt>");
 
                 //推荐品牌
                 strb.Append(@"<dd><div class='recomment'><h2>推荐品牌</h2><p>");
@@ -157,7 +157,7 @@ namespace YoeJoyHelper
                 if (c1Info.SysNo == c1SysNo)
                 {
                     string c1Name = c1Info.C1Name.Trim();
-                    strb.Append(String.Concat("<h2><i></i><b id='c1Name'>", c1Name, "</b><strong></strong></h2>"));
+                    strb.Append(String.Concat("<h2><i></i><b id='c1Name'>", c1Name, "</b><strong></strong></h2>", "<input type='hidden' value='", c1SysNo, "'/>"));
                     strb.Append(@"<ul class='listOut'>");
 
                     foreach (Category2Info c2Info in c2List.Keys)
@@ -168,7 +168,10 @@ namespace YoeJoyHelper
                             int c2SysNo = c2Info.SysNo;
                             strb.Append(@"<li><h3>");
                             strb.Append(c2Info.C2Name.Trim());
-                            strb.Append("</h3><p>");
+                            strb.Append("</h3>");
+                            strb.Append("<input type='hidden' value='");
+                            strb.Append(c2SysNo);
+                            strb.Append("'/><p>");
 
                             foreach (Category3Info c3Info in c3List.Keys)
                             {

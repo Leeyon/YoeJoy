@@ -19,18 +19,22 @@
 #hotComments .title .mem1{background:url(../images/showbg.png) -40px -160px no-repeat}
 #hotComments .border_b{height:12px; background:url(../images/showbg.png) 0px -197px no-repeat}
 #hotComments .group{background-color:#F3F3F3; padding:0px 10px; margin-bottom:-1px}
-#hotComments .group .item{overflow:hidden; padding:5px 0px; border-bottom:dotted 1px #ccc}
-#hotComments .group .item .photo{float:left; clear:both; border:solid 1px #ccc; margin-right:5px}
-#hotComments .group .item p{margin-top:5px}
+#hotComments .group .item{overflow:hidden; zoom:1; padding:5px 0px; border-bottom:dotted 1px #ccc}
+#hotComments .group .item .photo{float:left; border:solid 1px #ccc; margin-right:5px}
+#hotComments .group .item div{float:left; width:121px; clear:right}
+#hotComments .group .item .adText{margin-bottom:3px}
+#hotComments .group .item .price{text-align:right; margin-bottom:3px}
 /*热卖推荐样式*/
 #recommend{border:solid 1px #F9AA3D}
-#recommend .group{height:96px; border:solid 3px #F9EFE3; overflow:hidden; zoom:1}
+#recommend .group{border:solid 3px #F9EFE3; overflow:hidden; zoom:1}
 #recommend .group .title{width:36px; height:86px; background-color:#BE1E2D; text-align:center; padding-top:10px; float:left; margin-left:1px}
 #recommend .group .title li{font-size:14px; font-weight:bold; color:#fff}
 #recommend .group .item{overflow:hidden; zoom:1; margin:3px 0px; float:left}
 #recommend .group .item li{float:left; overflow:hidden; zoom:1; width:294px; padding:0 9px}
 #recommend .group .item li img{float:left}
-#recommend .group .item li .slave{margin:9px 0px}
+#recommend .group .item li .adText{margin-bottom:3px}
+#recommend .group .item li .price{text-align:left; position:relative; zoom:1; margin-bottom:5px}
+#recommend .group .item li .price a{ position:absolute; right:0}
 /*筛选条件*/
 #screening{margin-top:10px; border-top:solid 2px #F9AA3D}
 #screening *{line-height:18px}
@@ -61,13 +65,14 @@
 #showList .list{padding-top:10px; width:972px}
 #showList .list ul{overflow:hidden; zoom:1}
 #showList .list li{float:left; margin:0px 8px 10px 8px; border:solid 2px #fff; width:220px}
-#showList .list li .group{border:solid 1px #fff}
+#showList .list li .group{border:solid 1px #fff; padding:5px 5px 5px 7px}
 #showList .list li:hover{border:solid 2px #E9E7CF; padding:0px}
 #showList .list li:hover .group{border:solid 1px #F9F9E6}
-#showList .list li .group div{margin:5px;}
 #showList .list li .photo{text-align:center}
-#showList .list li .mem0{overflow:hidden; zoom:1; padding-right:5px}
+#showList .list li .adText{margin-bottom:3px}
+#showList .list li .mem0{overflow:hidden; zoom:1; padding-right:5px; padding-bottom:3px}
 #showList .list li .mem0 p{float:left; width:50%}
+#showList .list li .price{text-align:left}
 #showList .list li .botton{overflow:hidden; zoom:1}
 #showList .list li .botton .ck{display:block; width:60px; height:15px; padding:5px 10px; background-color:#D63C3C; border:solid 1px #ccc; color:#fff; text-align:center; line-height:15px}
 #showList .list li.show1 .botton .ck{margin:0px auto}

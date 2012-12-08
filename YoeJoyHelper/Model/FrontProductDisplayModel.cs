@@ -20,9 +20,11 @@ namespace YoeJoyHelper.Model
         public int C1SysNo { get; set; }
         public int C2SysNo { get; set; }
         public int C3SysNo { get; set; }
+        public string BaiscPrice { get; set; }
         public string Price { get; set; }
         public string ImgPath { get; set; }
         public string ProductPromotionWord { get; set; }
+        public string ProductBriefName { get; set; }
         public bool IsCanPurchase { get; set; }
         public int LimitQty { get; set; }
     }
@@ -37,6 +39,8 @@ namespace YoeJoyHelper.Model
         public int C3SysNo { get; set; }
         public string Price { get; set; }
         public string ProductPromotionWord { get; set; }
+        public string ProductBriefName { get; set; }
+        public string BaiscPrice { get; set; }
     }
 
     /// <summary>
@@ -51,6 +55,8 @@ namespace YoeJoyHelper.Model
         public string ProductPromotionWord { get; set; }
         public string ImgPath { get; set; }
         public string DiscountRate { get; set; }
+        public string ProductBriefName { get; set; }
+        public string BaiscPrice { get; set; }
     }
 
     /// <summary>
@@ -64,6 +70,8 @@ namespace YoeJoyHelper.Model
         public string Price { get; set; }
         public string ProductPromotionWord { get; set; }
         public string ImgPath { get; set; }
+        public string ProductBriefName { get; set; }
+        public string BaiscPrice { get; set; }
     }
 
     /// <summary>
@@ -109,6 +117,8 @@ namespace YoeJoyHelper.Model
         public string Price { get; set; }
         public string ImgPath { get; set; }
         public string ProductPromotionWord { get; set; }
+        public string ProductBriefName { get; set; }
+        public string BaiscPrice { get; set; }
     }
 
     /// <summary>
@@ -138,7 +148,7 @@ namespace YoeJoyHelper.Model
   where c2.C1SysNo={0} 
   order by c1c2.OrderNum";
 
-        private static readonly string GetCategoryTwoProductsSqlCmdTemplate = @"select op.ProductSysNo,op.ProductBriefName,op.OrderNum,CONVERT(float,pp.CurrentPrice)as Price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.PromotionWord from OnlineC1_Product as op 
+        private static readonly string GetCategoryTwoProductsSqlCmdTemplate = @"select op.ProductSysNo,op.ProductBriefName,op.OrderNum,CONVERT(float,pp.CurrentPrice)as Price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.PromotionWord,p.BriefName,CONVERT(float,pp.BasicPrice) as basicPrice from OnlineC1_Product as op 
   left join Product as p on op.ProductSysNo=p.SysNo
   left join Product_Images pimg on op.ProductSysNo=pimg.product_sysNo
   left join Product_Price pp on op.ProductSysNo=pp.ProductSysNo
@@ -210,6 +220,8 @@ namespace YoeJoyHelper.Model
                             Price = data.Rows[i]["Price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
                         });
                     }
                     return C2Products;
@@ -236,7 +248,7 @@ namespace YoeJoyHelper.Model
   left join Category2 c2 on p.C2SysNo=c2.SysNo
   where olp.CategorySysNo=232 and c2.C1SysNo={0}";
 
-        private static readonly string GetC2DisplayProductsSqlCmdTemplate = @"select top 8 olp.ProductSysNo as sysno,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C3SysNo from OnlineListProduct olp
+        private static readonly string GetC2DisplayProductsSqlCmdTemplate = @"select top 8 olp.ProductSysNo as sysno,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C3SysNo,p.BriefName,CONVERT(float,pp.BasicPrice) as basicPrice from OnlineListProduct olp
   left join Product p on olp.ProductSysNo=p.SysNo
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
   left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
@@ -308,6 +320,8 @@ namespace YoeJoyHelper.Model
                             Price = data.Rows[i]["price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["sysno"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
                         });
                     }
                     return C2Products;
@@ -328,7 +342,7 @@ namespace YoeJoyHelper.Model
     public class C1EmptyInventoryProductService
     {
         private static readonly string GetC1EmptyInventoryProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
-  p.C2SysNo,p.C3SysNo,pimg.product_simg
+  p.C2SysNo,p.C3SysNo,pimg.product_simg,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice
   from OnlineListProduct olp
   left join Product p on olp.ProductSysNo=p.SysNo
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
@@ -368,6 +382,8 @@ namespace YoeJoyHelper.Model
                             ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                             ImgPath = data.Rows[i]["product_simg"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
                         });
                     }
                     return products;
@@ -441,7 +457,7 @@ namespace YoeJoyHelper.Model
     public class C1WeeklyBestSaledProductService
     {
         private static readonly string GetC1WeeklyBestSaledProductsSqlCmdTemplate = @"select olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
-  p.C2SysNo,p.C3SysNo,pimg.product_simg
+  p.C2SysNo,p.C3SysNo,pimg.product_simg,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice
   from OnlineListProduct olp
   left join Product p on olp.ProductSysNo=p.SysNo
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
@@ -476,6 +492,8 @@ namespace YoeJoyHelper.Model
                             ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                             ImgPath = data.Rows[i]["product_simg"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
                         });
                     }
                     return products;
@@ -493,9 +511,121 @@ namespace YoeJoyHelper.Model
 
     }
 
+    public class C3BestSaledProductService
+    {
+        private static readonly string GetC1WeeklyBestSaledProductsSqlCmdTemplate = @"select top 3 olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
+  p.C2SysNo,p.C3SysNo,pimg.product_simg,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice
+  from OnlineListProduct olp
+  left join Product p on olp.ProductSysNo=p.SysNo
+  left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
+  left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
+  where olp.CategorySysNo={0}
+  and p.Status=1
+  and olp.OnlineAreaType={1}
+  and olp.OnlineRecommendType={2}
+  and pimg.status=1
+  and pimg.orderNum=1
+  order by olp.ListOrder";
+
+        public static List<C1WeeklyBestSaledProduct> GetC3BestSaledProduct(int c3SysNo)
+        {
+            try
+            {
+                int onlineAreaType = (int)AppEnum.OnlineAreaType.ThirdCategory;
+                int onlineRecommendType = (int)AppEnum.OnlineRecommendType.ExcellentRecommend;
+                string sqlCmd = String.Format(GetC1WeeklyBestSaledProductsSqlCmdTemplate, c3SysNo, onlineAreaType, onlineRecommendType);
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    List<C1WeeklyBestSaledProduct> products = new List<C1WeeklyBestSaledProduct>();
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        products.Add(new C1WeeklyBestSaledProduct()
+                        {
+                            C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                            C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                            Price = data.Rows[i]["price"].ToString().Trim(),
+                            ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                            ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ImgPath = data.Rows[i]["product_simg"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                        });
+                    }
+                    return products;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+    }
+
+    public class C3HotCommentProductService
+    {
+        private static readonly string GetC1WeeklyBestSaledProductsSqlCmdTemplate = @"select top 5 olp.ProductSysNo,p.PromotionWord,CONVERT(float,pp.CurrentPrice)as price,
+  p.C2SysNo,p.C3SysNo,pimg.product_simg,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice
+  from OnlineListProduct olp
+  left join Product p on olp.ProductSysNo=p.SysNo
+  left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
+  left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
+  where olp.CategorySysNo={0}
+  and p.Status=1
+  and olp.OnlineAreaType={1}
+  and olp.OnlineRecommendType={2}
+  and pimg.status=1
+  and pimg.orderNum=1
+  order by olp.ListOrder";
+
+        public static List<C1WeeklyBestSaledProduct> GetC3HotCommentedProduct(int c3SysNo)
+        {
+            try
+            {
+                int onlineAreaType = (int)AppEnum.OnlineAreaType.ThirdCategory;
+                int onlineRecommendType = (int)AppEnum.OnlineRecommendType.PowerfulSale;
+                string sqlCmd = String.Format(GetC1WeeklyBestSaledProductsSqlCmdTemplate, c3SysNo, onlineAreaType, onlineRecommendType);
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    List<C1WeeklyBestSaledProduct> products = new List<C1WeeklyBestSaledProduct>();
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        products.Add(new C1WeeklyBestSaledProduct()
+                        {
+                            C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                            C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                            Price = data.Rows[i]["price"].ToString().Trim(),
+                            ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                            ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ImgPath = data.Rows[i]["product_simg"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                        });
+                    }
+                    return products;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+    }
+
     public class C3ProductListSerivice
     {
-        private static readonly string getPagedProductListItemsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,pp.LimitedQty,p.IsCanPurchase
+        private static readonly string getPagedProductListItemsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,pp.LimitedQty,p.IsCanPurchase,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice
   from Product p
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Product_Images pimg on p.SysNo=pimg.product_sysNo
@@ -531,7 +661,7 @@ namespace YoeJoyHelper.Model
         /// <param name="c3SysNo"></param>
         /// <param name="orderByOption"></param>
         /// <returns></returns>
-        public static List<FrontDsiplayProduct> GetPagedProductList(int startIndex, int pagedCount, int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr,string order)
+        public static List<FrontDsiplayProduct> GetPagedProductList(int startIndex, int pagedCount, int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr, string order)
         {
             string orderByStr = YoeJoySystemDic.ProductListSortedOrderDic[orderByOption];
             string orderByStr1 = orderByStr;
@@ -556,7 +686,7 @@ namespace YoeJoyHelper.Model
                         break;
                     }
             }
-            string sqlCmd = String.Format(getPagedProductListItemsSqlCmdTemplate, pagedCount, c3SysNo, startIndex, arrtibutionFilterSqlCmd,c3SysNo,orderByStr1,order,orderByStr,order);
+            string sqlCmd = String.Format(getPagedProductListItemsSqlCmdTemplate, pagedCount, c3SysNo, startIndex, arrtibutionFilterSqlCmd, c3SysNo, orderByStr1, order, orderByStr, order);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -575,6 +705,8 @@ namespace YoeJoyHelper.Model
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
                             IsCanPurchase = (int.Parse(data.Rows[i]["IsCanPurchase"].ToString().Trim()) == 1) ? true : false,
                             LimitQty = int.Parse(data.Rows[i]["LimitedQty"].ToString().Trim()),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
                         });
                     }
                     return products;
@@ -1084,11 +1216,11 @@ and (p.PromotionWord like ('%{1}%')
 
     public class HomePromotionProductService
     {
-        private static readonly string getHomePromotionProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
+        private static readonly string getHomePromotionProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.BriefName,CONVERT(float,pp.BasicPrice) as basicPrice from OnlineListProduct olp 
   left join Product p on olp.ProductSysNo=p.SysNo 
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
   left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
-  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1}
+  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1} and olp.CategorySysNo=0
   order by olp.ListOrder ASC";
 
         /// <summary>
@@ -1116,6 +1248,8 @@ and (p.PromotionWord like ('%{1}%')
                         C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
                         C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
                         C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                        BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
+                        ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
                     });
                 }
                 return products;
@@ -1126,6 +1260,102 @@ and (p.PromotionWord like ('%{1}%')
             }
         }
 
+    }
+
+    public class HomeHotCommentedProductService
+    {
+        private static readonly string getHomePromotionProductsSqlCmdTemplate = @"select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.BriefName,CONVERT(float,pp.BasicPrice) as basicPrice from OnlineListProduct olp 
+  left join Product p on olp.ProductSysNo=p.SysNo 
+  left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
+  left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
+  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1} and olp.CategorySysNo=0
+and olp.ListOrder between {2} and {3}
+  order by olp.ListOrder ASC";
+
+        /// <summary>
+        /// 获得首页的热评商品
+        /// </summary>
+        /// <returns></returns>
+        public static List<FrontDsiplayProduct> GetHomeHotCommentedProducts(int startIndex, int endIndex)
+        {
+            int onlineAreaType = (int)AppEnum.OnlineAreaType.HomePage;
+            int onlineRecommendType = (int)AppEnum.OnlineRecommendType.PowerfulSale;
+            string sqlCmd = String.Format(getHomePromotionProductsSqlCmdTemplate, onlineAreaType, onlineRecommendType,startIndex,endIndex);
+            DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+            int count = data.Rows.Count;
+            if (count > 0)
+            {
+                List<FrontDsiplayProduct> products = new List<FrontDsiplayProduct>();
+                for (int i = 0; i < count; i++)
+                {
+                    products.Add(new FrontDsiplayProduct()
+                    {
+                        ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                        ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        Price = data.Rows[i]["price"].ToString().Trim(),
+                        ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                        BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
+                        ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                    });
+                }
+                return products;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    public class HomeBestSaledProductService
+    {
+        private static readonly string getHomePromotionProductsSqlCmdTemplate = @"select top 3 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.BriefName,CONVERT(float,pp.BasicPrice) as basicPrice from OnlineListProduct olp 
+  left join Product p on olp.ProductSysNo=p.SysNo 
+  left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
+  left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
+  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1} and olp.CategorySysNo=0
+and olp.ListOrder between {2} and {3}
+  order by olp.ListOrder ASC";
+
+        /// <summary>
+        /// 获得首页的热评商品
+        /// </summary>
+        /// <returns></returns>
+        public static List<FrontDsiplayProduct> GetHomeBestSaledProducts(int startIndex, int endIndex)
+        {
+            int onlineAreaType = (int)AppEnum.OnlineAreaType.HomePage;
+            int onlineRecommendType = (int)AppEnum.OnlineRecommendType.PromotionTopic;
+            string sqlCmd = String.Format(getHomePromotionProductsSqlCmdTemplate, onlineAreaType, onlineRecommendType, startIndex, endIndex);
+            DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+            int count = data.Rows.Count;
+            if (count > 0)
+            {
+                List<FrontDsiplayProduct> products = new List<FrontDsiplayProduct>();
+                for (int i = 0; i < count; i++)
+                {
+                    products.Add(new FrontDsiplayProduct()
+                    {
+                        ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                        ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        Price = data.Rows[i]["price"].ToString().Trim(),
+                        ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                        BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
+                        ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                    });
+                }
+                return products;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 
     #endregion

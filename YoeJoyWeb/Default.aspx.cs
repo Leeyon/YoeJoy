@@ -70,6 +70,22 @@ namespace YoeJoyWeb
         /// 大类2品牌
         /// </summary>
         protected string CategoryProductsBrandsTwoHTML { get; set; }
+        /// <summary>
+        /// 大类1 用户热评
+        /// </summary>
+        protected string CategoryProductsHotCommentedOneHTML { get; set; }
+        /// <summary>
+        /// 大类2 用户热评
+        /// </summary>
+        protected string CategoryProductsHotCommentedTwoHTML { get; set; }
+        /// <summary>
+        /// 大类1 热销商品
+        /// </summary>
+        protected string CategoryProductBestSaledOneHTML { get; set; }
+        /// <summary>
+        /// 大类2 热销商品
+        /// </summary>
+        protected string CategoryProductBestSaledTwoHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -86,6 +102,10 @@ namespace YoeJoyWeb
                 CategoryProductsBrandsTwoHTML = BrandsHelper.GetBrandsForCategoryOneProductsWrapper(YoeJoyConfig.HomeDisplayCategoryID2);
                 PromoHTML = FrontProductsHelper.GetHomePromotionProductsHTML();
                 PanicBuyingHTML = PanicBuyingHelper.GetPanicProductsForHomeWrapper();
+                CategoryProductsHotCommentedOneHTML = FrontProductsHelper.GetHomeHotCommentedProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID1),1, 2);
+                CategoryProductsHotCommentedTwoHTML = FrontProductsHelper.GetHomeHotCommentedProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID2), 3 ,4);
+                CategoryProductBestSaledOneHTML = FrontProductsHelper.GetHomeBestSaledProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID1),1, 3);
+                CategoryProductBestSaledTwoHTML = FrontProductsHelper.GetHomeBestSaledProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID2),4, 6);
             }
         }
     }

@@ -20,6 +20,14 @@ namespace YoeJoyHelper
         public int Status;
         public int OrderNum;
     }
+    /// <summary>
+    /// 用于上传图片的类
+    /// </summary>
+    public class ProductImage
+    {
+        public string LargeImg { get; set; }
+        public string SmallImg { get; set; }
+    }
 
     public class NewProductImageUtility
     {

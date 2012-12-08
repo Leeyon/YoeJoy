@@ -12,6 +12,7 @@ namespace YoeJoyHelper.Model
     /// </summary>
     public class ProductDetailModel
     {
+        public string ProductID { get; set; }
         public string SysNo { get; set; }
         public string ProductBriefName { get; set; }
         public string ProductBaiscPrice { get; set; }
@@ -54,7 +55,7 @@ namespace YoeJoyHelper.Model
 
         private static readonly string getProductDetailInfoSqlCmdTemplate = @"select p.SysNo,p.BriefName,p.PromotionWord,
   CONVERT(float,pp.BasicPrice) as BasicPrice,CONVERT(float,pp.CurrentPrice) as CurrentPrice,
-  p.ProductDescLong,p.PackageList,pp.LimitedQty, pas.SummaryMain,pp.Point from Product p 
+  p.ProductDescLong,p.PackageList,pp.LimitedQty, pas.SummaryMain,pp.Point,p.ProductID from Product p 
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Inventory inve on p.SysNo=inve.ProductSysNo
   left join Product_Attribute2_Summary pas on p.SysNo=pas.ProductSysNo
@@ -112,6 +113,7 @@ namespace YoeJoyHelper.Model
                 {
                     ProductDetailModel productDetail = new ProductDetailModel()
                     {
+                        ProductID = data.Rows[0]["ProductID"].ToString().Trim(),
                         SysNo = data.Rows[0]["SysNo"].ToString().Trim(),
                         ProductBriefName = data.Rows[0]["BriefName"].ToString().Trim(),
                         ProductBaiscPrice = data.Rows[0]["BasicPrice"].ToString().Trim(),

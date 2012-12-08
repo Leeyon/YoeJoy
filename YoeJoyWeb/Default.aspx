@@ -5,12 +5,14 @@
     TagPrefix="uc1" %>
 <%@ Register Src="Controls/OnlineStaticAD.ascx" TagName="OnlineStaticAD" TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <link type="text/css" rel="Stylesheet" href="static/css/head.css" />
+    <link type="text/css" rel="Stylesheet" href="../static/css/head.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftTopModule" runat="server">
     <uc1:CategoryNavigation ID="CategoryNavigation1" runat="server" />
-    <uc2:OnlineStaticAD ID="ADBelowNavigation" ADPositionID="2" ADCSSClass="ad" Width="208"
-        Height="80" runat="server" />
+    <div style="margin-top: 360px;">
+        <uc2:OnlineStaticAD ID="ADBelowNavigation" ADPositionID="2" ADCSSClass="ad" Width="208"
+            Height="80" runat="server" />
+    </div>
     <div class="panic">
         <h3>
             <em></em><strong><b>限时抢购</b><span>Panic-Bu ying</span></strong> <i></i>
@@ -19,6 +21,8 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="RightTopModule" runat="server">
+    <a href="javascript:void(0);">
+        <img src="static/images/help2.png" width="192" height="74" /></a>
     <dl id="notes">
         <dt><a class="adone sel" href="#"><span>公告</span> </a><a class="adtwo" href="#"><span>
             动态</span> </a></dt>
@@ -116,8 +120,6 @@
         <div id="highgoods1" class="area">
             <a class="prev" href="javascript:void(0)"></a>
             <div style="left: 573px;" id="options" class="selectbj">
-                <a class="selected" href="javascript:void(0)"></a><a href="javascript:void(0)"></a>
-                <a href="javascript:void(0)"></a>
             </div>
             <a class="next" href="javascript:void(0)"></a>
             <div style="width: 3600px;" class="group">
@@ -284,6 +286,8 @@
                         <img src="static/images/it.png" /></a>
                     <uc2:OnlineStaticAD ID="C1LeftAD1" ADPositionID="6" Width="208" Height="278" ADCSSClass="Header"
                         runat="server" />
+                    <p style="height: 66px; background-color: rgb(51, 0, 204);">
+                    </p>
                     <p>
                         <a href="#">IT相关导购文</a></p>
                     <p>
@@ -305,61 +309,11 @@
                 </div>
                 <div class="discus">
                     <h2 id="phone1">
-                        <span><a href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
+                        <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
                     </h2>
                     <div id="phoneCon1">
-                        <dl style="display: block;" class="discsPhone">
-                            <dt>
-                                <h2>
-                                    <a href="#">
-                                        <img alt="商品图片" src="static/images/sp.jpg" width="130" height="130"></a>
-                                </h2>
-                                <p>
-                                    <a href="#">商品名称商品名称商品名称商品名称</a> <span><b>332</b>条</span>
-                                </p>
-                            </dt>
-                            <dd class="hrs">
-                                <p>
-                                    <img src="static/images/alert.png">评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                                <span><em>会员:</em>l***o</span>
-                            </dd>
-                            <dt>
-                                <h2>
-                                    <a href="#">
-                                        <img alt="商品图片" src="static/images/sp.jpg" width="130" height="130"></a>
-                                </h2>
-                                <p>
-                                    <a href="#">商品名称商品名称商品名称商品名称</a> <span><b>332</b>条</span>
-                                </p>
-                            </dt>
-                            <dd>
-                                <p>
-                                    <img src="static/images/alert.png">评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                                <span><em>会员:</em>l***o</span>
-                            </dd>
-                        </dl>
-                        <dl style="display: none;" class="discusSell">
-                            <dd>
-                                <span>1</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                            <dd>
-                                <span>2</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                            <dd>
-                                <span>3</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                            <dd class="last">
-                                <span>4</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                        </dl>
+                       <%=CategoryProductsHotCommentedOneHTML%> 
+                        <%=CategoryProductBestSaledOneHTML%>
                     </div>
                 </div>
             </div>
@@ -371,6 +325,8 @@
                         <img src="static/images/home.png"></a>
                     <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208"
                         Height="278" runat="server" />
+                    <p style="height: 66px; background-color: rgb(51, 0, 204);">
+                    </p>
                     <p>
                         <a href="#">IT相关导购文</a></p>
                     <p>
@@ -387,71 +343,20 @@
             <div class="right">
                 <div class="brand">
                     <a class="h" href="#">
-                        <img src="static/images/brand.gif"></a>
+                        <img src="static/images/brand.gif"/></a>
                     <%=CategoryProductsBrandsTwoHTML%>
                 </div>
                 <div class="discus">
                     <h2 id="phone2">
-                        <span><a href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
+                        <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
                     </h2>
                     <div id="phoneCon2">
-                        <dl style="display: block;" class="discsPhone">
-                            <dt>
-                                <h2>
-                                    <a href="#">
-                                        <img alt="商品图片" src="static/images/sp.jpg" width="130" height="130"></a>
-                                </h2>
-                                <p>
-                                    <a href="#">商品名称商品名称商品名称商品名称</a> <span><b>332</b>条</span>
-                                </p>
-                            </dt>
-                            <dd class="hrs">
-                                <p>
-                                    <img src="static/images/alert.png">评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                                <span><em>会员:</em>l***o</span>
-                            </dd>
-                            <dt>
-                                <h2>
-                                    <a href="#">
-                                        <img alt="商品图片" src="static/images/sp.jpg" width="130" height="130"></a>
-                                </h2>
-                                <p>
-                                    <a href="#">商品名称商品名称商品名称商品名称</a> <span><b>332</b>条</span>
-                                </p>
-                            </dt>
-                            <dd>
-                                <p>
-                                    <img src="static/images/alert.png">评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                                <span><em>会员:</em>l***o</span>
-                            </dd>
-                        </dl>
-                        <dl style="display: none;" class="discusSell">
-                            <dd>
-                                <span>1</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                            <dd>
-                                <span>1</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                            <dd>
-                                <span>1</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                            <dd class="last">
-                                <span>1</span> <b>
-                                    <img src="static/images/fire.jpg"></b> <a href="#">商品名称商品名称商称商称 <em>¥238.5</em>
-                                </a>
-                            </dd>
-                        </dl>
+                        <%=CategoryProductsHotCommentedTwoHTML%>
+                        <%=CategoryProductBestSaledTwoHTML%>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content10" ContentPlaceHolderID="BackupContent2" runat="server">

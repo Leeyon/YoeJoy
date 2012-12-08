@@ -51,12 +51,14 @@ namespace YoeJoyHelper
                      <input type='hidden' class='buttonEndTime' value='{0}'/>
                 </h2>
                 <a class='phone' href='{1}'>
-                    <img alt='商品图片' src='{2}' width='100' height='100'/></a> <a class='word'
-                        href='{3}'>{4}</a><b class='price'>¥{5}</b>
+                    <img alt='商品图片' src='{2}' width='100' height='100'/></a> 
+                    <a class='name' href='{3}' title='{4}'>{5}</a>
+                    <span class='adText'>{6}</span>
+                    <p class='price'><b>¥{7}</b><span>¥{8}</span></p>
             </div>";
                     string imgURL = String.Concat(imageVitualPath, panic.CoverImg);
                     string deeplink=YoeJoyConfig.SiteBaseURL+"Pages/Product.aspx?c1="+panic.C1SysNo+"&c2="+panic.C2SysNo+"&c3="+panic.C3SysNo+"&pid="+panic.ProductSysNo;
-                    strb.Append(String.Format(liTemplate, panic.EndTime.ToString("MM-dd-yyyy HH:mm:ss"), deeplink, imgURL, deeplink, panic.PromotionWord, panic.ProductPrice));
+                    strb.Append(String.Format(liTemplate, panic.EndTime.ToString("MM-dd-yyyy HH:mm:ss"), deeplink, imgURL, deeplink,panic.BriefName,panic.BriefName, panic.PromotionWord, panic.ProductPrice,panic.BaiscPrice));
                 }
                 strb.Append("</div>");
                 HomePanicHTML = strb.ToString();

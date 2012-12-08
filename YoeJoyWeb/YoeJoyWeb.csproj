@@ -758,6 +758,7 @@
     <Content Include="static\images\headerBG.png" />
     <Content Include="static\images\heart.jpg" />
     <Content Include="static\images\help1.jpg" />
+    <Content Include="static\images\help2.png" />
     <Content Include="static\images\helpbt.png" />
     <Content Include="static\images\helpline.gif" />
     <Content Include="static\images\helpline.png" />

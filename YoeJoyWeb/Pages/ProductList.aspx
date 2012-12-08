@@ -140,7 +140,7 @@
             else if (orderTag == 2) {
                 order = "DESC";
                 orderOption = 4;
-                $("#orderBy").children("li").eq(1).addClass("selected");
+                $("#orderBy").children("li").eq(2).addClass("selected");
             }
             else if (orderTag == 5) {
                 return;

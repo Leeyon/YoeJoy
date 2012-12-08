@@ -44,6 +44,14 @@ namespace YoeJoyWeb
             }
         }
 
+        protected string SiteBaseURL
+        {
+            get
+            {
+                return YoeJoyConfig.SiteBaseURL;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsHomePage)

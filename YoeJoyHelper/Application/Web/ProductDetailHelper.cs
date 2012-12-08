@@ -18,10 +18,10 @@ namespace YoeJoyHelper
 
         public ProductDetailHelper(int productSysNo)
         {
-            //string key = String.Format(DynomicCacheObjSettings.ProductBaiscInfoCacheSettings.CacheKey, productSysNo);
-            //int duration = DynomicCacheObjSettings.ProductBaiscInfoCacheSettings.CacheDuration;
-            //productDetail = CacheObj<ProductDetailModel>.GetCachedObj(key, duration, ProductDetailBasicService.GetProductDetailBasicInfo(productSysNo));
-            productDetail = ProductDetailBasicService.GetProductDetailBasicInfo(productSysNo);
+            string key = String.Format(DynomicCacheObjSettings.ProductBaiscInfoCacheSettings.CacheKey, productSysNo);
+            int duration = DynomicCacheObjSettings.ProductBaiscInfoCacheSettings.CacheDuration;
+            productDetail = CacheObj<ProductDetailModel>.GetCachedObj(key, duration, ProductDetailBasicService.GetProductDetailBasicInfo(productSysNo));
+            //productDetail = ProductDetailBasicService.GetProductDetailBasicInfo(productSysNo);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace YoeJoyHelper
         public string GetProductDetailImages()
         {
             string productImgHTML = String.Empty;
-            if (productDetail != null&&productDetail.Images!=null)
+            if (productDetail != null && productDetail.Images != null)
             {
                 List<ProductDetailImg> imgs = productDetail.Images;
                 string imgVirtualPathBase = YoeJoyConfig.ImgVirtualPathBase;
@@ -62,7 +62,7 @@ namespace YoeJoyHelper
         {
             if (productDetail != null)
             {
-                return String.Format(@"<h1>{0}<span>{1}</span></h1><input type='hidden' id='productBriefName' value='{2}'/>", productDetail.ProductBriefName, productDetail.PromotionWord,productDetail.ProductBriefName);
+                return String.Format(@"<h1>{0}<span>{1}</span></h1><input type='hidden' id='productBriefName' value='{2}'/>", productDetail.ProductBriefName, productDetail.PromotionWord, productDetail.ProductBriefName);
             }
             else
             {
@@ -114,11 +114,11 @@ namespace YoeJoyHelper
                                 <input class='num' maxlength='3' value='1' type='text'>
                                 <a class='add' href='javascript:void(0)'>+</a>个</h6>
                             <h5>
-                                <a class='bt5' href='process1.html'>立即购买</a> <a class='bt4' href='javascript:void(0);'>
+                                <a class='bt5' href='process1.html'>立即购买</a> <a class='bt7' href='javascript:void(0);'>
                                     加入购物车</a> <a class='link1' href='javascript:void(0);'>加入收藏</a></h5>
                         </div>
                     </div>
-                </div>", productDetail.SysNo, "0",
+                </div>", productDetail.ProductID, "0",
                        productDetail.ProductBaiscPrice, productDetail.ProductCurrentPrice,
                        ((int.Parse(productDetail.ProductBaiscPrice) - (int.Parse(productDetail.ProductCurrentPrice)))),
                        productDetail.Point, productDetail.LimitedQty);
@@ -128,7 +128,6 @@ namespace YoeJoyHelper
                 return String.Empty;
             }
         }
-
         /// <summary>
         /// 商品介绍
         /// </summary>
@@ -175,7 +174,7 @@ namespace YoeJoyHelper
             {
                 return String.Empty;
             }
-        } 
+        }
 
     }
 }

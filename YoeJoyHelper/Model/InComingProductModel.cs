@@ -19,15 +19,17 @@ namespace YoeJoyHelper.Model
         public int C1SysNo { get; set; }
         public int C2SysNo { get; set; }
         public int C3SysNo { get; set; }
+        public string BaiscPrice { get; set; }
+        public string BriefName { get; set; }
     }
 
     public class InComingProductService
     {
-        private static readonly string GetHomeInComingProductSqlCmdTemplate = @" select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from OnlineListProduct olp 
+        private static readonly string GetHomeInComingProductSqlCmdTemplate = @" select top 4 olp.ProductSysNo,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.BriefName,CONVERT(float,pp.BasicPrice) as basicPrice from OnlineListProduct olp 
   left join Product p on olp.ProductSysNo=p.SysNo 
   left join Product_Price pp on olp.ProductSysNo=pp.ProductSysNo
   left join Product_Images pimg on olp.ProductSysNo=pimg.product_sysNo
-  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1}
+  where p.Status=1 and pimg.orderNum=1 and olp.OnlineAreaType={0} and olp.OnlineRecommendType={1} and olp.CategorySysNo=0
   order by olp.ListOrder ASC";
 
         public static List<InComingProductForHome> GetHomeInComingProduct()
@@ -51,6 +53,8 @@ namespace YoeJoyHelper.Model
                         C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
                         C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
                         C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                        BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
+                        BriefName = data.Rows[i]["BriefName"].ToString().Trim(),
                     });
                 }
                 return products;

@@ -16,7 +16,7 @@
 #buyArea h1{font-size:21px; font-weight:bold; color:#000; clear:both; margin-bottom:6px}
 #buyArea h1 span{color:#F00; font-size:16px}
 #buyArea #photoShow{float:left; width:375px; margin-right:10px; margin-bottom:5px; position:relative; border:solid 1px #ccc}
-#buyArea #photoShow .bigPhoto{width:375px; height:375px; font-size:0}
+#buyArea #photoShow .bigPhoto{width:375px; height:375px; font-size:0; border-bottom:solid 1px #ccc}
 #buyArea #photoShow .bigPhoto img{width:375px; height:375px;}
 #buyArea #photoShow .magnifier{width:155px; height:155px; border:solid 1px #FBCDAE; background:url(../images/fangdajing.png) no-repeat; position:absolute; display:none}
 #buyArea #photoShow .magnifier:hover{cursor:all-scroll; cursor:move}
@@ -54,22 +54,24 @@
 #buyArea .buyApp div h5{ padding:0px 15px 10px 15px}
 #buyArea .buyApp label{padding:3px; background-color:#fff; border:solid 2px #c1c1c1}
 #buyArea .buyApp label.selected{background-color:#ffffde; border:solid 2px #f89e3c}
-#buyArea .buyApp .bt4{margin-right:30px; padding-left:45px; width:106px}
+#buyArea .buyApp .bt6{margin-right:30px; padding-left:45px; width:106px}
 #buyArea .buyApp .bt5{margin-right:30px}
 #buyArea .buyApp .link1{border-left:solid 1px #ccc; padding:0px 10px; line-height:1}
 /*猜你喜欢*/
 #guessLike .group li{overflow:hidden; zoom:1}
 #guessLike .group li .photo{float:left; margin-right:5px; *margin-right:-3px}
-#guessLike .group li .goodsName{margin-bottom:10px; width:126px}
+#guessLike .group .adText{margin-bottom:3px}
+#guessLike .group .price{text-align:left; padding-left:67px}
 /*浏览记录*/
 #record .group li{overflow:hidden; zoom:1}
 #record .group li .photo{float:left; margin-right:5px; *margin-right:-3px}
-#record .group li .goodsName{margin-bottom:10px; width:126px}
+#record .group .adText{margin-bottom:3px}
+#record .group .price{text-align:left; padding-left:67px}
 /*浏览过的还看过*/
 #alsoSeen{border:solid 1px #ccc; margin-bottom:10px; border-top:1px solid #F9A93B}
 #alsoSeen .title{color:#666; background-color:#eee; padding:8px 11px; font-size:14px; font-weight:bold}
-#alsoSeen .list{overflow:hidden; zoom:1; width:978px; padding:0 1px; height:200px; margin-top:10px}
-#alsoSeen .list li{float:left; width:176px; margin:0px 9px; text-align:center}
+#alsoSeen .list{overflow:hidden; zoom:1; width:978px; padding:0 1px}
+#alsoSeen .list li{float:left; width:176px; padding:5px 9px 8px 9px; text-align:center}
 /*商品介绍菜单*/
 .introMenu{overflow:hidden; height:25px; background:url(../images/reddot.gif) 0px 23px repeat-x #fff; margin-bottom:10px; position:relative; z-index:100}
 .introMenu li{float:left; width:88px; height:23px; border-bottom:none; background:url(../images/showbg.png) -96px -252px no-repeat; font-size:12px; margin-right:5px; text-align:center; cursor:pointer; line-height:2.2; overflow:hidden}
@@ -179,8 +181,8 @@
 #cartCheck .group1 .item0 .member1{width:392px; float:left; overflow:hidden; position:relative; padding-bottom:10px}
 #cartCheck .group1 .item0 .member1 ul{overflow:hidden; zoom:1; position:relative}
 #cartCheck .group1 .item0 .member1 li{width:120px; text-align:center; margin-right:16px; float:left}
-#cartCheck .group1 .item0 .member1 li img{border:1px solid #ccc;}
-#cartCheck .group1 .item0 .member1 li span{font-weight:bold; color:#C00;}
+#cartCheck .group1 .item0 .member1 li img{border:1px solid #ccc; margin-bottom:3px}
+#cartCheck .group1 .item0 .member1 li .adText{margin-bottom:3px}
 #cartCheck .prev{float:left; width:27px;  margin-top:48px}
 #cartCheck .prev a{display:none; width:17px; height:61px; background:url(../images/prevwx.png) no-repeat;}
 #cartCheck .prev a:hover{background:url(../images/prevxz.png) no-repeat;}

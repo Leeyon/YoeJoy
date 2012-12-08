@@ -22,6 +22,7 @@ namespace YoeJoyHelper.Model
         public int C1SysNo { get; set; }
         public int C2SysNo { get; set; }
         public int C3SysNo { get; set; }
+        public int IsRecommend { get; set; }
     }
 
     /// <summary>
@@ -45,11 +46,12 @@ namespace YoeJoyHelper.Model
            ,[OrderNum]
            ,[C1SysNo]
            ,[C2SysNo]
-           ,[C3SysNo])
+           ,[C3SysNo]
+           ,[IsRecommend])
      VALUES
            ('{0}'
             ,{1}
-           ,'{2}',{3})";
+           ,'{2}',{3},'{4}','{5}','{6}',{7})";
 
         private static readonly string UpdateBrandSqlCmdTemplate = @"UPDATE [mmbuy].[dbo].[Brand]
    SET [BrandName] = '{0}'
@@ -59,13 +61,15 @@ namespace YoeJoyHelper.Model
       ,[C1SysNo]={4}
       ,[C2SysNo]={5}
       ,[C3SysNo]={6}
- WHERE [BrandSysNo]={7}";
+      ,[IsRecommend]={7}
+ WHERE [BrandSysNo]={8}";
 
         private static readonly string GetAllBrandsSqlCmdTemplate = @"SELECT [BrandSysNo]
       ,[BrandName]
       ,[Status]
       ,[BrandIcon]
       ,[OrderNum]
+      ,[IsRecommend]
   FROM [mmbuy].[dbo].[Brand]";
 
         private static readonly string GetProductBrandSqlCmdTemplate = @"select b.BrandSysNo,BrandName,BrandIcon from Brand b left join Product_brand pb on b.BrandSysNo=pb.BrandSysNo
@@ -83,6 +87,7 @@ namespace YoeJoyHelper.Model
       ,[BrandIcon]
       ,[OrderNum]
       ,[C3SysNo]
+      ,[IsRecommend]
   FROM [mmbuy].[dbo].[Brand] WHERE [BrandSysNo]={0}";
 
         private static readonly string GetHomeCenterBradsSqlCmdTemplate = @"select top {0} BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 order by OrderNum ASC";
@@ -98,7 +103,7 @@ namespace YoeJoyHelper.Model
         /// <returns></returns>
         public static bool AddNewBrand(BrandModel brand)
         {
-            string sqlCmd = String.Format(AddNewBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo);
+            string sqlCmd = String.Format(AddNewBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.IsRecommend);
             try
             {
                 if (new SqlDBHelper().ExecuteNonQuery(sqlCmd) > 0)
@@ -123,7 +128,7 @@ namespace YoeJoyHelper.Model
         /// <returns></returns>
         public static bool UpdateBrand(BrandModel brand)
         {
-            string sqlCmd = String.Format(UpdateBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.BrandSysNo);
+            string sqlCmd = String.Format(UpdateBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.IsRecommend, brand.BrandSysNo);
             try
             {
                 if (new SqlDBHelper().ExecuteNonQuery(sqlCmd) > 0)
@@ -233,6 +238,7 @@ namespace YoeJoyHelper.Model
                 Status = int.Parse(data.Rows[0]["Status"].ToString().Trim()),
                 OrderNum = int.Parse(data.Rows[0]["OrderNum"].ToString().Trim()),
                 C3SysNo = int.Parse(data.Rows[0]["C3SysNo"].ToString().Trim()),
+                IsRecommend = int.Parse(data.Rows[0]["IsRecommend"].ToString().Trim()),
             };
             return brand;
         }

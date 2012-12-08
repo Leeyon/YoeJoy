@@ -17,9 +17,11 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="MiddleTopModule" runat="server">
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="SiteNavModule" runat="server">
-    <div id="position">
-        <span>您在:</span> <b>首页</b> <span>&gt;</span> <span id="c1"><b></b></span><span>&gt;</span>
-        <span id="c3"><b></b></span>&gt;<span id="productNameNav"></span>
+    <div id="breadNav">
+        <p>
+            您在：<a href="../Default.aspx">首页</a>〉<a id='c1NavLink' href="javascript:void(0);"></a>〉<a
+                href="javascript:void(0);" id="c2NavLink"></a> 〉<a href="javascript:void(0);" id="c3NavLink"></a>〉<span
+                    id="productNav"></span></p>
     </div>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="LeftBigModule" runat="server">
@@ -48,44 +50,40 @@
                 </div>
                 <ul class="group">
                     <li><a class="photo" href="product.html">
-                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/../static/images/plsp.jpg" width="60"
-                            height="60"></a>
-                        <p class="goodsName">
-                            <a href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a></p>
-                        <p align="right">
-                            ¥<span class="price">200.0</span></p>
+                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <div>
+                            <a class="name" title="宏碁i5 独显 4G内存 直降400低价疯抢中！" href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a>
+                            <span class="adText">促销促销促销促销促销促销促销促销促销促销</span>
+                        </div>
+                        <p class="price">
+                            <b>¥1500</b><span>¥500</span></p>
                     </li>
                     <li><a class="photo" href="product.html">
-                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/../static/images/plsp.jpg" width="60"
-                            height="60"></a>
-                        <p class="goodsName">
-                            <a href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a></p>
-                        <p align="right">
-                            ¥<span class="price">200.0</span></p>
+                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <div>
+                            <a class="name" title="宏碁i5 独显 4G内存 直降400低价疯抢中！" href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a>
+                            <span class="adText">促销促销促销促销促销促销促销促销促销促销</span>
+                        </div>
+                        <p class="price">
+                            <b>¥1500</b><span>¥500</span></p>
                     </li>
                     <li><a class="photo" href="product.html">
-                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/../static/images/plsp.jpg" width="60"
-                            height="60"></a>
-                        <p class="goodsName">
-                            <a href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a></p>
-                        <p align="right">
-                            ¥<span class="price">200.0</span></p>
+                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <div>
+                            <a class="name" title="宏碁i5 独显 4G内存 直降400低价疯抢中！" href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a>
+                            <span class="adText">促销促销促销促销促销促销促销促销促销促销</span>
+                        </div>
+                        <p class="price">
+                            <b>¥1500</b><span>¥500</span></p>
                     </li>
                     <li><a class="photo" href="product.html">
-                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/../static/images/plsp.jpg" width="60"
-                            height="60"></a>
-                        <p class="goodsName">
-                            <a href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a></p>
-                        <p align="right">
-                            ¥<span class="price">200.0</span></p>
-                    </li>
-                    <li><a class="photo" href="product.html">
-                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/../static/images/plsp.jpg" width="60"
-                            height="60"></a>
-                        <p class="goodsName">
-                            <a href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a></p>
-                        <p align="right">
-                            ¥<span class="price">200.0</span></p>
+                        <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
+                        <div>
+                            <a class="name" title="宏碁i5 独显 4G内存 直降400低价疯抢中！" href="product.html">宏碁i5 独显 4G内存 直降400低价疯抢中！</a>
+                            <span class="adText">促销促销促销促销促销促销促销促销促销促销</span>
+                        </div>
+                        <p class="price">
+                            <b>¥1500</b><span>¥500</span></p>
                     </li>
                 </ul>
             </div>
@@ -562,7 +560,7 @@
                                 href="javascript:">下一页</a></p>
                     <p class="fastBuy" align="center">
                         <span>我要买：</span><a class="sub" href="javascript:void(0)">-</a>
-                        <input class="num" maxlength="3" value="1" type="text">
+                        <input class="num" maxlength="3" value="1" type="text" />
                         <a class="add" href="javascript:void(0)">+</a><span>个</span><a class="bt4" href="javascript:void(0);">加入购物车</a></p>
                 </div>
                 <!--商品评价End-->
@@ -663,7 +661,6 @@
                     购买了此商品的用户还买了：</h5>
                 <div class="item0 scrollItem">
                     <div class="member0 dot">
-                        <a class="selected" href="javascript:"></a><a href="javascript:"></a>
                     </div>
                     <div class="prev">
                         <a href="javascript:void(0);"></a>
@@ -709,8 +706,6 @@
         <div class="bBorder">
         </div>
     </div>
-</asp:Content>
-<asp:Content ID="Content9" ContentPlaceHolderID="HomeMiddleContent" runat="server">
     <div id="questions" class="popbox qaBox">
         <div class="tBorder">
         </div>
@@ -741,8 +736,6 @@
         <div class="bBorder">
         </div>
     </div>
-</asp:Content>
-<asp:Content ID="Content10" ContentPlaceHolderID="BackupContent2" runat="server">
     <div id="answer" class="popbox qaBox">
         <div class="tBorder">
         </div>
@@ -771,11 +764,15 @@
             </p>
             <p>
                 3、若您提交信息出现与产品无关的冗余信息或涉及广告、比价、重复反馈、不实 评论、恶意评论、粗口、危害国家安全等不当言论时，或经攸怡查实您存在自问自答等作弊行为，攸怡有权予以删除其内容。</p>
-            <br>
+            <br />
         </div>
         <div class="bBorder">
         </div>
     </div>
+</asp:Content>
+<asp:Content ID="Content9" ContentPlaceHolderID="HomeMiddleContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content10" ContentPlaceHolderID="BackupContent2" runat="server">
 </asp:Content>
 <asp:Content ID="Content11" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
@@ -789,10 +786,21 @@
             var $productBriefName = $("#productBriefName").val();
 
             var $c1Name = $("#foodImport").children("h2").eq(0).children("b").eq(0).html();
-            $("#position").children("span[id='c1']").children("b").html($c1Name);
+            $("#breadNav").children("p").children("a").eq(1).html($c1Name);
+            $("#breadNav").children("p").children("a").eq(1).click(function (event) {
+                window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList1.aspx?c1=" + c1;
+            });
+            var $c2Name = $(".listOut li input[value=" + c2 + "]").siblings("h3").text();
+            $("#breadNav").children("p").children("a").eq(2).click(function (event) {
+                window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList1.aspx?c1=" + c1;
+            });
+            $("#breadNav").children("p").children("a").eq(2).html($c2Name);
             var $c3Name = $(".listOut li p a input[value=" + c3 + "]").siblings("input").val();
-            $("#position").children("span[id='c3']").children("b").html($c3Name);
-            $("#position").children("span[id='productNameNav']").html($productBriefName);
+            $("#breadNav").children("p").children("a").eq(3).html($c3Name);
+            $("#breadNav").children("p").children("a").eq(3).click(function (event) {
+                window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList3.aspx?c1=" + c1 + "&c2=" + c2 + "&c3=" + c3;
+            });
+            $("#breadNav").children("p").children("span").eq(0).text($productBriefName);
         });
     </script>
 </asp:Content>

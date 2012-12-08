@@ -56,7 +56,14 @@ namespace YoeJoyWeb
         }
 
         protected string C3ProductFilterHTML { get; set; }
-
+        /// <summary>
+        /// 热卖推荐
+        /// </summary>
+        protected string C3BestSaledProductHTML { get; set; }
+        /// <summary>
+        /// 产品热评
+        /// </summary>
+        protected string C3HotCommentProductHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -65,6 +72,8 @@ namespace YoeJoyWeb
             {
                 SubCategoryNavigation1.C1SysNo = C1SysNo;
                 C3ProductFilterHTML = FrontProductsHelper.InitC3ProductFilterWrapper(C3SysNo);
+                C3BestSaledProductHTML = FrontProductsHelper.GetC3BestSaledProductHTMLWrapper(C1SysNo,C2SysNo,C3SysNo);
+                C3HotCommentProductHTML = FrontProductsHelper.GetC3HotCommentedProductHTMLWrapper(C1SysNo, C2SysNo, C3SysNo);
             }
         }
     }

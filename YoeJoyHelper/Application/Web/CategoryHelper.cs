@@ -104,7 +104,7 @@ namespace YoeJoyHelper
                             }
                         }
                         c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList, C2SysNo = c2Info.SysNo });
-                        strb.Append(String.Format("<a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a> ", baseURL, c1Info.SysNo, c2Info.C2Name));
+                        strb.Append(String.Format("<a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={2}'>{3}</a> ", baseURL, c1Info.SysNo,c2SysNo, c2Info.C2Name));
                     }
                 }
                 strb.Append("</p></div></div>");
@@ -112,7 +112,7 @@ namespace YoeJoyHelper
                 strb.Append(@"<dl class='Listcontent'><dt> <ul class='menuTwo'>");
                 foreach (string c2Name in c2c3Dic.Keys)
                 {
-                    strb.Append(String.Format(@"<li><h3><a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a></h3><ul>",baseURL,c1SysNo,c2Name));
+                    strb.Append(String.Format(@"<li><h3><a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={2}'>{3}</a></h3><ul>",baseURL,c1SysNo,c2c3Dic[c2Name].C2SysNo,c2Name));
                     foreach (C3MiniInfo c3Info in c2c3Dic[c2Name].C3MiniList)
                     {
                         strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList3.aspx?c1={1}&c2={4}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name, c2c3Dic[c2Name].C2SysNo));

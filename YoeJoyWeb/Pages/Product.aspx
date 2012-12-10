@@ -792,7 +792,7 @@
             });
             var $c2Name = $(".listOut li input[value=" + c2 + "]").siblings("h3").text();
             $("#breadNav").children("p").children("a").eq(2).click(function (event) {
-                window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList1.aspx?c1=" + c1;
+                window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList2.aspx?c1=" + c1 + "&c2=" + c2;
             });
             $("#breadNav").children("p").children("a").eq(2).html($c2Name);
             var $c3Name = $(".listOut li p a input[value=" + c3 + "]").siblings("input").val();

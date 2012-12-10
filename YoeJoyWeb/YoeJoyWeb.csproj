@@ -207,6 +207,13 @@
     <Compile Include="Service\UserRegister.aspx.designer.cs">
       <DependentUpon>UserRegister.aspx</DependentUpon>
     </Compile>
+    <Compile Include="upload.aspx.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="upload.aspx.designer.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -992,6 +999,7 @@
     <Content Include="static\js\dev\YoeJoy.Namespace.js" />
     <Content Include="static\js\dev\Yoejoy.Site.js" />
     <Content Include="static\js\prod\jquery-1.8.1.min.js" />
+    <Content Include="upload.aspx" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>

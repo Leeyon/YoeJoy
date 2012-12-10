@@ -26,18 +26,33 @@ namespace YoeJoyWeb
             }
         }
 
+        protected int C2SysNo
+        {
+            get
+            {
+                if (Request.QueryString["c2"] == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return int.Parse(Request.QueryString["c2"].ToString().Trim());
+                }
+            }
+        }
+
         /// <summary>
         /// 大类商品
         /// </summary>
-        protected string C1ProductsDisplayHTML { get; set; }
+        protected string C2ProductsDisplayHTML { get; set; }
         /// <summary>
         /// 清库产品
         /// </summary>
-        protected string C1EmptyInventoryProductsHTML { get; set; }
+        protected string C2EmptyInventoryProductsHTML { get; set; }
         /// <summary>
         /// 本周销量排行
         /// </summary>
-        protected string C1WeeklyBestSaledProductsHTML { get; set; }
+        protected string C2WeeklyBestSaledProductsHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,9 +60,9 @@ namespace YoeJoyWeb
             if (!IsPostBack)
             {
                 SubCategoryNavigation1.C1SysNo = C1SysNo;
-                C1WeeklyBestSaledProductsHTML = FrontProductsHelper.GetC1WeeklyBestSaledProductsHTMLWrapper(C1SysNo);
-                C1EmptyInventoryProductsHTML = FrontProductsHelper.GetC1EmptyInventoryProductsHTML(C1SysNo);
-                C1ProductsDisplayHTML = FrontProductsHelper.GetC1ProductsDisplayHTMLWrapper(C1SysNo);
+                C2WeeklyBestSaledProductsHTML = FrontProductsHelper.GetC2WeeklyBestSaledProductsHTMLWrapper(C1SysNo,C2SysNo);
+                C2EmptyInventoryProductsHTML = FrontProductsHelper.GetC2EmptyInventoryProductsHTMLWrapper(C1SysNo,C2SysNo);
+                C2ProductsDisplayHTML = FrontProductsHelper.GetC2ProductsDisplayHTMLWrapper(C1SysNo, C2SysNo);
             }
         }
     }

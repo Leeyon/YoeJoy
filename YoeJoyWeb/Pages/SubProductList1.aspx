@@ -17,7 +17,7 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="SiteNavModule" runat="server">
     <div id="position">
-        <span>您在:</span> <b>首页</b> <span>&gt;</span> <span id="c1"></span>
+        <span>您在 :</span> <b><a href="../Default.aspx">首页</a></b> <span>&gt;</span> <span id="c1"></span>
     </div>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="LeftBigModule" runat="server">

@@ -57,11 +57,26 @@ namespace YoeJoyWeb
             }
         }
 
+        protected string Order
+        {
+            get
+            {
+                if (Request.QueryString["order"] == null)
+                {
+                    return "DESC";
+                }
+                else
+                {
+                    return Request.QueryString["order"].ToString().Trim();
+                }
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                Response.Write(SearchHelper.GetSearch1ProductListHTML(OrderTag, StartIndex, KeyWords));
+                Response.Write(SearchHelper.GetSearch1ProductListHTML(OrderTag, StartIndex, KeyWords, Order));
             }
         }
     }

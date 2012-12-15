@@ -106,22 +106,6 @@ namespace YoeJoyHelper.Model
     }
 
     /// <summary>
-    /// Serach1结果中展示的商品
-    /// </summary>
-    public class Search1DsiplayProduct
-    {
-        public string ProductSysNo { get; set; }
-        public int C1SysNo { get; set; }
-        public int C2SysNo { get; set; }
-        public int C3SysNo { get; set; }
-        public string Price { get; set; }
-        public string ImgPath { get; set; }
-        public string ProductPromotionWord { get; set; }
-        public string ProductBriefName { get; set; }
-        public string BaiscPrice { get; set; }
-    }
-
-    /// <summary>
     /// 用户浏览记录中的商品
     /// </summary>
     public class CustomerBrowserHistoryProduct
@@ -838,7 +822,7 @@ namespace YoeJoyHelper.Model
 
     public class C3ProductListSerivice
     {
-        private static readonly string getPagedProductListItemsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,pp.LimitedQty,p.IsCanPurchase,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice
+        private static readonly string getPagedProductListItemsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,pp.LimitedQty,p.IsCanPurchase,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice,p.CreateTime
   from Product p
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Product_Images pimg on p.SysNo=pimg.product_sysNo
@@ -1031,29 +1015,30 @@ namespace YoeJoyHelper.Model
     {
         private static readonly string getSearch1C3NamesSqlCmdTemplate = @"select distinct p.C1SysNo,p.C2SysNo,p.C3SysNo,c3.C3Name from Product p 
  left join Category3 c3 on p.C3SysNo=c3.SysNo
+ left join Brand b on p.C1SysNo=b.C1SysNo
  where p.Status=1
  and c3.Status=0
- and 
- (p.PromotionWord like ('%{0}%')
-{1})";
+ and (p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') {3})";
 
         private static readonly string getSearch1C3ProductTotalCountSqlCmdTemplate = @"select COUNT(distinct p.SysNo)as totalCount from Product p
- where p.Status=1
- and 
- (p.PromotionWord like ('%{0}%')
- {1})";
+left join Brand b on p.C1SysNo=b.C1SysNo
+ where p.Status=1 and 
+(p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') {3})";
 
-        private static readonly string getSearch1C3PagedProductsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo from Product p
+        private static readonly string getSearch1ProductsSqlCmdTemplate = @"select distinct p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice,p.IsCanPurchase,p.CreateTime,pp.LimitedQty from Product p
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Product_Images pimg on p.SysNo=pimg.product_sysNo 
-  left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo 
+  left join Brand b on p.C1SysNo=b.C1SysNo
   where p.Status=1  
   and (pimg.orderNum=1 and pimg.status=1) 
-  and 
- (p.PromotionWord like ('%{1}%')
- {2})
-  and p.SysNo not in  (select top {3} p.SysNo from Product p where p.Status=1 {4}) 
-  {5}";
+  and (p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') {3}) {4} {5}";
+
+        private static readonly string getSearchC1SysNo = @"select top 1 p.C1SysNo from Product p
+ left join Category1 c1 on p.C1SysNo=c1.SysNo
+ left join Brand b on p.C1SysNo=b.C1SysNo
+ where p.Status=1 
+ and c1.Status=0
+ and (p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') {3})";
 
 
         /// <summary>
@@ -1068,10 +1053,10 @@ namespace YoeJoyHelper.Model
             {
                 for (int i = 1; i < keyWordsArray.Length; i++)
                 {
-                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') ", keyWordsArray[i].Trim(), keyWordsArray[i].Trim(), keyWordsArray[i].Trim());
                 }
             }
-            string sqlCmd = String.Format(getSearch1C3NamesSqlCmdTemplate, keyWordsArray[0].Trim(), childSearchSqlCmd);
+            string sqlCmd = String.Format(getSearch1C3NamesSqlCmdTemplate, keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), childSearchSqlCmd);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -1115,10 +1100,10 @@ namespace YoeJoyHelper.Model
             {
                 for (int i = 1; i < keyWordsArray.Length; i++)
                 {
-                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') ", keyWordsArray[i].Trim(), keyWordsArray[i].Trim(), keyWordsArray[i].Trim());
                 }
             }
-            string sqlCmd = String.Format(getSearch1C3ProductTotalCountSqlCmdTemplate, keyWordsArray[0].Trim(), childSearchSqlCmd);
+            string sqlCmd = String.Format(getSearch1C3ProductTotalCountSqlCmdTemplate, keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), childSearchSqlCmd);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -1139,6 +1124,43 @@ namespace YoeJoyHelper.Model
         }
 
         /// <summary>
+        /// 获取搜索结果中第一个商品的大类ID
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <returns></returns>
+        public static int GetSearchC1SysNo(string keyWords)
+        {
+            string childSearchSqlCmd = String.Empty;
+            string[] keyWordsArray = keyWords.Split(' ');
+            if (keyWordsArray.Length > 1)
+            {
+                for (int i = 1; i < keyWordsArray.Length; i++)
+                {
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') ", keyWordsArray[i].Trim(), keyWordsArray[i].Trim(), keyWordsArray[i].Trim());
+                }
+            }
+            string sqlCmd = String.Format(getSearchC1SysNo, keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), childSearchSqlCmd);
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    return int.Parse(data.Rows[0]["C1SysNo"].ToString().Trim());
+                }
+                else
+                {
+                    return int.Parse(new SqlDBHelper().ExecuteQuery(@"select top 1 c1.SysNo from Category1 c1
+ where c1.Status=0").Rows[0]["SysNo"].ToString().Trim());
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
         /// 取得分页的搜索结果集合
         /// </summary>
         /// <param name="startIndex"></param>
@@ -1147,7 +1169,7 @@ namespace YoeJoyHelper.Model
         /// <param name="orderByOption"></param>
         /// <param name="attribution2IdStr"></param>
         /// <returns></returns>
-        public static List<Search1DsiplayProduct> GetPagedSearch1Products(int startIndex, int pagedCount, YoeJoyEnum.ProductListSortedOrder orderByOption, string keyWords)
+        public static List<FrontDsiplayProduct> GetPagedSearch1Products(YoeJoyEnum.ProductListSortedOrder orderByOption, string keyWords, string order = "DESC")
         {
             string orderByStr = YoeJoySystemDic.ProductListSortedOrderDic[orderByOption];
             string orderByStr1 = orderByStr;
@@ -1173,20 +1195,20 @@ namespace YoeJoyHelper.Model
             {
                 for (int i = 1; i < keyWordsArray.Length; i++)
                 {
-                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') ", keyWordsArray[i].Trim(), keyWordsArray[i].Trim(), keyWordsArray[i].Trim());
                 }
             }
-            string sqlCmd = String.Format(getSearch1C3PagedProductsSqlCmdTemplate, pagedCount, keyWords[0], childSearchSqlCmd, startIndex, orderByStr1, orderByStr);
+            string sqlCmd = String.Format(getSearch1ProductsSqlCmdTemplate, keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), childSearchSqlCmd, orderByStr, order);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
                 int rowCount = data.Rows.Count;
                 if (rowCount > 0)
                 {
-                    List<Search1DsiplayProduct> products = new List<Search1DsiplayProduct>();
+                    List<FrontDsiplayProduct> products = new List<FrontDsiplayProduct>();
                     for (int i = 0; i < rowCount; i++)
                     {
-                        products.Add(new Search1DsiplayProduct()
+                        products.Add(new FrontDsiplayProduct()
                         {
                             C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
                             C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
@@ -1195,6 +1217,10 @@ namespace YoeJoyHelper.Model
                             Price = data.Rows[i]["price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["SysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
+                            IsCanPurchase = (int.Parse(data.Rows[i]["IsCanPurchase"].ToString().Trim()) == 1) ? true : false,
+                            LimitQty = int.Parse(data.Rows[i]["LimitedQty"].ToString().Trim()),
                         });
                     }
                     return products;
@@ -1216,26 +1242,21 @@ namespace YoeJoyHelper.Model
     {
         private static readonly string getSearch2ProductListItemTotalCountSqlCmdTemplate = @"select COUNT(distinct p.SysNo)as totalCount from Product p
   left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo
+  left join Brand b on p.C1SysNo=b.C1SysNo
   where p.Status=1
   {0}
-and (p.PromotionWord like ('%{1}%')
- {2})
-  and p.C3SysNo={3}";
+  and (p.PromotionWord like ('%{1}%') or p.BriefName like ('%{2}%') or b.BrandName like ('%{3}%') {4})
+  and p.C3SysNo={5}";
 
-        private static readonly string getSearch2C3PagedProductsSqlCmdTemplate = @"select distinct top {0} p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg from Product p
+        private static readonly string getSearch2C3ProductsSqlCmdTemplate = @"select distinct p.SysNo,p.ProductName,p.PromotionWord,CONVERT(float,pp.CurrentPrice) as price,pimg.product_limg,p.C1SysNo,p.C2SysNo,p.C3SysNo,p.BriefName,CONVERT(float,pp.BasicPrice) as baiscPrice,p.IsCanPurchase,p.CreateTime,pp.LimitedQty from Product p
   left join Product_Price pp on p.SysNo=pp.ProductSysNo
   left join Product_Images pimg on p.SysNo=pimg.product_sysNo 
-  left join Product_Attribute2 pa2 on p.SysNo=pa2.ProductSysNo 
-  where p.Status=1
-  and (pimg.orderNum=1 and pimg.status=1)
-  and p.C3SysNo={1}
-  {2}
+  left join Brand b on p.C1SysNo=b.C1SysNo
+  where p.Status=1  
   and (pimg.orderNum=1 and pimg.status=1) 
-  and 
- (p.PromotionWord like ('%{3}%')
- {4})
-  and p.SysNo not in  (select top {5} p.SysNo from Product p where p.Status=1 {6}) 
-  {7}";
+  {0}
+  and (p.PromotionWord like ('%{1}%') or p.BriefName like ('%{2}%') or b.BrandName like ('%{3}%') {4})
+  and p.C3Sysno={5} {6} {7}";
 
         /// <summary>
         /// 获得满足search2条件的商品总数
@@ -1257,10 +1278,10 @@ and (p.PromotionWord like ('%{1}%')
             {
                 for (int i = 1; i < keyWordsArray.Length; i++)
                 {
-                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') ", keyWordsArray[i].Trim(), keyWordsArray[i].Trim(), keyWordsArray[i].Trim());
                 }
             }
-            string sqlCmd = String.Format(getSearch2ProductListItemTotalCountSqlCmdTemplate, arrtibutionFilterSqlCmd, keyWords[0].ToString().Trim(), childSearchSqlCmd, c3SysNo);
+            string sqlCmd = String.Format(getSearch2ProductListItemTotalCountSqlCmdTemplate, arrtibutionFilterSqlCmd, keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), childSearchSqlCmd, c3SysNo);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -1289,7 +1310,7 @@ and (p.PromotionWord like ('%{1}%')
         /// <param name="orderByOption"></param>
         /// <param name="attribution2IdStr"></param>
         /// <returns></returns>
-        public static List<FrontDsiplayProduct> GetPagedProductList(int startIndex, int pagedCount, int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr, string keyWords)
+        public static List<FrontDsiplayProduct> GetPagedProductList(int c3SysNo, YoeJoyEnum.ProductListSortedOrder orderByOption, string attribution2IdStr, string keyWords, string order = "DESC")
         {
             string orderByStr = YoeJoySystemDic.ProductListSortedOrderDic[orderByOption];
             string orderByStr1 = orderByStr;
@@ -1304,7 +1325,7 @@ and (p.PromotionWord like ('%{1}%')
             {
                 for (int i = 1; i < keyWordsArray.Length; i++)
                 {
-                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%')", keyWordsArray[i].Trim());
+                    childSearchSqlCmd += String.Format(" or p.PromotionWord like ('%{0}%') or p.BriefName like ('%{1}%') or b.BrandName like ('%{2}%') ", keyWordsArray[i].Trim(), keyWordsArray[i].Trim(), keyWordsArray[i].Trim());
                 }
             }
             switch (orderByOption)
@@ -1323,7 +1344,7 @@ and (p.PromotionWord like ('%{1}%')
                         break;
                     }
             }
-            string sqlCmd = String.Format(getSearch2C3PagedProductsSqlCmdTemplate, pagedCount, c3SysNo, arrtibutionFilterSqlCmd, keyWordsArray[0].ToString().Trim(), childSearchSqlCmd, startIndex, orderByStr1, orderByStr);
+            string sqlCmd = String.Format(getSearch2C3ProductsSqlCmdTemplate, arrtibutionFilterSqlCmd, keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), keyWordsArray[0].Trim(), childSearchSqlCmd, c3SysNo, orderByStr, order);
             try
             {
                 DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
@@ -1335,11 +1356,17 @@ and (p.PromotionWord like ('%{1}%')
                     {
                         products.Add(new FrontDsiplayProduct()
                         {
-                            C3SysNo = c3SysNo,
+                            C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                            C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                            C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
                             ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
                             Price = data.Rows[i]["price"].ToString().Trim(),
                             ProductSysNo = data.Rows[i]["SysNo"].ToString().Trim(),
                             ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                            ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                            BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
+                            IsCanPurchase = (int.Parse(data.Rows[i]["IsCanPurchase"].ToString().Trim()) == 1) ? true : false,
+                            LimitQty = int.Parse(data.Rows[i]["LimitedQty"].ToString().Trim()),
                         });
                     }
                     return products;

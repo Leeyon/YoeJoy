@@ -94,7 +94,7 @@
                         <button type="button" id="btnSearch">
                         </button>
                         <input type="hidden" id="siteBaseURL" value="<%=SiteBaseURL %>" />
-                        <input type="hidden" id="siteSearchURL" value="<%=SiteBaseURLSerach %>" />
+                        <input type="hidden" id="siteSearchURL" value="<%=SiteBaseURLSearch %>" />
                     </p>
                 </div>
             </dd>

@@ -813,6 +813,7 @@
     <Content Include="static\images\jxgw.jpg" />
     <Content Include="static\images\jxgwbt.jpg" />
     <Content Include="static\images\kuaibao.png" />
+    <Content Include="static\images\listBg.gif" />
     <Content Include="static\images\liststyle.png" />
     <Content Include="static\images\loginbg.gif" />
     <Content Include="static\images\loginbt.png" />

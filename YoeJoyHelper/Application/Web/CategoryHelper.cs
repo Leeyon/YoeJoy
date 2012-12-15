@@ -124,7 +124,7 @@ namespace YoeJoyHelper
                 //推荐品牌
                 strb.Append(@"<dd><div class='recomment'><h2>推荐品牌</h2><p>");
 
-                List<BrandForHome> brands = BrandService.GetCategoryOneBrands(c1Info.SysNo.ToString().Trim());
+                List<BrandForHome> brands = BrandService.GetCategoryListBrands(c1Info.SysNo.ToString().Trim());
                 if (brands != null && brands.Count > 0)
                 {
                     foreach (BrandForHome brand in brands)

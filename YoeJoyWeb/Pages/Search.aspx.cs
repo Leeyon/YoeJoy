@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using YoeJoyHelper;
 using YoeJoyHelper.Extension;
+using YoeJoyHelper;
 
-namespace YoeJoyWeb
+namespace YoeJoyWeb.Pages
 {
     public partial class Search : System.Web.UI.Page
     {
@@ -26,13 +26,16 @@ namespace YoeJoyWeb
                 }
             }
         }
-
+        
+        
         protected string Search1C3Filter { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ((Site)this.Master).IsHomePage = false;
             if (!IsPostBack)
             {
+                SubCategoryNavigation1.C1SysNo = SearchHelper.GetSearchResultC1SysNo(KeyWords);
                 Search1C3Filter = SearchHelper.InitSearch1C3ProductFilter(KeyWords);
             }
         }

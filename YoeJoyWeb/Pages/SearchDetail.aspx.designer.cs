@@ -10,7 +10,7 @@
 namespace YoeJoyWeb.Pages {
     
     
-    public partial class SearchDetail {
+    public partial class SearchDetail1 {
         
         /// <summary>
         /// CategoryNavigation1 控件。

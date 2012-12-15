@@ -30,12 +30,12 @@ namespace YoeJoyHelper
             return c1ProductsDisplayHTML;
         }
 
-        public static string GetC2ProductsDisplayHTMLWrapper(int c1SysNo,int c2SysNo)
+        public static string GetC2ProductsDisplayHTMLWrapper(int c1SysNo, int c2SysNo)
         {
             CacheObjSetting cacheSetting = DynomicCacheObjSettings.CategoryTwoProductsDisplayCacheSettings;
             string key = String.Format(cacheSetting.CacheKey, c2SysNo);
             int duration = cacheSetting.CacheDuration;
-            string c1ProductsDisplayHTML = CacheObj<string>.GetCachedObj(key, duration, GetC2ProductsDisplayHTML(c1SysNo,c2SysNo));
+            string c1ProductsDisplayHTML = CacheObj<string>.GetCachedObj(key, duration, GetC2ProductsDisplayHTML(c1SysNo, c2SysNo));
             return c1ProductsDisplayHTML;
         }
 
@@ -48,12 +48,12 @@ namespace YoeJoyHelper
             return c1EmptyInventoryProductsHTML;
         }
 
-        public static string GetC2EmptyInventoryProductsHTMLWrapper(int c1SysNo,int c2SysNo)
+        public static string GetC2EmptyInventoryProductsHTMLWrapper(int c1SysNo, int c2SysNo)
         {
             CacheObjSetting cacheSetting = DynomicCacheObjSettings.CategoryTwoEmptyInventoryProductsCacheSettings;
             string key = String.Format(cacheSetting.CacheKey, c2SysNo);
             int duration = cacheSetting.CacheDuration;
-            string c1EmptyInventoryProductsHTML = CacheObj<string>.GetCachedObj(key, duration, GetC2EmptyInventoryProductsHTML(c1SysNo,c2SysNo));
+            string c1EmptyInventoryProductsHTML = CacheObj<string>.GetCachedObj(key, duration, GetC2EmptyInventoryProductsHTML(c1SysNo, c2SysNo));
             return c1EmptyInventoryProductsHTML;
         }
 
@@ -75,12 +75,12 @@ namespace YoeJoyHelper
             return c1WeeklyBestSaledProductsHTML;
         }
 
-        public static string GetC2WeeklyBestSaledProductsHTMLWrapper(int c1SysNo,int c2SyNo)
+        public static string GetC2WeeklyBestSaledProductsHTMLWrapper(int c1SysNo, int c2SyNo)
         {
             CacheObjSetting cacheSetting = DynomicCacheObjSettings.CategoryTwoWeeklyBestSaledProductsCacheSettings;
             string key = String.Format(cacheSetting.CacheKey, c2SyNo);
             int duration = cacheSetting.CacheDuration;
-            string c1WeeklyBestSaledProductsHTML = CacheObj<string>.GetCachedObj(key, duration, GetC2WeeklyBestSaledProductsHTML(c1SysNo,c2SyNo));
+            string c1WeeklyBestSaledProductsHTML = CacheObj<string>.GetCachedObj(key, duration, GetC2WeeklyBestSaledProductsHTML(c1SysNo, c2SyNo));
             return c1WeeklyBestSaledProductsHTML;
         }
 
@@ -491,7 +491,7 @@ namespace YoeJoyHelper
         /// </summary>
         /// <param name="categoryOneId"></param>
         /// <returns></returns>
-        public static string GetC2WeeklyBestSaledProductsHTML(int c1SysNo,int c2SysNo)
+        public static string GetC2WeeklyBestSaledProductsHTML(int c1SysNo, int c2SysNo)
         {
             string c1WeeklyBestSaledProductsHTML = String.Empty;
             List<C1WeeklyBestSaledProduct> products = C2WeeklyBestSaledProductService.GetC2WeeklyBestSaledProduct(c2SysNo);
@@ -536,7 +536,7 @@ namespace YoeJoyHelper
             if (productTotalCount > 0)
             {
                 int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
+                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : ((productTotalCount / pagedCount) + (productTotalCount % pagedCount));
 
                 string bottomNavHTMLTemplate = @"<a id='prev10' class='prev10' href='javascript:void(0)'/></a>
                         <a id='prev' class='prev' href='javascript:void(0)'></a><em id='pageNumNav' class='pageNum'>{0}</em>
@@ -668,7 +668,7 @@ namespace YoeJoyHelper
                     string deeplink = YoeJoyConfig.SiteBaseURL + "pages/product.aspx?c1=" + c1SysNo + "&c2=" + c2SysNo + "&c3=" + c3SysNo + "&pid=" + product.ProductSysNo;
                     if (product.IsCanPurchase)
                     {
-                        strb.Append(String.Format(productListItemHTMLTemplate2, deeplink, product.ProductBriefName, imgPath, deeplink, product.ProductBriefName, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
+                        strb.Append(String.Format(productListItemHTMLTemplate2, deeplink, product.ProductBriefName, imgPath, product.ProductBriefName, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
                     }
                     else
                     {

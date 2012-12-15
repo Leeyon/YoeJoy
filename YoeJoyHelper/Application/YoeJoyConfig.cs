@@ -40,9 +40,9 @@ namespace YoeJoyHelper
         public static readonly Dictionary<YoeJoyEnum.ProductListSortedOrder, string> ProductListSortedOrderDic = new Dictionary<YoeJoyEnum.ProductListSortedOrder, string>()
         {
             {YoeJoyEnum.ProductListSortedOrder.Default,"order by p.SysNo"},
-            {YoeJoyEnum.ProductListSortedOrder.Price,"order by price,p.SysNo"},
+            {YoeJoyEnum.ProductListSortedOrder.Price,"order by price"},
             {YoeJoyEnum.ProductListSortedOrder.SaledAmount,"order by p.SysNo"},
-            {YoeJoyEnum.ProductListSortedOrder.OnlieDate,"order by p.SysNo"},
+            {YoeJoyEnum.ProductListSortedOrder.OnlieDate,"order by p.CreateTime"},
             {YoeJoyEnum.ProductListSortedOrder.Comment,"order by p.SysNo"}
         };
     }

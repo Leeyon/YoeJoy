@@ -70,7 +70,7 @@
                         <a href="javascript:void(0)">更多筛选</a></div>
                 </div>
             </div>
-            <iframe id="ProductIframe" frameborder="0" scrolling="no" width="1001px" height="750px">
+            <iframe id="ProductIframe" frameborder="0" scrolling="no" width="1001px" height="1150px">
             </iframe>
         </div>
     </div>
@@ -107,7 +107,7 @@
                 window.location.target = "_parent";
             });
             var $c2Name = $(".listOut li input[value=" + c2 + "]").siblings("h3").text();
-            $("#breadNav").children("p").children("a").eq(2).html($c1Name);
+            $("#breadNav").children("p").children("a").eq(2).html($c2Name);
             $("#breadNav").children("p").children("a").eq(2).click(function (event) {
                 window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList2.aspx?c1=" + c1 + "&c2=" + c2;
                 window.location.target = "_parent";

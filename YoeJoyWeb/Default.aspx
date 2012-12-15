@@ -86,7 +86,7 @@
     <dl class="Promotions">
         <dt><a class="prom" href="#">
             <img alt="图标" src="static/images/szj.png" width="8" height="8" />
-            <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#">更多&gt;&gt; </a>
+            <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#"><%--更多&gt;&gt; --%></a>
         </dt>
         <dd>
             <%=PromoHTML %>
@@ -96,7 +96,7 @@
         <!--新品上市-->
         <dt><a class="prom" href="#">
             <img alt="图标" src="static/images/szj.png" width="8" height="8" />
-            <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#">更多&gt;&gt; </a>
+            <b>新品上市</b> <span>promotions</span> </a><a class="more" href="#"><%--更多&gt;&gt; --%></a>
         </dt>
         <dd>
             <%=InComingProducts%>

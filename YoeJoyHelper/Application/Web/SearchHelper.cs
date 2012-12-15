@@ -20,73 +20,21 @@ namespace YoeJoyHelper
             List<C3ProductSerach1Filter> search1Filters = Search1ProductService.GetSearch1C3Names(keyWords);
             if (search1Filters != null)
             {
-                StringBuilder strb = new StringBuilder(@"<tbody id='filterTable'><tr>
-                    <td class='option' valign='top' width='32' align='right'>
-                        分类:
-                    </td>
-                    <td>
-                        <ul>
-                            <li class='selected'>全部</li>".Trim());
+                StringBuilder strb = new StringBuilder(@"<div class='attr'> <em>产品类别：
+    </em><a class='selected' href='javascript:void(0);'>全部</a><strong>".Trim());
 
                 string filterItemHTMLTemplate = @"
-                            <li>{0}<input type='hidden' value='{1}'/><input type='hidden' value='{2}'/><input type='hidden' value='{3}'/></li>".Trim();
+                            <span><a href='javascript:void(0);'>{0}</a><input type='hidden' value='{1}'/><input type='hidden' value='{2}'/><input type='hidden' value='{3}'/></span>".Trim();
 
                 foreach (C3ProductSerach1Filter filter in search1Filters)
                 {
                     strb.Append(String.Format(filterItemHTMLTemplate, filter.C3Name, filter.C1SysNo, filter.C2SysNo, filter.C3SysNo));
                 }
 
-                strb.Append(@"</ul>
-                    </td>
-                </tr></tbody>".Trim());
+                strb.Append(@"</strong></div>".Trim());
                 serach1C3ProductFilterHTML = strb.ToString();
             }
             return serach1C3ProductFilterHTML;
-        }
-
-        /// <summary>
-        /// 初始化Serach1商品列表表头
-        /// </summary>
-        /// <param name="keyWords"></param>
-        /// <returns></returns>
-        public static string InitSearch1C3ProductListHeader(string keyWords)
-        {
-            string productListHeaderHTML = String.Empty;
-            int productTotalCount = Search1ProductService.GetSearch1C3ProductTotalCount(keyWords);
-            StringBuilder strb = new StringBuilder("<div class='fyitem'>");
-            if (productTotalCount == -1)
-            {
-                productListHeaderHTML = "<b>系统异常</b>";
-            }
-            else if (productTotalCount == 0)
-            {
-                productListHeaderHTML = "<b>没有符合条件的商品</b>";
-            }
-            else
-            {
-                int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
-
-                string enableArrowHTML = @"<a class='enableArrow' id='nextArrow'></a>";
-                string disableArrowHTML = @"<a class='disableArrow' id='prevArrow'></a>";
-                string topNavHTML = String.Empty;
-                string topNavHTMLTemplate = @"共<span>{0}<input type='hidden' value='{1}' id='totalCount'/></span>个商品<img src='../static/images/pxtjfg.gif' width='2' height='20'><span id='currentPageNum'>1</span>/{2}<input type='hidden' value='1' id='currentPageIndex'/><input type='hidden' value='1' id='pagedSeed'/><input type='hidden' value='{3}' id='totalPagedCount'/><input type='hidden' value='{4}' id='seed'/>{5}{6}";
-                if (totalPageCount == 1)
-                {
-                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount, pagedCount, disableArrowHTML, disableArrowHTML);
-                }
-                else
-                {
-                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount, pagedCount, disableArrowHTML, enableArrowHTML);
-                }
-                strb.Append(topNavHTML);
-            }
-
-            strb.Append("</div>");
-
-            productListHeaderHTML = strb.ToString();
-
-            return productListHeaderHTML;
         }
 
         /// <summary>
@@ -99,20 +47,26 @@ namespace YoeJoyHelper
             string productListFooterHTML = String.Empty;
 
             int productTotalCount = Search1ProductService.GetSearch1C3ProductTotalCount(keyWords);
-            StringBuilder strb = new StringBuilder("<div id='listFooter' class='fyitem1' align='right'>");
+            StringBuilder strb = new StringBuilder("<div id='turnPage'>");
             if (productTotalCount > 0)
             {
                 int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
+                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : ((productTotalCount/pagedCount)+(productTotalCount % pagedCount));
 
-                string disablePrevButtonHTML = @"<span id='prevBtn' class='prev prev0'>上一页</span>";
-                string enableNextArrowHTML = @"<span id='nextBtn' class='prev next1'>下一页</span>";
+                string bottomNavHTMLTemplate = @"<a id='prev10' class='prev10' href='javascript:void(0)'/></a>
+                        <a id='prev' class='prev' href='javascript:void(0)'></a><em id='pageNumNav' class='pageNum'>{0}</em>
+                        <a id='next' class='next' href='javascript:void(0)'></a><a id='next10' class='next10' href='javascript:void(0)'></a>
+                        <span>共{1}页&nbsp;&nbsp;到第</span>
+                        <input id='txtIndex' class='in' type='text' />
+                        <span>页</span>
+                        <input id='btnLocate' class='butt' value='确定' type='button' />
+                        <input type='hidden' id='totalPageCount' value='{2}'/>
+                       <input type='hidden' id='pageSeed' value='{3}'/>
+                       <input type='hidden' id='totalProductCount' value='{4}'/>";
+
                 string bottomNavHTML = String.Empty;
-                string bottomNavItemHTMLTemplate = @"<span class='pagenum'>{0}</span>";
-                string bottomNavHTMLTemplate = @"{0}{1}{2}<span>共{3}页</span><span>到第</span>
-        <input id='txtPageNum' maxlength='2' width='2' type='text' />
-        <span>页</span>
-        <input id='btnPageNum' value='确定' type='button' />";
+                string bottomNavItemHTMLTemplate = @"<a href='javascript:void(0)'>{0}</a>";
+
                 if (totalPageCount > 1)
                 {
                     string bottomNavItenHTML = String.Empty;
@@ -120,7 +74,7 @@ namespace YoeJoyHelper
                     {
                         bottomNavItenHTML += String.Format(bottomNavItemHTMLTemplate, i);
                     }
-                    bottomNavHTML = String.Format(bottomNavHTMLTemplate, disablePrevButtonHTML, bottomNavItenHTML, enableNextArrowHTML, totalPageCount);
+                    bottomNavHTML = String.Format(bottomNavHTMLTemplate, bottomNavItenHTML, totalPageCount, totalPageCount, pagedCount, productTotalCount);
                 }
                 strb.Append(bottomNavHTML);
             }
@@ -132,7 +86,7 @@ namespace YoeJoyHelper
             return productListFooterHTML;
         }
 
-        public static string GetSearch1ProductListHTML(YoeJoyEnum.ProductListSortedOrder orderOption, int startIndex, string keyWords)
+        public static string GetSearch1ProductListHTML(YoeJoyEnum.ProductListSortedOrder orderOption, int startIndex, string keyWords,string order)
         {
             string productListHTML = String.Empty;
             StringBuilder strb = new StringBuilder("<ul>");
@@ -140,17 +94,55 @@ namespace YoeJoyHelper
             string baseURL = YoeJoyConfig.SiteBaseURL;
             int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
 
-            List<Search1DsiplayProduct> products = Search1ProductService.GetPagedSearch1Products((startIndex-1), pagedCount, orderOption, keyWords);
+            List<FrontDsiplayProduct> products = Search1ProductService.GetPagedSearch1Products(orderOption,keyWords,order);
             if (products != null)
             {
                 string imageBaseURL = YoeJoyConfig.ImgVirtualPathBase;
-                string productListItemHTMLTemplate = @"<li><a href='product.html?c1={0}&c2={1}&c3={2}&pid={3}' target='_parent'>
-                            <p>
-                                <img src='{4}'><span class='price'>{5}元</span></p>
-                            <span>{6}</span></a></li>";
-                foreach (Search1DsiplayProduct product in products)
+                string productListItemHTMLTemplate1 = @"<li class='show1'>
+                    <div class='group'>
+                <div class='photo'><a href='{0}' target='_parent'><img class='photo' alt='{1}' src='{2}' width='190' height='190'></a></div>
+                <a class='name' title='{3}' href='{4}' target='_parent'>{5}</a>
+                <span class='adText'>{6}</span>
+                <div class='mem0'>
+                  <p class='price'><b>¥{7}</b><span>¥{8}</span></p>
+                  <p align='right'>评论:1000条</p>
+                </div>
+                <div class='botton'><a class='ck' href='{9}' target='_parent'>查看详情</a></div>
+              </div>
+                </li>";
+
+                string productListItemHTMLTemplate2 = @"<li class='show2'>
+                    <div class='group'>
+                <div class='photo'><a href='{0}' target='_parent'><img class='photo' alt='{1}' src='{2}' width='190' height='190'></a></div>
+                <a class='name' title='{3}' href='{4}' target='_parent'>{5}</a>
+                <span class='adText'>{6}</span>
+                <div class='mem0'>
+                  <p class='price'><b>¥{7}</b><span>¥{8}</span></p>
+                  <p align='right'>评论:1000条</p>
+                </div>
+                <div class='botton'>
+                  <p><a class='sub' href='javascript:void(0)'>-</a>
+                    <input class='num' maxLength='3' value='1' type='text'>
+                    <a class='add' href='javascript:void(0)'>+</a></p>
+                  <a class='ck' href='process1.html'>直接购买</a></div>
+              </div>
+                </li>";
+
+                startIndex = (startIndex - 1)*pagedCount;
+                var pagedProductList = products.Skip(startIndex).Take(pagedCount);
+
+                foreach (FrontDsiplayProduct product in pagedProductList)
                 {
-                    strb.Append(String.Format(productListItemHTMLTemplate, product.C1SysNo, product.C2SysNo, product.C3SysNo, product.ProductSysNo, String.Concat(imageBaseURL,product.ImgPath), product.Price, product.ProductPromotionWord));
+                    string imgPath = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "pages/product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    if (product.IsCanPurchase)
+                    {
+                        strb.Append(String.Format(productListItemHTMLTemplate2, deeplink, product.ProductBriefName, imgPath, product.ProductBriefName, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
+                    }
+                    else
+                    {
+                        strb.Append(String.Format(productListItemHTMLTemplate1, deeplink, product.ProductBriefName, imgPath, product.ProductBriefName, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice, deeplink));
+                    }
                 }
             }
             strb.Append("</ul>");
@@ -158,51 +150,6 @@ namespace YoeJoyHelper
             productListHTML = strb.ToString();
 
             return productListHTML;
-        }
-
-        /// <summary>
-        /// 初始化Serach2商品列表表头
-        /// </summary>
-        /// <param name="keyWords"></param>
-        /// <returns></returns>
-        public static string InitSearch2C3ProductListHeader(int c3SysNo, string attribution2IdStr, string keyWords)
-        {
-            string productListHeaderHTML = String.Empty;
-            int productTotalCount = Search2ProductService.GetSearch2C3ProductTotalCount(c3SysNo, attribution2IdStr, keyWords);
-            StringBuilder strb = new StringBuilder("<div class='fyitem'>");
-            if (productTotalCount == -1)
-            {
-                productListHeaderHTML = "<b>系统异常</b>";
-            }
-            else if (productTotalCount == 0)
-            {
-                productListHeaderHTML = "<b>没有符合条件的商品</b>";
-            }
-            else
-            {
-                int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
-
-                string enableArrowHTML = @"<a class='enableArrow' id='nextArrow'></a>";
-                string disableArrowHTML = @"<a class='disableArrow' id='prevArrow'></a>";
-                string topNavHTML = String.Empty;
-                string topNavHTMLTemplate = @"共<span>{0}<input type='hidden' value='{1}' id='totalCount'/></span>个商品<img src='../static/images/pxtjfg.gif' width='2' height='20'><span id='currentPageNum'>1</span>/{2}<input type='hidden' value='1' id='currentPageIndex'/><input type='hidden' value='1' id='pagedSeed'/><input type='hidden' value='{3}' id='totalPagedCount'/><input type='hidden' value='{4}' id='seed'/>{5}{6}";
-                if (totalPageCount == 1)
-                {
-                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount, pagedCount, disableArrowHTML, disableArrowHTML);
-                }
-                else
-                {
-                    topNavHTML = String.Format(topNavHTMLTemplate, productTotalCount, productTotalCount, totalPageCount, totalPageCount, pagedCount, disableArrowHTML, enableArrowHTML);
-                }
-                strb.Append(topNavHTML);
-            }
-
-            strb.Append("</div>");
-
-            productListHeaderHTML = strb.ToString();
-
-            return productListHeaderHTML;
         }
 
         /// <summary>
@@ -215,20 +162,26 @@ namespace YoeJoyHelper
             string productListFooterHTML = String.Empty;
 
             int productTotalCount = Search2ProductService.GetSearch2C3ProductTotalCount(c3SysNo, attribution2IdStr, keyWords);
-            StringBuilder strb = new StringBuilder("<div id='listFooter' class='fyitem1' align='right'>");
+            StringBuilder strb = new StringBuilder("<div id='turnPage'>");
             if (productTotalCount > 0)
             {
                 int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
-                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : productTotalCount / pagedCount;
+                int totalPageCount = (productTotalCount <= pagedCount) ? 1 : ((productTotalCount / pagedCount) + (productTotalCount % pagedCount));
 
-                string disablePrevButtonHTML = @"<span id='prevBtn' class='prev prev0'>上一页</span>";
-                string enableNextArrowHTML = @"<span id='nextBtn' class='prev next1'>下一页</span>";
+                string bottomNavHTMLTemplate = @"<a id='prev10' class='prev10' href='javascript:void(0)'/></a>
+                        <a id='prev' class='prev' href='javascript:void(0)'></a><em id='pageNumNav' class='pageNum'>{0}</em>
+                        <a id='next' class='next' href='javascript:void(0)'></a><a id='next10' class='next10' href='javascript:void(0)'></a>
+                        <span>共{1}页&nbsp;&nbsp;到第</span>
+                        <input id='txtIndex' class='in' type='text' />
+                        <span>页</span>
+                        <input id='btnLocate' class='butt' value='确定' type='button' />
+                        <input type='hidden' id='totalPageCount' value='{2}'/>
+                       <input type='hidden' id='pageSeed' value='{3}'/>
+                       <input type='hidden' id='totalProductCount' value='{4}'/>";
+
                 string bottomNavHTML = String.Empty;
-                string bottomNavItemHTMLTemplate = @"<span class='pagenum'>{0}</span>";
-                string bottomNavHTMLTemplate = @"{0}{1}{2}<span>共{3}页</span><span>到第</span>
-        <input id='txtPageNum' maxlength='2' width='2' type='text' />
-        <span>页</span>
-        <input id='btnPageNum' value='确定' type='button' />";
+                string bottomNavItemHTMLTemplate = @"<a href='javascript:void(0)'>{0}</a>";
+
                 if (totalPageCount > 1)
                 {
                     string bottomNavItenHTML = String.Empty;
@@ -236,7 +189,7 @@ namespace YoeJoyHelper
                     {
                         bottomNavItenHTML += String.Format(bottomNavItemHTMLTemplate, i);
                     }
-                    bottomNavHTML = String.Format(bottomNavHTMLTemplate, disablePrevButtonHTML, bottomNavItenHTML, enableNextArrowHTML, totalPageCount);
+                    bottomNavHTML = String.Format(bottomNavHTMLTemplate, bottomNavItenHTML, totalPageCount, totalPageCount, pagedCount, productTotalCount);
                 }
                 strb.Append(bottomNavHTML);
             }
@@ -255,7 +208,7 @@ namespace YoeJoyHelper
         /// <param name="startIndex"></param>
         /// <param name="keyWords"></param>
         /// <returns></returns>
-        public static string GetSearch2ProductListHTML(YoeJoyEnum.ProductListSortedOrder orderOption, int startIndex, int c3SysNo, int c1SysNo, int c2SysNo, string attribution2Ids,string keyWords)
+        public static string GetSearch2ProductListHTML(YoeJoyEnum.ProductListSortedOrder orderOption, int startIndex, int c3SysNo, int c1SysNo, int c2SysNo, string attribution2Ids, string keyWords,string order)
         {
             string productListHTML = String.Empty;
             StringBuilder strb = new StringBuilder("<ul>");
@@ -263,17 +216,55 @@ namespace YoeJoyHelper
             string baseURL = YoeJoyConfig.SiteBaseURL;
             int pagedCount = int.Parse(YoeJoyConfig.ProductListPagedCount);
 
-            List<FrontDsiplayProduct> products = Search2ProductService.GetPagedProductList((startIndex - 1), pagedCount, c3SysNo, orderOption, attribution2Ids, keyWords);
+            List<FrontDsiplayProduct> products = Search2ProductService.GetPagedProductList(c3SysNo, orderOption, attribution2Ids, keyWords, order);
             if (products != null)
             {
                 string imageBaseURL = YoeJoyConfig.ImgVirtualPathBase;
-                string productListItemHTMLTemplate = @"<li><a href='product.html?c1={0}&c2={1}&c3={2}&pid={3}' target='_parent'>
-                            <p>
-                                <img src='{4}'><span class='price'>{5}元</span></p>
-                            <span>{6}</span></a></li>";
-                foreach (FrontDsiplayProduct product in products)
+                string productListItemHTMLTemplate1 = @"<li class='show1'>
+                    <div class='group'>
+                <div class='photo'><a href='{0}' target='_parent'><img class='photo' alt='{1}' src='{2}' width='190' height='190'></a></div>
+                <a class='name' title='{3}' href='{4}' target='_parent'>{5}</a>
+                <span class='adText'>{6}</span>
+                <div class='mem0'>
+                  <p class='price'><b>¥{7}</b><span>¥{8}</span></p>
+                  <p align='right'>评论:1000条</p>
+                </div>
+                <div class='botton'><a class='ck' href='{9}' target='_parent'>查看详情</a></div>
+              </div>
+                </li>";
+
+                string productListItemHTMLTemplate2 = @"<li class='show2'>
+                    <div class='group'>
+                <div class='photo'><a href='{0}' target='_parent'><img class='photo' alt='{1}' src='{2}' width='190' height='190'></a></div>
+                <a class='name' title='{3}' href='{4}' target='_parent'>{5}</a>
+                <span class='adText'>{6}</span>
+                <div class='mem0'>
+                  <p class='price'><b>¥{7}</b><span>¥{8}</span></p>
+                  <p align='right'>评论:1000条</p>
+                </div>
+                <div class='botton'>
+                  <p><a class='sub' href='javascript:void(0)'>-</a>
+                    <input class='num' maxLength='3' value='1' type='text'>
+                    <a class='add' href='javascript:void(0)'>+</a></p>
+                  <a class='ck' href='process1.html'>直接购买</a></div>
+              </div>
+                </li>";
+
+                startIndex = (startIndex - 1) * pagedCount;
+                var pagedProductList = products.Skip(startIndex).Take(pagedCount);
+
+                foreach (FrontDsiplayProduct product in pagedProductList)
                 {
-                    strb.Append(String.Format(productListItemHTMLTemplate, c1SysNo,c2SysNo, c3SysNo, product.ProductSysNo, String.Concat(imageBaseURL, product.ImgPath), product.Price, product.ProductPromotionWord));
+                    string imgPath = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "pages/product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    if (product.IsCanPurchase)
+                    {
+                        strb.Append(String.Format(productListItemHTMLTemplate2, deeplink, product.ProductBriefName, imgPath, product.ProductBriefName, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
+                    }
+                    else
+                    {
+                        strb.Append(String.Format(productListItemHTMLTemplate1, deeplink, product.ProductBriefName, imgPath, product.ProductBriefName, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice, deeplink));
+                    }
                 }
             }
             strb.Append("</ul>");
@@ -281,6 +272,18 @@ namespace YoeJoyHelper
             productListHTML = strb.ToString();
 
             return productListHTML;
+        }
+
+        /// <summary>
+        /// 获取搜索结果中第一个商品的大类ID
+        /// 来生成右侧导航
+        /// </summary>
+        /// <param name="keyWords"></param>
+        /// <returns></returns>
+        public static int GetSearchResultC1SysNo(string keyWords)
+        {
+            int c1SysNo = Search1ProductService.GetSearchC1SysNo(keyWords);
+            return c1SysNo;
         }
     }
 }

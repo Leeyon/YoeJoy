@@ -1,275 +1,251 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchResult1.aspx.cs" Inherits="YoeJoyWeb.SearchResult1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchResult1.aspx.cs"
+    Inherits="YoeJoyWeb.SearchResult1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <link type="text/css" rel="Stylesheet" href="../static/css/base.css" />
     <link type="text/css" rel="Stylesheet" href="../static/css/layout.css" />
-    <link type="text/css" rel="Stylesheet" href="../static/css/layout1020.css" />
-    <style type="text/css">
-        body
-        {
-            background: none;
-        }
-        
-        .enableArrow
-        {
-            display: inline-block;
-            cursor: pointer;
-            background-image: url('../static/images/hy2.gif');
-            background-repeat: no-repeat;
-            width: 18px;
-            height: 18px;
-            margin: 0px 3px;
-        }
-        .disableArrow
-        {
-            display: inline-block;
-            background-image: url('../static/images/qy1.gif');
-            background-repeat: no-repeat;
-            width: 18px;
-            height: 18px;
-            margin: 0px 3px;
-        }
-        .pagenum
-        {
-            cursor: pointer;
-        }
-        #listHeaderLeft li
-        {
-            cursor: pointer;
-        }
-        .next1
-        {
-            cursor: pointer;
-        }
-    </style>
+    <link type="text/css" rel="Stylesheet" href="../static/css/class.css" />
+    <script type="text/javascript" src="../static/js/dev/YoeJoy.Namespace.js"></script>
     <script type="text/javascript" src="../static/js/dev/jquery-1.8.1.js"></script>
+    <script type="text/javascript" src="../static/js/dev/jquery.js"></script>
+    <script type="text/javascript" src="../static/js/dev/usercustom.js"></script>
+    <script type="text/javascript" src="../static/js/dev/Yoejoy.Site.js"></script>
 </head>
 <body>
-    <div class="splb">
-        <!--排序条件-->
-        <div class="pxtjitem">
-            <ul id="listHeaderLeft">
-                <li class="selected">默认排序<input type="hidden" value="1" /></li>
-                <li>价格<input type="hidden" value="2" /></li>
-                <li>销量<input type="hidden" value="3" /></li>
-                <li>上架时间<input type="hidden" value="4" /></li>
-                <li>评价<input type="hidden" value="5" /></li>
-            </ul>
-            <div id="listHeaderRight">
-                <%=C3ProductListHeaderHTML%>
+    <div id="showList">
+        <!--排序条件Begin-->
+        <div class="sort">
+            <div class="item0">
+                <div>
+                    <span>排序：</span>
+                    <select id="orderSelect">
+                        <option value="1">销量从高到低</option>
+                        <option value="2">销量从低到高</option>
+                        <option value="3">价格从高到低</option>
+                        <option value="4">价格从低到高</option>
+                        <option value="5">评论从高到低</option>
+                        <option value="6">评论从低到高</option>
+                        <option selected="selected" value="0">默认排序</option>
+                    </select>
+                </div>
+                <ul id="orderBy">
+                    <li><a href="javascript:void(0)">销量</a><input type="hidden" value="3" /></li>
+                    <li><a href="javascript:void(0)">价格</a><input type="hidden" value="2" /></li>
+                    <li><a href="javascript:void(0)">评论</a><input type="hidden" value="5" /></li>
+                    <li><a href="javascript:void(0)">上架时间</a><input type="hidden" value="4" /></li>
+                </ul>
+            </div>
+            <div class="item1">
             </div>
         </div>
+        <!--排序条件End-->
+        <!--显示商品列表Begin-->
         <div id="productList" class="list">
         </div>
     </div>
+    <!--商品列表页码-->
     <%=C3ProductListFooterHTML%>
     <script type="text/javascript">
 
-        function getQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) {
-                return unescape(r[2]);
-            }
-            return null;
-        }
+        var c1 = YoeJoy.Site.Utility.GetQueryString("c1");
+        var c2 = YoeJoy.Site.Utility.GetQueryString("c2");
+        var c3 = YoeJoy.Site.Utility.GetQueryString("c3");
+        var keyWords=YoeJoy.Site.Utility.GetQueryString("q");
+        //分页起始标识
+        var startIndex = 1;
+        //总页数
+        var totalPageCount = parseInt($("#totalPageCount").val());
+        //当前页码标识
+        var currentPageIndex = 1;
+        var handlerBaseURL = "../Service/GetSearch1ProductListItem.aspx";
+        var order = "DESC";
+        var orderOption = 1;
+        var pageSeed = parseInt($("#pageSeed").val());
+        var totalProductCount = parseInt($("#totalProductCount").val());
+        var IsAscOrder = false;
 
         function getProductListItem(callbackHandler) {
-            var handerBaseURL = "../Service/GetSearch1ProductListItem.aspx";
-            var keyWords = getQueryString("q");
-            var currentPageIndex = parseInt($("#currentPageIndex").val());
-            var orderOption = $("#listHeaderLeft .selected").children("input").val();
-            var handlerURL = handerBaseURL + "?startIndex=" + currentPageIndex + "&orderBy=" + orderOption + "&q=" +escape(keyWords)+ "&random=" + Math.random();
+            //Use random number in query string to avoid the Ajax get handler browser cache
+            var handlerURL = handlerBaseURL + "?startIndex=" + currentPageIndex + "&orderBy=" + orderOption + "&order="+order+"&q=" + escape(keyWords) + "&random=" + Math.random();
+            //var handlerURL = handerBaseURL + "?c1=" + c1 + "&c2=" + c2 + "&c3=" + c3 + "&startIndex=" + currentPageIndex + "&orderBy=" + orderOption + "&attrIds=" + attributionIds;
             $.get(handlerURL, function (data) {
                 $("#productList").empty().append(data);
                 callbackHandler();
             });
-        }
+        };
+
 
         function locateToPage(pageNum) {
-            var pagedSeed = parseInt($("#pagedSeed").val());
-            var currentPageIndex = parseInt($("#currentPageIndex").val());
-            var seed = parseInt($("#seed").val());
-            var stepSeed = Math.abs((pageNum - pagedSeed));
-            if (pageNum > pagedSeed) {
-                $("#currentPageIndex").val(currentPageIndex + stepSeed * seed);
+            var stepSeed = Math.abs((pageNum - currentPageIndex));
+            if (pageNum > currentPageIndex) {
+                currentPageIndex = currentPageIndex + stepSeed
+                startIndex = startIndex + stepSeed * pageSeed;
             }
             else {
-                $("#currentPageIndex").val(currentPageIndex - stepSeed * seed);
+                currentPageIndex = currentPageIndex - stepSeed
+                startIndex = startIndex - stepSeed * pageSeed;
             }
             getProductListItem(function () {
-                $("#pagedSeed").val(pageNum);
-                $("#currentPageNum").empty().html(pageNum);
-                $("#listFooter .pagenum").removeClass("selected");
-                $("#listFooter .pagenum").eq(pageNum - 1).addClass("selected");
-                var totalPageCount = parseInt($("#totalPagedCount").val());
-                if (pageNum == 1) {
-                    $("#prevArrow").removeClass().addClass("disableArrow");
-                    $("#nextArrow").removeClass().addClass("enableArrow");
-                    $("#nextBtn").removeClass("prev0").addClass("next1");
-                    $("#prevBtn").removeClass("next1").addClass("prev0");
-                }
-                else if (pageNum == totalPageCount) {
-                    $("#nextArrow").removeClass().addClass("disableArrow");
-                    $("#prevArrow").removeClass().addClass("enableArrow");
-                    $("#nextBtn").removeClass("next1").addClass("prev0");
-                    $("#prevBtn").removeClass("prev0").addClass("next1");
-                }
-                else {
-                    $("#prevArrow").removeClass().addClass("enableArrow");
-                    $("#nextArrow").removeClass().addClass("enableArrow");
-                    $("#nextBtn").removeClass("prev0").addClass("next1");
-                    $("#prevBtn").removeClass("prev0").addClass("next1");
-                }
+                pageNum--;
+                $("#pageNumNav").children("a").removeClass("current");
+                $("#pageNumNav").children("a").eq(pageNum).addClass("current");
             });
-        }
+        };
+
+        function changeOrderByList(orderTag) {
+            orderTag = parseInt(orderTag);
+            startIndex = 1;
+            currentPageIndex = 1;
+            $("#orderBy").children("li").removeClass("selected");
+            if (orderTag == 0) {
+                order = "DESC";
+                orderOption = 1;
+            }
+            else if (orderTag == 1) {
+                order = "DESC";
+                orderOption = 3;
+                $("#orderBy").children("li").eq(0).addClass("selected");
+            }
+            else if (orderTag == 2) {
+                order = "ASC";
+                orderOption = 3;
+                $("#orderBy").children("li").eq(0).addClass("selected");
+            }
+            else if (orderTag == 3) {
+                order = "DESC";
+                orderOption = 2;
+                $("#orderBy").children("li").eq(1).addClass("selected").css('background-position', '39px -21px');
+            }
+            else if (orderTag == 4) {
+                order = "ASC";
+                orderOption = 2;
+                $("#orderBy").children("li").eq(1).addClass("selected").css('background-position', '39px -44px');
+            }
+            getProductListItem(function () {
+                $("#pageNumNav").children("a").eq(0).addClass("current");
+            });
+        };
+
+        function changeOrderByTab(orderTag) {
+            switch (orderTag) {
+                case "3":
+                    {
+                        if (IsAscOrder) {
+                            changeOrderByList(2);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 2
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        else {
+                            changeOrderByList(1);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 1
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        return;
+                    }
+                case "2":
+                    {
+                        if (IsAscOrder) {
+                            changeOrderByList(4);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 4
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        else {
+                            changeOrderByList(3);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 3
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        return;
+                    }
+                case "4":
+                    {
+                        order = "DESC";
+                        orderOption = 4;
+                        getProductListItem(function () {
+                            $("#pageNumNav").children("a").eq(0).addClass("current");
+                        });
+                    }
+                default:
+                    {
+                        return;
+                    }
+            }
+        };
 
         $(function () {
 
-            var totalPagedCount = parseInt($("#totalPagedCount").val());
-            var seed = parseInt($("#seed").val());
+            var _$parentWindow = $(window.parent.document);
+            _$parentWindow.find("#resultNum").text("找到" + totalProductCount + "件相关商品")
 
             getProductListItem(function () {
-                var pagedSeed = parseInt($("#pagedSeed").val());
-                if (pagedSeed == totalPagedCount) {
-                    $("#nextArrow").removeClass("enableArrow").addClass("disableArrow");
-                }
-                $("#listFooter .pagenum").eq(0).addClass("selected");
+                $("#pageNumNav").children("a").eq(0).addClass("current");
             });
 
-            $("#prevArrow").click(function () {
-                if ($(this).hasClass("disableArrow")) {
-                    return;
-                }
-                else {
-                    var currentPageIndex = parseInt($("#currentPageIndex").val());
-                    $("#currentPageIndex").val(currentPageIndex - seed);
-
-                    getProductListItem(function () {
-                        var pagedSeed = parseInt($("#pagedSeed").val());
-                        $("#pagedSeed").val(pagedSeed - 1);
-                        pagedSeed -= 1;
-                        $("#currentPageNum").empty().html(pagedSeed);
-                        $("#listFooter .pagenum").removeClass("selected");
-                        $("#listFooter .pagenum").eq(pagedSeed - 1).addClass("selected");
-                        if (pagedSeed > 1) {
-                            $("#prevArrow").removeClass().addClass("enableArrow");
-                            $("#nextArrow").removeClass().addClass("enableArrow");
-                            $("#nextBtn").removeClass("prev0").addClass("next1");
-                            $("#prevBtn").removeClass("prev0").addClass("next1");
-                        }
-                        else {
-                            $("#prevArrow").removeClass().addClass("disableArrow");
-                            $("#nextArrow").removeClass().addClass("enableArrow");
-                            $("#nextBtn").removeClass("prev0").addClass("next1");
-                            $("#prevBtn").removeClass("next1").addClass("prev0");
-                        }
-                    });
+            $("#prev").click(function () {
+                if (currentPageIndex > 1) {
+                    locateToPage(currentPageIndex - 1);
                 }
             });
 
-            $("#nextArrow").click(function () {
-                if ($(this).hasClass("disableArrow")) {
-                    return;
-                }
-                else {
-                    var currentPageIndex = parseInt($("#currentPageIndex").val());
-                    $("#currentPageIndex").val(currentPageIndex + seed);
-                    getProductListItem(function () {
-                        var pagedSeed = parseInt($("#pagedSeed").val());
-                        $("#pagedSeed").val(pagedSeed + 1);
-                        pagedSeed += 1;
-                        $("#currentPageNum").empty().html(pagedSeed);
-                        $("#listFooter .pagenum").removeClass("selected");
-                        $("#listFooter .pagenum").eq(pagedSeed - 1).addClass("selected");
-                        if (pagedSeed < totalPagedCount) {
-                            $("#nextArrow").removeClass().addClass("enableArrow");
-                            $("#prevArrow").removeClass().addClass("enableArrow");
-                            $("#nextBtn").removeClass("prev0").addClass("next1");
-                            $("#prevBtn").removeClass("prev0").addClass("next1");
-                        }
-                        else {
-                            $("#nextArrow").removeClass().addClass("disableArrow");
-                            $("#prevArrow").removeClass().addClass("enableArrow");
-                            $("#nextBtn").removeClass("next1").addClass("prev0");
-                            $("#prevBtn").removeClass("prev0").addClass("next1");
-                        }
-                    });
+            $("#next").click(function () {
+                if (currentPageIndex < totalPageCount) {
+                    locateToPage(currentPageIndex + 1);
                 }
             });
 
-            $("#listHeaderLeft li").each(function (index) {
-                $(this).click(function () {
-                    $(this).siblings("li").removeClass("selected");
-                    $(this).addClass("selected");
-                    $("#currentPageIndex").val('1');
-                    $("#currentPageNum").empty().html('1');
-                    getProductListItem(function () {
-                        $("#pagedSeed").val('1');
-                        $("#listFooter .pagenum").removeClass("selected");
-                        $("#listFooter .pagenum").eq(0).addClass("selected");
-                        if (totalPagedCount == 1) {
-                            $("#prevArrow").removeClass().addClass("disableArrow");
-                            $("#nextArrow").removeClass().addClass("disableArrow");
-                        }
-                        else {
-                            $("#prevArrow").removeClass().addClass("disableArrow");
-                            $("#nextArrow").removeClass().addClass("enableArrow");
-                        }
-                    });
+            $("#pageNumNav").children("a").each(function (index) {
+                $(this).click(function (event) {
+                    locateToPage(index + 1);
                 });
             });
 
-            $("#listFooter .pagenum").each(function (index) {
-                $(this).click(function () {
-                    if ($(this).hasClass("selected")) {
+            $("#btnLocate").click(function () {
+                var pageNumInput = parseInt($("#txtIndex").val());
+                if (pageNumInput == '') {
+                    return;
+                }
+                else {
+                    if (pageNumInput > totalPageCount || pageNumInput <= 0) {
+                        alert("输入值越界");
+                    }
+                    else if (pageNumInput == currentPageIndex) {
                         return;
                     }
                     else {
-                        $(this).siblings(".pagenum").removeClass("selected");
-                        $(this).addClass("selected");
-                        var pageNum = parseInt($(this).html());
-                        var pagedSeed = parseInt($("#pagedSeed").val());
-                        if (pageNum == pagedSeed) {
-                            return;
-                        }
-                        else {
-                            locateToPage(pageNum);
-                        }
+                        locateToPage(pageNumInput);
                     }
+                }
+            });
+
+            $("#orderSelect").change(function (event) {
+                var $option = $(this);
+                var optionValue = $option.val();
+                changeOrderByList(optionValue);
+            });
+
+            $("#orderBy li").each(function (index) {
+                $(this).click(function (event) {
+                    $(this).siblings().removeClass("selected");
+                    $(this).addClass('selected');
+                    var orderOption = $(this).children("input").val();
+                    if ($(this).hasClass("asc")) {
+                        $(this).css('background-position', '39px -44px');
+                        $(this).removeClass("asc");
+                        IsAscOrder = false;
+                    }
+                    else {
+                        $(this).css('background-position', '39px -21px');
+                        $(this).addClass("asc");
+                        IsAscOrder = true;
+                    }
+                    changeOrderByTab(orderOption);
                 });
-            });
-
-            $("#prevBtn").click(function () {
-                if ($(this).hasClass("prev0")) {
-                    return;
-                } else {
-                    $("#prevArrow").click();
-                }
-            });
-
-            $("#nextBtn").click(function () {
-                if ($(this).hasClass("prev0")) {
-                    return;
-                } else {
-                    $("#nextArrow").click();
-                }
-            });
-
-            $("#btnPageNum").click(function () {
-                var pageNumInput = $("#txtPageNum").val();
-                var pagedSeed = parseInt($("#pagedSeed").val());
-                if (pageNumInput > totalPagedCount || pageNumInput <= 0) {
-                    alert("输入值越界");
-                }
-                else if (pageNumInput == pagedSeed) {
-                    return;
-                }
-                else {
-                    locateToPage(parseInt(pageNumInput));
-                }
             });
 
         });

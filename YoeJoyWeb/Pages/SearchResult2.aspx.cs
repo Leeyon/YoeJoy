@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using YoeJoyHelper;
 using YoeJoyHelper.Extension;
 
-namespace YoeJoyWeb.Pages
+namespace YoeJoyWeb
 {
     public partial class SearchResult2 : System.Web.UI.Page
     {
@@ -87,14 +87,12 @@ namespace YoeJoyWeb.Pages
             }
         }
 
-        protected string C3ProductListHeaderHTML { get; set; }
         protected string C3ProductListFooterHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                C3ProductListHeaderHTML = SearchHelper.InitSearch2C3ProductListHeader(C3CategorySysId, Attribution2Ids, KeyWords);
                 C3ProductListFooterHTML = SearchHelper.InitSearch2C3ProductListFooter(C3CategorySysId, Attribution2Ids, KeyWords);
             }
         }

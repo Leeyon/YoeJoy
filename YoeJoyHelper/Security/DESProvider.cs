@@ -68,7 +68,7 @@ namespace YoeJoyHelper.Security
         /// <returns></returns>
         public static string EncryptString(string encryptString)
         {
-            return EncryptString(encryptString);
+            return EncryptString(encryptString,Key);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace YoeJoyHelper.Security
         /// <returns></returns>
         public static string DecryptString(string decryptString)
         {
-            return DecryptString(decryptString);
+            return DecryptString(decryptString,Key);
         }
 
         /// <summary>

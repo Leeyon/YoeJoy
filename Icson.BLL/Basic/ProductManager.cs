@@ -1860,7 +1860,7 @@ namespace Icson.BLL.Basic
         {
             //select 出来的sysno默认是ProductSysNo, 不能改
 
-            string sql0 = @" select distinct top 10
+            string sql0 = @" select distinct
 								product.sysno, productid, productname,PromotionWord, productmode as productmodel,product.createtime,
                                 product.DMS,product.OPL,product.InventoryCycleTime,product.DMSWeight,DefaultPurchasePrice,
 								unitcost, currentprice, point, lastorderprice,inventory_stock.safeqty,

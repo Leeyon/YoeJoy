@@ -94,7 +94,7 @@ namespace YoeJoyWeb
             {
                 CategoryNavigation1.IsHomePage = true;
                 HomeWebBulletinListHTML = WebBulletinHelper.GetWebBulletinListForHome(5);
-                HomeBrandsHTML = BrandsHelper.GetBrandsForHomeWrapper(5);
+                HomeBrandsHTML = BrandsHelper.GetBrandsForHomeWrapper(8);
                 InComingProducts = InComingProductHelper.GetInComingProductForHomeWrapper();
                 CategoryProductsOneHTML = FrontProductsHelper.GetHomeCategoryOneProductsDisplayHTMLWrapper(YoeJoyConfig.HomeDisplayCategoryID1);
                 CategoryProductsTwoHTML = FrontProductsHelper.GetHomeCategoryOneProductsDisplayHTMLWrapper(YoeJoyConfig.HomeDisplayCategoryID2);

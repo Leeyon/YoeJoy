@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <link type="text/css" rel="Stylesheet" href="../static/css/base.css" />
     <link type="text/css" rel="Stylesheet" href="../static/css/layout.css" />
     <link type="text/css" rel="Stylesheet" href="../static/css/class.css" />
     <script type="text/javascript" src="../static/js/dev/YoeJoy.Namespace.js"></script>
@@ -20,10 +21,12 @@
                 <div>
                     <span>排序：</span>
                     <select id="orderSelect">
-                        <option value="1">价格从低到高</option>
-                        <option value="2">价格从高到低</option>
-                        <option value="3">销量从高到低</option>
-                        <option value="4">评论从高到低</option>
+                        <option value="1">销量从高到低</option>
+                        <option value="2">销量从低到高</option>
+                        <option value="3">价格从高到低</option>
+                        <option value="4">价格从低到高</option>
+                        <option value="5">评论从高到低</option>
+                        <option value="6">评论从低到高</option>
                         <option selected="selected" value="0">默认排序</option>
                     </select>
                 </div>
@@ -60,6 +63,7 @@
         var order = "DESC";
         var orderOption = 1;
         var pageSeed = parseInt($("#pageSeed").val());
+        var IsAscOrder = false;
 
         function getProductListItem(callbackHandler) {
             //Use random number in query string to avoid the Ajax get handler browser cache
@@ -92,31 +96,31 @@
         function changeOrderByList(orderTag) {
             orderTag = parseInt(orderTag);
             startIndex = 1;
-            $("#orderBy").children("li").removeClass("selected");
             currentPageIndex = 1;
+            $("#orderBy").children("li").removeClass("selected");
             if (orderTag == 0) {
                 order = "DESC";
                 orderOption = 1;
             }
             else if (orderTag == 1) {
-                order = "ASC";
-                orderOption = 2;
-                $("#orderBy").children("li").eq(1).addClass("selected");
-            }
-            else if (orderTag == 2) {
-                order = "DESC";
-                orderOption = 2;
-                $("#orderBy").children("li").eq(1).addClass("selected");
-            }
-            else if (orderTag == 3) {
                 order = "DESC";
                 orderOption = 3;
                 $("#orderBy").children("li").eq(0).addClass("selected");
             }
-            else if (orderTag == 4) {
+            else if (orderTag == 2) {
+                order = "ASC";
+                orderOption = 3;
+                $("#orderBy").children("li").eq(0).addClass("selected");
+            }
+            else if (orderTag == 3) {
                 order = "DESC";
-                orderOption = 4;
-                $("#orderBy").children("li").eq(2).addClass("selected");
+                orderOption = 2;
+                $("#orderBy").children("li").eq(1).addClass("selected").css('background-position', '39px -21px');
+            }
+            else if (orderTag == 4) {
+                order = "ASC";
+                orderOption = 2;
+                $("#orderBy").children("li").eq(1).addClass("selected").css('background-position', '39px -44px');
             }
             getProductListItem(function () {
                 $("#pageNumNav").children("a").eq(0).addClass("current");
@@ -124,34 +128,55 @@
         };
 
         function changeOrderByTab(orderTag) {
-            orderTag = parseInt(orderTag);
-            startIndex = 1;
-            $("#orderSelect").children("option[selected='selected']").removeAttr("selected");
-            currentPageIndex = 1;
-            if (orderTag == 0) {
-                order = "DESC";
-                orderOption = 3;
+            switch (orderTag) {
+                case "3":
+                    {
+                        if (IsAscOrder) {
+                            changeOrderByList(2);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 2
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        else {
+                            changeOrderByList(1);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 1
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        return;
+                    }
+                case "2":
+                    {
+                        if (IsAscOrder) {
+                            changeOrderByList(4);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 4
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        else {
+                            changeOrderByList(3);
+                            $('#orderSelect option').filter(function () {
+                                return $(this).val() == 3
+                            }).attr('selected', 'true').siblings().removeAttr('selected');
+                        }
+                        return;
+                    }
+                case "4":
+                    {
+                        order = "DESC";
+                        orderOption = 4;
+                        getProductListItem(function () {
+                            $("#pageNumNav").children("a").eq(0).addClass("current");
+                        });
+                    }
+                default:
+                    {
+                        return;
+                    }
             }
-            else if (orderTag == 1) {
-                order = "ASC";
-                orderOption = 2;
-                $("#orderBy").children("li").eq(1).addClass("selected");
-            }
-            else if (orderTag == 2) {
-                order = "DESC";
-                orderOption = 4;
-                $("#orderBy").children("li").eq(2).addClass("selected");
-            }
-            else if (orderTag == 5) {
-                return;
-            }
-            getProductListItem(function () {
-                $("#pageNumNav").children("a").eq(0).addClass("current");
-            });
         };
 
         $(function () {
-
             getProductListItem(function () {
                 $("#pageNumNav").children("a").eq(0).addClass("current");
             });
@@ -198,11 +223,22 @@
                 changeOrderByList(optionValue);
             });
 
-            $("#orderBy").children("li").each(function (index) {
+            $("#orderBy li").each(function (index) {
                 $(this).click(function (event) {
-                    $("#orderBy").children("li").removeClass("selected");
-                    $(this).addClass("selected");
-                    changeOrderByTab(index);
+                    $(this).siblings().removeClass("selected");
+                    $(this).addClass('selected');
+                    var orderOption = $(this).children("input").val();
+                    if ($(this).hasClass("asc")) {
+                        $(this).css('background-position', '39px -44px');
+                        $(this).removeClass("asc");
+                        IsAscOrder = false;
+                    }
+                    else {
+                        $(this).css('background-position', '39px -21px');
+                        $(this).addClass("asc");
+                        IsAscOrder = true;
+                    }
+                    changeOrderByTab(orderOption);
                 });
             });
 

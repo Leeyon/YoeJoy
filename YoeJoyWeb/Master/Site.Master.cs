@@ -36,7 +36,7 @@ namespace YoeJoyWeb
 
         protected string LeftTopDivTag { get; set; }
 
-        protected string SiteBaseURLSerach
+        protected string SiteBaseURLSearch
         {
             get
             {

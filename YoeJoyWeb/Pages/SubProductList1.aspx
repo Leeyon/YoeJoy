@@ -17,7 +17,8 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="SiteNavModule" runat="server">
     <div id="position">
-        <span>您在 :</span> <b><a href="../Default.aspx">首页</a></b> <span>&gt;</span> <span id="c1"></span>
+        <span>您在 :</span> <b><a href="../Default.aspx">首页</a></b> <span>&gt;</span> <span
+            id="c1"></span>
     </div>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="LeftBigModule" runat="server">
@@ -63,6 +64,10 @@
 <asp:Content ID="Content11" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
         $(function () {
+            $(".mainShow").each(function (index) {
+                $(this).children("div").eq(0).css({ "width": "100%", "border": "none" });
+                $(this).children("div").eq(1).css({ "display": "none" });
+            });
             var $c1Name = $("#foodImport").children("h2").eq(0).children("b").eq(0).html();
             $("#position").children("span[id='c1']").html($c1Name);
         });

@@ -26,15 +26,12 @@ namespace YoeJoyWeb
                 }
             }
         }
-
-        protected string C3ProductListHeaderHTML { get; set; }
         protected string C3ProductListFooterHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                C3ProductListHeaderHTML=SearchHelper.InitSearch1C3ProductListHeader(KeyWords);
                 C3ProductListFooterHTML = SearchHelper.InitSearch1C3ProductListFooter(KeyWords);
             }
         }

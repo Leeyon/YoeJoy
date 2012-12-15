@@ -128,7 +128,7 @@
             </div>
             <!--浏览过该商品的用户还看过end-->
             <!--商品综合信息区域Begin-->
-            <ul style="top: 36px;" class="introMenu">
+            <ul class="introMenu">
                 <li class="selected">商品介绍</li>
                 <li>规格参数</li>
                 <li>包装清单</li>

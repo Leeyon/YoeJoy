@@ -28,7 +28,7 @@ namespace YoeJoyHelper.Model
   Product p on sc.ProductSysNo=p.SysNo left join
   Product_Price pp on sc.ProductSysNo=pp.ProductSysNo left join 
   Product_Images pis on sc.ProductSysNo=pis.product_sysNo
-  where sc.Status=1 and pis.status=1 and pis.orderNum=1 order by sc.SysNo DESC";
+  where sc.Status=1 and pis.status=1 and pis.orderNum=1 and p.Status=1 order by sc.SysNo DESC";
 
         public static List<PanicBuyingProductModelForHome> GetHomePanicProduct()
         {

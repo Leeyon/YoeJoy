@@ -41,7 +41,7 @@ namespace YoeJoyHelper
             string homeBrandsHTML = String.Empty;
             string imageVitualPath = YoeJoyConfig.ImgVirtualPathBase;
             StringBuilder strb = new StringBuilder("<ul>");
-            List<BrandForHome> homeBrands = BrandService.GetHomeCenterBrands(topNum.ToString().Trim());
+            List<BrandForHome> homeBrands = BrandService.GetHomeCenterBrands(topNum);
             if (homeBrands != null)
             {
                 foreach (BrandForHome homeBrand in homeBrands)

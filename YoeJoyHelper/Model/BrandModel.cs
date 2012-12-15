@@ -19,10 +19,25 @@ namespace YoeJoyHelper.Model
         public string BrandLogo { get; set; }
         public int Status { get; set; }
         public int OrderNum { get; set; }
+        /// <summary>
+        /// 品牌旗舰店显示顺序
+        /// </summary>
+        public int RecommendOrderNum { get; set; }
+        /// <summary>
+        /// 分类列表显示顺序
+        /// </summary>
+        public int PromotionOrderNum { get; set; }
         public int C1SysNo { get; set; }
         public int C2SysNo { get; set; }
         public int C3SysNo { get; set; }
+        /// <summary>
+        /// 是否显示在首页中间品牌旗舰店
+        /// </summary>
         public int IsRecommend { get; set; }
+        /// <summary>
+        /// 是否显示在大类的品牌推荐中
+        /// </summary>
+        public int IsPromoted { get; set; }
     }
 
     /// <summary>
@@ -47,11 +62,14 @@ namespace YoeJoyHelper.Model
            ,[C1SysNo]
            ,[C2SysNo]
            ,[C3SysNo]
-           ,[IsRecommend])
+           ,[IsRecommend]
+           ,[IsPromoted]
+           ,[RecommendOrderNum]
+           ,[PromotionOrderNum])
      VALUES
            ('{0}'
             ,{1}
-           ,'{2}',{3},'{4}','{5}','{6}',{7})";
+           ,'{2}',{3},'{4}','{5}','{6}',{7},{8},{9},{10})";
 
         private static readonly string UpdateBrandSqlCmdTemplate = @"UPDATE [mmbuy].[dbo].[Brand]
    SET [BrandName] = '{0}'
@@ -62,14 +80,20 @@ namespace YoeJoyHelper.Model
       ,[C2SysNo]={5}
       ,[C3SysNo]={6}
       ,[IsRecommend]={7}
- WHERE [BrandSysNo]={8}";
+      ,[IsPromoted]={8}
+      ,[RecommendOrderNum]={9}
+      ,[PromotionOrderNum]={10}
+ WHERE [BrandSysNo]={11}";
 
         private static readonly string GetAllBrandsSqlCmdTemplate = @"SELECT [BrandSysNo]
       ,[BrandName]
       ,[Status]
       ,[BrandIcon]
-      ,[OrderNum]
+      ,[RecommendOrderNum]
       ,[IsRecommend]
+      ,[IsPromoted]
+      ,[PromotionOrderNum]
+      ,[OrderNum]
   FROM [mmbuy].[dbo].[Brand]";
 
         private static readonly string GetProductBrandSqlCmdTemplate = @"select b.BrandSysNo,BrandName,BrandIcon from Brand b left join Product_brand pb on b.BrandSysNo=pb.BrandSysNo
@@ -86,15 +110,24 @@ namespace YoeJoyHelper.Model
       ,[Status]
       ,[BrandIcon]
       ,[OrderNum]
+      ,[C1SysNo]
+      ,[C2SysNo]
       ,[C3SysNo]
       ,[IsRecommend]
+      ,[IsPromoted]
+      ,[RecommendOrderNum]
+      ,[PromotionOrderNum]
   FROM [mmbuy].[dbo].[Brand] WHERE [BrandSysNo]={0}";
 
-        private static readonly string GetHomeCenterBradsSqlCmdTemplate = @"select top {0} BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 order by OrderNum ASC";
+        private static readonly string GetHomeCenterBradsSqlCmdTemplate = @"  select top {0} b.BrandSysNo,b.BrandName,b.BrandIcon,b.C1SysNo,b.RecommendOrderNum from Brand b 
+  where b.Status=1 and b.IsRecommend=1 order by b.RecommendOrderNum ASC";
 
-        private static readonly string GetHomeCategoryOneBrandsSqlCmdTemplate = @"select top 8 BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 and C1SysNo={0} order by OrderNum ASC";
+        private static readonly string GetHomeCategoryOneBrandsSqlCmdTemplate = @"  select top 8 b.BrandSysNo,b.BrandName,b.BrandIcon,b.C1SysNo,b.OrderNum from Brand b
+  where b.Status=1 and b.C1SysNo={0} order by b.OrderNum ASC";
 
-        private static readonly string GetHomeCategoryListBrandsSqlCmdTemplate = @"select BrandSysNo,BrandName,BrandIcon,C1SysNo from Brand where Status=1 and C1SysNo={0} order by OrderNum ASC";
+        private static readonly string GetHomeCategoryListBrandsSqlCmdTemplate = @"  select top {0} b.BrandSysNo,b.BrandName from Brand as b 
+  where b.Status=1 and b.IsPromoted=1 and b.C1SysNo={1} order by b.PromotionOrderNum ASC";
+
 
         /// <summary>
         /// 添加一个新的品牌
@@ -103,7 +136,7 @@ namespace YoeJoyHelper.Model
         /// <returns></returns>
         public static bool AddNewBrand(BrandModel brand)
         {
-            string sqlCmd = String.Format(AddNewBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.IsRecommend);
+            string sqlCmd = String.Format(AddNewBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.IsRecommend, brand.IsPromoted, brand.RecommendOrderNum, brand.PromotionOrderNum);
             try
             {
                 if (new SqlDBHelper().ExecuteNonQuery(sqlCmd) > 0)
@@ -128,7 +161,7 @@ namespace YoeJoyHelper.Model
         /// <returns></returns>
         public static bool UpdateBrand(BrandModel brand)
         {
-            string sqlCmd = String.Format(UpdateBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.IsRecommend, brand.BrandSysNo);
+            string sqlCmd = String.Format(UpdateBrandSqlCmdTemplate, brand.BrandName, brand.Status, brand.BrandLogo, brand.OrderNum, brand.C1SysNo, brand.C2SysNo, brand.C3SysNo, brand.IsRecommend, brand.IsPromoted, brand.RecommendOrderNum, brand.PromotionOrderNum, brand.BrandSysNo);
             try
             {
                 if (new SqlDBHelper().ExecuteNonQuery(sqlCmd) > 0)
@@ -237,8 +270,13 @@ namespace YoeJoyHelper.Model
                 BrandLogo = data.Rows[0]["BrandIcon"].ToString().Trim(),
                 Status = int.Parse(data.Rows[0]["Status"].ToString().Trim()),
                 OrderNum = int.Parse(data.Rows[0]["OrderNum"].ToString().Trim()),
+                C1SysNo = int.Parse(data.Rows[0]["C1SysNo"].ToString().Trim()),
+                C2SysNo = int.Parse(data.Rows[0]["C2SysNo"].ToString().Trim()),
                 C3SysNo = int.Parse(data.Rows[0]["C3SysNo"].ToString().Trim()),
                 IsRecommend = int.Parse(data.Rows[0]["IsRecommend"].ToString().Trim()),
+                IsPromoted = int.Parse(data.Rows[0]["IsPromoted"].ToString().Trim()),
+                PromotionOrderNum = int.Parse(data.Rows[0]["PromotionOrderNum"].ToString().Trim()),
+                RecommendOrderNum = int.Parse(data.Rows[0]["RecommendOrderNum"].ToString().Trim()),
             };
             return brand;
         }
@@ -263,7 +301,7 @@ namespace YoeJoyHelper.Model
         /// </summary>
         /// <param name="topNum"></param>
         /// <returns></returns>
-        public static List<BrandForHome> GetHomeCenterBrands(string topNum)
+        public static List<BrandForHome> GetHomeCenterBrands(int topNum=8)
         {
             try
             {
@@ -339,11 +377,11 @@ namespace YoeJoyHelper.Model
         /// </summary>
         /// <param name="c1SysNo"></param>
         /// <returns></returns>
-        public static List<BrandForHome> GetCategoryListBrands(string c1SysNo)
+        public static List<BrandForHome> GetCategoryListBrands(string c1SysNo,int topNum=12)
         {
             try
             {
-                DataTable data = new SqlDBHelper().ExecuteQuery(String.Format(GetHomeCategoryListBrandsSqlCmdTemplate, c1SysNo));
+                DataTable data = new SqlDBHelper().ExecuteQuery(String.Format(GetHomeCategoryListBrandsSqlCmdTemplate,topNum,c1SysNo));
                 int rowCount = data.Rows.Count;
                 if (rowCount > 0)
                 {
@@ -354,8 +392,6 @@ namespace YoeJoyHelper.Model
                         {
                             BrandName = data.Rows[i]["BrandName"].ToString().Trim(),
                             BrandSysNo = int.Parse(data.Rows[i]["BrandSysNo"].ToString().Trim()),
-                            BrandLogo = data.Rows[i]["BrandIcon"].ToString().Trim(),
-                            C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
                         });
                     }
                     return brands;

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace YoeJoyWeb.Pages {
+namespace YoeJoyWeb {
     
     
     public partial class SearchResult2 {

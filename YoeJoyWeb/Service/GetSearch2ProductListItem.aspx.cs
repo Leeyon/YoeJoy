@@ -102,6 +102,21 @@ namespace YoeJoyWeb
             }
         }
 
+        protected string Order
+        {
+            get
+            {
+                if (Request.QueryString["order"] == null)
+                {
+                    return "DESC";
+                }
+                else
+                {
+                    return Request.QueryString["order"].ToString().Trim();
+                }
+            }
+        }
+
         protected string KeyWords
         {
             get
@@ -121,7 +136,7 @@ namespace YoeJoyWeb
 		{
             if (!IsPostBack)
             {
-                Response.Write(SearchHelper.GetSearch2ProductListHTML(OrderTag, StartIndex, C3CategorySysId, C1CategorySysId, C2CategorySysId, Attribution2Ids, KeyWords));
+                Response.Write(SearchHelper.GetSearch2ProductListHTML(OrderTag, StartIndex, C3CategorySysId, C1CategorySysId, C2CategorySysId, Attribution2Ids, KeyWords,Order));
             }
 		}
 	}

@@ -104,8 +104,8 @@
                 $("#btnSearch").click(function (event) {
                     var keyWords = $("#txtSearch").val();
                     if (keyWords.length > 0) {
-                        var searchURL = $("#siteSearchURL").val();
-                        window.location.href = searchURL + "?q=" + escape(keyWords);
+                        var searchURL = "http://" + window.location.host + "/Pages/Search.aspx?q=" + escape(keyWords);
+                        window.location.href = searchURL;
                     }
                     else {
                         return;

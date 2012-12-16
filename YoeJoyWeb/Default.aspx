@@ -159,94 +159,8 @@
             </div>
         </div>
         <div id="highgoods2" class="area imgshow">
-    <div class="item">
-      <div class="slave0">彩绘贴</div>
-      <div class="mem0"><img class="prev" src="../static/images/hg2prev.png" data-src="../static/images/hg2prev.png"></div>
-      <div class="mem1">
-        <div class="scrollw">
-          <div class="scroll">
-            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
-            <div class="info">
-              <p class="nameItem">
-                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
-                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
-              </p>
-              <p class="price"><b>¥1500</b><span>¥500</span></p>
-            </div>
-          </div>
-          <div class="scroll">
-            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
-            <div class="info">
-              <p class="nameItem">
-                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
-                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
-              </p>
-              <p class="price"><b>¥1500</b><span>¥500</span></p>
-            </div>
-          </div>
+        <%=HomePromotionBrandsProductHTML %>
         </div>
-      </div>
-      <div class="mem0"><img class="next" src="../static/images/hg2next.png" data-src="../static/images/hg2next.png"></div>
-    </div>
-    <div class="item">
-      <div class="slave0">彩绘贴</div>
-      <div class="mem0"><img class="prev" src="../static/images/hg2prev.png" data-src="../static/images/hg2prev.png"></div>
-      <div class="mem1">
-        <div class="scrollw">
-          <div class="scroll">
-            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
-            <div class="info">
-              <p class="nameItem">
-                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
-                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
-              </p>
-              <p class="price"><b>¥1500</b><span>¥500</span></p>
-            </div>
-          </div>
-          <div class="scroll">
-            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
-            <div class="info">
-              <p class="nameItem">
-                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
-                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
-              </p>
-              <p class="price"><b>¥1500</b><span>¥500</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mem0"><img class="next" src="../static/images/hg2next.png" data-src="../static/images/hg2next.png"></div>
-    </div>
-    <div class="item">
-      <div class="slave0">彩绘贴</div>
-      <div class="mem0"><img class="prev" src="../static/images/hg2prev.png" data-src="../static/images/hg2prev.png"></div>
-      <div class="mem1">
-        <div class="scrollw">
-          <div class="scroll">
-            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
-            <div class="info">
-              <p class="nameItem">
-                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
-                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
-              </p>
-              <p class="price"><b>¥1500</b><span>¥500</span></p>
-            </div>
-          </div>
-          <div class="scroll">
-            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
-            <div class="info">
-              <p class="nameItem">
-                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
-                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
-              </p>
-              <p class="price"><b>¥1500</b><span>¥500</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mem0"><img class="next" src="../static/images/hg2next.png" data-src="../static/images/hg2next.png"></div>
-    </div>
-  </div>
         <div id="centerAdWrapper">
             <uc2:OnlineStaticAD ID="OnlineStaticAD1" ADPositionID="4" ADCSSClass="ad1" runat="server" />
             <uc2:OnlineStaticAD ID="OnlineStaticAD2" ADPositionID="5" ADCSSClass="ad1" runat="server" />
@@ -275,62 +189,62 @@
                 </div>
                 <%=CategoryProductsOneHTML%>
             </div>
-            <div class="right">
-                <div class="brand">
-                    <a class="h" href="#">
-                        <img src="static/images/brand.gif" width="192" height="40"></a>
-                    <%=CategoryProductsBrandsOneHTML%>
-                </div>
-                <div class="discus">
-                    <h2 id="phone1">
-                        <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
-                    </h2>
-                    <div id="phoneCon1">
-                        <%=CategoryProductsHotCommentedOneHTML%>
-                        <%=CategoryProductBestSaledOneHTML%>
-                    </div>
+    <div class="right">
+        <div class="brand">
+            <a class="h" href="#">
+                <img src="static/images/brand.gif" width="192" height="40"></a>
+            <%=CategoryProductsBrandsOneHTML%>
+        </div>
+        <div class="discus">
+            <h2 id="phone1">
+                <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
+            </h2>
+            <div id="phoneCon1">
+                <%=CategoryProductsHotCommentedOneHTML%>
+                <%=CategoryProductBestSaledOneHTML%>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div style="margin-top: 10px;" class="ThreeRow">
+        <div class="bigLeft">
+            <div class="It">
+                <a class="Header" href="#">
+                    <img src="static/images/home.png"></a>
+                <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208"
+                    Height="278" runat="server" />
+                <p style="height: 66px; background-color: rgb(51, 0, 204);">
+                </p>
+                <p>
+                    <a href="#">IT相关导购文</a></p>
+                <p>
+                    <a href="#">IT相关导购文</a></p>
+                <p>
+                    <a href="#">IT相关导购文</a></p>
+                <p>
+                    <a href="#">IT相关导购文</a></p>
+                <p>
+                    <a href="#">IT相关导购文</a></p>
+            </div>
+            <%=CategoryProductsTwoHTML%>
+        </div>
+        <div class="right">
+            <div class="brand">
+                <a class="h" href="#">
+                    <img src="static/images/brand.gif" /></a>
+                <%=CategoryProductsBrandsTwoHTML%>
+            </div>
+            <div class="discus">
+                <h2 id="phone2">
+                    <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
+                </h2>
+                <div id="phoneCon2">
+                    <%=CategoryProductsHotCommentedTwoHTML%>
+                    <%=CategoryProductBestSaledTwoHTML%>
                 </div>
             </div>
         </div>
-        <div style="margin-top: 10px;" class="ThreeRow">
-            <div class="bigLeft">
-                <div class="It">
-                    <a class="Header" href="#">
-                        <img src="static/images/home.png"></a>
-                    <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208"
-                        Height="278" runat="server" />
-                    <p style="height: 66px; background-color: rgb(51, 0, 204);">
-                    </p>
-                    <p>
-                        <a href="#">IT相关导购文</a></p>
-                    <p>
-                        <a href="#">IT相关导购文</a></p>
-                    <p>
-                        <a href="#">IT相关导购文</a></p>
-                    <p>
-                        <a href="#">IT相关导购文</a></p>
-                    <p>
-                        <a href="#">IT相关导购文</a></p>
-                </div>
-                <%=CategoryProductsTwoHTML%>
-            </div>
-            <div class="right">
-                <div class="brand">
-                    <a class="h" href="#">
-                        <img src="static/images/brand.gif" /></a>
-                    <%=CategoryProductsBrandsTwoHTML%>
-                </div>
-                <div class="discus">
-                    <h2 id="phone2">
-                        <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
-                    </h2>
-                    <div id="phoneCon2">
-                        <%=CategoryProductsHotCommentedTwoHTML%>
-                        <%=CategoryProductBestSaledTwoHTML%>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content10" ContentPlaceHolderID="BackupContent2" runat="server">

@@ -129,6 +129,15 @@ namespace YoeJoyHelper
             return HomeBestSaledProductHTML;
         }
 
+        public static string GetHomePromotionBrandsProductsWrapper(int brandId)
+        {
+            CacheObjSetting cacheSetting = StaticCacheObjSettings.SiteHomePromotionBrandsProduct;
+            string key = cacheSetting.CacheKey;
+            int duration = cacheSetting.CacheDuration;
+            string HomeBestSaledProductHTML = CacheObj<string>.GetCachedObj(key, duration, GetHomePromotionBrandsProductsHTML(brandId));
+            return HomeBestSaledProductHTML;
+        }
+
         public static string InitC3ProductFilterWrapper(int c3SysNo)
         {
             CacheObjSetting cacheSetting = DynomicCacheObjSettings.CategoryOneWeeklyBestSaledProductsCacheSettings;
@@ -977,5 +986,61 @@ namespace YoeJoyHelper
 
             return homeHotCommentedProductHTML;
         }
+
+        /// <summary>
+        /// 获得首页中间品牌推荐的商品
+        /// </summary>
+        public static string GetHomePromotionBrandsProductsHTML(int promotionBrandId)
+        {
+            string homePromotionBrandsProductsHTML = String.Empty;
+
+            List<HomePromotionBrandsC3Info> c3Info = HomePromotionBrandsService.GetHomePromptionBrandsC3Info(promotionBrandId);
+            if (c3Info != null)
+            {
+                StringBuilder strb = new StringBuilder();
+                string siteBaseURL = YoeJoyConfig.SiteBaseURL;
+                string imgBasePath = YoeJoyConfig.ImgVirtualPathBase;
+                foreach (HomePromotionBrandsC3Info c3 in c3Info)
+                {
+                    strb.Append("<div class='item'>");
+                    string c3Deeplnik = String.Concat(siteBaseURL, "Pages/SubProductList3.aspx?c1=", c3.C1SysNo, "&c2=", c3.C2SysNo, "&c3=", c3.C3SysNo);
+                    strb.Append(String.Concat("<div class='slave0'><a href='", c3Deeplnik, "'>", c3.C3Name, "</a></div>"));
+                    strb.Append("<div class='mem0'><img class='prev' src='../static/images/hg2prev.png' data-src='../static/images/hg2prev.png'></div>");
+                    strb.Append("<div class='mem1'>");
+                    List<FrontDsiplayProduct> products = HomePromotionBrandsService.GetHomePromotionBrandsProducts(promotionBrandId, c3.C3SysNo);
+                    if (products != null)
+                    {
+                        strb.Append("<div class='scrollw'>");
+                        string productHTMLTemplate = @"<div class='photo'>
+            <a href='{0}'><img src='{1}' ></a></div>
+            <div class='info'>
+              <p class='nameItem'>
+                <a class='name' title='{2}' href='{3}'>{4}</a>
+                <span class='adText'>{5}</span>
+              </p>
+              <p class='price'><b>¥{6}</b><span>¥{7}</span></p></div>";
+
+                        foreach (FrontDsiplayProduct product in products)
+                        {
+                            string productDeepLink = String.Concat(siteBaseURL, "Pages/Product.aspx?c1=", c3.C1SysNo, "&c2=", c3.C2SysNo, "&c3=", c3.C3SysNo, "&pid=", product.ProductSysNo);
+                            string imagePath = String.Concat(imgBasePath, product.ImgPath);
+                            strb.Append("<div class='scroll'>");
+
+                            strb.Append(String.Format(productHTMLTemplate, productDeepLink, imagePath, product.ProductBriefName, productDeepLink,
+                                product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
+
+                            strb.Append("</div>");
+                        }
+                        strb.Append("</div>");
+                    }
+                    strb.Append("</div>");
+                    strb.Append("<div class='mem0'><img class='next' src='../static/images/hg2next.png' data-src='../static/images/hg2next.png'></div>");
+                    strb.Append("</div>");
+                }
+                homePromotionBrandsProductsHTML = strb.ToString();
+            }
+            return homePromotionBrandsProductsHTML;
+        }
+
     }
 }

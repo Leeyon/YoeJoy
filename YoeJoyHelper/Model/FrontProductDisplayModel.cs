@@ -122,6 +122,17 @@ namespace YoeJoyHelper.Model
         public string PromotionWord { get; set; }
     }
 
+    /// <summary>
+    /// 首页推荐品牌商品
+    /// </summary>
+    public class HomePromotionBrandsC3Info
+    {
+        public string C3Name { get; set; }
+        public int C1SysNo { get; set; }
+        public int C2SysNo { get; set; }
+        public int C3SysNo { get; set; }
+    }
+
     #endregion
 
     #region 前台商品展示的模型服务
@@ -1586,6 +1597,112 @@ and olp.ListOrder between {2} and {3}
                         C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
                         C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
                         BaiscPrice = data.Rows[i]["basicPrice"].ToString().Trim(),
+                        ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
+                    });
+                }
+                return products;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    public class HomePromotionBrandsService
+    {
+        private static readonly string getHomePromotionBrandsC3InfoSqlCmd = @"select distinct top 3 c3.C3Name,p.C1SysNo,p.C2SysNo,p.C3SysNo from OnlineListProduct op
+  left join Product p on op.ProductSysNo=p.SysNo
+  left join Product_Brand pb on op.ProductSysNo=pb.ProductSysNo
+  left join Product_Price pp on op.ProductSysNo=pp.ProductSysNo
+  left join Category3 c3 on p.C3SysNo=c3.SysNo
+  where pb.BrandSysNo={0}
+  and p.Status=1
+  and c3.Status=0
+  and op.OnlineAreaType={1}
+  and op.CategorySysNo=0
+  and op.OnlineRecommendType={2}";
+
+        private static readonly string getHomePromotionBrandsProductSqlCmd = @"select distinct op.ProductSysNo,p.BriefName,p.PromotionWord,
+  p.C1SysNo,p.C2SysNo,p.C3SysNo,CONVERT(float,pp.BasicPrice) as baiscPrice,CONVERT(float,pp.CurrentPrice) as price,
+  pimgs.product_limg,op.ListOrder
+  from OnlineListProduct op
+  left join Product p on op.ProductSysNo=p.SysNo
+  left join Product_Brand pb on op.ProductSysNo=pb.ProductSysNo
+  left join Product_Price pp on op.ProductSysNo=pp.ProductSysNo
+  left join Category3 c3 on p.C3SysNo=c3.SysNo
+  left join Product_Images pimgs on op.ProductSysNo=pimgs.product_sysNo
+  where pb.BrandSysNo={0}
+  and p.Status=1
+  and c3.Status=0
+  and op.OnlineAreaType={1}
+  and op.CategorySysNo=0
+  and op.OnlineRecommendType={2}
+  and pimgs.orderNum=1
+  and pimgs.status=1
+  and p.C3SysNo={3} order by op.ListOrder ASC";
+
+        /// <summary>
+        /// 获得首页品牌推荐的商品种类信息
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        public static List<HomePromotionBrandsC3Info> GetHomePromptionBrandsC3Info(int brandId)
+        {
+            int onlineAreaType = (int)AppEnum.OnlineAreaType.HomePage;
+            int onlineRecommendType = (int)AppEnum.OnlineRecommendType.PromotionBrand;
+            string sqlCmd = String.Format(getHomePromotionBrandsC3InfoSqlCmd,brandId,onlineAreaType, onlineRecommendType);
+            DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+            int count = data.Rows.Count;
+            if (count > 0)
+            {
+                List<HomePromotionBrandsC3Info> c3Info = new List<HomePromotionBrandsC3Info>();
+                for (int i = 0; i < count; i++)
+                {
+                    c3Info.Add(new HomePromotionBrandsC3Info()
+                    {
+                        C3Name=data.Rows[i]["C3Name"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                    });
+                }
+                return c3Info;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 推荐品牌的商品
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <param name="c3SysNo"></param>
+        /// <returns></returns>
+        public static List<FrontDsiplayProduct> GetHomePromotionBrandsProducts(int brandId, int c3SysNo)
+        {
+             int onlineAreaType = (int)AppEnum.OnlineAreaType.HomePage;
+            int onlineRecommendType = (int)AppEnum.OnlineRecommendType.PromotionBrand;
+            string sqlCmd = String.Format(getHomePromotionBrandsProductSqlCmd,brandId,onlineAreaType, onlineRecommendType,c3SysNo);
+            DataTable data = new SqlDBHelper().ExecuteQuery(sqlCmd);
+            int count = data.Rows.Count;
+            if (count > 0)
+            {
+                List<FrontDsiplayProduct> products = new List<FrontDsiplayProduct>();
+                for (int i = 0; i < count; i++)
+                {
+                    products.Add(new FrontDsiplayProduct()
+                    {
+                        ProductSysNo = data.Rows[i]["ProductSysNo"].ToString().Trim(),
+                        ProductPromotionWord = data.Rows[i]["PromotionWord"].ToString().Trim(),
+                        Price = data.Rows[i]["price"].ToString().Trim(),
+                        ImgPath = data.Rows[i]["product_limg"].ToString().Trim(),
+                        C1SysNo = int.Parse(data.Rows[i]["C1SysNo"].ToString().Trim()),
+                        C2SysNo = int.Parse(data.Rows[i]["C2SysNo"].ToString().Trim()),
+                        C3SysNo = int.Parse(data.Rows[i]["C3SysNo"].ToString().Trim()),
+                        BaiscPrice = data.Rows[i]["baiscPrice"].ToString().Trim(),
                         ProductBriefName = data.Rows[i]["BriefName"].ToString().Trim(),
                     });
                 }

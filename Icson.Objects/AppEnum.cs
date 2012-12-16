@@ -3317,6 +3317,8 @@ namespace Icson.Objects
             PowerfulSale = 8,
             [Description("热卖推荐")]
             ExcellentRecommend = 9,
+            [Description("品牌推荐")]
+            PromotionBrand = 10,
         }
         public static SortedList GetOnlineRecommendType()
         {
@@ -3346,8 +3348,10 @@ namespace Icson.Objects
             ServiceFaq = 6,
             [Description("帐户中心")]
             AccountCenter = 7,
+            [Description("搜索页")]
+            Search = 8,
             [Description("购物车")]
-            ShoppingCart = 8
+            ShoppingCart = 9
         }
         public static SortedList GetOnlineAreaType()
         {

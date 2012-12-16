@@ -86,8 +86,8 @@
     <dl class="Promotions">
         <dt><a class="prom" href="#">
             <img alt="图标" src="static/images/szj.png" width="8" height="8" />
-            <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#"><%--更多&gt;&gt; --%></a>
-        </dt>
+            <b>商品促销</b> <span>promotions</span> </a><a class="more" href="#">
+                <%--更多&gt;&gt; --%></a> </dt>
         <dd>
             <%=PromoHTML %>
         </dd>
@@ -96,8 +96,8 @@
         <!--新品上市-->
         <dt><a class="prom" href="#">
             <img alt="图标" src="static/images/szj.png" width="8" height="8" />
-            <b>新品上市</b> <span>promotions</span> </a><a class="more" href="#"><%--更多&gt;&gt; --%></a>
-        </dt>
+            <b>新品上市</b> <span>promotions</span> </a><a class="more" href="#">
+                <%--更多&gt;&gt; --%></a> </dt>
         <dd>
             <%=InComingProducts%>
         </dd>
@@ -158,121 +158,95 @@
                 </div>
             </div>
         </div>
-        <div id="highgoods2" class="area">
-            <div class="item">
-                <div class="slave0">
-                    彩绘贴</div>
-                <div class="mem0">
-                    <img class="prev" src="static/images/hg2prev.png"></div>
-                <div class="mem1">
-                    <div class="scrollw">
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div class="info">
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div>
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mem0">
-                    <img class="next" src="static/images/hg2next.png"></div>
+        <div id="highgoods2" class="area imgshow">
+    <div class="item">
+      <div class="slave0">彩绘贴</div>
+      <div class="mem0"><img class="prev" src="../static/images/hg2prev.png" data-src="../static/images/hg2prev.png"></div>
+      <div class="mem1">
+        <div class="scrollw">
+          <div class="scroll">
+            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
+            <div class="info">
+              <p class="nameItem">
+                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
+                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
+              </p>
+              <p class="price"><b>¥1500</b><span>¥500</span></p>
             </div>
-            <div class="item">
-                <div class="slave0">
-                    彩绘贴</div>
-                <div class="mem0">
-                    <img class="prev" src="static/images/hg2prev.png"></div>
-                <div class="mem1">
-                    <div class="scrollw">
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div>
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div>
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div>
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mem0">
-                    <img class="next" src="static/images/hg2next.png"></div>
+          </div>
+          <div class="scroll">
+            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
+            <div class="info">
+              <p class="nameItem">
+                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
+                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
+              </p>
+              <p class="price"><b>¥1500</b><span>¥500</span></p>
             </div>
-            <div class="item">
-                <div class="slave0">
-                    彩绘贴</div>
-                <div class="mem0">
-                    <img class="prev" src="static/images/hg2prev.png"></div>
-                <div class="mem1">
-                    <div class="scrollw">
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div>
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                        <div class="scroll">
-                            <div class="photo">
-                                <a href="products/product.html">
-                                    <img src="static/images/hg2sp0.png"></a></div>
-                            <div>
-                                <p class="name">
-                                    <a href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a></p>
-                                <p class="price0">
-                                    <span class="yen">¥</span>&nbsp;&nbsp;<span class="slave0">148</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mem0">
-                    <img class="next" src="static/images/hg2next.png"></div>
-            </div>
+          </div>
         </div>
+      </div>
+      <div class="mem0"><img class="next" src="../static/images/hg2next.png" data-src="../static/images/hg2next.png"></div>
+    </div>
+    <div class="item">
+      <div class="slave0">彩绘贴</div>
+      <div class="mem0"><img class="prev" src="../static/images/hg2prev.png" data-src="../static/images/hg2prev.png"></div>
+      <div class="mem1">
+        <div class="scrollw">
+          <div class="scroll">
+            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
+            <div class="info">
+              <p class="nameItem">
+                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
+                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
+              </p>
+              <p class="price"><b>¥1500</b><span>¥500</span></p>
+            </div>
+          </div>
+          <div class="scroll">
+            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
+            <div class="info">
+              <p class="nameItem">
+                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
+                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
+              </p>
+              <p class="price"><b>¥1500</b><span>¥500</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mem0"><img class="next" src="../static/images/hg2next.png" data-src="../static/images/hg2next.png"></div>
+    </div>
+    <div class="item">
+      <div class="slave0">彩绘贴</div>
+      <div class="mem0"><img class="prev" src="../static/images/hg2prev.png" data-src="../static/images/hg2prev.png"></div>
+      <div class="mem1">
+        <div class="scrollw">
+          <div class="scroll">
+            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
+            <div class="info">
+              <p class="nameItem">
+                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
+                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
+              </p>
+              <p class="price"><b>¥1500</b><span>¥500</span></p>
+            </div>
+          </div>
+          <div class="scroll">
+            <div class="photo"><a href="products/product.html"><img src="../static/images/hg2sp0.png" data-src="../static/images/hg2sp0.png"></a></div>
+            <div class="info">
+              <p class="nameItem">
+                <a class="name" title="Gelaskins iPhone 4/4s 艺术彩绘贴" href="products/product.html">Gelaskins iPhone 4/4s 艺术彩绘贴</a>
+                <span class="adText">促销促销促销促销品名称商品品名称商品品名称商品销促销促销促销促销end</span>
+              </p>
+              <p class="price"><b>¥1500</b><span>¥500</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mem0"><img class="next" src="../static/images/hg2next.png" data-src="../static/images/hg2next.png"></div>
+    </div>
+  </div>
         <div id="centerAdWrapper">
             <uc2:OnlineStaticAD ID="OnlineStaticAD1" ADPositionID="4" ADCSSClass="ad1" runat="server" />
             <uc2:OnlineStaticAD ID="OnlineStaticAD2" ADPositionID="5" ADCSSClass="ad1" runat="server" />
@@ -312,7 +286,7 @@
                         <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
                     </h2>
                     <div id="phoneCon1">
-                       <%=CategoryProductsHotCommentedOneHTML%> 
+                        <%=CategoryProductsHotCommentedOneHTML%>
                         <%=CategoryProductBestSaledOneHTML%>
                     </div>
                 </div>
@@ -343,7 +317,7 @@
             <div class="right">
                 <div class="brand">
                     <a class="h" href="#">
-                        <img src="static/images/brand.gif"/></a>
+                        <img src="static/images/brand.gif" /></a>
                     <%=CategoryProductsBrandsTwoHTML%>
                 </div>
                 <div class="discus">

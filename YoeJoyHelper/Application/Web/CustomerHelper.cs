@@ -340,55 +340,84 @@ namespace YoeJoyHelper
         }
 
         /// <summary>
-        /// 获取在商品详细页用户的浏览历史
+        /// 获取在商品吧详细页的用户浏览历史
         /// </summary>
         /// <returns></returns>
-        public static string GetCustomerBrowserHistoryByPosition(string positionTag)
+        public static string GetProductDetailBrowserHistoryProductsHTML()
         {
-            ///TODO: add UI code
-            string frontPageBrowserHisHTML = String.Empty;
+            string productDetailBroswerHistoryHTML = String.Empty;
 
             string cookie = CookieUtil.GetDESEncryptedCookieValue(CookieUtil.Cookie_BrowseHistory);
             ArrayList al = CustomerBrowserHistoryProductService.GetBrowseHistoryList(cookie);
 
             if (al != null)
             {
-                switch (positionTag.ToLower(CultureInfo.InvariantCulture))
+                StringBuilder strb = new StringBuilder("<ul class='group'>");
+
+                string liHTML = @"<li><a class='photo' href='{0}'>
+                        <img alt='{1}' src='{2}' width='60' height='60'></a>
+                        <div>
+                            <a class='name' title='{3}' href='{4}'>{5}</a>
+                            <span class='adText'>{6}</span>
+                        </div>
+                        <p class='price'>
+                            <b>¥{7}</b><span>¥{8}</span></p>
+                    </li>";
+
+                var products = al.ToArray().Take(4);
+
+                foreach (CustomerBrowserHistoryProduct product in products)
                 {
-                    //商品详细页的用户浏览记录
-                    case "productdetail":
-                        {
-                            if (al.Count > 5)
-                            {
-                                var hisList = al.ToArray().Take(5);
-                            }
-                            else
-                            {
-                                var hisList = al.ToArray(typeof(string));
-                            }
-                            break;
-                        }
-                    //用户中心首页
-                    case "accountcenter":
-                        {
-                            if (al.Count < 7)
-                            {
-                                var histList = al.ToArray().Take(7);
-                            }
-                            else
-                            {
-                                var histList = al.ToArray();
-                            }
-                            break;
-                        }
-                    //我的全部浏览记录
-                    default:
-                        {
-                            break;
-                        }
+                    string thumbImg = YoeJoyConfig.ImgVirtualPathBase + product.SmallImg;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, thumbImg, product.ProductBriefName, deeplink, product.ProductBriefName, product.PromotionWord, product.CurrentPrice, product.StandardPrice));
                 }
+
+                strb.Append("</ul>");
+                productDetailBroswerHistoryHTML = strb.ToString();
             }
-            return frontPageBrowserHisHTML;
+            return productDetailBroswerHistoryHTML;
+        }
+
+        /// <summary>
+        /// 获得用户中心的最近浏览的商品历史记录
+        /// </summary>
+        /// <returns></returns>
+        public static string GetProfileCenterBorwserHistoryProductsHTML()
+        {
+            string productDetailBroswerHistoryHTML = String.Empty;
+
+            string cookie = CookieUtil.GetDESEncryptedCookieValue(CookieUtil.Cookie_BrowseHistory);
+            ArrayList al = CustomerBrowserHistoryProductService.GetBrowseHistoryList(cookie);
+
+            if (al != null)
+            {
+                StringBuilder strb = new StringBuilder("<ul class='recentLIst'>");
+
+                string liHTML = @"<li><a class='photo' href='{0}' title='{1}'>
+                        <img src='{2}' alt='{3}' 
+                            width='60' height='60'></a>
+                        <div>
+                            <a class='name' title='{4}' href='{5}'>
+                                {6}</a> <span class='adText'>{7}</span>
+                        </div>
+                        <p class='price'>
+                            <b>¥{8}</b><span>¥{9}</span></p>
+                    </li>";
+
+                var products = al.ToArray().Take(3);
+
+                foreach (CustomerBrowserHistoryProduct product in products)
+                {
+                    string thumbImg = YoeJoyConfig.ImgVirtualPathBase + product.SmallImg;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, thumbImg, product.ProductBriefName,product.ProductBriefName, deeplink, product.ProductBriefName, product.PromotionWord, product.CurrentPrice, product.StandardPrice));
+                }
+
+                strb.Append("</ul>");
+                productDetailBroswerHistoryHTML = strb.ToString();
+            }
+            return productDetailBroswerHistoryHTML;
         }
 
     }

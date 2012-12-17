@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using YoeJoyHelper.Security;
 using Icson.Utils;
 using Icson.Objects;
 using Icson.Objects.Online;
@@ -14,7 +15,7 @@ using System.Data;
 
 namespace YoeJoyWeb.User
 {
-    public partial class MyAddress : System.Web.UI.Page
+    public partial class MyAddress : SecurityPageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,13 +34,12 @@ namespace YoeJoyWeb.User
             }
         }
 
-
         private void BindAddressList()
         {
             IcsonSessionInfo oSession = CommonUtility.GetUserSession(Context);
             if (oSession.sCustomer == null || oSession.sCustomer.SysNo == AppConst.IntNull)
             {
-                Response.Redirect(AppConfig.OnlineRootPath + "Account/Login.html");
+                Response.Redirect("login.aspx");
             }
 
             int customerSysNo = oSession.sCustomer.SysNo;
@@ -213,5 +213,14 @@ namespace YoeJoyWeb.User
             AddressInfo.Visible = true;
         }
 
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            AddressInfo.Visible = false;
+            txtBrief.Text = "";
+            txtPhone.Text = "";
+            txtAddress.Text = "";
+            txtZip.Text = "";
+            txtFax.Text = "";
+        }
     }
 }

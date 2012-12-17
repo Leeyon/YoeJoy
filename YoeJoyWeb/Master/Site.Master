@@ -104,7 +104,7 @@
                     }
                 });
             });
-        </script>
+    </script>
         <asp:ContentPlaceHolder ID="MiddleTopModule" runat="server">
         </asp:ContentPlaceHolder>
     </div>

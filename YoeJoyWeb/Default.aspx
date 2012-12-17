@@ -71,16 +71,23 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MiddleTopModule" runat="server">
     <dl id="focus">
-        <dt><a style="display: none;" href="#">
-            <img src="static/images/gg1.jpg"></a> <a style="display: none;" href="#">
-                <img src="static/images/gg2.jpg"></a> <a style="display: inline-block;" href="#">
-                    <img src="static/images/gg3.jpg"></a> <a style="display: none;" href="#">
-                        <img src="static/images/gg4.jpg"></a> <a style="display: none;" href="#">
-                            <img src="static/images/gg5.jpg"></a> </dt>
+        <dt><a style="display: none;" href="http://www.ue96.com/Pages/SubProductList3.aspx?c1=232&amp;c2=233&amp;c3=352">
+            <img src="http://www.ue96.com/up/products/ad07.jpg" /></a> <a style="display: none;"
+                href="http://www.ue96.com/Pages/SubProductList1.aspx?c1=8">
+                <img src="http://www.ue96.com/up/products/ad04.jpg" /></a> <a style="display: inline-block;"
+                    href="http://www.ue96.com/Pages/SubProductList1.aspx?c1=633">
+                    <img src="http://www.ue96.com/up/products/ad03.jpg" /></a> <a style="display: none;"
+                        href="http://www.ue96.com/Pages/SubProductList2.aspx?c1=2&amp;c2=620">
+                        <img src="http://www.ue96.com/up/products/ad05.jpg" /></a> <a style="display: none;"
+                            href="http://www.ue96.com/Pages/SubProductList1.aspx?c1=4">
+                            <img src="http://www.ue96.com/up/products/ad06.jpg" /></a> </dt>
         <dd>
-            <a style="opacity: 0.5;" href="#">沙漠风暴底价大促开启</a> <a style="opacity: 0.5;" href="#">沙漠风暴底价大促开启</a>
-            <a style="opacity: 1;" href="#">沙漠风暴底价大促开</a> <a style="opacity: 0.5;" href="#">沙漠风暴底价大促开</a>
-            <a style="opacity: 0.5;" href="#">沙漠风暴底价大促开</a>
+            <a style="opacity: 0.5;" href="http://www.ue96.com/Pages/SubProductList3.aspx?c1=232&amp;c2=233&amp;c3=352">
+                趣味办公享生活</a> <a style="opacity: 0.5;" href="http://www.ue96.com/Pages/SubProductList1.aspx?c1=8">
+                    LaFong Style</a> <a style="opacity: 1;" href="http://www.ue96.com/Pages/SubProductList1.aspx?c1=633">
+                        爱美女人的秘密</a> <a style="opacity: 0.5;" href="http://www.ue96.com/Pages/SubProductList2.aspx?c1=2&amp;c2=620">
+                            Apple精品周边</a> <a style="opacity: 0.5;" href="http://www.ue96.com/Pages/SubProductList1.aspx?c1=4">
+                                礼品卡惠集中营</a>
         </dd>
     </dl>
     <dl class="Promotions">
@@ -159,7 +166,7 @@
             </div>
         </div>
         <div id="highgoods2" class="area imgshow">
-        <%=HomePromotionBrandsProductHTML %>
+            <%=HomePromotionBrandsProductHTML %>
         </div>
         <div id="centerAdWrapper">
             <uc2:OnlineStaticAD ID="OnlineStaticAD1" ADPositionID="4" ADCSSClass="ad1" runat="server" />
@@ -189,62 +196,62 @@
                 </div>
                 <%=CategoryProductsOneHTML%>
             </div>
-    <div class="right">
-        <div class="brand">
-            <a class="h" href="#">
-                <img src="static/images/brand.gif" width="192" height="40"></a>
-            <%=CategoryProductsBrandsOneHTML%>
-        </div>
-        <div class="discus">
-            <h2 id="phone1">
-                <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
-            </h2>
-            <div id="phoneCon1">
-                <%=CategoryProductsHotCommentedOneHTML%>
-                <%=CategoryProductBestSaledOneHTML%>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div style="margin-top: 10px;" class="ThreeRow">
-        <div class="bigLeft">
-            <div class="It">
-                <a class="Header" href="#">
-                    <img src="static/images/home.png"></a>
-                <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208"
-                    Height="278" runat="server" />
-                <p style="height: 66px; background-color: rgb(51, 0, 204);">
-                </p>
-                <p>
-                    <a href="#">IT相关导购文</a></p>
-                <p>
-                    <a href="#">IT相关导购文</a></p>
-                <p>
-                    <a href="#">IT相关导购文</a></p>
-                <p>
-                    <a href="#">IT相关导购文</a></p>
-                <p>
-                    <a href="#">IT相关导购文</a></p>
-            </div>
-            <%=CategoryProductsTwoHTML%>
-        </div>
-        <div class="right">
-            <div class="brand">
-                <a class="h" href="#">
-                    <img src="static/images/brand.gif" /></a>
-                <%=CategoryProductsBrandsTwoHTML%>
-            </div>
-            <div class="discus">
-                <h2 id="phone2">
-                    <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
-                </h2>
-                <div id="phoneCon2">
-                    <%=CategoryProductsHotCommentedTwoHTML%>
-                    <%=CategoryProductBestSaledTwoHTML%>
+            <div class="right">
+                <div class="brand">
+                    <a class="h" href="#">
+                        <img src="static/images/brand.gif" width="192" height="40"></a>
+                    <%=CategoryProductsBrandsOneHTML%>
+                </div>
+                <div class="discus">
+                    <h2 id="phone1">
+                        <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
+                    </h2>
+                    <div id="phoneCon1">
+                        <%=CategoryProductsHotCommentedOneHTML%>
+                        <%=CategoryProductBestSaledOneHTML%>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div style="margin-top: 10px;" class="ThreeRow">
+            <div class="bigLeft">
+                <div class="It">
+                    <a class="Header" href="#">
+                        <img src="static/images/home.png"></a>
+                    <uc2:OnlineStaticAD ID="C1LeftAD2" ADPositionID="7" ADCSSClass="Header" Width="208"
+                        Height="278" runat="server" />
+                    <p style="height: 66px; background-color: rgb(51, 0, 204);">
+                    </p>
+                    <p>
+                        <a href="#">IT相关导购文</a></p>
+                    <p>
+                        <a href="#">IT相关导购文</a></p>
+                    <p>
+                        <a href="#">IT相关导购文</a></p>
+                    <p>
+                        <a href="#">IT相关导购文</a></p>
+                    <p>
+                        <a href="#">IT相关导购文</a></p>
+                </div>
+                <%=CategoryProductsTwoHTML%>
+            </div>
+            <div class="right">
+                <div class="brand">
+                    <a class="h" href="#">
+                        <img src="static/images/brand.gif" /></a>
+                    <%=CategoryProductsBrandsTwoHTML%>
+                </div>
+                <div class="discus">
+                    <h2 id="phone2">
+                        <span><a class="sel" href="#">用户评论</a></span> <span><a href="#">销量排行</a></span>
+                    </h2>
+                    <div id="phoneCon2">
+                        <%=CategoryProductsHotCommentedTwoHTML%>
+                        <%=CategoryProductBestSaledTwoHTML%>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content10" ContentPlaceHolderID="BackupContent2" runat="server">

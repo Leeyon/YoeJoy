@@ -15,6 +15,10 @@ namespace YoeJoyWeb.User
         /// 用户的基本信息
         /// </summary>
         protected string MyProfileHTML { get; set; }
+        /// <summary>
+        /// 用户最近的浏览记录
+        /// </summary>
+        protected string MyRecentBroswerHistoryHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,6 +27,7 @@ namespace YoeJoyWeb.User
             {
                 var cInfo = CommonUtility.GetUserSession(Context).sCustomer;
                 MyProfileHTML = CustomerHelper.GetCustomerBasicInfo(cInfo);
+                MyRecentBroswerHistoryHTML = CustomerHelper.GetProfileCenterBorwserHistoryProductsHTML();
             }
         }
     }

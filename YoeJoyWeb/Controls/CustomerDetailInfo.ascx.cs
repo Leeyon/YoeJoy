@@ -37,7 +37,7 @@ namespace YoeJoyWeb.Controls
 
             if (oSession.sCustomer == null || oSession.sCustomer.SysNo == AppConst.IntNull)
             {
-                string url = "../CustomError.aspx?msg=" + Server.UrlEncode("缺少注册信息，不能更新或继续注册，请登录");
+                string url = "login.aspx";
                 Response.Redirect(url);
             }
 
@@ -60,6 +60,7 @@ namespace YoeJoyWeb.Controls
 
             if (!Page.IsPostBack)
             {
+                lbUserId.Text = oSession.sCustomer.CustomerID;
                 DatePickerUtil.GetInstance().setDatePickerBox(txtBirthDay);
                 scArea.BindArea();
                 if (this.opt != "reg")

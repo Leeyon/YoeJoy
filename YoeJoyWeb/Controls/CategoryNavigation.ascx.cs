@@ -17,17 +17,14 @@ namespace YoeJoyWeb.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string categoryMiddleContent = new CategoryHelper().InitCategoryNavigation();
+            if (IsHomePage)
             {
-                string categoryMiddleContent = new CategoryHelper().InitCategoryNavigation();
-                if (IsHomePage)
-                {
-                    CategoryNavHTML = String.Format("<div id='Menu'>{0}</div>", categoryMiddleContent);
-                }
-                else
-                {
-                    CategoryNavHTML = String.Format("<div id='ItemSort'> <span>全部商品分类<b>+</b></span> </div><div id='Menu' class='classMenu'>{0}</div>", categoryMiddleContent);
-                }
+                CategoryNavHTML = String.Format("<div id='Menu'>{0}</div>", categoryMiddleContent);
+            }
+            else
+            {
+                CategoryNavHTML = String.Format("<div id='ItemSort'> <span>全部商品分类<b>+</b></span> </div><div id='Menu' class='classMenu'>{0}</div>", categoryMiddleContent);
             }
         }
     }

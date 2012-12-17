@@ -80,6 +80,7 @@ namespace YoeJoyWeb.Pages
         protected string ProductRelatedGuessYouLikeHTML { get; set; }
         protected string ProductAlsoSeenHTML { get; set; }
         protected string ProductAlsoBuyHTML { get; set; }
+        protected string BrowserHistoryProductListHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -99,6 +100,7 @@ namespace YoeJoyWeb.Pages
                 ProductAlsoBuyHTML = FrontProductsHelper.GetProductAlsoBuyInCartCheck(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
                 //添加最近浏览记录
                 CustomerHelper.SetCustomerBrowserHistory(ProductSysNo);
+                BrowserHistoryProductListHTML = CustomerHelper.GetProductDetailBrowserHistoryProductsHTML();
             }
         }
     }

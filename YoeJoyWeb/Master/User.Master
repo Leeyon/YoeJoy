@@ -101,11 +101,8 @@
                 });
             });
         </script>
-        <div id="position">
-            <span>
-                <img src="../static/images/f4.jpg" />您在:</span> <b><a href="../Default.aspx">首页</a></b>
-            <span>&gt;</span> <span>用户中心</span>
-        </div>
+        <asp:ContentPlaceHolder ID="NavContentPlaceHolder" runat="server">
+        </asp:ContentPlaceHolder>
         <div class="left">
             <dl id="LeftBar">
                 <dt>
@@ -134,11 +131,11 @@
                     <a href="#">〉帮助中心</a></dd>
                 <dt><span>帐户中心</span></dt>
                 <dd>
-                    〉<a href="UserCenterEditMyInfo.html">编辑个人资料</a></dd>
+                    〉<a href="../User/MyProfileDetail.aspx">编辑个人资料</a></dd>
                 <dd>
                     〉<a href="UserCenterChangePassWord.html">修改密码</a></dd>
                 <dd>
-                    〉<a href="UserCenterMyAddress.html">收货地址管理</a></dd>
+                    〉<a href="../User/MyAddress.aspx">收货地址管理</a></dd>
                 <dd>
                     〉<a href="UserCenterShare.html">一键分享</a></dd>
                 <dd>

@@ -263,6 +263,13 @@
     <Compile Include="User\MyProfile.aspx.designer.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\MyProfileDetail.aspx.cs">
+      <DependentUpon>MyProfileDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MyProfileDetail.aspx.designer.cs">
+      <DependentUpon>MyProfileDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1024,13 +1031,16 @@
     <Content Include="static\js\prod\jquery-1.8.1.min.js" />
     <Content Include="upload.aspx" />
     <Content Include="User\Login.aspx" />
+    <Content Include="User\MyAddress.aspx" />
     <Content Include="User\MyProfile.aspx" />
+    <Content Include="User\MyProfileDetail.aspx" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="User\MyAddress.aspx" />
     <Content Include="User\MyPassword.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -3,6 +3,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="NavContentPlaceHolder" runat="server">
+    <div id="position">
+        <span>
+            <img src="../static/images/f4.jpg" />您在:</span> <b><a href="../Default.aspx">首页</a></b>
+        <span>&gt;</span> <span>用户中心</span>
+    </div>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="RightBigModule" runat="server">
     <!--用户基本信息-->
     <div id="myInfo">
@@ -197,41 +204,7 @@
             <div class="l">
                 <h2>
                     我最近浏览的商品</h2>
-                <ul class="recentLIst">
-                    <li><a class="photo" title="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" href="product.html">
-                        <img alt="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" src="../static/images/plsp.jpg"
-                            width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" href="product.html">
-                                Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒</a> <span class="adText">Wyeth/惠氏 进口奶源
-                                    S-26金装幼儿乐 幼儿配方奶粉</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                    </li>
-                    <li><a class="photo" title="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" href="product.html">
-                        <img alt="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" src="../static/images/plsp.jpg"
-                            width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" href="product.html">
-                                Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒</a> <span class="adText">Wyeth/惠氏 进口奶源
-                                    S-26金装幼儿乐 幼儿配方奶粉</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                    </li>
-                    <li><a class="photo" title="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" href="product.html">
-                        <img alt="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" src="../static/images/plsp.jpg"
-                            width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒" href="product.html">
-                                Wyeth/惠氏 进口奶源 S-26金装幼儿乐 幼儿配方奶粉3段（1-3岁）1200g/盒</a> <span class="adText">Wyeth/惠氏 进口奶源
-                                    S-26金装幼儿乐 幼儿配方奶粉</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                    </li>
-                </ul>
+                <%=MyRecentBroswerHistoryHTML %>
             </div>
             <div class="r">
                 <div id="newFocus">

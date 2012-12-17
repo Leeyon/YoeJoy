@@ -58,7 +58,7 @@ namespace YoeJoyHelper
             </div>";
                     string imgURL = String.Concat(imageVitualPath, panic.CoverImg);
                     string deeplink=YoeJoyConfig.SiteBaseURL+"Pages/Product.aspx?c1="+panic.C1SysNo+"&c2="+panic.C2SysNo+"&c3="+panic.C3SysNo+"&pid="+panic.ProductSysNo;
-                    strb.Append(String.Format(liTemplate, panic.EndTime.ToString("MM-dd-yyyy HH:mm:ss"), deeplink, imgURL, deeplink,panic.BriefName,panic.BriefName, panic.PromotionWord, panic.ProductPrice,panic.BaiscPrice));
+                    strb.Append(String.Format(liTemplate, panic.EndTime.ToString("MM/dd/yyyy HH:mm:ss"), deeplink, imgURL, deeplink,panic.BriefName,panic.BriefName, panic.PromotionWord, panic.ProductPrice,panic.BaiscPrice));
                 }
                 strb.Append("</div>");
                 HomePanicHTML = strb.ToString();

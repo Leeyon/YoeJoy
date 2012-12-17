@@ -181,7 +181,7 @@ namespace YoeJoyHelper
             CustomerInfo oCustomer = null;
             oCustomer = CustomerManager.GetInstance().Load(name);
             string encryptPassword = DESProvider.EncryptString(password, YoeJoyConfig.DESCEncryptKey);
-            //string encryptPassword = DESProvider.DecryptString(oCustomer.Pwd, YoeJoyConfig.DESCEncryptKey);
+            //string encryptPassword1 = DESProvider.DecryptString(oCustomer.Pwd, YoeJoyConfig.DESCEncryptKey);
             if (oCustomer == null)
             {
                 msg = "用户不存在";
@@ -377,7 +377,7 @@ namespace YoeJoyHelper
                             }
                             else
                             {
-
+                                var histList = al.ToArray();
                             }
                             break;
                         }
@@ -390,5 +390,6 @@ namespace YoeJoyHelper
             }
             return frontPageBrowserHisHTML;
         }
+
     }
 }

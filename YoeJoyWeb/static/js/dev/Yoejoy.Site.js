@@ -32,6 +32,20 @@ YoeJoy.Site = new function () {
             return arr;
         }
 
+        _this.GetSiteBaseURL = function (isHttps) {
+            if (isHttps) {
+                return ("https://" + window.location.host);
+            }
+            else {
+                return ("http://" + window.location.host);
+            }
+        }
+
+        _this.GetJsonStr = function (str) {
+            var json = eval('(' + str + ')');
+            return json;
+        }
+
     };
 
 };

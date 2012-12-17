@@ -97,6 +97,8 @@ namespace YoeJoyWeb.Pages
                 ProductRelatedGuessYouLikeHTML = FrontProductsHelper.GetProductGuessYouLikeHTML(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
                 ProductAlsoSeenHTML=FrontProductsHelper.GetProductAlsoSeenHTML(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
                 ProductAlsoBuyHTML = FrontProductsHelper.GetProductAlsoBuyInCartCheck(C1SysNo, C2SysNo, C3SysNo, ProductSysNo);
+                //添加最近浏览记录
+                CustomerHelper.SetCustomerBrowserHistory(ProductSysNo);
             }
         }
     }

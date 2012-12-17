@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace YoeJoyWeb {
+namespace YoeJoyWeb.Master {
     
     
-    public partial class Site {
+    public partial class Payment {
         
         /// <summary>
         /// HeadContent 控件。
@@ -22,102 +22,66 @@ namespace YoeJoyWeb {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
         
         /// <summary>
-        /// UserProfiler1 控件。
+        /// head 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::YoeJoyWeb.Controls.UserProfiler UserProfiler1;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// LeftTopModule 控件。
+        /// form1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftTopModule;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// RightTopModule 控件。
+        /// BodyContentPlaceHolder 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder RightTopModule;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder BodyContentPlaceHolder;
         
         /// <summary>
-        /// MiddleTopModule 控件。
+        /// ModuleContentPlaceHolder 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MiddleTopModule;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ModuleContentPlaceHolder;
         
         /// <summary>
-        /// SiteNavModule 控件。
+        /// BackupContentPlaceHolder 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder SiteNavModule;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContentPlaceHolder;
         
         /// <summary>
-        /// LeftBigModule 控件。
+        /// BackupContentPlaceHolder1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftBigModule;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContentPlaceHolder1;
         
         /// <summary>
-        /// RightBigModule 控件。
+        /// ScriptContentPlaceHolder 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder RightBigModule;
-        
-        /// <summary>
-        /// BackupContent1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContent1;
-        
-        /// <summary>
-        /// HomeMiddleContent 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HomeMiddleContent;
-        
-        /// <summary>
-        /// BackupContent2 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContent2;
-        
-        /// <summary>
-        /// ScriptContent 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptContentPlaceHolder;
     }
 }

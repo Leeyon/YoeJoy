@@ -84,6 +84,13 @@
     <Compile Include="Controls\CategoryNavigation.ascx.designer.cs">
       <DependentUpon>CategoryNavigation.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserProfiler.ascx.cs">
+      <DependentUpon>UserProfiler.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UserProfiler.ascx.designer.cs">
+      <DependentUpon>UserProfiler.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -94,12 +101,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Master\Payment.Master.cs">
+      <DependentUpon>Payment.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Payment.Master.designer.cs">
+      <DependentUpon>Payment.Master</DependentUpon>
+    </Compile>
     <Compile Include="Master\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Master\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\User.Master.cs">
+      <DependentUpon>User.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\User.Master.designer.cs">
+      <DependentUpon>User.Master</DependentUpon>
     </Compile>
     <Compile Include="Pages\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
@@ -627,6 +648,7 @@
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="Controls\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Controls\UserProfiler.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Product.aspx" />
@@ -1001,13 +1023,13 @@
     <Content Include="static\js\dev\Yoejoy.Site.js" />
     <Content Include="static\js\prod\jquery-1.8.1.min.js" />
     <Content Include="upload.aspx" />
+    <Content Include="User\Login.aspx" />
+    <Content Include="User\MyProfile.aspx" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="User\Login.aspx" />
     <Content Include="User\MyAddress.aspx" />
     <Content Include="User\MyPassword.aspx" />
-    <Content Include="User\MyProfile.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1021,6 +1043,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Controls\CKEditor\.htaccess" />
+    <Content Include="Master\User.Master" />
+    <Content Include="Master\Payment.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Icson.BLL\Icson.BLL.csproj">

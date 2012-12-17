@@ -1,0 +1,222 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="YoeJoyWeb.Master.User" %>
+
+<%@ Register Src="../Controls/CategoryNavigation.ascx" TagName="CategoryNavigation"
+    TagPrefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>攸怡网 - 综合类互联网商城 100%正品行货 折扣 实惠</title>
+    <meta property="qc:admins" content="2422330137617527163757" />
+    <link type="text/css" rel="Stylesheet" href="../static/css/base.css" />
+    <link type="text/css" rel="Stylesheet" href="../static/css/productSort.css" />
+    <link type="text/css" rel="Stylesheet" href="../static/css/usercenter.css" />
+    <script type="text/javascript" src="../static/js/dev/jquery-1.8.1.js"></script>
+    <script type="text/javascript" src="../static/js/dev/usercustom.js"></script>
+    <script type="text/javascript" src="../static/js/dev/jquery.js"></script>
+    <script type="text/javascript" src="../static/js/dev/YoeJoy.Namespace.js"></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript" src="../static/js/dev/YoeJoy.Object.js"></script>
+    <script type="text/javascript" src="../static/js/dev/Yoejoy.Site.js"></script>
+    <script type="text/javascript" src="../static/js/dev/jquery.scrollLoading-min.js"></script>
+</head>
+<body id="bg">
+    <form id="form1" runat="server">
+    <dl id="logo">
+        <dt><a href="#">
+            <img alt="logo" src="../static/../static/images/logo.gif" width="243" height="50" /></a></dt>
+    </dl>
+    <div class="ThreeRow top">
+        <div class="left ItemSort1" id="ItemSortCon">
+            <uc1:CategoryNavigation ID="CategoryNavigation1" runat="server" IsHomePage="false" />
+        </div>
+        <div class="right">
+            <div id="count">
+                <div id="chart">
+                    <span>购物车:<b>12</b>件 </span>
+                    <img alt="购物车" src="../static/images/gwcbt0.png" width="39" height="32">
+                    <a href="process1.html">结算</a>
+                </div>
+                <div id="chartContent">
+                    <img alt="背景" src="../static/images/gwctop.png" width="372" height="18">
+                    <div class="shopping">
+                        <p class="l">
+                            <a href="#">
+                                <img src="../static/images/char.jpg"></a> <span>全脂牛奶全脂牛奶全脂牛奶全脂牛奶</span> <b>￥15000.00</b>
+                        </p>
+                        <div class="r">
+                            <span>-</span>
+                            <input value="1" type="text">
+                            <span>+</span>
+                            <p>
+                                删除</p>
+                        </div>
+                    </div>
+                    <div class="payNow">
+                        <div class="l">
+                            共<b>12</b>件商品
+                        </div>
+                        <div class="r">
+                            <p>
+                                合计：<b>￥1900.9</b></p>
+                            <a href="process1.html">
+                                <img src="../static/images/jsbt.png"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ServiceLine">
+                <span>400-808-9196 (9:30~18:30)</span> <font>9914838 (9:30~22:00)</font>
+            </div>
+        </div>
+        <div class="middle">
+            <dl id="Search">
+                <dt id="topNav"><a href="../Default.aspx">首页</a><a href="grounp.html">团购</a> </dt>
+                <dd>
+                    <p id="HotWord">
+                        <span>热门搜索:</span> <a href="search.html">ＩＴ数码</a> <a href="search.html">巧克力</a>
+                        <a href="search.html">进口糖果</a>
+                    </p>
+                    <div id="SearchBox">
+                        <p>
+                            <input id="txtSearch" value="数码产品" type="text" />
+                            <button type="button" id="btnSearch">
+                            </button>
+                        </p>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSearch").click(function (event) {
+                    var keyWords = $("#txtSearch").val();
+                    if (keyWords.length > 0) {
+                        var searchURL = YoeJoy.Site.Utility.GetSiteBaseURL(false) + "/Pages/Search.aspx?q=" + escape(keyWords);
+                        window.location.href = searchURL;
+                    }
+                    else {
+                        return;
+                    }
+                });
+            });
+        </script>
+        <div id="position">
+            <span>
+                <img src="../static/images/f4.jpg" />您在:</span> <b><a href="../Default.aspx">首页</a></b>
+            <span>&gt;</span> <span>用户中心</span>
+        </div>
+        <div class="left">
+            <dl id="LeftBar">
+                <dt>
+                    <h1>
+                        <a href="UserCenterMyJoyo.html">我的攸怡</a></h1>
+                </dt>
+                <dt><span>交易中心</span></dt>
+                <dd>
+                    〉<a href="UserCenterMYorders.html">我的订单</a></dd>
+                <dd>
+                    〉<a href="UserCenterFavorites.html"> 我的收藏</a></dd>
+                <dd>
+                    〉<a href="UserCenterMyGrounp.html">我的团购订单</a></dd>
+                <dd>
+                    〉<a href="UserCenterMYEvalution.html">评价商品</a></dd>
+                <dd class="last">
+                    <a href="UserCenterMyHistory.html">〉浏览历史</a></dd>
+                <dt><span>服务中心</span></dt>
+                <dd>
+                    〉<a href="UserCenterMYMessage.html"> 站内信</a></dd>
+                <dd>
+                    〉<a href="UserCenterMYcomplain.html">在线投诉</a></dd>
+                <dd>
+                    〉<a href="UserCenterCanceTheOrders.html">在线退换货</a></dd>
+                <dd class="last">
+                    <a href="#">〉帮助中心</a></dd>
+                <dt><span>帐户中心</span></dt>
+                <dd>
+                    〉<a href="UserCenterEditMyInfo.html">编辑个人资料</a></dd>
+                <dd>
+                    〉<a href="UserCenterChangePassWord.html">修改密码</a></dd>
+                <dd>
+                    〉<a href="UserCenterMyAddress.html">收货地址管理</a></dd>
+                <dd>
+                    〉<a href="UserCenterShare.html">一键分享</a></dd>
+                <dd>
+                    〉<a href="UserCenterMYouHui.html">我的优惠券</a></dd>
+                <dd>
+                    〉<a href="UserCenterMyScore.html">我的积分</a></dd>
+                <dd class="last">
+                    <a href="UserCenterMYCost.html">〉消费记录</a></dd>
+            </dl>
+        </div>
+        <div class="bigRight">
+            <asp:ContentPlaceHolder ID="RightBigModule" runat="server">
+            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="BackupContent1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    <asp:ContentPlaceHolder ID="BackupContentPlaceHolder2" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="ScriptContentPlaceHolder" runat="server">
+    </asp:ContentPlaceHolder>
+    <div id="footer">
+        <ul id="Guide">
+            <a id="topp" href="#">
+                <img src="../static/../static/images/topp.png"></a>
+            <li><a class="guidePic" href="#">
+                <img src="../static/../static/images/guide.jpg"></a> </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/../static/images/footico1.png">关于攸怡</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/../static/images/footico2.png">新手指南</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/../static/images/footico3.png">我的帐户</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/../static/images/footico4.png">客户服务中心</h2>
+                    <p>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <div id="footMsg">
+            <span class="minLogo">
+                <img src="../static/../static/images/logob.jpg"></span> <span class="menu"><a href="#">
+                    商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">
+                        商城首页</a>
+                    <br>
+                    <em>联系热线: +86-21-64681500 E-Mail: contact@joyoplan.com<br>
+                        沪ICP备09017990号</em> </span>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

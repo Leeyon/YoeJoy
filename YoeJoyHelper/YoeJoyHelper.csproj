@@ -75,6 +75,9 @@
     <Compile Include="Model\WishListModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\DESProvider.cs" />
+    <Compile Include="Security\SecurityPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utility\CommonUtility.cs" />
     <Compile Include="Utility\GroupBuyUtility.cs" />
     <Compile Include="Utility\NewProductImageUtility.cs" />

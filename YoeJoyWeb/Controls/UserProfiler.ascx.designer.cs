@@ -7,9 +7,9 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace YoeJoyWeb.User {
+namespace YoeJoyWeb.Controls {
     
     
-    public partial class MyProfile {
+    public partial class UserProfiler {
     }
 }

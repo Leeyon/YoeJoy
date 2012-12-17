@@ -4,20 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using YoeJoyHelper.Security;
 using YoeJoyHelper;
-using Icson.Objects;
-using Icson.Objects.Online;
 
 namespace YoeJoyWeb.User
 {
-    public partial class MyProfile : System.Web.UI.Page
+    public partial class MyProfile : SecurityPageBase
     {
+        /// <summary>
+        /// 用户的基本信息
+        /// </summary>
         protected string MyProfileHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var cInfo = ((Site)this.Master).UserSession.sCustomer;
-            MyProfileHTML = CustomerHelper.GetCustomerBasicInfo(cInfo);
+            base.CheckProfile(Context);
+            if (!IsPostBack)
+            {
+                var cInfo = CommonUtility.GetUserSession(Context).sCustomer;
+                MyProfileHTML = CustomerHelper.GetCustomerBasicInfo(cInfo);
+            }
         }
     }
 }

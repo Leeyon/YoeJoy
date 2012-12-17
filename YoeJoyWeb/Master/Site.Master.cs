@@ -14,23 +14,6 @@ namespace YoeJoyWeb
 {
     public partial class Site : System.Web.UI.MasterPage
     {
-        /// <summary>
-        /// 用户的Session
-        /// </summary>
-        public IcsonSessionInfo UserSession
-        {
-            get
-            {
-                IcsonSessionInfo oSession = (IcsonSessionInfo)Session["IcsonSessionInfo"];
-                if (oSession == null)
-                {
-                    oSession = new IcsonSessionInfo();
-                    Session["IcsonSessionInfo"] = oSession;
-                }
-                return oSession;
-            }
-        }
-
         //判断是否是主页
         public bool IsHomePage { get; set; }
 
@@ -61,10 +44,6 @@ namespace YoeJoyWeb
             else
             {
                 LeftTopDivTag = "<div class='left ItemSort1' id='ItemSortCon'>";
-            }
-            if (UserSession.sCustomer == null)
-            {
-                ///TODO: add logic here for user scenarios
             }
         }
     }

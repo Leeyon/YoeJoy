@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace YoeJoyWeb {
+namespace YoeJoyWeb.Master {
     
     
-    public partial class Site {
+    public partial class User {
         
         /// <summary>
         /// HeadContent 控件。
@@ -22,58 +22,22 @@ namespace YoeJoyWeb {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
         
         /// <summary>
-        /// UserProfiler1 控件。
+        /// form1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::YoeJoyWeb.Controls.UserProfiler UserProfiler1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LeftTopModule 控件。
+        /// CategoryNavigation1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftTopModule;
-        
-        /// <summary>
-        /// RightTopModule 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder RightTopModule;
-        
-        /// <summary>
-        /// MiddleTopModule 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MiddleTopModule;
-        
-        /// <summary>
-        /// SiteNavModule 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder SiteNavModule;
-        
-        /// <summary>
-        /// LeftBigModule 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftBigModule;
+        protected global::YoeJoyWeb.Controls.CategoryNav CategoryNavigation1;
         
         /// <summary>
         /// RightBigModule 控件。
@@ -94,30 +58,21 @@ namespace YoeJoyWeb {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContent1;
         
         /// <summary>
-        /// HomeMiddleContent 控件。
+        /// BackupContentPlaceHolder2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HomeMiddleContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContentPlaceHolder2;
         
         /// <summary>
-        /// BackupContent2 控件。
+        /// ScriptContentPlaceHolder 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder BackupContent2;
-        
-        /// <summary>
-        /// ScriptContent 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptContentPlaceHolder;
     }
 }

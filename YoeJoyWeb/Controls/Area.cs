@@ -203,13 +203,12 @@ namespace YoeJoyWeb.Controls
 				ddlDistrict.SelectedIndexChanged += new System.EventHandler(ddl_SelectedIndexChanged);
 			}
 
-			Controls.Add(new LiteralControl("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td nowrap=true>省份：</td><td>"));
+            Controls.Add(new LiteralControl("<lable>省份：</lable>"));
 			Controls.Add(ddlProvince);
-			Controls.Add(new LiteralControl("</td><td nowrap=true>城市：</td><td>"));
+            Controls.Add(new LiteralControl("<lable>城市：</lable>"));
 			Controls.Add(ddlCity);
-			Controls.Add(new LiteralControl("</td><td nowrap=true>区县：</td><td>"));
+            Controls.Add(new LiteralControl("<lable>区县：</lable>"));
 			Controls.Add(ddlDistrict);
-			Controls.Add(new LiteralControl("</td></tr></table>"));
 
 			base.OnInit(e);
 		}

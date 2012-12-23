@@ -39,78 +39,7 @@
                     <div class="mem1">
                     </div>
                 </div>
-                <div class="group">
-                    <div class="item">
-                        <a class="photo" href="product.html">
-                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="商品名称商品名称商品名称商品名称商品名称" href="product.html">商品名称商品名称商品名称商品名称商品名称</a>
-                            <span class="adText">促销促销促销促销促销促销促销</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                        <p class="pltext" align="left">
-                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                        <p class="slave" align="right">
-                            会员:l***o</p>
-                    </div>
-                    <div class="item">
-                        <a class="photo" href="product.html">
-                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="商品名称商品名称商品名称商品名称商品名称" href="product.html">商品名称商品名称商品名称商品名称商品名称</a>
-                            <span class="adText">促销促销促销促销促销促销促销</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                        <p class="pltext" align="left">
-                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                        <p class="slave" align="right">
-                            会员:l***o</p>
-                    </div>
-                    <div class="item">
-                        <a class="photo" href="product.html">
-                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="商品名称商品名称商品名称商品名称商品名称" href="product.html">商品名称商品名称商品名称商品名称商品名称</a>
-                            <span class="adText">促销促销促销促销促销促销促销</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                        <p class="pltext" align="left">
-                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                        <p class="slave" align="right">
-                            会员:l***o</p>
-                    </div>
-                    <div class="item">
-                        <a class="photo" href="product.html">
-                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="商品名称商品名称商品名称商品名称商品名称" href="product.html">商品名称商品名称商品名称商品名称商品名称</a>
-                            <span class="adText">促销促销促销促销促销促销促销</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                        <p class="pltext" align="left">
-                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                        <p class="slave" align="right">
-                            会员:l***o</p>
-                    </div>
-                    <div class="item">
-                        <a class="photo" href="product.html">
-                            <img alt="商品名称商品名称商品名称商品名称商品名称" src="../static/images/plsp.jpg" width="60" height="60"></a>
-                        <div>
-                            <a class="name" title="商品名称商品名称商品名称商品名称商品名称" href="product.html">商品名称商品名称商品名称商品名称商品名称</a>
-                            <span class="adText">促销促销促销促销促销促销促销</span>
-                        </div>
-                        <p class="price">
-                            <b>¥1500</b><span>¥500</span></p>
-                        <p class="pltext" align="left">
-                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
-                        <p class="slave" align="right">
-                            会员:l***o</p>
-                    </div>
-                </div>
+                <%=SearchHotCommentProductsHTML %>
             </div>
             <!--产品热评End-->
         </div>

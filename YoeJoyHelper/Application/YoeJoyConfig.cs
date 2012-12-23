@@ -61,6 +61,5 @@ namespace YoeJoyHelper
         public static readonly string DESCEncryptKey = ConfigurationManager.AppSettings["DESCEncryptKey"].ToString().Trim();
         public static readonly string WishListPagedCount = ConfigurationManager.AppSettings["WishListPagedCount"].ToString().Trim();
         //public static readonly string XMLVirtualPathBase = ConfigurationManager.AppSettings["XMLVitrualPath"].ToString().Trim();
-        public static readonly string HomePromotionBrandId = ConfigurationManager.AppSettings["HomePromotionBrandId"].ToString().Trim();
     }
 }

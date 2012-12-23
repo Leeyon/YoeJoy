@@ -16,9 +16,9 @@ namespace YoeJoyHelper.Extension
         public static bool IsSafeString(this string target)
         {
             bool isSafeString = true;
-            if(String.IsNullOrEmpty(target))
+            if (String.IsNullOrEmpty(target))
             {
-                isSafeString=false;
+                isSafeString = false;
             }
             return isSafeString;
         }
@@ -38,6 +38,23 @@ namespace YoeJoyHelper.Extension
             else
             {
                 return target.Trim();
+            }
+        }
+
+        /// <summary>
+        /// 编码URL中文参数
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static string GetUrlEncodeStr(this string target)
+        {
+            if (String.IsNullOrEmpty(target))
+            {
+                return String.Empty;
+            }
+            else
+            {
+                return HttpUtility.UrlEncode(target);
             }
         }
 

@@ -76,6 +76,10 @@ namespace YoeJoyHelper
                     }
                     bottomNavHTML = String.Format(bottomNavHTMLTemplate, bottomNavItenHTML, totalPageCount, totalPageCount, pagedCount, productTotalCount);
                 }
+                else
+                {
+                    bottomNavHTML = String.Format(@"<input type='hidden' id='totalProductCount' value='{0}'/>", productTotalCount);
+                }
                 strb.Append(bottomNavHTML);
             }
 
@@ -190,6 +194,10 @@ namespace YoeJoyHelper
                         bottomNavItenHTML += String.Format(bottomNavItemHTMLTemplate, i);
                     }
                     bottomNavHTML = String.Format(bottomNavHTMLTemplate, bottomNavItenHTML, totalPageCount, totalPageCount, pagedCount, productTotalCount);
+                }
+                else
+                {
+                    bottomNavHTML = String.Format(@"<input type='hidden' id='totalProductCount' value='{0}'/>", productTotalCount);
                 }
                 strb.Append(bottomNavHTML);
             }

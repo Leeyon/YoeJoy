@@ -3869,6 +3869,7 @@ and product.SysNo not in (select productsysno from sale_countdown where status =
             sql = sql.Replace("@customerSysNo", customerSysNo.ToString());
             return SqlHelper.ExecuteDataSet(sql);
         }
+
         public DataSet GetCartDs(Hashtable ht)
         {
             //ht 是productsysno的集合。
@@ -3900,6 +3901,50 @@ and product.SysNo not in (select productsysno from sale_countdown where status =
             sql = sql.Replace("@productsysnoS", sb.ToString());
             return SqlHelper.ExecuteDataSet(sql);
         }
+
+        /// <summary>
+        /// GetCartDs的增强版
+        /// For UE96
+        /// </summary>
+        /// <param name="ht"></param>
+        /// <returns></returns>
+        public DataTable NewGetCartDs(Hashtable ht)
+        {
+            //ht 是productsysno的集合。
+            if (ht == null || ht.Count == 0)
+                return null;
+            int i = 0;
+            StringBuilder sb = new StringBuilder(20);
+            foreach (int productsysno in ht.Keys)
+            {
+                if (i != 0)
+                    sb.Append(",");
+                sb.Append(productsysno.ToString());
+                i++;
+            }
+            string sql = @"select 
+								product.sysno, C1SysNo,C2SysNo,C3SysNo,
+                                productname,PromotionWord,VirtualArriveTime,size2name, 
+								product_price.CurrentPrice,
+								availableqty+virtualqty as onlineqty,availableqty,
+                                product_simg
+							from
+								product(nolock), product_price(nolock), inventory(nolock),size2(nolock),Product_Images (nolock)
+							where
+								product.sysno = product_price.productsysno
+							and product.sysno = inventory.productsysno 
+                            and product.productsize *= size2.sysno
+                            and product.SysNo=Product_Images.product_sysNo
+							@onlineShowLimit
+                            and Product_Images.status=1
+                            and Product_Images.orderNum=1
+							and product.sysno in (@productsysnoS)
+							";
+            sql = sql.Replace("@onlineShowLimit", onlineShowLimit);
+            sql = sql.Replace("@productsysnoS", sb.ToString());
+            return SqlHelper.ExecuteDataTable(sql);
+        }
+
         /// <summary>
         /// 获取购物车主商品当前对应赠品集合
         /// </summary>

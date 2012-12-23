@@ -37,6 +37,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assemblies\CKEditor.NET.dll</HintPath>
     </Reference>
+    <Reference Include="DBCSoft.Component, Version=1.0.3519.30462, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\DBCSoft.Component.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -62,6 +66,13 @@
     </Compile>
     <Compile Include="Controls\CustomerDetailInfo.ascx.designer.cs">
       <DependentUpon>CustomerDetailInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OnlieShoppingCart.ascx.cs">
+      <DependentUpon>OnlieShoppingCart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlieShoppingCart.ascx.designer.cs">
+      <DependentUpon>OnlieShoppingCart.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\OnlineStaticAD.ascx.cs">
       <DependentUpon>OnlineStaticAD.ascx</DependentUpon>
@@ -121,6 +132,13 @@
     </Compile>
     <Compile Include="Master\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BrandProductList1.aspx.cs">
+      <DependentUpon>BrandProductList1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BrandProductList1.aspx.designer.cs">
+      <DependentUpon>BrandProductList1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
@@ -185,6 +203,27 @@
     <Compile Include="Pages\SubProductList2.aspx.designer.cs">
       <DependentUpon>SubProductList2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BrandProductsResult1.aspx.cs">
+      <DependentUpon>BrandProductsResult1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BrandProductsResult1.aspx.designer.cs">
+      <DependentUpon>BrandProductsResult1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BrandProductList2.aspx.cs">
+      <DependentUpon>BrandProductList2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BrandProductList2.aspx.designer.cs">
+      <DependentUpon>BrandProductList2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BrandProductsResult2.aspx.cs">
+      <DependentUpon>BrandProductsResult2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BrandProductsResult2.aspx.designer.cs">
+      <DependentUpon>BrandProductsResult2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CustomerFavorite.aspx.cs">
       <DependentUpon>CustomerFavorite.aspx</DependentUpon>
@@ -214,6 +253,13 @@
     <Compile Include="Service\GetSearch2ProductListItem.aspx.designer.cs">
       <DependentUpon>GetSearch2ProductListItem.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service\ShoppingCartService.aspx.cs">
+      <DependentUpon>ShoppingCartService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\ShoppingCartService.aspx.designer.cs">
+      <DependentUpon>ShoppingCartService.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Service\UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -227,6 +273,48 @@
     </Compile>
     <Compile Include="Service\UserRegister.aspx.designer.cs">
       <DependentUpon>UserRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\GetBrandProductList1Item.aspx.cs">
+      <DependentUpon>GetBrandProductList1Item.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\GetBrandProductList1Item.aspx.designer.cs">
+      <DependentUpon>GetBrandProductList1Item.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\GetBrandProductList2Item.aspx.cs">
+      <DependentUpon>GetBrandProductList2Item.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\GetBrandProductList2Item.aspx.designer.cs">
+      <DependentUpon>GetBrandProductList2Item.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping\CheckOut.aspx.cs">
+      <DependentUpon>CheckOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping\CheckOut.aspx.designer.cs">
+      <DependentUpon>CheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping\Pay-alipay3.aspx.cs">
+      <DependentUpon>Pay-alipay3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping\Pay-alipay3.aspx.designer.cs">
+      <DependentUpon>Pay-alipay3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping\PreCheckOut.aspx.cs">
+      <DependentUpon>PreCheckOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping\PreCheckOut.aspx.designer.cs">
+      <DependentUpon>PreCheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping\ShoppingCart.aspx.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping\ShoppingCart.aspx.designer.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
     </Compile>
     <Compile Include="upload.aspx.cs">
       <DependentUpon>upload.aspx</DependentUpon>
@@ -248,6 +336,27 @@
     </Compile>
     <Compile Include="User\MyAddress.aspx.designer.cs">
       <DependentUpon>MyAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\MyHistory.aspx.cs">
+      <DependentUpon>MyHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MyHistory.aspx.designer.cs">
+      <DependentUpon>MyHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\MyOrder.aspx.cs">
+      <DependentUpon>MyOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MyOrder.aspx.designer.cs">
+      <DependentUpon>MyOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\MyOrderDetail.aspx.cs">
+      <DependentUpon>MyOrderDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\MyOrderDetail.aspx.designer.cs">
+      <DependentUpon>MyOrderDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\MyPassword.aspx.cs">
       <DependentUpon>MyPassword.aspx</DependentUpon>
@@ -284,8 +393,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assemblies\CKEditor.NET.dll" />
+    <Content Include="Assemblies\DBCSoft.Component.dll" />
     <Content Include="Controls\My97DatePicker\开发包\skin\default\bg.jpg" />
     <Content Include="Controls\CustomerDetailInfo.ascx" />
+    <Content Include="Controls\OnlieShoppingCart.ascx" />
     <Content Include="Controls\OnlineStaticAD.ascx" />
     <Content Include="Controls\SubCategoryNavigation.ascx" />
     <Content Include="Controls\CategoryNavigation.ascx" />
@@ -658,6 +769,7 @@
     <Content Include="Controls\UserProfiler.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\BrandProductList1.aspx" />
     <Content Include="Pages\Product.aspx" />
     <Content Include="Pages\ProductList.aspx" />
     <Content Include="Pages\Search.aspx" />
@@ -667,12 +779,22 @@
     <Content Include="Pages\SubProductList1.aspx" />
     <Content Include="Pages\SubProductList3.aspx" />
     <Content Include="Pages\SubProductList2.aspx" />
+    <Content Include="Pages\BrandProductsResult1.aspx" />
+    <Content Include="Pages\BrandProductList2.aspx" />
+    <Content Include="Pages\BrandProductsResult2.aspx" />
     <Content Include="Service\CustomerFavorite.aspx" />
     <Content Include="Service\GetProductListItem.aspx" />
     <Content Include="Service\GetSearch1ProductListItem.aspx" />
     <Content Include="Service\GetSearch2ProductListItem.aspx" />
+    <Content Include="Service\ShoppingCartService.aspx" />
     <Content Include="Service\UserLogin.aspx" />
     <Content Include="Service\UserRegister.aspx" />
+    <Content Include="Service\GetBrandProductList1Item.aspx" />
+    <Content Include="Service\GetBrandProductList2Item.aspx" />
+    <Content Include="Shopping\CheckOut.aspx" />
+    <Content Include="Shopping\Pay-alipay3.aspx" />
+    <Content Include="Shopping\PreCheckOut.aspx" />
+    <Content Include="Shopping\ShoppingCart.aspx" />
     <Content Include="static\css\base.css" />
     <Content Include="static\css\class.css" />
     <Content Include="static\css\grounp.css" />
@@ -754,6 +876,7 @@
     <Content Include="static\images\dt_span.jpg" />
     <Content Include="static\images\ear.jpg" />
     <Content Include="static\images\edit.jpg" />
+    <Content Include="static\images\emptycart.JPG" />
     <Content Include="static\images\f01.jpg" />
     <Content Include="static\images\f02.jpg" />
     <Content Include="static\images\f03.jpg" />
@@ -956,6 +1079,7 @@
     <Content Include="static\images\tgproduct.jpg" />
     <Content Include="static\images\time.png" />
     <Content Include="static\images\timebg.png" />
+    <Content Include="static\images\tj.JPG" />
     <Content Include="static\images\top.jpg" />
     <Content Include="static\images\top.png" />
     <Content Include="static\images\topp.png" />
@@ -1032,12 +1156,15 @@
     <Content Include="upload.aspx" />
     <Content Include="User\Login.aspx" />
     <Content Include="User\MyAddress.aspx" />
+    <Content Include="User\MyHistory.aspx" />
+    <Content Include="User\MyOrder.aspx" />
+    <Content Include="User\MyOrderDetail.aspx" />
+    <Content Include="User\MyPassword.aspx" />
     <Content Include="User\MyProfile.aspx" />
     <Content Include="User\MyProfileDetail.aspx" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="User\MyPassword.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

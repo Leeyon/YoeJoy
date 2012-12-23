@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using YoeJoyHelper.Model;
+using YoeJoyHelper.Extension;
 
 namespace YoeJoyHelper
 {
@@ -46,8 +47,9 @@ namespace YoeJoyHelper
             {
                 foreach (BrandForHome homeBrand in homeBrands)
                 {
-                    strb.Append(string.Format(@"<a href='./brands.aspx?bid={0}' target='_self''>
-                            <img alt='{1}' src='{2}' /></a></li>", homeBrand.BrandSysNo, homeBrand.BrandName, (imageVitualPath + homeBrand.BrandLogo)));
+                    strb.Append(string.Format(@"<a href='./Pages/BrandProductList1.aspx?bid={0}&bName={1}' target='_self'>
+                            <img alt='{2}' src='{3}' /></a></li>", homeBrand.BrandSysNo,
+                                                                  homeBrand.BrandName.GetUrlEncodeStr(), homeBrand.BrandName, (imageVitualPath + homeBrand.BrandLogo)));
                 }
             }
             strb.Append("</ul>");
@@ -68,11 +70,11 @@ namespace YoeJoyHelper
             if (homeBrands != null)
             {
                 int tRowCount = homeBrands.Count % 8;
-                string tdHTMLTemplate = @"<li><a href='{0}brands.aspx?bid={1}'><img src='{2}'></a> </li>";
+                string tdHTMLTemplate = @"<li><a href='{0}Pages/BrandProductList1.aspx?bid={1}&bName={2}'><img src='{3}'></a> </li>";
                 StringBuilder strb = new StringBuilder("<ul>");
                 for (int i = 0; i < tRowCount; i++)
                 {
-                    strb.Append(String.Format(tdHTMLTemplate,YoeJoyConfig.SiteBaseURL,homeBrands[i].BrandSysNo,imageVitualPath + homeBrands[i].BrandLogo, homeBrands[i].BrandName));
+                    strb.Append(String.Format(tdHTMLTemplate, YoeJoyConfig.SiteBaseURL, homeBrands[i].BrandSysNo, homeBrands[i].BrandName.GetUrlEncodeStr(), imageVitualPath + homeBrands[i].BrandLogo));
                 }
                 strb.Append("</ul>");
                 homeBrandsHTML = strb.ToString();

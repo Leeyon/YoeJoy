@@ -2,6 +2,9 @@
 
 <%@ Register Src="../Controls/CategoryNavigation.ascx" TagName="CategoryNavigation"
     TagPrefix="uc1" %>
+<%@ Register Src="../Controls/UserProfiler.ascx" TagName="UserProfiler" TagPrefix="uc2" %>
+<%@ Register Src="../Controls/OnlieShoppingCart.ascx" TagName="OnlieShoppingCart"
+    TagPrefix="uc3" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -25,46 +28,14 @@
     <dl id="logo">
         <dt><a href="#">
             <img alt="logo" src="../static/../static/images/logo.gif" width="243" height="50" /></a></dt>
+        <uc2:UserProfiler ID="UserProfiler1" runat="server" />
     </dl>
     <div class="ThreeRow top">
         <div class="left ItemSort1" id="ItemSortCon">
             <uc1:CategoryNavigation ID="CategoryNavigation1" runat="server" IsHomePage="false" />
         </div>
         <div class="right">
-            <div id="count">
-                <div id="chart">
-                    <span>购物车:<b>12</b>件 </span>
-                    <img alt="购物车" src="../static/images/gwcbt0.png" width="39" height="32">
-                    <a href="process1.html">结算</a>
-                </div>
-                <div id="chartContent">
-                    <img alt="背景" src="../static/images/gwctop.png" width="372" height="18">
-                    <div class="shopping">
-                        <p class="l">
-                            <a href="#">
-                                <img src="../static/images/char.jpg"></a> <span>全脂牛奶全脂牛奶全脂牛奶全脂牛奶</span> <b>￥15000.00</b>
-                        </p>
-                        <div class="r">
-                            <span>-</span>
-                            <input value="1" type="text">
-                            <span>+</span>
-                            <p>
-                                删除</p>
-                        </div>
-                    </div>
-                    <div class="payNow">
-                        <div class="l">
-                            共<b>12</b>件商品
-                        </div>
-                        <div class="r">
-                            <p>
-                                合计：<b>￥1900.9</b></p>
-                            <a href="process1.html">
-                                <img src="../static/images/jsbt.png"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <uc3:OnlieShoppingCart ID="OnlieShoppingCart1" runat="server" />
             <div id="ServiceLine">
                 <span>400-808-9196 (9:30~18:30)</span> <font>9914838 (9:30~22:00)</font>
             </div>
@@ -107,11 +78,11 @@
             <dl id="LeftBar">
                 <dt>
                     <h1>
-                        <a href="UserCenterMyJoyo.html">我的攸怡</a></h1>
+                        <a href="../User/MyProfile.aspx">我的攸怡</a></h1>
                 </dt>
                 <dt><span>交易中心</span></dt>
                 <dd>
-                    〉<a href="UserCenterMYorders.html">我的订单</a></dd>
+                    〉<a href="../User/MyOrder.aspx">我的订单</a></dd>
                 <dd>
                     〉<a href="UserCenterFavorites.html"> 我的收藏</a></dd>
                 <dd>
@@ -119,7 +90,7 @@
                 <dd>
                     〉<a href="UserCenterMYEvalution.html">评价商品</a></dd>
                 <dd class="last">
-                    <a href="UserCenterMyHistory.html">〉浏览历史</a></dd>
+                    <a href="../User/MyHistory.aspx">〉浏览历史</a></dd>
                 <dt><span>服务中心</span></dt>
                 <dd>
                     〉<a href="UserCenterMYMessage.html"> 站内信</a></dd>
@@ -133,7 +104,7 @@
                 <dd>
                     〉<a href="../User/MyProfileDetail.aspx">编辑个人资料</a></dd>
                 <dd>
-                    〉<a href="UserCenterChangePassWord.html">修改密码</a></dd>
+                    〉<a href="../User/MyPassword.aspx">修改密码</a></dd>
                 <dd>
                     〉<a href="../User/MyAddress.aspx">收货地址管理</a></dd>
                 <dd>

@@ -131,36 +131,36 @@
             <a class="next" href="javascript:void(0)"></a>
             <div style="width: 3600px;" class="group">
                 <div class="item">
-                    <img src="static/images/spb3.jpg" width="100" height="100">
+                    <img src="static/images/spb3.jpg" width="100">
                     <ul>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29498">
+                            <img style="margin-top: 60px;" src="static/images/1a.png" width="253" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29477">
+                            <img style="margin-top: 60px;" src="static/images/2a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29622">
+                            <img style="margin-top: 60px;" src="static/images/3a.png" width="278" height="265"></a></li>
                     </ul>
                 </div>
                 <div class="item">
                     <img src="static/images/spb3.jpg" width="100">
                     <ul>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 97.5px;" src="static/images/jp1a.png" width="200" height="190"></a></li>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29618">
+                            <img style="margin-top: 60px;" src="static/images/4a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29619">
+                            <img style="margin-top: 60px;" src="static/images/5a.png" width="278" height="265"></a></li>
+                        <li><a href="products/http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29620">
+                            <img style="margin-top: 60px;" src="static/images/6a.png" width="278" height="265"></a></li>
                     </ul>
                 </div>
                 <div class="item">
                     <img src="static/images/spb3.jpg" width="100">
                     <ul>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 97.5px;" src="static/images/jp1a.png" width="200" height="190"></a></li>
-                        <li><a href="products/product.html">
-                            <img style="margin-top: 60px;" src="static/images/jp1a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29621">
+                            <img style="margin-top: 60px;" src="static/images/7a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=625&amp;pid=29627">
+                            <img style="margin-top: 60px;" src="static/images/8a.png" width="278" height="265"></a></li>
+                        <li><a href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=620&amp;c3=622&amp;pid=29623">
+                            <img style="margin-top: 60px;" src="static/images/9a.png" width="278" height="265"></a></li>
                     </ul>
                 </div>
             </div>

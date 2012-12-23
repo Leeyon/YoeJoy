@@ -25,15 +25,14 @@
                 <img alt="logo" src="../static/images/logo.gif" width="243" height="50"></a>
             <div id="welcomeContent">
                 <p class="Myname">
-                    <b>bbbb,欢迎您</b> <a href="#">[退出]</a>
+                    <b>
+                        <%=UserIDTxt%>,欢迎您</b> <a href="#">[退出]</a>
                 </p>
                 <p class="Myinfo">
-                    <span><a href="#">去首页继续购物 |</a></span> <span>
-                        <img src="../static/images/buycar.gif"><a id="Mycart" href="#">购物车(<b>2</b>) |</a></span>
-                    <span><a href="UserCenterMyJoyo.html">我的攸怡 |</a></span> <span><a href="help-index.html">
-                        帮助中心</a> </span>
+                    <span><a href="../Default.aspx">去首页继续购物 |</a></span> <span><a href="../User/MyProfiler.aspx">
+                        我的攸怡 |</a></span> <span><a href="help-index.html">帮助中心</a> </span>
                 </p>
-                <div id="chartContent">
+                <%--<div id="chartContent">
                     <img alt="背景" src="../static/images/gwctop.png" width="374" height="18">
                     <div class="shopping">
                         <p class="l">
@@ -61,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
         </div>
     </div>
     <asp:ContentPlaceHolder ID="BodyContentPlaceHolder" runat="server">
@@ -75,66 +74,57 @@
     <asp:ContentPlaceHolder ID="ScriptContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
     <div id="footer">
-    	<ul id="Guide">
-        	<a id="topp" href="#"><img src="../static/images/topp.png"></a>
+        <ul id="Guide">
+            <a id="topp" href="#">
+                <img src="../static/images/topp.png"></a>
             <li>
-            	<div class="guideDesc">
-                	<h2><img src="../static/images/footico1.png">关于攸怡</h2>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/images/footico1.png">关于攸怡</h2>
                     <p>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
                     </p>
                 </div>
             </li>
             <li>
-            	<div class="guideDesc">
-                	<h2><img src="../static/images/footico2.png">新手指南</h2>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/images/footico2.png">新手指南</h2>
                     <p>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
                     </p>
                 </div>
             </li>
             <li>
-            	<div class="guideDesc">
-                	<h2><img src="../static/images/footico3.png">我的帐户</h2>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/images/footico3.png">我的帐户</h2>
                     <p>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
                     </p>
                 </div>
             </li>
             <li>
-            	<div class="guideDesc">
-                	<h2><img src="../static/images/footico4.png">客户服务中心</h2>
+                <div class="guideDesc">
+                    <h2>
+                        <img src="../static/images/footico4.png">客户服务中心</h2>
                     <p>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
-                    	<a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a> <a href="help.html">攸怡(新浪)</a>
+                        <a href="help.html">攸怡(新浪)</a>
                     </p>
                 </div>
             </li>
         </ul>
-        
         <div id="footMsg">
-        	<span class="minLogo"><img src="../static/images/logob.jpg"></span>
-            <span class="menu">
-            	<a href="#">商城首页</a>
-            	<a href="#">商城首页</a>
-            	<a href="#">商城首页</a>
-            	<a href="#">商城首页</a>
-            	<a href="#">商城首页</a>
-                <br>
-                <em>联系热线: +86-21-64681500 E-Mail: contact@joyoplan.com<br>
-沪ICP备09017990号</em>
-            </span>
+            <span class="minLogo">
+                <img src="../static/images/logob.jpg"></span> <span class="menu"><a href="#">商城首页</a>
+                    <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a> <a href="#">商城首页</a>
+                    <br>
+                    <em>联系热线: +86-21-64681500 E-Mail: contact@joyoplan.com<br>
+                        沪ICP备09017990号</em> </span>
         </div>
     </div>
     </form>

@@ -48,6 +48,7 @@
     <Compile Include="Application\Data\JsonContentTransfomer.cs" />
     <Compile Include="Application\Data\SharedCacheObj.cs" />
     <Compile Include="Application\Web\ADHelper.cs" />
+    <Compile Include="Application\Web\BrandProductHelper.cs" />
     <Compile Include="Application\Web\BrandsHelper.cs" />
     <Compile Include="Application\Data\CacheHelper.cs" />
     <Compile Include="Application\Data\CacheObjKeys.cs" />

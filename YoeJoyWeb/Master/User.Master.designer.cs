@@ -31,6 +31,15 @@ namespace YoeJoyWeb.Master {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// UserProfiler1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::YoeJoyWeb.Controls.UserProfiler UserProfiler1;
+        
+        /// <summary>
         /// CategoryNavigation1 控件。
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace YoeJoyWeb.Master {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::YoeJoyWeb.Controls.CategoryNav CategoryNavigation1;
+        
+        /// <summary>
+        /// OnlieShoppingCart1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::YoeJoyWeb.Controls.OnlieShoppingCart OnlieShoppingCart1;
         
         /// <summary>
         /// NavContentPlaceHolder 控件。

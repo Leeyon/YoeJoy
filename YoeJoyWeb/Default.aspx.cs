@@ -110,7 +110,7 @@ namespace YoeJoyWeb
                 CategoryProductsHotCommentedTwoHTML = FrontProductsHelper.GetHomeHotCommentedProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID2), 3 ,4);
                 CategoryProductBestSaledOneHTML = FrontProductsHelper.GetHomeBestSaledProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID1),1, 3);
                 CategoryProductBestSaledTwoHTML = FrontProductsHelper.GetHomeBestSaledProductHTMLWrapper(int.Parse(YoeJoyConfig.HomeDisplayCategoryID2),4, 6);
-                HomePromotionBrandsProductHTML = FrontProductsHelper.GetHomePromotionBrandsProductsWrapper(int.Parse(YoeJoyConfig.HomePromotionBrandId));
+                HomePromotionBrandsProductHTML = FrontProductsHelper.GetHomePromotionBrandsProductsWrapper();
             }
         }
     }

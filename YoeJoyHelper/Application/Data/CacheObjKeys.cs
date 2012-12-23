@@ -24,6 +24,7 @@ namespace YoeJoyHelper
         internal static readonly CacheObjSetting SiteHomePromoProductListCacheSetting = new CacheObjSetting() { CacheKey = "HomePromoProductList", CacheDuration = 7200 };
         internal static readonly CacheObjSetting SiteHomePanicProductListCacheSetting = new CacheObjSetting() { CacheKey = "HomePanicProductList", CacheDuration = 3600 };
         internal static readonly CacheObjSetting SiteHomePromotionBrandsProduct = new CacheObjSetting() { CacheKey = "SiteHomePromotionBrandsProduct", CacheDuration = 7200 };
+        internal static readonly CacheObjSetting SearchHotCommentedProduct = new CacheObjSetting() { CacheKey = "SearchHotCommentedProduct", CacheDuration = 7200 };
     }
 
     /// <summary>

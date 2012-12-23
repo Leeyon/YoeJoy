@@ -114,14 +114,14 @@ namespace YoeJoyHelper
                                 <input class='num' maxlength='3' value='1' type='text'>
                                 <a class='add' href='javascript:void(0)'>+</a>个</h6>
                             <h5>
-                                <a class='bt5' href='process1.html'>立即购买</a> <a class='bt7' href='javascript:void(0);'>
+                                <a class='bt5' href='../Shopping/ShoppingCart.aspx?Cmd=Add&ItemID={7}'>立即购买</a> <a id='btnAddToCart' class='bt7' href='javascript:void(0);'>
                                     加入购物车</a> <a class='link1' href='javascript:void(0);'>加入收藏</a></h5>
                         </div>
                     </div>
                 </div>", productDetail.ProductID, "0",
                        productDetail.ProductBaiscPrice, productDetail.ProductCurrentPrice,
-                       ((int.Parse(productDetail.ProductBaiscPrice) - (int.Parse(productDetail.ProductCurrentPrice)))),
-                       productDetail.Point, productDetail.LimitedQty);
+                       ((float.Parse(productDetail.ProductBaiscPrice) - (float.Parse(productDetail.ProductCurrentPrice)))).ToString("0.00"),
+                       productDetail.Point, productDetail.LimitedQty,productDetail.SysNo);
             }
             else
             {
@@ -175,6 +175,5 @@ namespace YoeJoyHelper
                 return String.Empty;
             }
         }
-
     }
 }

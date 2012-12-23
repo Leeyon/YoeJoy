@@ -75,6 +75,8 @@ namespace YoeJoyWeb.Pages
 
         protected string Search2C3Filter { get; set; }
 
+        protected string SearchHotCommentProductsHTML { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ((Site)this.Master).IsHomePage = false;
@@ -82,6 +84,7 @@ namespace YoeJoyWeb.Pages
             {
                 SubCategoryNavigation1.C1SysNo = C1SysNo;
                 Search2C3Filter = FrontProductsHelper.InitC3ProductFilterWrapper(C3SysNo);
+                SearchHotCommentProductsHTML = FrontProductsHelper.GetSearchHotCommentedProductsHTMLWrapper();
             }
         }
     }

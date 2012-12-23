@@ -27,8 +27,9 @@ namespace YoeJoyWeb.Pages
             }
         }
         
-        
         protected string Search1C3Filter { get; set; }
+
+        protected string SearchHotCommentProductsHTML { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,6 +38,7 @@ namespace YoeJoyWeb.Pages
             {
                 SubCategoryNavigation1.C1SysNo = SearchHelper.GetSearchResultC1SysNo(KeyWords);
                 Search1C3Filter = SearchHelper.InitSearch1C3ProductFilter(KeyWords);
+                SearchHotCommentProductsHTML = FrontProductsHelper.GetSearchHotCommentedProductsHTMLWrapper();
             }
         }
     }

@@ -16,11 +16,11 @@ namespace YoeJoyWeb.Controls
     public partial class UserProfiler : System.Web.UI.UserControl
     {
         private static readonly string profileHeaderTxtWithoutLogin = @"<h6>
-        [&nbsp;<a href='"+YoeJoyConfig.SiteBaseURL+@"User/Login.aspx'> 登录 </a>&nbsp;]&nbsp;&nbsp;&nbsp; [&nbsp;<a href='User/Login.aspx'>
+        [&nbsp;<a href='"+YoeJoyConfig.SiteBaseURL+@"User/Login.aspx'> 登录 </a>&nbsp;]&nbsp;&nbsp;&nbsp; [&nbsp;<a href='User/Login.aspx?act=register'>
             注册新用户 </a>&nbsp;]
     </h6>";
         private static readonly string profileHeaderTxtWithLogin = @"<h6>
-        [&nbsp;欢迎 &nbsp;]&nbsp;&nbsp;&nbsp; [&nbsp{0}&nbsp;]</h6>";
+        &nbsp;欢迎 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp{0}&nbsp;</h6>";
 
         protected string ProfilerHeadHTML { get; set; }
         protected void Page_Load(object sender, EventArgs e)

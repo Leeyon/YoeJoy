@@ -38,7 +38,7 @@
     </p>
     <p>
         <label>
-            居住地:</labe>
+            居住地:</label>
             <sc1:Area ID="scArea" runat="server" AutoPostBack="false">
             </sc1:Area>
     </p>

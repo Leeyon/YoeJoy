@@ -5,6 +5,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="NavContentPlaceHolder" runat="server">
+<div id="position">
+        <span>
+            <img src="../static/images/f4.jpg" />您在:</span> <b><a href="../Default.aspx">首页</a></b>
+        <span>&gt;</span> <span><b><a href="MyProfile.aspx">用户中心</a></b></span><span>&gt;</span>
+        <span>收货地址管理</span>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="RightBigModule" runat="server">
     <div class="myaddress">

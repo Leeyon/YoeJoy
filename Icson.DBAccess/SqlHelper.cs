@@ -115,6 +115,13 @@ namespace Icson.DBAccess
             return ExecuteDataSet(SqlHelper.ConnectionStringLocal, cmdText, null);
         }
 
+        public static DataTable ExecuteDataTable(string cmdText)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = cmdText;
+            return ExecuteDataTable(cmd);
+        }
+
         public static DataSet ExecuteDataSet(string connectionString, string cmdText)
         {
             return ExecuteDataSet(connectionString, cmdText, null);
@@ -163,6 +170,25 @@ namespace Icson.DBAccess
                 sqlDA.Fill(dataSet, "Anonymous");
 
                 return dataSet;
+            }
+        }
+
+        public static DataTable ExecuteDataTable(SqlCommand cmd)
+        {
+            
+            using (SqlConnection conn = new SqlConnection(SqlHelper.ConnectionStringLocal))
+            {
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+
+                cmd.Connection = conn;
+
+                SqlDataAdapter sqlDA = new SqlDataAdapter();
+                sqlDA.SelectCommand = cmd;
+                DataTable data = new DataTable();
+                sqlDA.Fill(data);
+
+                return data;
             }
         }
 

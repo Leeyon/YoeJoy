@@ -129,12 +129,12 @@ namespace YoeJoyHelper
             return HomeBestSaledProductHTML;
         }
 
-        public static string GetHomePromotionBrandsProductsWrapper(int brandId)
+        public static string GetHomePromotionBrandsProductsWrapper()
         {
             CacheObjSetting cacheSetting = StaticCacheObjSettings.SiteHomePromotionBrandsProduct;
             string key = cacheSetting.CacheKey;
             int duration = cacheSetting.CacheDuration;
-            string HomeBestSaledProductHTML = CacheObj<string>.GetCachedObj(key, duration, GetHomePromotionBrandsProductsHTML(brandId));
+            string HomeBestSaledProductHTML = CacheObj<string>.GetCachedObj(key, duration, GetHomePromotionBrandsProductsHTML());
             return HomeBestSaledProductHTML;
         }
 
@@ -145,6 +145,15 @@ namespace YoeJoyHelper
             int duration = cacheSetting.CacheDuration;
             string c3ProductFilterHTML = CacheObj<string>.GetCachedObj(key, duration, InitC3ProductFilter(c3SysNo));
             return c3ProductFilterHTML;
+        }
+
+        public static string GetSearchHotCommentedProductsHTMLWrapper()
+        {
+            CacheObjSetting cacheSetting = StaticCacheObjSettings.SearchHotCommentedProduct;
+            string key = cacheSetting.CacheKey;
+            int duration = cacheSetting.CacheDuration;
+            string searchHotCommentedProductsHTML = CacheObj<string>.GetCachedObj(key, duration, GetSearchHotCommentedProductsHTML());
+            return searchHotCommentedProductsHTML;
         }
 
         /// <summary>
@@ -569,6 +578,10 @@ namespace YoeJoyHelper
                     }
                     bottomNavHTML = String.Format(bottomNavHTMLTemplate, bottomNavItenHTML, totalPageCount, totalPageCount, pagedCount);
                 }
+                else
+                {
+                    bottomNavHTML = String.Format(@"<input type='hidden' id='totalProductCount' value='{0}'/>", productTotalCount);
+                }
                 strb.Append(bottomNavHTML);
             }
 
@@ -990,11 +1003,11 @@ namespace YoeJoyHelper
         /// <summary>
         /// 获得首页中间品牌推荐的商品
         /// </summary>
-        public static string GetHomePromotionBrandsProductsHTML(int promotionBrandId)
+        public static string GetHomePromotionBrandsProductsHTML()
         {
             string homePromotionBrandsProductsHTML = String.Empty;
 
-            List<HomePromotionBrandsC3Info> c3Info = HomePromotionBrandsService.GetHomePromptionBrandsC3Info(promotionBrandId);
+            List<HomePromotionBrandsC3Info> c3Info = HomePromotionBrandsService.GetHomePromptionBrandsC3Info();
             if (c3Info != null)
             {
                 StringBuilder strb = new StringBuilder();
@@ -1007,7 +1020,7 @@ namespace YoeJoyHelper
                     strb.Append(String.Concat("<div class='slave0'><a href='", c3Deeplnik, "'>", c3.C3Name, "</a></div>"));
                     strb.Append("<div class='mem0'><img class='prev' src='../static/images/hg2prev.png' data-src='../static/images/hg2prev.png'></div>");
                     strb.Append("<div class='mem1'>");
-                    List<FrontDsiplayProduct> products = HomePromotionBrandsService.GetHomePromotionBrandsProducts(promotionBrandId, c3.C3SysNo);
+                    List<FrontDsiplayProduct> products = HomePromotionBrandsService.GetHomePromotionBrandsProducts(c3.C3SysNo);
                     if (products != null)
                     {
                         strb.Append("<div class='scrollw'>");
@@ -1042,5 +1055,44 @@ namespace YoeJoyHelper
             return homePromotionBrandsProductsHTML;
         }
 
+        /// <summary>
+        /// 搜索页 热评商品
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSearchHotCommentedProductsHTML()
+        {
+            string searchHotCommentedProductsHTML = String.Empty;
+            List<FrontDsiplayProduct> products = SearchHotCommentedProductService.GetSearchHotCommentedProduct();
+            StringBuilder strb = new StringBuilder("<div class='group'>");
+            if (products != null)
+            {
+                string imageBasePath = YoeJoyConfig.ImgVirtualPathBase;
+                string c1LastedDisCountProductItemHTML = @"<div class='item'>
+                        <a class='photo' href='{0}l'>
+                            <img alt='{1}' src='{2}' width='60' height='60'></a>
+                        <div>
+                            <a class='name' title='{3}' href='{4}'>{5}</a>
+                            <span class='adText'>{6}</span>
+                        </div>
+                        <p class='price'>
+                            <b>¥{7}</b><span>¥{8}</span></p>
+                        <p class='pltext' align='left'>
+                            评论内容评论内容评论内容评论内容评论内容评论内容</p>
+                        <p class='slave' align='right'>
+                            会员:l***o</p>
+                    </div>";
+
+                for (int i = 0; i < products.Count; i++)
+                {
+                    FrontDsiplayProduct product = products[i];
+                    string thumbImg = imageBasePath + product.ImgPath;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(c1LastedDisCountProductItemHTML, deeplink,product.ProductBriefName,thumbImg, product.ProductBriefName, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
+                }
+                strb.Append("</div>");
+                searchHotCommentedProductsHTML = strb.ToString();
+            }
+            return searchHotCommentedProductsHTML;
+        }
     }
 }

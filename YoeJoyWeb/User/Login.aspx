@@ -2,6 +2,7 @@
     CodeBehind="Login.aspx.cs" Inherits="YoeJoyWeb.User.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <link type="text/css" rel="Stylesheet" href="../static/css/base.css" />
     <link type="text/css" rel="Stylesheet" href="../static/css/layout.css" />
     <link type="text/css" rel="Stylesheet" href="../static/css/login.css" />
 </asp:Content>
@@ -42,19 +43,19 @@
                 <p>
                     <em></em><strong>请填写以下注册信息，均为必填项：</strong></p>
                 <p class="input">
-                    <em>邮箱：</em><input id="txtEmail" name="邮箱" type="text"/></p>
+                    <em>邮箱：</em><input id="txtEmail" name="邮箱" type="text" /></p>
                 <p class="note">
                     <span>邮箱可作为登入账号，并用于找回密码，接收订单通知等。</span><strong></strong></p>
                 <p class="input">
-                    <em>用户名：</em><input id="txtRegisterName" name="用户名" type="text"/></p>
+                    <em>用户名：</em><input id="txtRegisterName" name="用户名" type="text" /></p>
                 <p class="note">
                     <span>4-20位字符，可由中文、字母、数字及特殊字符组成。</span><strong></strong></p>
                 <p class="input">
-                    <em>密码：</em><input id="password" name="密码" type="password"/></p>
+                    <em>密码：</em><input id="password" name="密码" type="password" /></p>
                 <p class="note">
                     <span>6-20位字符，可由字母、数字或符号的组合。</span><strong></strong></p>
                 <p class="input">
-                    <em>确认密码：</em><input id="password1" name="确认密码" type="password"/></p>
+                    <em>确认密码：</em><input id="password1" name="确认密码" type="password" /></p>
                 <p class="note">
                     <span>请再次输入密码。</span><strong></strong></p>
                 <p class="input code">
@@ -63,7 +64,7 @@
                 <p class="note">
                     <span>请输入图片中的字符，不区分大小写。</span></p>
                 <p class="button">
-                    <input id="btnRegister" value="同意以下协议并注册" type="button"/></p>
+                    <input id="btnRegister" value="同意以下协议并注册" type="button" /></p>
                 <textarea>          《攸怡服务协议》（以下简称“本协议”）是由攸怡网站的运营方（以下简称“攸怡或攸怡网站”）在提供域名为www.yoejoy.com的网络运营服务时与攸怡的使用者（以下简称“用户”）达成的关于使用攸怡网站服务的各项条款、条件和规则。
 
 如果您访问攸怡网站或在攸怡网站购物，或以任何行为实际使用、享受攸怡的服务，即表示您接受了本协议，并同意受本协议各项条款的约束。如果您不同意本协议中的任何内容，您可以选择不使用本网站。

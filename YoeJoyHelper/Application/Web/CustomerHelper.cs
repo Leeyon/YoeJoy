@@ -8,20 +8,19 @@ using YoeJoyHelper.Security;
 using System.Collections;
 using YoeJoyHelper.Model;
 using System.Globalization;
-
+using System.Data;
+using System.Threading;
 
 using Icson.Utils;
 using Icson.Objects;
-
-
 using Icson.Objects.Basic;
 using Icson.Objects.Online;
-
+using Icson.Objects.Sale;
 using Icson.BLL;
 using Icson.BLL.Online;
 using Icson.BLL.Basic;
+using Icson.BLL.Sale;
 
-using System.Threading;
 
 namespace YoeJoyHelper
 {
@@ -270,6 +269,46 @@ namespace YoeJoyHelper
         }
 
         /// <summary>
+        /// 获得用户的购物车
+        /// </summary>
+        /// <param name="ht"></param>
+        /// <returns></returns>
+        public static string GetCustomerShoppingCart(Hashtable ht)
+        {
+
+            List<FrontDsiplayProduct> producs = CustomerShoppingCartService.GetShoppingCartProducts(ht);
+
+            string shoppingCartHTML = String.Empty;
+            if (producs != null)
+            {
+                StringBuilder strb = new StringBuilder();
+
+                string liHTML = @"<p class='l'>
+                        <a href='{0}'>
+                            <img alt='{1}' src='{2}' width='30' height='30'></a><a class='goodsName'
+                                href='{3}'>{4}</a><b>￥{5}</b>
+                    </p>
+                    <div class='r'>
+                        <a class='sub' href='javascript:void(0)'>-</a>
+                        <input class='num' maxlength='3' value='1' type='text'/>
+                        <a class='add' href='javascript:void(0)'>+</a>
+                        <p onClick='javascript:DeleteShoppingCartItem(this);'>
+                            删除 <input type='hidden' value='{6}'/></p>
+                    </div>";
+
+                foreach (FrontDsiplayProduct product in producs)
+                {
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    string image = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, image, deeplink, product.ProductBriefName, product.Price,product.ProductSysNo));
+                }
+
+                shoppingCartHTML = strb.ToString();
+            }
+            return shoppingCartHTML;
+        }
+
+        /// <summary>
         /// 获得用户分页的收藏列表
         /// </summary>
         /// <param name="customerSysNo"></param>
@@ -411,13 +450,67 @@ namespace YoeJoyHelper
                 {
                     string thumbImg = YoeJoyConfig.ImgVirtualPathBase + product.SmallImg;
                     string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
-                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, thumbImg, product.ProductBriefName,product.ProductBriefName, deeplink, product.ProductBriefName, product.PromotionWord, product.CurrentPrice, product.StandardPrice));
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, thumbImg, product.ProductBriefName, product.ProductBriefName, deeplink, product.ProductBriefName, product.PromotionWord, product.CurrentPrice, product.StandardPrice));
                 }
 
                 strb.Append("</ul>");
                 productDetailBroswerHistoryHTML = strb.ToString();
             }
             return productDetailBroswerHistoryHTML;
+        }
+
+        /// <summary>
+        /// 获得用户的所有浏览商品记录
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCustomerBrowserHistoryProductsAllHTML()
+        {
+            string productDetailBroswerHistoryHTML = String.Empty;
+
+            string cookie = CookieUtil.GetDESEncryptedCookieValue(CookieUtil.Cookie_BrowseHistory);
+            ArrayList al = CustomerBrowserHistoryProductService.GetBrowseHistoryList(cookie);
+
+            if (al != null)
+            {
+                StringBuilder strb = new StringBuilder();
+
+                string liHTML = @"<tr>
+                    <td>
+                        <span>2012-09-09 21:30</span>
+                    </td>
+                    <td>
+                        <a href='{0}'>
+                            <img src='{1}'></a> <em><b>{2}</b><br>
+                                <span>攸怡价：<strong>￥{3}</strong> 市场价：<i>￥{4}</i> </span></em>
+                    </td>
+                    <td style='text-align: left;'>
+                        <a href='#'>
+                            <img src='../static/images/history.jpg'></a><br>
+                        <a href='#'>
+                            <img src='../static/images/adda.jpg'></a><br>
+                        <a href='#'>清除浏览历史</a>
+                    </td>
+                </tr>";
+
+                var products = al.ToArray();
+
+                foreach (CustomerBrowserHistoryProduct product in products)
+                {
+                    string thumbImg = YoeJoyConfig.ImgVirtualPathBase + product.LargeImg;
+                    string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
+                    strb.Append(String.Format(liHTML, deeplink, thumbImg, product.ProductBriefName, product.CurrentPrice, product.StandardPrice));
+                }
+                productDetailBroswerHistoryHTML = strb.ToString();
+            }
+            return productDetailBroswerHistoryHTML;
+        }
+
+        /// <summary>
+        /// 清除用户的所有cookie
+        /// </summary>
+        public static void ClearCustomerBrowserHistoryProductsAll()
+        {
+            CookieUtil.SetDESEncryptedCookie(CookieUtil.Cookie_BrowseHistory, String.Empty);
         }
 
     }

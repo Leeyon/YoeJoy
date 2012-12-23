@@ -615,7 +615,7 @@
                     </div>
                     <div class="member1">
                         <a class="close" href="javascript:void(0)">继续购物</a>&nbsp;&nbsp;<a class="settlement"
-                            href="process1.html">去结算</a></div>
+                            href="../Shopping/ShoppingCart.aspx">去结算</a></div>
                 </div>
             </div>
             <!--购买了此商品的用户还买了Begin-->
@@ -764,6 +764,21 @@
                 window.location.href = $("#siteBaseURL").val() + "Pages/SubProductList3.aspx?c1=" + c1 + "&c2=" + c2 + "&c3=" + c3;
             });
             $("#breadNav").children("p").children("span").eq(0).text($productBriefName);
+
+            $("#btnAddToCart").click(function (event) {
+                var shoppingCartServiceURL = "../Service/ShoppingCartService.aspx?cmd=add";
+                var params = "pid=" + pid + "&qtp=1";
+                $.post(shoppingCartServiceURL, params, function (data) {
+                    var result = YoeJoy.Site.Utility.GetJsonStr(data);
+                    if (result.IsSuccess) {
+                        alert(result.Msg);
+                    }
+                    else {
+                        alert(result.Msg);
+                    }
+                });
+            });
+
         });
     </script>
 </asp:Content>

@@ -88,119 +88,108 @@ namespace YoeJoyWeb.Shopping
                         }
                         catch
                         {
-                            //ShowError("商品数量错误");
+                            ShowError("商品数量错误");
                         }
                     }
                     CartInfo oInfo = new CartInfo();
                     switch (action.ToUpper())
                     {
-                        //删除商品
-                        case "DEL":
+                        case "DEL":     //删除商品
+                            for (int i = 0; i < arrProductSysno.Length; i++)
                             {
-                                for (int i = 0; i < arrProductSysno.Length; i++)
+                                if (arrProductSysno[i] != AppConst.StringNull)
                                 {
-                                    if (arrProductSysno[i] != AppConst.StringNull)
-                                    {
-                                        CartManager.GetInstance().DeleteFromCart(Int32.Parse(arrProductSysno[i]));
-                                    }
+                                    CartManager.GetInstance().DeleteFromCart(Int32.Parse(arrProductSysno[i]));
                                 }
-                                Response.Redirect(Request.Url.AbsolutePath);
-                                break;
                             }
-                        //增加商品
-                        case "ADD":
+                            Response.Redirect(Request.Url.AbsolutePath);
+                            break;
+                        case "ADD":     //增加商品
+                        case "MOVE":    //从收藏加移入商品
+                            Hashtable newItemHt = new Hashtable(3);
+                            for (int i = 0; i < arrProductSysno.Length; i++)
                             {
-                                break;
+                                if (arrProductSysno[i] != AppConst.StringNull)
+                                {
+                                    int qty = 0;
+                                    if (arrQuantity == null)
+                                        qty = 1;
+                                    else
+                                        qty = Int32.Parse(arrQuantity[i]);
+
+
+                                    oInfo.ProductSysNo = Int32.Parse(arrProductSysno[i]);
+                                    oInfo.Quantity = qty;
+                                    oInfo.ExpectQty = qty;
+                                }
                             }
-                        //从收藏加移入商品
-                        case "MOVE":
+
+                            newHt = CartManager.GetInstance().GetCartHash();
+
+                            //CartManager.GetInstance().AddToCart(newItemHt);
+
+                            bool check = true;
+
+
+
+                            foreach (DataGridItem item in dgCart.Items)
                             {
-                                Hashtable newItemHt = new Hashtable(3);
-                                for (int i = 0; i < arrProductSysno.Length; i++)
+
+                                if (item.Cells[0].Text.Equals(oInfo.ProductSysNo.ToString()))
                                 {
-                                    if (arrProductSysno[i] != AppConst.StringNull)
+                                    check = false;
+                                    int limite = Int32.Parse((item.FindControl("lblLimitedQty") as Label).Text);
+                                    int que = Int32.Parse(item.Cells[1].Text);
+                                    TextBox textBox = item.FindControl("txtQuantity") as TextBox;
+
+                                    int queNow = Int32.Parse(textBox.Text);
+                                    queNow += oInfo.Quantity;
+
+                                    if (queNow > limite)
                                     {
-                                        int qty = 0;
-                                        if (arrQuantity == null)
-                                            qty = 1;
-                                        else
-                                            qty = Int32.Parse(arrQuantity[i]);
-
-
-                                        oInfo.ProductSysNo = Int32.Parse(arrProductSysno[i]);
-                                        oInfo.Quantity = qty;
-                                        oInfo.ExpectQty = qty;
+                                        ShowMessage("您期望购买的数量已经超出限购量！");
+                                        return;
                                     }
-                                }
 
-                                newHt = CartManager.GetInstance().GetCartHash();
-
-                                //CartManager.GetInstance().AddToCart(newItemHt);
-
-                                bool check = true;
-
-
-
-                                foreach (DataGridItem item in dgCart.Items)
-                                {
-
-                                    if (item.Cells[0].Text.Equals(oInfo.ProductSysNo.ToString()))
+                                    if (queNow > que)
                                     {
-                                        check = false;
-                                        int limite = Int32.Parse((item.FindControl("lblLimitedQty") as Label).Text);
-                                        int que = Int32.Parse(item.Cells[1].Text);
-                                        TextBox textBox = item.FindControl("txtQuantity") as TextBox;
+                                        oInfo.Quantity = que;
+                                        textBox.Text = oInfo.Quantity.ToString();
 
-                                        int queNow = Int32.Parse(textBox.Text);
-                                        queNow += oInfo.Quantity;
-
-                                        if (queNow > limite)
-                                        {
-                                            ShowMessage("您期望购买的数量已经超出限购量！");
-                                            return;
-                                        }
-
-                                        if (queNow > que)
-                                        {
-                                            oInfo.Quantity = que;
-                                            textBox.Text = oInfo.Quantity.ToString();
-
-                                            ShowMessage("您期望购买的数量已经超出库存，这是我们目前的所有库存了！");
-
-                                        }
-                                        else
-                                        {
-                                            oInfo.Quantity = queNow;
-                                        }
-
-                                        CartManager.GetInstance().UpdateCart(oInfo);
-
-                                        newHt.Remove(oInfo.ProductSysNo);
-                                        newHt.Add(oInfo.ProductSysNo, oInfo);
-
-                                        break;
+                                        ShowMessage("您期望购买的数量已经超出库存，这是我们目前的所有库存了！");
 
                                     }
-                                }
-                                if (check)
-                                {
+                                    else
+                                    {
+                                        oInfo.Quantity = queNow;
+                                    }
+
+                                    CartManager.GetInstance().UpdateCart(oInfo);
+
+                                    newHt.Remove(oInfo.ProductSysNo);
                                     newHt.Add(oInfo.ProductSysNo, oInfo);
-                                    Hashtable ht = new Hashtable();
-                                    ht.Add(oInfo.ProductSysNo, oInfo);
-                                    CartManager.GetInstance().AddToCart(ht);
+
+                                    break;
+
                                 }
-
-
-
-                                BindData();
-
-                                Response.Redirect(Request.Url.AbsolutePath);
-                                break;
                             }
-                        default:
-                            {//浏览购车
-                                break;
+                            if (check)
+                            {
+                                newHt.Add(oInfo.ProductSysNo, oInfo);
+                                Hashtable ht = new Hashtable();
+                                ht.Add(oInfo.ProductSysNo, oInfo);
+                                CartManager.GetInstance().AddToCart(ht);
+
                             }
+
+
+
+                            BindData();
+
+                            Response.Redirect(Request.Url.AbsolutePath);
+                            break;
+                        default:        //浏览购车
+                            break;
                     }
                 }
                 //进入购物车页面时，默认选中所有赠品

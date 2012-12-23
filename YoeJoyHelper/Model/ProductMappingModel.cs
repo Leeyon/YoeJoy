@@ -294,7 +294,7 @@ namespace YoeJoyHelper.Model
             Random random = new Random();
             for (int i = 0; i < listLength; i++)
             {
-                randomList[i] = pkList[random.Next(pkList.Count)];
+                randomList.Add(pkList[random.Next(pkList.Count)]);
             }
             return randomList;
         }

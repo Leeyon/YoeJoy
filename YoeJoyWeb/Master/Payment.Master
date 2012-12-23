@@ -22,45 +22,25 @@
     <div id="ProcessHeader">
         <div id="banner">
             <a class="logo" href="#">
-                <img alt="logo" src="../static/images/logo.gif" width="243" height="50"></a>
+                <img alt="logo" src="../static/images/logo.gif" width="243" height="50" /></a>
             <div id="welcomeContent">
                 <p class="Myname">
                     <b>
                         <%=UserIDTxt%>,欢迎您</b> <a href="#">[退出]</a>
                 </p>
                 <p class="Myinfo">
-                    <span><a href="../Default.aspx">去首页继续购物 |</a></span> <span><a href="../User/MyProfiler.aspx">
+                    <span><a href="../Default.aspx">去首页继续购物 |</a></span> <span><a href="../User/MyProfile.aspx">
                         我的攸怡 |</a></span> <span><a href="help-index.html">帮助中心</a> </span>
                 </p>
-                <%--<div id="chartContent">
-                    <img alt="背景" src="../static/images/gwctop.png" width="374" height="18">
-                    <div class="shopping">
-                        <p class="l">
-                            <a href="#">
-                                <img src="../static/images/char.jpg"></a> <a href="product.html"><span>全脂牛奶全脂牛奶全脂牛奶全脂牛奶</span></a>
-                            <b>￥15000.00</b>
-                        </p>
-                        <div class="r">
-                            <a class="sub" href="javascript:void(0)">-</a>
-                            <input class="num" maxlength="3" value="1" type="text">
-                            <a class="add" href="javascript:void(0)">+</a>
-                            <p>
-                                删除</p>
-                        </div>
-                    </div>
-                    <div class="payNow">
-                        <div class="l">
-                            共<b>12</b>件商品
-                        </div>
-                        <div class="r">
-                            <p>
-                                合计：<b>￥1900.9</b></p>
-                            <a href="process2.html">
-                                <img src="../static/images/jsbt.png"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
+                <%--<div id="chartContent"> <img alt="背景"
+        src="../static/images/gwctop.png" width="374" height="18"> <div class="shopping">
+        <p class="l"> <a href="#"> <img src="../static/images/char.jpg"></a> <a href="product.html"><span>全脂牛奶全脂牛奶全脂牛奶全脂牛奶</span></a>
+        <b>￥15000.00</b> </p> <div class="r"> <a class="sub" href="javascript:void(0)">-</a>
+        <input class="num" maxlength="3" value="1" type="text"> <a class="add" href="javascript:void(0)">+</a>
+        <p> 删除</p> </div> </div> <div class="payNow"> <div class="l"> 共<b>12</b>件商品 </div>
+        <div class="r"> <p> 合计：<b>￥1900.9</b></p> <a href="process2.html"> <img src="../static/images/jsbt.png"></a>
+        </div> </div> </div>--%>
+            </div>
         </div>
     </div>
     <asp:ContentPlaceHolder ID="BodyContentPlaceHolder" runat="server">

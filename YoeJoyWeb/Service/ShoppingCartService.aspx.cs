@@ -78,6 +78,31 @@ namespace YoeJoyWeb.Service
             }
         }
 
+        /// <summary>
+        /// 空的购物车初始HTML代码
+        /// </summary>
+        private static readonly string emptyShoppingCartHTML = @"<div id='chart'>
+        <span>购物车:<b><a href='javascript:void(0);'>0</a></b> 件
+        </span>
+        <img alt='购物车' src='../static/images/gwcbt0.png' width='39' height='32'>
+        <a href='javascript:void(0);''>结算</a>
+    </div><div id='chartContent'>
+        <img alt='背景' src='../static/images/gwctop.png' width='374' height='18'>
+        <div id='myShoppingCart' class='shopping'>
+        </div>
+        <div class='payNow'>
+            <div class='l'>
+                共<b><a href='javascript:void(0);''>0</a></b>件商品
+            </div>
+            <div class='r'>
+                <p>
+                    合计：<b id='CartTotalPrice'>￥0</b></p>
+                <a href='javascript:void(0);''>
+                    <img alt='结算' src='../static/images/jsbt.png' width='61' height='25'></a>
+            </div>
+        </div>
+    </div>";
+
         protected Hashtable newHt = new Hashtable();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -118,6 +143,7 @@ namespace YoeJoyWeb.Service
                                     {
                                         CartManager.GetInstance().DeleteFromCart(ProductSysNo);
                                         msg = "删除成功";
+                                        result = true;
                                         Response.Write(JsonContentTransfomer<object>.GetJsonContent(new { IsSuccess = result, Msg = msg }));
                                         break;
                                     }
@@ -143,7 +169,8 @@ namespace YoeJoyWeb.Service
 
                             if (ht == null || ht.Count == 0)
                             {
-                                Response.Write(JsonContentTransfomer<object>.GetJsonContent(new { IsSuccess = true, Msg =String.Empty }));
+
+                                Response.Write(emptyShoppingCartHTML);
                             }
                             else
                             {

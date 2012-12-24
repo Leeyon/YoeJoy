@@ -88,7 +88,7 @@ namespace YoeJoyHelper
                 Dictionary<string, C2C3Dic> c2c3Dic = new Dictionary<string, C2C3Dic>();
                 strb.Append(String.Format(@"<li class='hover'><div class='liHover'>
                         <div class='ListMain'>
-                            <h2><span>•</span><a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a><i>&gt;</i></h2><p>",baseURL,c1SysNo,c1Info.C1Name));
+                            <h2><span>•</span><a href='{0}Pages/SubProductList1.aspx?c1={1}'>{2}</a><i>&gt;</i></h2><p>", baseURL, c1SysNo, c1Info.C1Name));
 
                 foreach (Category2Info c2Info in c2List.Keys)
                 {
@@ -104,7 +104,7 @@ namespace YoeJoyHelper
                             }
                         }
                         c2c3Dic.Add(c2Info.C2Name, new C2C3Dic() { C2Name = c2Info.C2Name, C3MiniList = c3InfoList, C2SysNo = c2Info.SysNo });
-                        strb.Append(String.Format("<a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={2}'>{3}</a> ", baseURL, c1Info.SysNo,c2SysNo, c2Info.C2Name));
+                        strb.Append(String.Format("<a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={2}'>{3}</a> ", baseURL, c1Info.SysNo, c2SysNo, c2Info.C2Name));
                     }
                 }
                 strb.Append("</p></div></div>");
@@ -112,7 +112,7 @@ namespace YoeJoyHelper
                 strb.Append(@"<dl class='Listcontent'><dt> <ul class='menuTwo'>");
                 foreach (string c2Name in c2c3Dic.Keys)
                 {
-                    strb.Append(String.Format(@"<li><h3><a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={2}'>{3}</a></h3><ul>",baseURL,c1SysNo,c2c3Dic[c2Name].C2SysNo,c2Name));
+                    strb.Append(String.Format(@"<li><h3><a href='{0}Pages/SubProductList2.aspx?c1={1}&c2={2}'>{3}</a></h3><ul>", baseURL, c1SysNo, c2c3Dic[c2Name].C2SysNo, c2Name));
                     foreach (C3MiniInfo c3Info in c2c3Dic[c2Name].C3MiniList)
                     {
                         strb.Append(String.Format(@"<li><a href='{0}Pages/SubProductList3.aspx?c1={1}&c2={4}&c3={2}'>{3}</a></li>", baseURL, c1SysNo, c3Info.C3SysNo, c3Info.C3Name, c2c3Dic[c2Name].C2SysNo));
@@ -129,7 +129,7 @@ namespace YoeJoyHelper
                 {
                     foreach (BrandForHome brand in brands)
                     {
-                        strb.Append(@"<a href='#'>" + brand.BrandName + "</a>");
+                        strb.Append(@"<a href='" + baseURL + "Pages/BrandProductList1.aspx?bid=" + brand.BrandSysNo + "'>" + brand.BrandName + "</a>");
                     }
                 }
                 strb.Append("</p></div></dd></dl></li>");

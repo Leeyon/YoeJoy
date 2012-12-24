@@ -125,7 +125,7 @@ namespace YoeJoyHelper.Model
         private static readonly string GetHomeCategoryOneBrandsSqlCmdTemplate = @"  select top 8 b.BrandSysNo,b.BrandName,b.BrandIcon,b.C1SysNo,b.OrderNum from Brand b
   where b.Status=1 and b.C1SysNo={0} order by b.OrderNum ASC";
 
-        private static readonly string GetHomeCategoryListBrandsSqlCmdTemplate = @"  select top {0} b.BrandSysNo,b.BrandName from Brand as b 
+        private static readonly string GetHomeCategoryListBrandsSqlCmdTemplate = @"select top {0} b.BrandSysNo,b.BrandName,b.PromotionOrderNum from Brand as b 
   where b.Status=1 and b.IsPromoted=1 and b.C1SysNo={1} order by b.PromotionOrderNum ASC";
 
 

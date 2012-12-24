@@ -739,6 +739,44 @@
 </asp:Content>
 <asp:Content ID="Content11" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
+
+        function RefreshOnlineShoppingCart() {
+            var shoppingCartServiceURL = YoeJoy.Site.Utility.GetSiteBaseURL(false) + "/Service/ShoppingCartService.aspx?cmd=view&random=" + Math.random();
+            //var shoppingCartServiceURL = YoeJoy.Site.Utility.GetSiteBaseURL(false) + "/Service/ShoppingCartService.aspx?cmd=view";
+            $.get(shoppingCartServiceURL, function (data) {
+                $("#count").empty().append(data);
+                ReCartBindHoverEvent();
+            });
+        };
+
+        function ReCartBindHoverEvent() {
+
+            var char = $('#count img');
+            var charf = $('#count');
+            var charContent = $('#chartContent');
+            var car = $('#chart img');
+
+            char.hover(function () {
+                charContent.css('display', 'block');
+                car.attr({ 'src': '../static/images/gwcbt1.png' });
+            }, function () {
+            });
+
+            charf.hover(function () {
+            }, function () {
+                charContent.css('display', 'none');
+                car.attr({ 'src': '../static/images/gwcbt0.png' });
+            });
+
+            charContent.hover(function () {
+                charContent.show();
+                car.attr({ 'src': '../static/images/gwcbt1.png' });
+            }, function () {
+                charContent.hide();
+                car.attr({ 'src': '../static/images/gwcbt0.png' });
+            });
+        };
+
         $(function () {
 
             var c1 = YoeJoy.Site.Utility.GetQueryString("c1");
@@ -771,7 +809,10 @@
                 $.post(shoppingCartServiceURL, params, function (data) {
                     var result = YoeJoy.Site.Utility.GetJsonStr(data);
                     if (result.IsSuccess) {
-                        alert(result.Msg);
+                        //alert(result.Msg);
+                        RefreshOnlineShoppingCart();
+                        
+                        return;
                     }
                     else {
                         alert(result.Msg);

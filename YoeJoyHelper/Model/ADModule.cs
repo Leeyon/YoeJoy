@@ -82,6 +82,12 @@ namespace YoeJoyHelper.Model
       ,[OrderNum]
   FROM [mmbuy].[dbo].[AD] WHERE [PositionID] = {0} AND [Status]=1";
 
+        private static readonly string getSlideAdByPostionSqlCmdTemplate = @"SELECT [ADName]
+      ,[ADImg]
+      ,[ADLink]
+      ,[OrderNum]
+  FROM [mmbuy].[dbo].[AD] WHERE [PositionID] = {0} AND [Status]=1 ORDER BY [OrderNum] ASC";
+
         private static readonly string GetSiteAdForSlideShowSqlCmdTemplate = @"SELECT [ADName]
       ,[ADImg]
       ,[ADLink]
@@ -189,6 +195,42 @@ namespace YoeJoyHelper.Model
                         ADLink = data.Rows[0]["ADLink"].ToString().Trim(),
                     };
                     return ad;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获得幻灯片广告
+        /// </summary>
+        /// <param name="positionId"></param>
+        /// <returns></returns>
+        public static List<ADModuleForSite> GetSlideAdByPosition(int positionId)
+        {
+            try
+            {
+                DataTable data = new SqlDBHelper().ExecuteQuery(String.Format(getSlideAdByPostionSqlCmdTemplate, positionId));
+                int rowCount = data.Rows.Count;
+                if (rowCount > 0)
+                {
+                    List<ADModuleForSite> ads = new List<ADModuleForSite>();
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        ads.Add(new ADModuleForSite()
+                        {
+                            ADName = data.Rows[i]["ADName"].ToString().Trim(),
+                            ADImg = data.Rows[i]["ADImg"].ToString().Trim(),
+                            ADLink = data.Rows[i]["ADLink"].ToString().Trim(),
+                        });
+                    }
+                    return ads;
                 }
                 else
                 {

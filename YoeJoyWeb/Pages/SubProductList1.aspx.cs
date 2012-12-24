@@ -39,6 +39,11 @@ namespace YoeJoyWeb
         /// </summary>
         protected string C1WeeklyBestSaledProductsHTML { get; set; }
 
+        /// <summary>
+        /// 大类幻灯片广告
+        /// </summary>
+        protected string C1SlideAdHTML { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ((Site)this.Master).IsHomePage = false;
@@ -48,6 +53,7 @@ namespace YoeJoyWeb
                 C1WeeklyBestSaledProductsHTML = FrontProductsHelper.GetC1WeeklyBestSaledProductsHTMLWrapper(C1SysNo);
                 C1EmptyInventoryProductsHTML = FrontProductsHelper.GetC1EmptyInventoryProductsHTML(C1SysNo);
                 C1ProductsDisplayHTML = FrontProductsHelper.GetC1ProductsDisplayHTMLWrapper(C1SysNo);
+                C1SlideAdHTML = ADHelper.GetSlideAdWrapper(C1SysNo);
             }
         }
     }

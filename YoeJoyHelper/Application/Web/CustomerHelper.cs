@@ -243,13 +243,44 @@ namespace YoeJoyHelper
         {
             string customInfoHTML = String.Empty;
 
-            StringBuilder strb = new StringBuilder("<tbody>");
+            StringBuilder strb = new StringBuilder("<div id='myInfo'>");
 
-            string profileRowHTMLTemplate = "<tr><td>{0}</td><td>{1}</td></tr>";
+            //            string profileHTMLTemplate = @"
+            //        <div class='l'>
+            //            <img src='../static/images/tx02.jpg'>
+            //            <a href='#'>编辑头像</a>
+            //        </div>
+            //        <div class='r'>
+            //            <h2>
+            //                <em>您好，{0}</em><strong>高级会员</strong><em>[</em><b>{1}</b><em>]</em> <span>上一次登录时间：{2}</span>
+            //            </h2>
+            //            <ul class='infoDetail'>
+            //                <li>等待付款订单(0)</li>
+            //                <li>等待收货订单(0)</li>
+            //                <li><a href='#'>等待评价商品(10)</a></li>
+            //                <li>攸怡积分:<b>{3}</b></li>
+            //                <li>冻结积分:<b>32</b></li>
+            //                <li><a href='#'>优惠券:<b>2</b></a></li>
+            //                <li><a href='#'>站内信(<b>2</b>)</a></li>
+            //            </ul>
+            //        </div>";
 
-            strb.Append(String.Format(profileRowHTMLTemplate, "用户ID：", cInfo.CustomerID.ToString().Trim()));
-            strb.Append(String.Format(profileRowHTMLTemplate, "会员等级：", AppEnum.GetCustomerRank(cInfo.CustomerRank)));
-            strb.Append(String.Format(profileRowHTMLTemplate, "积分：", cInfo.ValidScore > 0 ? cInfo.ValidScore : 0));
+            string profileHTMLTemplate = @"
+        <div class='l'>
+            <img src='../static/images/tx02.jpg'>
+            <a href='#'>编辑头像</a>
+        </div>
+        <div class='r'>
+            <h2>
+                <em>您好，{0}</em><strong>{1}</strong><em>[</em><b>{2}</b><em>]</em> <span>上一次登录时间：{3}</span>
+            </h2>
+            <ul class='infoDetail'>
+                <li>等待付款订单(0)</li>
+                <li>等待收货订单(0)</li>
+                <li><a href='#'>等待评价商品(0)</a></li>
+                <li>攸怡积分:<b>{4}</b></li>
+            </ul>
+        </div>";
 
             string emailStatus = String.Empty;
             if (cInfo.EmailStatus == (int)AppEnum.EmailStatus.Origin)
@@ -261,9 +292,9 @@ namespace YoeJoyHelper
                 emailStatus = "已验证";
             }
 
-            strb.Append(String.Format(profileRowHTMLTemplate, "邮箱验证：", emailStatus));
+            strb.Append(String.Format(profileHTMLTemplate, cInfo.CustomerID, emailStatus, AppEnum.GetCustomerRank(cInfo.CustomerRank), cInfo.LastLoginTime, cInfo.ValidScore > 0 ? cInfo.ValidScore : 0));
 
-            strb.Append("</tbody>");
+            strb.Append("</div>");
             customInfoHTML = strb.ToString();
             return customInfoHTML;
         }
@@ -275,12 +306,15 @@ namespace YoeJoyHelper
         /// <returns></returns>
         public static string GetCustomerShoppingCart(Hashtable ht)
         {
-
-            List<FrontDsiplayProduct> producs = CustomerShoppingCartService.GetShoppingCartProducts(ht);
-
+            int productCount = 0;
+            float productTotalPrice = 0;
+            string siteBaseURL = YoeJoyConfig.SiteBaseURL;
+            List<FrontDsiplayProduct> products = CustomerShoppingCartService.GetShoppingCartProducts(ht);
             string shoppingCartHTML = String.Empty;
-            if (producs != null)
+            if (products != null)
             {
+
+                productCount = products.Count;
                 StringBuilder strb = new StringBuilder();
 
                 string liHTML = @"<p class='l'>
@@ -296,16 +330,44 @@ namespace YoeJoyHelper
                             删除 <input type='hidden' value='{6}'/></p>
                     </div>";
 
-                foreach (FrontDsiplayProduct product in producs)
+                foreach (FrontDsiplayProduct product in products)
                 {
                     string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
                     string image = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
-                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, image, deeplink, product.ProductBriefName, product.Price,product.ProductSysNo));
+                    strb.Append(String.Format(liHTML, deeplink, product.ProductBriefName, image, deeplink, product.ProductBriefName, product.Price, product.ProductSysNo));
+                    productTotalPrice += float.Parse(product.Price);
                 }
 
                 shoppingCartHTML = strb.ToString();
             }
-            return shoppingCartHTML;
+
+            string shoppingCartHTMLWrapper1 = String.Format(@"<div id='chart'>
+        <span>购物车:<b><a href='{0}Shopping/ShoppingCart.aspx'>{1}</a></b> 件
+        </span>
+        <img alt='购物车' src='../static/images/gwcbt0.png' width='39' height='32' />
+        <a href='{2}Shopping/ShoppingCart.aspx'>结算</a>
+    </div>
+    <div id='chartContent'>
+        <img alt='背景' src='../static/images/gwctop.png' width='374' height='18' />
+        <div id='myShoppingCart' class='shopping'>", siteBaseURL, productCount, siteBaseURL);
+
+
+            string shoppingCartHTMLWrapper2 = String.Format(@"</div>
+        <div class='payNow'>
+            <div class='l'>
+                共<b><a href='{0}Shopping/ShoppingCart.aspx'>{1}</a></b>件商品
+            </div>
+            <div class='r'>
+                <p>
+                    合计：<b id='CartTotalPrice'>￥{2}</b></p>
+                <a href='{3}Shopping/ShoppingCart.aspx'>
+                    <img alt='结算' src='../static/images/jsbt.png' width='61' height='25' /></a>
+            </div>
+        </div>
+    </div>", siteBaseURL, productCount, productTotalPrice.ToString("0.00"), siteBaseURL);
+
+
+            return String.Concat(shoppingCartHTMLWrapper1, shoppingCartHTML, shoppingCartHTMLWrapper2);
         }
 
         /// <summary>

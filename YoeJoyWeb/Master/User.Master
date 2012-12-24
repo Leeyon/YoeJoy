@@ -59,6 +59,61 @@
             </dl>
         </div>
         <script type="text/javascript">
+
+            function RefreshOnlineShoppingCart() {
+                var shoppingCartServiceURL = YoeJoy.Site.Utility.GetSiteBaseURL(false) + "/Service/ShoppingCartService.aspx?cmd=view&random=" + Math.random();
+                //var shoppingCartServiceURL = YoeJoy.Site.Utility.GetSiteBaseURL(false) + "/Service/ShoppingCartService.aspx?cmd=view";
+                $.get(shoppingCartServiceURL, function (data) {
+                    $("#count").empty().append(data);
+                    ReCartBindHoverEvent();
+                });
+            };
+
+            function ReCartBindHoverEvent() {
+
+                var char = $('#count img');
+                var charf = $('#count');
+                var charContent = $('#chartContent');
+                var car = $('#chart img');
+
+                char.hover(function () {
+                    charContent.css('display', 'block');
+                    car.attr({ 'src': '../static/images/gwcbt1.png' });
+                }, function () {
+                });
+
+                charf.hover(function () {
+                }, function () {
+                    charContent.css('display', 'none');
+                    car.attr({ 'src': '../static/images/gwcbt0.png' });
+                });
+
+                charContent.hover(function () {
+                    charContent.show();
+                    car.attr({ 'src': '../static/images/gwcbt1.png' });
+                }, function () {
+                    charContent.hide();
+                    car.attr({ 'src': '../static/images/gwcbt0.png' });
+                });
+            };
+
+            function DeleteShoppingCartItem(sender) {
+                var $this = $(sender);
+                var deleteHandlerBaseURL = YoeJoy.Site.Utility.GetSiteBaseURL(false) + "/Service/ShoppingCartService.aspx?cmd=delete";
+                var productSysNo = $this.children("input").val();
+                var params = "pid=" + productSysNo;
+                $.post(deleteHandlerBaseURL, params, function (data) {
+                    var result = YoeJoy.Site.Utility.GetJsonStr(data);
+                    if (result.IsSuccess) {
+                        RefreshOnlineShoppingCart();
+                    }
+                    else {
+                        alert(result.Msg);
+                    }
+                });
+            };
+
+
             $(function () {
                 $("#btnSearch").click(function (event) {
                     var keyWords = $("#txtSearch").val();

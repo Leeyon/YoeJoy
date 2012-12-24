@@ -12,27 +12,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="RightBigModule" runat="server">
     <!--用户基本信息-->
-    <div id="myInfo">
-        <div class="l">
-            <img src="../static/images/tx02.jpg">
-            <a href="#">编辑头像</a>
-        </div>
-        <div class="r">
-            <h2>
-                <em>您好，攸怡用户</em><strong>高级会员</strong><em>[</em><b>未验证</b><em>]</em> <span>上一次登录时间：2012-10-24
-                    16:44:34</span>
-            </h2>
-            <ul class="infoDetail">
-                <li>等待付款订单(0)</li>
-                <li>等待收货订单(0)</li>
-                <li><a href="#">等待评价商品(10)</a></li>
-                <li>攸怡积分:<b>32</b></li>
-                <li>冻结积分:<b>32</b></li>
-                <li><a href="#">优惠券:<b>2</b></a></li>
-                <li><a href="#">站内信(<b>2</b>)</a></li>
-            </ul>
-        </div>
-    </div>
+    <%=MyProfileHTML%>
     <!--近期订单-->
     <div class="item1">
         <h2>

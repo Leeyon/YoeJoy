@@ -98,7 +98,8 @@
                 $.post(registerHandlerURL, { "name": name, "pass": password }, function (data) {
                     var result = YoeJoy.Site.Utility.GetJsonStr(data);
                     if (result.IsSuccess) {
-                        window.location.href = "../Default.aspx";
+                        window.history.go(-1);
+                        //window.location.href = "../Default.aspx";
                     }
                     else {
                         alert(result.Msg);

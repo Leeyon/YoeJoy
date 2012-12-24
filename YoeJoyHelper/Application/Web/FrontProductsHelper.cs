@@ -340,11 +340,16 @@ namespace YoeJoyHelper
 
                     }
                     strb.Append("</ul></div>");
-                    ADModuleForSite ad = ADService.GetHomeAdByPosition(key);
-                    if (ad != null)
+                    List<ADModuleForSite> ads = ADService.GetSlideAdByPosition(key);
+                    if (ads != null)
                     {
-                        string c2AdHTMLTemplate = @"<div class='hot'><a href='{0}' target='_blank'><img width='192' height='360' src='{1}' alt='{2}'></img></a></div>";
-                        strb.Append(String.Format(c2AdHTMLTemplate, ad.ADLink, String.Concat(imageBasePath, ad.ADImg), ad.ADName));
+                        strb.Append("<div class='hot'>");
+                        string c3AdHTMLTemplate = @"<a href='{0}' target='_blank'><img src='{1}' alt='{2}'></img></a>";
+                        foreach (ADModuleForSite ad in ads)
+                        {
+                            strb.Append(String.Format(c3AdHTMLTemplate, ad.ADLink, String.Concat(imageBasePath, ad.ADImg), ad.ADName));
+                        }
+                        strb.Append("</div>");
                     }
                     strb.Append("</div></div>");
                 }

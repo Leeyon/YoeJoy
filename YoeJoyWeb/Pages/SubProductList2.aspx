@@ -35,18 +35,7 @@
 <asp:Content ID="Content7" ContentPlaceHolderID="RightBigModule" runat="server">
     <div class="bigRight">
         <div class="clear">
-            <div id="adShow">
-                <a class="show" href="product.html">
-                    <img alt="主题广告" src="../static/images/gg1.jpg" width="780" height="277"></a>
-                <a href="product.html">
-                    <img alt="主题广告" src="../static/images/gg2.jpg" width="780" height="277"></a>
-                <a href="product.html">
-                    <img alt="主题广告" src="../static/images/gg3.jpg" width="780" height="277"></a>
-                <div class="btItem">
-                    <a class="selected" href="javascript:">1</a> <a href="javascript:">2</a> <a href="javascript:">
-                        3</a>
-                </div>
-            </div>
+           <%=C2SlideAdHTML%>
             <dl id="Discount">
                 <dt><i></i><b>清库产品</b><strong></strong></dt>
                 <%=C2EmptyInventoryProductsHTML%>

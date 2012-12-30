@@ -1,5 +1,6 @@
+@charset "utf-8";
 *{margin:0; padding:0; line-height:none;}
-body { font-family:Helvetica, Tahoma, Arial,\5b8b\4f53, sans-serif; font-size:12px;color:#555}
+body {font-family:Helvetica, Tahoma, Arial,\5b8b\4f53, sans-serif; font-size:12px;color:#555}
 a,span,font,b,em,strong,label,i,citi{display:inline-block;}
 i{font-style:normal;}
 strong{ font-weight:normal;}
@@ -9,9 +10,9 @@ li{list-style:none;}
 a{color:#555; text-decoration:none;}
 a:hover{color:#FF0000;}
 a img{border:none;}
-
 .num{width:18px; height:18px; border:solid 1px #ccc; text-align:center; margin:0px 2px; vertical-align:middle}
 .sub,.add{width:15px; height:15px; border:solid 1px #ccc; text-align:center; vertical-align:middle; line-height:1.2; background-color:#fff; margin:0px 2px}
+
 .ItemSort1{background:url(../images/hov2.png) no-repeat left top;}
 .ItemSort{background:url(../images/hov3.png) no-repeat left top;}
 
@@ -37,7 +38,7 @@ a img{border:none;}
 #logo dd p{text-align:right}
 #logo dd p a{border-right:solid #ccc 1px; padding:0 8px}
 
-#bg{background:url(../images/top.jpg) repeat-x 0 78px;}
+.allDom{background:url(../images/top.jpg) repeat-x 0 78px; visibility:visible}
 .top{ background:url(../images/indexbg.png) no-repeat 0 0}
 .clear{overflow:hidden; zoom:1}
 
@@ -62,10 +63,10 @@ a img{border:none;}
 #chart{overflow:hidden; zoom:1;}
 #chart span,#chart img,#chart a{float:left; color:#FFF;}
 #chart img{margin-top:2px;}
-#chart span{background:url(../images/headerbg.png) no-repeat; height:19px; padding-left:28px; width:77px; margin-top:10px; margin-left:10px;}
-#chart span b{ color:#FC0;}
+#chart span{background:url(../images/headerbg.png) no-repeat; height:19px; padding-left:28px; width:77px; margin-top:10px; margin-left:10px}
+#chart span b{color:#FC0;}
 #chart a{background:url(../images/headerbg.png) 27px -25px no-repeat; padding-right:8px; margin-top:10px; margin-left:5px;}
-
+#chart span b a{padding:0; margin:0; float:none}
 #chartContent{position:absolute; right:0; top:34px; width:372px; border:rgb(249,170,61) solid 2px; background:#fff; display:none}
 
 .shopping{overflow:hidden;zoom:1; margin:0 10px; padding:10px 0;}
@@ -87,8 +88,8 @@ a img{border:none;}
 #ServiceLine font{background:url(../images/qq.jpg) no-repeat 1px center; padding-left:22px; margin-top:3px; font-size:12px;}
 
 #Menu{position:absolute; margin-top:-1px; z-index:5}
-#Menu .header{display:block;height:88px;background:url(../images/hov.png) no-repeat left top; width:208px}
-.lbg{background:url(../images/allclassbg1.gif) repeat-y left #fff; margin-top:-2px; padding-top:2px; padding-bottom:-2px; width:208px; height:263px; overflow:hidden}
+#Menu .header{display:block;height:86px;background:url(../images/hov.png) no-repeat left top; width:208px}
+.lbg{background:url(../images/allclassbg1.gif) repeat-y left #fff;  padding-top:2px; padding-bottom:-2px; width:208px; height:263px; overflow:hidden}
 .classMenu .lbg{height:auto}
 .rbg{background:url(../images/indexbgs.png) no-repeat top left;height:10px; font-size:0; width:208px}
 
@@ -105,11 +106,13 @@ a img{border:none;}
 #MeunList .hover{height:68px; *height:69px; *margin-bottom:-6px}
 #MeunList .hov{padding:0 2px 0 2px; border:rgb(209,65,0) solid 2px; border-left:none; border-right:none; background:#FBEEE1;}
 
-.Listcontent{width:591px; position:absolute; border:rgb(209,65,0) 2px solid; overflow:hidden; zoom:1; top:84px; left:199px; display:none; z-index:6; opacity:0.9; filter:alpha(opacity=90)}
-.Listcontent dt,.Listcontent dd{float:left; padding-bottom:10000px; margin-bottom:-10000px;}
+.Listcontent{width:638px; position:absolute; background-color:#F3F3F3; border:rgb(209,65,0) 2px solid; overflow:hidden; zoom:1; top:84px; left:199px; display:none; z-index:6; opacity:0.9; filter:alpha(opacity=90)}
+.Listcontent dt,.Listcontent dd{float:left}
 .Listcontent dt{border-right:#CCC solid 1px; width:450px; background:#FBEEE1}
-.Listcontent dt .mem span{background-color:#043506; color:#fff; font-family:'黑体'; font-size:14px; padding:5px 10px; margin:20px}
-.Listcontent dd{width:140px; background:#F3F3F3}
+.Listcontent dt .mem span{background-color:#043506; font-family:'黑体'; font-size:15px; font-weight:bold; padding:5px 10px; margin:20px}
+.Listcontent dt .mem span a{color:#fff}
+.Listcontent dt .mem span a:hover{color:#FFC}
+.Listcontent dd{width:187px}
 .menuTwo{height:100%; padding-top:10px}
 .menuTwo li{padding:5px 0; overflow:hidden; zoom:1}
 .menuTwo h3{float:left; font-weight:bold; padding-left:8px; width:78px; text-align:right; padding-right:10px }
@@ -117,9 +120,9 @@ a img{border:none;}
 .menuTwo li ul{float:left; width:68%; overflow:hidden; zoom:1}
 .menuTwo li ul li{float:left; border-left:solid 1px #ccc; padding:0 6px; overflow:visible; margin-bottom:5px; white-space:nowrap}
 .menuTwo li ul li a{font-family:\5b8b\4f53}
-.recomment{padding-left:15px; line-height:18px; padding-top:13px;padding-bottom:10000px; margin-bottom:-10000px;}
+.recomment{padding-left:15px; line-height:18px; padding-top:13px}
 .recomment h2{color:#c00; font-size:14px; font-weight:bold; padding-bottom:5px;}
-.recomment p a{ margin-right:15px; margin-bottom:1px}
+.recomment p a{margin-right:15px; margin-bottom:1px}
 
 #focus{overflow:hidden; height:277px; position:relative}
 #focus a{display:block; text-align:center;}
@@ -128,7 +131,6 @@ a img{border:none;}
 #focus dd{overflow:hidden;zoom:1; position:absolute; top:251px; width:100%}
 #focus dd a{float:left; width:20%; background:#666; color:#000; height:26px; line-height:2.1}
 #focus dd a.sel{ background:#F00; color:#FFF;}
-
 
 #position{width:1200px; margin:0 auto; margin-bottom:10px; border-bottom:#ccc solid 1px; padding-bottom:5px; clear:both;zoom:1; padding:8px 0;}	
 #position span,#position b{color:#666; padding-right:7px;}
@@ -154,8 +156,8 @@ a img{border:none;}
 #footMsg span a{padding:0 8px; border-right:#ccc solid 1px}
 #footMsg span em{color:#999;padding:5px 0 0 8px}
 
-.name,.adText{height:34px; text-align:left; display:block; line-height:1.4; overflow:hidden}
-.name{color:#436581}
+.name,.adText{height:34px; display:block; text-align:left; line-height:1.4; overflow:hidden}
+.name{color:#436581; margin-top:5px}
 .name:hover{text-decoration:underline}
 .adText{color:#999; margin-bottom:8px}
 .price{text-align:center}

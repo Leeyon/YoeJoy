@@ -37,7 +37,14 @@
     </dl>
     <uc2:OnlineStaticAD ID="ADBelowNews" ADPositionID="3" ADCSSClass="ad" Width="192"
         Height="106" runat="server" />
-    <div class="GroupPurchase">
+    <a class="ad" href="http://www.ue96.com/pages/product.aspx?c1=2&amp;c2=611&amp;c3=612&amp;pid=29554"
+        target="_blank">
+        <img src="http://www.ue96.com/up/products/ad11.jpg">
+    </a><a class="ad" href="http://www.ue96.com/Pages/SubProductList2.aspx?c1=633&amp;c2=634"
+        target="_blank">
+        <img src="http://www.ue96.com/up/products/ad12.jpg" height="262">
+    </a>
+    <%--<div class="GroupPurchase">
         <h5 class="mytitles">
             <em></em><strong><b>团购</b><span>Group-Buying</span></strong> <i></i>
         </h5>
@@ -67,7 +74,7 @@
             <a class="word" href="#">商品名称商品名称商品名称商品名称商品名称商品名称 </a><a class="join" href="#">¥1000.0
             </a>
         </div>
-    </div>
+    </div>--%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MiddleTopModule" runat="server">
     <dl id="focus">
@@ -263,7 +270,9 @@
             $("#panicContentt").children("div[class='panicContent']").each(function (index) {
                 var $this = $(this);
                 var startTime = new Date();
-                var $endTime = Date.parse($this.children(".time").children("input").val());
+                var $endTime = $this.children(".time").children("input").val();
+                $endTime = $endTime.replace(/\-/g, '/');
+                $endTime = Date.parse($endTime);
                 var remainSecond = (($endTime - startTime.getTime()) / 1000);
                 var $timeDiv = $this.children("h2[class='time']");
                 var InterValObj = window.setInterval(function () {

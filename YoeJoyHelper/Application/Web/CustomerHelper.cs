@@ -207,7 +207,7 @@ namespace YoeJoyHelper
                 oCustomer = CustomerManager.GetInstance().Load(name);
 
                 System.Web.HttpCookie mycookie = new System.Web.HttpCookie("LoginInfo");	//申明新的COOKIE变量
-                mycookie.Domain = "www.MMMbuy.cn";
+                mycookie.Domain = YoeJoyConfig.SiteBaseURL;
                 mycookie.Expires = DateTime.Now.AddYears(1);
                 mycookie.Value = name + "," + DateTime.Now.ToString(AppConst.DateFormatLong);
                 context.Response.Cookies.Add(mycookie);

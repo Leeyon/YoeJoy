@@ -37,7 +37,7 @@
         <asp:TextBox ID="txtBirthDay" runat="server"></asp:TextBox><strong>生日确定后，不能修改</strong>
     </p>
     <p>
-        <label>
+        <label><b>*</b>
             居住地:</label>
             <sc1:Area ID="scArea" runat="server" AutoPostBack="false">
             </sc1:Area>
@@ -46,10 +46,10 @@
         <label>
             您的地址:</label><asp:TextBox ID="txtDwellAddress" runat="server" Width="430px"></asp:TextBox></p>
     <p>
-        <label>
+        <label><b>*</b>
             您的邮编:</label><asp:TextBox ID="txtZip" runat="server"></asp:TextBox></p>
     <p>
-        <label>
+        <label><b>*</b>
             您的传真:</label>
         <asp:TextBox ID="txtFax" runat="server"></asp:TextBox></p>
     <p>

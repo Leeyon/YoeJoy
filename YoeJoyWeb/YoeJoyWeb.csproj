@@ -133,6 +133,13 @@
     <Compile Include="Master\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Article.aspx.cs">
+      <DependentUpon>Article.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Article.aspx.designer.cs">
+      <DependentUpon>Article.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BrandProductList1.aspx.cs">
       <DependentUpon>BrandProductList1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,6 +232,20 @@
       <DependentUpon>BrandProductsResult2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Authtication.aspx.cs">
+      <DependentUpon>Authtication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\Authtication.aspx.designer.cs">
+      <DependentUpon>Authtication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\Captcha.aspx.cs">
+      <DependentUpon>Captcha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service\Captcha.aspx.designer.cs">
+      <DependentUpon>Captcha.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Service\CustomerFavorite.aspx.cs">
       <DependentUpon>CustomerFavorite.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -294,6 +315,13 @@
     </Compile>
     <Compile Include="Shopping\CheckOut.aspx.designer.cs">
       <DependentUpon>CheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping\Comfirm.aspx.cs">
+      <DependentUpon>Comfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shopping\Comfirm.aspx.designer.cs">
+      <DependentUpon>Comfirm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Shopping\Pay-alipay3.aspx.cs">
       <DependentUpon>Pay-alipay3.aspx</DependentUpon>
@@ -769,6 +797,7 @@
     <Content Include="Controls\UserProfiler.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Article.aspx" />
     <Content Include="Pages\BrandProductList1.aspx" />
     <Content Include="Pages\Product.aspx" />
     <Content Include="Pages\ProductList.aspx" />
@@ -782,6 +811,8 @@
     <Content Include="Pages\BrandProductsResult1.aspx" />
     <Content Include="Pages\BrandProductList2.aspx" />
     <Content Include="Pages\BrandProductsResult2.aspx" />
+    <Content Include="Service\Authtication.aspx" />
+    <Content Include="Service\Captcha.aspx" />
     <Content Include="Service\CustomerFavorite.aspx" />
     <Content Include="Service\GetProductListItem.aspx" />
     <Content Include="Service\GetSearch1ProductListItem.aspx" />
@@ -792,6 +823,7 @@
     <Content Include="Service\GetBrandProductList1Item.aspx" />
     <Content Include="Service\GetBrandProductList2Item.aspx" />
     <Content Include="Shopping\CheckOut.aspx" />
+    <Content Include="Shopping\Comfirm.aspx" />
     <Content Include="Shopping\Pay-alipay3.aspx" />
     <Content Include="Shopping\PreCheckOut.aspx" />
     <Content Include="Shopping\ShoppingCart.aspx" />
@@ -802,6 +834,7 @@
     <Content Include="static\css\help.css" />
     <Content Include="static\css\layout.css" />
     <Content Include="static\css\login.css" />
+    <Content Include="static\css\news.css" />
     <Content Include="static\css\process1.css" />
     <Content Include="static\css\product.css" />
     <Content Include="static\css\productSort.css" />
@@ -911,6 +944,7 @@
     <Content Include="static\images\grounp.jpg" />
     <Content Include="static\images\guanzhu.jpg" />
     <Content Include="static\images\guide.jpg" />
+    <Content Include="static\images\gwc.jpg" />
     <Content Include="static\images\gwcbg.png" />
     <Content Include="static\images\gwcbottom.png" />
     <Content Include="static\images\gwcbt.png" />
@@ -984,6 +1018,7 @@
     <Content Include="static\images\navbg0.png" />
     <Content Include="static\images\navbg1.png" />
     <Content Include="static\images\newNum.png" />
+    <Content Include="static\images\next.jpg" />
     <Content Include="static\images\next0.gif" />
     <Content Include="static\images\next1.gif" />
     <Content Include="static\images\nextwx.png" />

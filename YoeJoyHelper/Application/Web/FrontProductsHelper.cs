@@ -984,20 +984,22 @@ namespace YoeJoyHelper
             if (products != null)
             {
                 string emptyInventoryItemHTML = @"<dd>
-                                <em>1</em><img src='{0}' width='57' height='57'>
+                                <em>{0}</em><img src='{1}' width='57' height='57'>
                                 <div>
-                                    <a class='name' href='{1}'>{2}</a> <i class='adText'>{3}</i>
+                                    <a class='name' href='{2}'>{3}</a> <i class='adText'>{4}</i>
                                 </div>
                                 <p class='price'>
-                                    <b>¥{4}</b><span>¥{5}</span></p>
+                                    <b>¥{5}</b><span>¥{6}</span></p>
                             </dd>";
 
-                foreach (FrontDsiplayProduct product in products)
+                for (int i = 0; i <products.Count; i++)
                 {
+                    var product = products[i];
                     string thumbImg = YoeJoyConfig.ImgVirtualPathBase + product.ImgPath;
                     string deeplink = YoeJoyConfig.SiteBaseURL + "Pages/Product.aspx?c1=" + product.C1SysNo + "&c2=" + product.C2SysNo + "&c3=" + product.C3SysNo + "&pid=" + product.ProductSysNo;
-                    strb.Append(String.Format(emptyInventoryItemHTML, thumbImg, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
+                    strb.Append(String.Format(emptyInventoryItemHTML,(i+1),thumbImg, deeplink, product.ProductBriefName, product.ProductPromotionWord, product.Price, product.BaiscPrice));
                 }
+
                 strb.Append("</dl>");
                 homeHotCommentedProductHTML = strb.ToString();
             }

@@ -41,7 +41,7 @@ namespace YoeJoyWeb.Shopping
                 //soInfo.VatInfo.VATEMSFee = 0;
                 //oSession.sSO = this.soInfo;
                 //Response.Redirect("CheckOut.aspx");
-                Response.Redirect("CheckOut.aspx");
+                Response.Redirect("Comfirm.aspx");
             }
         }
     }

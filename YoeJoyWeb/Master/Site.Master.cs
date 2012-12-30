@@ -37,6 +37,7 @@ namespace YoeJoyWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            checkAutoLogin();
             if (IsHomePage)
             {
                 LeftTopDivTag = "<div class='left'>";
@@ -46,5 +47,31 @@ namespace YoeJoyWeb
                 LeftTopDivTag = "<div class='left ItemSort1' id='ItemSortCon'>";
             }
         }
+
+        /// <summary>
+        /// 检测自动登录
+        /// </summary>
+        private void checkAutoLogin()
+        {
+            if (Request.Cookies["LocalSession"] != null)
+            {
+                if (CommonUtility.GetUserSession(Context).sCustomer == null)
+                {
+                    string authticationUrl = SiteBaseURL + "Service/Authtication.aspx";
+                    string token = Request.Cookies["LocalSession"].Value;
+                    string from = Request.RawUrl;
+                    Response.Redirect(authticationUrl+"?token="+token+"&from="+from);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
     }
 }

@@ -1027,7 +1027,7 @@ namespace YoeJoyWeb.Shopping
             catch
             {
                 checkGo = true;
-                Response.Redirect("../Account/login.aspx?url=../Shopping/ShoppingCart.aspx");
+                Response.Redirect("../User/login.aspx?url=../Shopping/ShoppingCart.aspx");
             }
             //-------------------------库存判断--------------------------//
 
@@ -1057,9 +1057,6 @@ namespace YoeJoyWeb.Shopping
                     int soSysNo = int.Parse(dr["sysno"].ToString());
 
                     oldSoInfo = SaleManager.GetInstance().LoadSOMaster(soSysNo);
-
-
-
                 }
             }
 

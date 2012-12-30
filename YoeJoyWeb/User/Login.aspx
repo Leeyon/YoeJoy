@@ -21,7 +21,8 @@
                     <em>密码：</em><input id="txtPass" type="password"><a class="link3" href="#">找回密码</a></p>
                 <p>
                     <em></em>
-                    <input type="checkbox"><span>记住账户名</span><input type="checkbox"><span>自动登录</span></p>
+                    <input type="checkbox" id="cbRememberName" /><span>记住账户名</span><input type="checkbox"
+                        id="cbAutoLogin" /><span>自动登录</span></p>
                 <p class="button">
                     <input id="btnLogin" value="登入" type="button"><a href="#"></a></p>
                 <h5 class="joint">
@@ -59,13 +60,14 @@
                 <p class="note">
                     <span>请再次输入密码。</span><strong></strong></p>
                 <p class="input code">
-                    <em>验证码：</em><input name="验证码" type="text"><img alt="验证码" src="../static/images/code.jpg"
-                        width="69" height="27"><span class="slave">看不清？</span><a class="link1" href="#">换一张</a></p>
+                    <em>验证码：</em><input id="txtCaptcha" name="验证码" type="text" /><img id="imgCaptcha"
+                        alt="验证码" src="../Service/Captcha.aspx" width="69" height="27" /><span class="slave">看不清？</span><a
+                            id="btnRefreshCaptcha" class="link1" href="javascript:void(0)">换一张</a></p>
                 <p class="note">
                     <span>请输入图片中的字符，不区分大小写。</span></p>
                 <p class="button">
                     <input id="btnRegister" value="同意以下协议并注册" type="button" /></p>
-                <textarea>          《攸怡服务协议》（以下简称“本协议”）是由攸怡网站的运营方（以下简称“攸怡或攸怡网站”）在提供域名为www.yoejoy.com的网络运营服务时与攸怡的使用者（以下简称“用户”）达成的关于使用攸怡网站服务的各项条款、条件和规则。
+                <textarea>          《攸怡服务协议》（以下简称“本协议”）是由攸怡网站的运营方（以下简称“攸怡或攸怡网站”）在提供域名为www.ue96.com的网络运营服务时与攸怡的使用者（以下简称“用户”）达成的关于使用攸怡网站服务的各项条款、条件和规则。
 
 如果您访问攸怡网站或在攸怡网站购物，或以任何行为实际使用、享受攸怡的服务，即表示您接受了本协议，并同意受本协议各项条款的约束。如果您不同意本协议中的任何内容，您可以选择不使用本网站。
 
@@ -85,21 +87,53 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ScriptContentPlaceHolder" runat="server">
     <script type="text/javascript">
+
         $(function () {
 
             $("#welcomeContent").css({ "display": "none" });
+
+            if (YoeJoy.Site.Cookie.GetCookieValue("name") == null || YoeJoy.Site.Cookie.GetCookieValue("name") == undefined) {
+            }
+            else {
+                $("#txtID").val(YoeJoy.Site.Cookie.GetCookieValue("name").toString());
+            }
+
+            var from = YoeJoy.Site.Utility.GetQueryString("from");
+
+            //刷新验证码
+            $("#btnRefreshCaptcha").click(function (event) {
+                $("#imgCaptcha").removeAttr("src");
+                $("#imgCaptcha").attr({ "src": "../Service/Captcha.aspx?random=" + Math.random() });
+            });
 
             //用户登录
             $("#loginTab #btnLogin").click(function () {
                 var registerHandlerURL = "../Service/UserLogin.aspx";
                 var name = $("#txtID").val();
                 var password = $("#txtPass").val();
+                var extern = "empty";
 
-                $.post(registerHandlerURL, { "name": name, "pass": password }, function (data) {
+                var IsCbRememberNameClicked = $("#cbRememberName").attr("checked") == undefined ? false : true;
+                var IsCbAutoLogineClicked = $("#cbAutoLogin").attr("checked") == undefined ? false : true;
+
+                if (IsCbAutoLogineClicked) {
+                    extern = "autoLogin";
+                    IsCbRememberNameClicked = false;
+                }
+
+                if (IsCbRememberNameClicked) {
+                    YoeJoy.Site.Cookie.AddCookie("name", name, 7 * 24);
+                }
+
+                $.post(registerHandlerURL, { "name": name, "pass": password, "extern": extern }, function (data) {
                     var result = YoeJoy.Site.Utility.GetJsonStr(data);
                     if (result.IsSuccess) {
-                        window.history.go(-1);
-                        //window.location.href = "../Default.aspx";
+                        if (from == null || from == undefined || from == '') {
+                            window.location.href = "../Default.aspx";
+                        }
+                        else {
+                            window.location.href = from;
+                        }
                     }
                     else {
                         alert(result.Msg);
@@ -116,15 +150,25 @@
                 var pass2 = $("#password1").val();
                 var email = $("#txtEmail").val();
 
-                $.post(registerHandlerURL, { "name": name, "pass1": pass1, "pass2": pass2, "email": email }, function (data) {
-                    var result = YoeJoy.Site.Utility.GetJsonStr(data);
-                    if (result.IsSuccess) {
-                        window.location.href = "MyProfile.aspx";
-                    }
-                    else {
-                        alert(result.Msg);
-                    }
-                });
+                var captchaInput = $("#txtCaptcha").val();
+
+                var captcha = YoeJoy.Site.Cookie.GetCookieValue("captcha").toString();
+
+                if (captchaInput == captcha) {
+
+                    $.post(registerHandlerURL, { "name": name, "pass1": pass1, "pass2": pass2, "email": email }, function (data) {
+                        var result = YoeJoy.Site.Utility.GetJsonStr(data);
+                        if (result.IsSuccess) {
+                            window.location.href = "MyProfile.aspx";
+                        }
+                        else {
+                            alert(result.Msg);
+                        }
+                    });
+                }
+                else {
+                    alert("请检查你的验证码!");
+                }
 
             });
 

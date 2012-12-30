@@ -35,7 +35,10 @@
 <asp:Content ID="Content7" ContentPlaceHolderID="RightBigModule" runat="server">
     <div class="bigRight">
         <div class="clear">
-            <%=C1SlideAdHTML%>
+        <a class="ad" href="http://www.ue96.com/Pages/SubProductList3.aspx?c1=232&amp;c2=539&amp;c3=540" target="_blank">
+                <img src="http://www.ue96.com/up/products/ad09.jpg">
+            </a>
+            <%--<%=C1SlideAdHTML%>--%>
             <dl id="Discount">
                 <dt><i></i><b>清库产品</b><strong></strong></dt>
                 <%=C1EmptyInventoryProductsHTML%>

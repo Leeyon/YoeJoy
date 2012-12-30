@@ -10,6 +10,7 @@ using System.Collections;
 using Icson.Utils;
 using Icson.Objects.Online;
 using Icson.BLL.Online;
+using YoeJoyHelper.Extension;
 
 namespace YoeJoyHelper.Security
 {
@@ -26,7 +27,7 @@ namespace YoeJoyHelper.Security
                 IcsonSessionInfo oSession = CommonUtility.GetUserSession(context);
                 if (oSession.sCustomer == null)
                 {
-                    string loginUrl = String.Concat(YoeJoyConfig.SiteBaseURL, "User/Login.aspx");
+                    string loginUrl = String.Concat(YoeJoyConfig.SiteBaseURL, "User/Login.aspx?from=",Context.Request.RawUrl.GetUrlEncodeStr());
                     Response.Redirect(loginUrl);
                 }
             }

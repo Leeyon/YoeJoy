@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using YoeJoyHelper;
 using Icson.Objects;
 using Icson.Utils;
+using YoeJoyHelper.Security;
 
 namespace YoeJoyWeb
 {
@@ -18,8 +19,15 @@ namespace YoeJoyWeb
             {
                 string name = Request["name"].ToString().Trim();
                 string password = Request["pass"].ToString().Trim();
+                string external = Request["extern"].ToString().Trim();
 
-                string msg=String.Empty;
+                bool autoLogin = false;
+                if (String.Equals(external, "autoLogin"))
+                {
+                    autoLogin = true;
+                }
+
+                string msg = String.Empty;
 
                 bool result = CustomerHelper.CustomerLogin(Context, name, password, out msg);
 
@@ -30,10 +38,16 @@ namespace YoeJoyWeb
                     mycookie.Expires = DateTime.Now.AddYears(1);
                     mycookie.Value = name + "," + DateTime.Now.ToString(AppConst.DateFormatLong);
                     Response.Cookies.Add(mycookie);
+                    //添加自动登录的cookie
+                    if (autoLogin)
+                    {
+                        var cookieValue= DESProvider.EncryptString(name+","+password);
+                        var cookie = new System.Web.HttpCookie("LocalSession", cookieValue);
+                        cookie.Expires = DateTime.Now.AddDays(7);
+                        Response.Cookies.Add(cookie);
+                    }
+                    Response.Write(JsonContentTransfomer<object>.GetJsonContent(new { IsSuccess = result, Msg = msg }));
                 }
-
-                Response.Write(JsonContentTransfomer<object>.GetJsonContent(new { IsSuccess = result, Msg = msg }));
-
             }
         }
     }

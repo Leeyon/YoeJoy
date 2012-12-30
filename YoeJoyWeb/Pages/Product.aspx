@@ -811,7 +811,6 @@
                     if (result.IsSuccess) {
                         //alert(result.Msg);
                         RefreshOnlineShoppingCart();
-                        
                         return;
                     }
                     else {

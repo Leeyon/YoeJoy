@@ -7,6 +7,8 @@
     <link type="text/css" rel="Stylesheet" href="../static/css/login.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+        data-appid="100346020" data-redirecturi="http://www.ue96.com/Default.aspx"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="BodyContentPlaceHolder" runat="server">
     <div id="login_global" class="clear">
@@ -24,7 +26,7 @@
                     <input type="checkbox" id="cbRememberName" /><span>记住账户名</span><input type="checkbox"
                         id="cbAutoLogin" /><span>自动登录</span></p>
                 <p class="button">
-                    <input id="btnLogin" value="登入" type="button"><a href="#"></a></p>
+                    <input id="btnLogin" value="登入" type="button" /><span id="qqLoginBtn"></span></p>
                 <h5 class="joint">
                     使用合作网站账号登录攸怡：</h5>
                 <ul class="clear">
@@ -99,6 +101,12 @@
             }
 
             var from = YoeJoy.Site.Utility.GetQueryString("from");
+
+            //QQ 登录
+            QC.Login({
+                btnId: "qqLoginBtn"	//插入按钮的节点id
+            }, function (reqData, opts) {
+            }, function (reqData,opts) { });
 
             //刷新验证码
             $("#btnRefreshCaptcha").click(function (event) {

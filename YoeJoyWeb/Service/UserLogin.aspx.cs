@@ -41,13 +41,14 @@ namespace YoeJoyWeb
                     //添加自动登录的cookie
                     if (autoLogin)
                     {
-                        var cookieValue= DESProvider.EncryptString(name+","+password);
-                        var cookie = new System.Web.HttpCookie("LocalSession", cookieValue);
+                        string cookieValue = String.Concat(name, ",", password);
+                        string encriptValue = DESProvider.EncryptString(cookieValue);
+                        var cookie = new System.Web.HttpCookie("LocalSession", encriptValue);
                         cookie.Expires = DateTime.Now.AddDays(7);
                         Response.Cookies.Add(cookie);
                     }
-                    Response.Write(JsonContentTransfomer<object>.GetJsonContent(new { IsSuccess = result, Msg = msg }));
                 }
+                Response.Write(JsonContentTransfomer<object>.GetJsonContent(new { IsSuccess = result, Msg = msg }));
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using YoeJoyHelper;
 using YoeJoyHelper.Security;
+using YoeJoyHelper.Extension;
 
 namespace YoeJoyWeb.Service
 {

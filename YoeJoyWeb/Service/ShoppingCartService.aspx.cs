@@ -88,19 +88,7 @@ namespace YoeJoyWeb.Service
         <a href='javascript:void(0);''>结算</a>
     </div><div id='chartContent'>
         <img alt='背景' src='../static/images/gwctop.png' width='374' height='18'>
-        <div id='myShoppingCart' class='shopping'>
-        </div>
-        <div class='payNow'>
-            <div class='l'>
-                共<b><a href='javascript:void(0);''>0</a></b>件商品
-            </div>
-            <div class='r'>
-                <p>
-                    合计：<b id='CartTotalPrice'>￥0</b></p>
-                <a href='javascript:void(0);''>
-                    <img alt='结算' src='../static/images/jsbt.png' width='61' height='25'></a>
-            </div>
-        </div>
+        <div id='myShoppingCart' class='shopping'>您的购物车中还没有商品，赶紧选购吧！</div>
     </div>";
 
         protected Hashtable newHt = new Hashtable();

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using YoeJoyHelper;
+using YoeJoyHelper.Extension;
 
 using Icson.Utils;
 using Icson.Objects.Online;
@@ -58,7 +59,7 @@ namespace YoeJoyWeb
                 if (CommonUtility.GetUserSession(Context).sCustomer == null)
                 {
                     string authticationUrl = SiteBaseURL + "Service/Authtication.aspx";
-                    string token = Request.Cookies["LocalSession"].Value;
+                    string token = Request.Cookies["LocalSession"].Value.GetUrlEncodeStr();
                     string from = Request.RawUrl;
                     Response.Redirect(authticationUrl+"?token="+token+"&from="+from);
                 }
